@@ -48,8 +48,11 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 		onCompleted: (data: T) => {
 			setProperties(data?.getAllPropertiesByAdmin?.list)
 		    setPropertiesTotal(data?.getAllPropertiesByAdmin?.metaCounter[0]?.total ?? 0)
+			
 		}	
+		
 	})
+	
 
 	/** LIFECYCLES **/
 	useEffect(() => {

@@ -225,68 +225,68 @@ const Filter = (props: FilterType) => {
 		[searchFilter],
 	);
 
-	const propertyRoomSelectHandler = useCallback(
-		async (number: Number) => {
-			try {
-				if (number != 0) {
-					if (searchFilter?.search?.roomsList?.includes(number)) {
-						await router.push(
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: {
-									...searchFilter.search,
-									roomsList: searchFilter?.search?.roomsList?.filter((item: Number) => item !== number),
-								},
-							})}`,
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: {
-									...searchFilter.search,
-									roomsList: searchFilter?.search?.roomsList?.filter((item: Number) => item !== number),
-								},
-							})}`,
-							{ scroll: false },
-						);
-					} else {
-						await router.push(
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: { ...searchFilter.search, roomsList: [...(searchFilter?.search?.roomsList || []), number] },
-							})}`,
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: { ...searchFilter.search, roomsList: [...(searchFilter?.search?.roomsList || []), number] },
-							})}`,
-							{ scroll: false },
-						);
-					}
-				} else {
-					delete searchFilter?.search.roomsList;
-					setSearchFilter({ ...searchFilter });
-					await router.push(
-						`/property?input=${JSON.stringify({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-							},
-						})}`,
-						`/property?input=${JSON.stringify({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-							},
-						})}`,
-						{ scroll: false },
-					);
-				}
+	// const propertyRoomSelectHandler = useCallback(
+	// 	async (number: Number) => {
+	// 		try {
+	// 			if (number != 0) {
+	// 				if (searchFilter?.search?.roomsList?.includes(number)) {
+	// 					await router.push(
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: {
+	// 								...searchFilter.search,
+	// 								roomsList: searchFilter?.search?.roomsList?.filter((item: Number) => item !== number),
+	// 							},
+	// 						})}`,
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: {
+	// 								...searchFilter.search,
+	// 								roomsList: searchFilter?.search?.roomsList?.filter((item: Number) => item !== number),
+	// 							},
+	// 						})}`,
+	// 						{ scroll: false },
+	// 					);
+	// 				} else {
+	// 					await router.push(
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: { ...searchFilter.search, roomsList: [...(searchFilter?.search?.roomsList || []), number] },
+	// 						})}`,
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: { ...searchFilter.search, roomsList: [...(searchFilter?.search?.roomsList || []), number] },
+	// 						})}`,
+	// 						{ scroll: false },
+	// 					);
+	// 				}
+	// 			} else {
+	// 				delete searchFilter?.search.roomsList;
+	// 				setSearchFilter({ ...searchFilter });
+	// 				await router.push(
+	// 					`/property?input=${JSON.stringify({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 						},
+	// 					})}`,
+	// 					`/property?input=${JSON.stringify({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 						},
+	// 					})}`,
+	// 					{ scroll: false },
+	// 				);
+	// 			}
 
-				console.log('propertyRoomSelectHandler:', number);
-			} catch (err: any) {
-				console.log('ERROR, propertyRoomSelectHandler:', err);
-			}
-		},
-		[searchFilter],
-	);
+	// 			console.log('propertyRoomSelectHandler:', number);
+	// 		} catch (err: any) {
+	// 			console.log('ERROR, propertyRoomSelectHandler:', err);
+	// 		}
+	// 	},
+	// 	[searchFilter],
+	// );
 
 	const propertyOptionSelectHandler = useCallback(
 		async (e: any) => {
@@ -596,7 +596,7 @@ const Filter = (props: FilterType) => {
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Rooms</Typography>
-					<Stack className="button-group">
+					{/* <Stack className="button-group">
 						<Button
 							sx={{
 								borderRadius: '12px 0 0 12px',
@@ -656,7 +656,7 @@ const Filter = (props: FilterType) => {
 						>
 							5+
 						</Button>
-					</Stack>
+					</Stack> */}
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Bedrooms</Typography>

@@ -185,14 +185,14 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Typography className={'date'}>{moment().diff(property?.createdAt, 'days')} days ago</Typography>
 									</Stack>
 									<Stack className={'bottom-box'}>
-										<Stack className="option">
+										{/* <Stack className="option">
 											<img src="/img/icons/bed.svg" alt="" /> <Typography>{property?.propertyBeds} bed</Typography>
 										</Stack>
 										<Stack className="option">
 											<img src="/img/icons/room.svg" alt="" /> <Typography>{property?.propertyRooms} room</Typography>
-										</Stack>
+										</Stack> */}
 										<Stack className="option">
-											<img src="/img/icons/expand.svg" alt="" /> <Typography>{property?.propertySquare} m2</Typography>
+											<img src="/img/icons/expand.svg" alt="" /> <Typography>{property?.propertyVolume} m3</Typography>
 										</Stack>
 									</Stack>
 								</Stack>
@@ -249,19 +249,19 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												/>
 											</svg>
 										</Stack>
-										<Stack className={'option-includes'}>
+										{/* <Stack className={'option-includes'}>
 											<Typography className={'title'}>Bedroom</Typography>
 											<Typography className={'option-data'}>{property?.propertyBeds}</Typography>
-										</Stack>
+										</Stack> */}
 									</Stack>
 									<Stack className={'option'}>
 										<Stack className={'svg-box'}>
 											<img src={'/img/icons/room.svg'} />
 										</Stack>
-										<Stack className={'option-includes'}>
+										{/* <Stack className={'option-includes'}>
 											<Typography className={'title'}>Room</Typography>
 											<Typography className={'option-data'}>{property?.propertyRooms}</Typography>
-										</Stack>
+										</Stack> */}
 									</Stack>
 									<Stack className={'option'}>
 										<Stack className={'svg-box'}>
@@ -306,7 +306,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className={'option-includes'}>
 											<Typography className={'title'}>Size</Typography>
-											<Typography className={'option-data'}>{property?.propertySquare} m2</Typography>
+											<Typography className={'option-data'}>{property?.propertyVolume} m3</Typography>
 										</Stack>
 									</Stack>
 									<Stack className={'option'}>
@@ -340,16 +340,16 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Property Size</Typography>
-													<Typography className={'data'}>{property?.propertySquare} m2</Typography>
+													<Typography className={'data'}>{property?.propertyVolume} m3</Typography>
 												</Box>
-												<Box component={'div'} className={'info'}>
+												{/* <Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Rooms</Typography>
 													<Typography className={'data'}>{property?.propertyRooms}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Bedrooms</Typography>
 													<Typography className={'data'}>{property?.propertyBeds}</Typography>
-												</Box>
+												</Box> */}
 											</Stack>
 											<Stack className={'right'}>
 												<Box component={'div'} className={'info'}>

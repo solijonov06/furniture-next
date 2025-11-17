@@ -36,7 +36,7 @@ const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 
 	/** APOLLO REQUESTS **/
 	const [updateMemberByAdmin] = useMutation(UPDATE_MEMBER_BY_ADMIN);
-
+	console.log("membersInquiry SENT TO BACKEND:", membersInquiry);
 		const {
 			loading: getAllMembersByAdminLoading,
 			data: getAllMembersByAdminData,
