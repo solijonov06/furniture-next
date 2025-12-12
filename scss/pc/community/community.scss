@@ -1,183 +1,284 @@
+// ============================================
+// COMMUNITY PAGE - April Ford Style
+// ============================================
+
 #pc-wrap {
 	#community-list-page {
 		position: relative;
+		background: var(--color-bg-primary);
+		padding-bottom: 100px;
+
 		.container {
-			padding-top: 100px;
+			padding-top: 80px;
 			flex-direction: column;
-			gap: 64px;
+			gap: 60px;
+
+			// ============================================
+			// MAIN CONTENT LAYOUT
+			// ============================================
 			.main-box {
 				flex-direction: row;
-				gap: 31px;
+				gap: 40px;
+
+				// ============================================
+				// LEFT SIDEBAR
+				// ============================================
 				.left-config {
-					width: 266px;
+					width: 280px;
 					height: fit-content;
-					gap: 30px;
-					padding: 30px 15px 57px 21px;
-					margin-top: 100px;
-					margin-bottom: 50px;
-					border-radius: 12px;
-					border: 1px solid rgba(196, 196, 196, 0.79);
-					background: #fff;
-					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+					flex-shrink: 0;
+					padding: 32px 24px;
+					border-radius: $radius-md;
+					background: var(--color-bg-card);
+					box-shadow: var(--shadow-card);
+					border: 1px solid var(--color-border-primary);
+					position: sticky;
+					top: 100px;
+
 					.image-info {
 						width: 100%;
 						flex-direction: row;
-						gap: 11px;
+						gap: 16px;
+						align-items: center;
+						padding-bottom: 24px;
+						border-bottom: 1px solid var(--color-border-primary);
+						margin-bottom: 24px;
+
 						img {
-							width: 80px;
-							height: 80px;
+							width: 64px;
+							height: 64px;
 							border-radius: 50%;
 							object-fit: cover;
+							border: 3px solid var(--color-bg-secondary);
 						}
+
 						.community-name {
 							.name {
-								margin-top: 15px;
-								color: #181a20;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
+								color: var(--color-text-primary);
+								font-family: $font-heading;
+								font-size: 16px;
 								font-weight: 600;
-								line-height: normal;
+								text-transform: uppercase;
+								letter-spacing: 0.5px;
+							}
+
+							.role {
+								margin-top: 4px;
+								color: var(--color-text-secondary);
+								font-family: $font;
+								font-size: 13px;
 							}
 						}
 					}
+
 					.tab-button {
-						width: 216.612px;
-						height: 36px;
+						width: 100%;
+						height: 44px;
 						padding: 0;
 						justify-content: center;
 						align-items: center;
-						border-radius: 6px;
-						border: 1px solid #181a20;
-						margin-bottom: 10px;
-						color: #181a20;
+						border-radius: $radius-full;
+						border: 2px solid var(--color-border-primary);
+						margin-bottom: 12px;
+						color: var(--color-text-primary);
 						font-family: $font;
-						font-size: 14px;
-						font-style: normal;
-						font-weight: 500;
-						line-height: 150%;
-						letter-spacing: -0.266px;
-					}
-					.tab-button.active {
-						width: 216.612px;
-						height: 36px;
-						padding: 0;
-						justify-content: center;
-						align-items: center;
-						background-color: #000000;
-						color: #ffffff;
-						border-radius: 6px;
-						margin-bottom: 10px;
-						font-family: $font;
-						font-size: 14px;
-						font-style: normal;
-						font-weight: 500;
-						line-height: 150%;
-						letter-spacing: -0.266px;
+						font-size: 13px;
+						font-weight: 600;
+						text-transform: uppercase;
+						letter-spacing: 0.5px;
+						background: transparent;
+						cursor: pointer;
+						transition: all $transition-fast;
+
+						&:hover {
+							border-color: var(--color-accent-primary, $color-primary-blue);
+							color: var(--color-accent-primary, $color-primary-blue);
+						}
+
+						&.active {
+							background: var(--color-accent-primary, $color-primary-blue);
+							border-color: var(--color-accent-primary, $color-primary-blue);
+							color: $color-white;
+						}
 					}
 				}
+
+				// ============================================
+				// RIGHT CONTENT
+				// ============================================
 				.right-config {
-					width: 100%;
-					height: auto;
+					flex: 1;
+
 					.panel-config {
 						width: 100%;
-						height: auto;
+
+						// Title Section
 						.title-box {
 							width: 100%;
-							height: auto;
 							flex-direction: row;
 							justify-content: space-between;
 							align-items: center;
-							margin-bottom: 45px;
+							margin-bottom: 40px;
+
 							.left {
-								width: 60%;
-								height: auto;
 								.title {
-									color: #000;
-									font-family: $font;
-									font-size: 24px;
-									font-style: normal;
+									color: var(--color-text-primary);
+									font-family: $font-heading;
+									font-size: 28px;
 									font-weight: 600;
-									line-height: normal;
-									letter-spacing: 0.24px;
+									text-transform: uppercase;
+									letter-spacing: 1px;
 								}
+
 								.sub-title {
-									color: #757575;
+									margin-top: 8px;
+									color: var(--color-text-secondary);
 									font-family: $font;
-									font-size: 13px;
-									font-style: normal;
-									font-weight: 700;
-									line-height: normal;
-									letter-spacing: 0.325px;
+									font-size: 14px;
 								}
 							}
+
 							.right {
-								width: 91px;
-								height: 32px;
-								border-radius: 4px;
-								background: #eb6753;
-								color: #fff;
+								padding: 12px 24px;
+								border-radius: $radius-full;
+								background: var(--color-accent-primary, $color-primary-blue);
+								color: $color-white;
 								font-family: $font;
 								font-size: 13px;
-								font-style: normal;
-								font-weight: 500;
-								line-height: normal;
-								letter-spacing: 0.39px;
+								font-weight: 600;
+								text-transform: uppercase;
+								letter-spacing: 0.5px;
+								cursor: pointer;
+								transition: all $transition-fast;
+
+								&:hover {
+									opacity: 0.9;
+									box-shadow: $shadow-button;
+								}
 							}
 						}
+
+						// Article Grid
 						.list-box {
 							width: 100%;
-							height: auto;
-							flex-direction: row;
-							flex-wrap: wrap;
-							gap: 30px;
+							display: grid;
+							grid-template-columns: repeat(3, 1fr);
+							gap: 24px;
+
+							// Article Card
+							.community-general-card-config {
+								background: var(--color-bg-card);
+								border-radius: $radius-md;
+								overflow: hidden;
+								box-shadow: var(--shadow-card);
+								border: 1px solid var(--color-border-primary);
+								transition: all $transition-normal;
+
+								&:hover {
+									transform: translateY(-8px);
+									box-shadow: 0px 20px 50px rgba(167, 139, 250, 0.2);
+								}
+							}
+						}
+
+						// No Article Message
+						.no-article {
+							width: 100%;
+							padding: 60px 20px;
+							display: flex;
+							flex-direction: column;
+							align-items: center;
+							justify-content: center;
+							text-align: center;
+
+							svg {
+								color: var(--color-text-tertiary);
+								margin-bottom: 16px;
+							}
+
+							p {
+								color: var(--color-text-secondary);
+								font-family: $font;
+								font-size: 16px;
+							}
 						}
 					}
 				}
 			}
+
+			// ============================================
+			// SIMILAR ARTICLES SECTION
+			// ============================================
 			.similar-articles-config {
 				width: 100%;
-				height: auto;
-				gap: 75px;
-				padding: 30px 9px 28px 9px;
-				border-radius: 10px;
-				border: 1px solid #c4c4c4;
+				padding: 40px;
+				border-radius: $radius-md;
+				background: var(--color-bg-secondary);
+				border: 1px solid var(--color-border-primary);
+
 				.similar-articles-title {
-					padding-left: 56px;
-					color: #000;
-					font-family: $font;
-					font-size: 30px;
-					font-style: normal;
+					color: var(--color-text-primary);
+					font-family: $font-heading;
+					font-size: 24px;
 					font-weight: 600;
-					line-height: normal;
+					text-transform: uppercase;
+					letter-spacing: 1px;
+					margin-bottom: 30px;
 				}
+
 				.articles-box-row {
 					width: 100%;
-					height: auto;
-					flex-direction: row;
-					gap: 5px;
+					display: grid;
+					grid-template-columns: repeat(4, 1fr);
+					gap: 24px;
 				}
 			}
+
+			// ============================================
+			// PAGINATION
+			// ============================================
 			.pagination-config {
 				width: 100%;
+				display: flex;
+				flex-direction: column;
 				align-items: center;
-				justify-content: center;
-				margin-bottom: 50px;
 				gap: 20px;
-				padding-left: 270px;
+				padding-left: 320px;
+
 				.pagination-box {
+					display: flex;
 					align-items: center;
 					justify-content: center;
+
+					.MuiPagination-ul {
+						gap: 8px;
+
+						li button {
+							width: 40px;
+							height: 40px;
+							border-radius: 50%;
+							font-family: $font;
+							font-size: 14px;
+							color: var(--color-text-primary);
+							transition: all $transition-fast;
+
+							&.Mui-selected {
+								background: var(--color-accent-primary, $color-primary-blue);
+								color: $color-white;
+							}
+
+							&:hover {
+								background: var(--color-bg-secondary);
+							}
+						}
+					}
 				}
+
 				.total-result {
 					p {
-						color: #181a20;
-						text-align: center;
+						color: var(--color-text-secondary);
 						font-family: $font;
 						font-size: 14px;
-						font-style: normal;
-						font-weight: 400;
-						line-height: 26px;
 					}
 				}
 			}

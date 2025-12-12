@@ -2,60 +2,856 @@
 @import 'variables.scss';
 @import 'reset.scss';
 
+// ============================================
+// GLOBAL BASE STYLES - April Ford Design
+// ============================================
+
 a {
 	white-space: nowrap;
 	text-decoration: none;
-	color: #212121;
+	color: $color-dark;
+	transition: color $transition-fast;
+
+	&:hover {
+		color: $color-primary-blue;
+	}
 }
+
 button {
 	text-transform: none;
 	box-shadow: none;
 	padding: 0;
+	cursor: pointer;
+	transition: all $transition-fast;
 }
+
 button.outline {
-	border: 1px solid #eee;
+	border: 1px solid $color-border;
 }
+
 button.contain {
-	color: #fff;
+	color: $color-white;
 }
+
 span,
 p {
-	line-height: 1.2;
+	line-height: 1.5;
 }
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-heading;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.1;
+}
+
 body {
 	font-family: $font;
+	color: $color-dark;
+	background: $color-white;
+
 	&::-webkit-scrollbar {
-		width: 9px;
+		width: 8px;
 	}
+
 	&::-webkit-scrollbar-thumb {
 		height: 30%;
-		background: #bdbdbd;
+		background: $color-primary-blue;
 		border-radius: 10px;
 	}
+
 	&::-webkit-scrollbar-track {
-		background: #eee;
+		background: $color-background;
 	}
 
 	.MuiPopover-paper {
-		box-shadow: none;
+		box-shadow: $shadow-card;
+		border-radius: $radius-md;
 	}
 }
+
 hr {
 	border-width: 0;
 	border-bottom-width: thin;
-	border-color: #eee;
+	border-color: $color-border;
 	margin: auto;
 }
 
-/** VERSION: PC **/
+// ============================================
+// GRADIENT UTILITIES
+// ============================================
+.gradient-hero {
+	background: $gradient-hero;
+}
+
+.gradient-text {
+	background: $gradient-text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+// ============================================
+// PC WRAPPER - Main Layout
+// ============================================
 #pc-wrap {
 	width: 100%;
 	height: 100%;
+	overflow-x: hidden;
 
 	.container {
 		position: relative;
 		width: 1300px;
+		max-width: 95%;
 		margin: 0 auto;
 		display: flex;
+	}
+}
+
+// ============================================
+// MOBILE WRAPPER
+// ============================================
+#mobile-wrap {
+	width: 100%;
+	min-height: 100vh;
+}
+
+// ============================================
+// SECTION STYLES
+// ============================================
+.section-gradient {
+	position: relative;
+	background: $gradient-hero;
+	overflow: hidden;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+		pointer-events: none;
+	}
+}
+
+.section-white {
+	background: $color-white;
+	padding: 100px 0;
+}
+
+.section-light {
+	background: $color-background;
+	padding: 100px 0;
+}
+
+// ============================================
+// TYPOGRAPHY CLASSES
+// ============================================
+.heading-xl {
+	font-family: $font-heading;
+	font-size: 72px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	line-height: 1;
+
+	@media (max-width: $breakpoint-tablet) {
+		font-size: 48px;
+	}
+}
+
+.heading-lg {
+	font-family: $font-heading;
+	font-size: 48px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	line-height: 1.1;
+
+	@media (max-width: $breakpoint-tablet) {
+		font-size: 36px;
+	}
+}
+
+.heading-md {
+	font-family: $font-heading;
+	font-size: 32px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.text-white {
+	color: $color-white;
+}
+
+.text-dark {
+	color: $color-dark;
+}
+
+.text-light {
+	color: $color-text-light;
+}
+
+// ============================================
+// DARK MODE GLOBAL STYLES
+// Deep Slate (#0f172a) + Soft Violet (#a78bfa)
+// ============================================
+[data-theme="dark"] {
+	// Body and Background
+	body {
+		background: var(--color-bg-primary);
+		color: var(--color-text-primary);
+	}
+
+	// Links - use violet accent in dark mode
+	a {
+		color: var(--color-text-primary);
+
+		&:hover {
+			color: var(--color-accent-primary);
+		}
+	}
+
+	// Cards and Containers
+	#pc-wrap {
+		background: var(--color-bg-primary);
+
+		.home-page {
+			background: var(--color-bg-primary);
+
+			// Trend Properties Section
+			.trend-properties {
+				background: var(--color-bg-primary);
+
+				.info-box {
+					.left {
+						span {
+							color: var(--color-text-primary);
+						}
+						p {
+							color: var(--color-text-secondary);
+						}
+					}
+				}
+
+				.trend-card-box,
+				.top-card-box {
+					background: var(--color-bg-card);
+					border-color: var(--color-border-primary);
+
+					.info {
+						background: var(--color-bg-card);
+
+						.title {
+							color: var(--color-text-primary);
+						}
+
+						.desc {
+							color: var(--color-text-secondary);
+						}
+
+						.options span {
+							color: var(--color-text-secondary);
+						}
+
+						.bott {
+							p {
+								color: var(--color-text-primary);
+							}
+
+							.view-cnt {
+								color: var(--color-text-secondary);
+							}
+						}
+					}
+				}
+			}
+
+			// Popular Properties Section
+			.popular-properties {
+				background: var(--color-bg-secondary);
+
+				.info-box {
+					.left {
+						span {
+							color: var(--color-text-primary);
+						}
+						p {
+							color: var(--color-text-secondary);
+						}
+					}
+				}
+
+				.popular-card-box {
+					background: var(--color-bg-card);
+
+					.info {
+						background: var(--color-bg-card);
+
+						.title {
+							color: var(--color-text-primary);
+						}
+
+						.desc {
+							color: var(--color-text-secondary);
+						}
+					}
+				}
+			}
+
+			// Top Properties Section
+			.top-properties {
+				background: var(--color-bg-primary);
+
+				.info-box {
+					.left {
+						span {
+							color: var(--color-text-primary);
+						}
+						p {
+							color: var(--color-text-secondary);
+						}
+					}
+				}
+			}
+
+			// Top Agents Section
+			.top-agents {
+				background: var(--color-bg-secondary);
+
+				.top-agent-card {
+					strong {
+						color: var(--color-text-primary);
+					}
+
+					span {
+						color: var(--color-text-secondary);
+					}
+				}
+			}
+
+			// Community Board Section
+			.community-board {
+				background: var(--color-bg-primary);
+
+				.info-box {
+					.left {
+						span {
+							color: var(--color-text-primary);
+						}
+					}
+				}
+
+				.community-main {
+					.content-top span {
+						color: var(--color-text-secondary);
+					}
+
+					.community-left {
+						.vertical-card {
+							strong {
+								color: var(--color-text-primary);
+							}
+							span {
+								color: var(--color-text-secondary);
+							}
+						}
+					}
+
+					.community-right {
+						.horizontal-card {
+							div {
+								strong {
+									color: var(--color-text-primary);
+								}
+								span {
+									color: var(--color-text-secondary);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// ============================================
+	// FOOTER DARK MODE - All text white
+	// ============================================
+	#footer {
+		.footer-container {
+			background: var(--color-bg-primary);
+
+			.main {
+				.left {
+					.footer-box {
+						.logo {
+							filter: brightness(0) invert(1);
+						}
+
+						.location-block {
+							.location-title {
+								color: var(--color-text-primary);
+							}
+							.location-address {
+								color: var(--color-text-secondary);
+							}
+						}
+
+						.contact-item {
+							.label {
+								color: var(--color-text-tertiary);
+							}
+							a {
+								color: var(--color-accent-primary);
+							}
+						}
+
+						.media-box {
+							svg {
+								color: var(--color-text-secondary);
+
+								&:hover {
+									color: var(--color-accent-primary);
+								}
+							}
+						}
+					}
+				}
+
+				.right {
+					.link-column {
+						strong {
+							color: var(--color-text-primary);
+						}
+
+						span {
+							color: var(--color-text-secondary);
+
+							&:hover {
+								color: var(--color-accent-primary);
+							}
+						}
+					}
+
+					.newsletter-column {
+						strong {
+							color: var(--color-text-primary);
+						}
+
+						.newsletter-form {
+							input {
+								background: var(--color-bg-secondary);
+								border-color: var(--color-border-primary);
+								color: var(--color-text-primary);
+
+								&::placeholder {
+									color: var(--color-text-tertiary);
+								}
+							}
+
+							button {
+								background: var(--color-accent-primary);
+								color: var(--color-text-inverse);
+
+								&:hover {
+									background: var(--color-accent-hover);
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.second {
+				border-color: var(--color-border-primary);
+
+				span {
+					color: var(--color-text-secondary);
+				}
+			}
+		}
+	}
+
+	// ============================================
+	// MY PAGE DARK MODE
+	// ============================================
+	.my-page {
+		background: var(--color-bg-primary);
+
+		.left-config {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+
+			.info {
+				.name {
+					color: var(--color-text-primary);
+				}
+				.phone {
+					color: var(--color-text-secondary);
+
+					svg {
+						color: var(--color-text-secondary);
+					}
+				}
+				.role {
+					color: var(--color-accent-primary);
+				}
+			}
+
+			.menu-title {
+				color: var(--color-text-tertiary);
+			}
+
+			.menu-item {
+				color: var(--color-text-primary);
+
+				svg {
+					color: var(--color-text-secondary);
+				}
+
+				&:hover, &.active {
+					background: var(--color-bg-tertiary);
+					color: var(--color-accent-primary);
+
+					svg {
+						color: var(--color-accent-primary);
+					}
+				}
+			}
+		}
+
+		.main-config {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+
+			h2, h3 {
+				color: var(--color-text-primary);
+			}
+
+			label {
+				color: var(--color-text-secondary);
+			}
+
+			input, textarea, select {
+				background: var(--color-bg-secondary);
+				border-color: var(--color-border-primary);
+				color: var(--color-text-primary);
+
+				&::placeholder {
+					color: var(--color-text-tertiary);
+				}
+			}
+
+			.upload-btn {
+				background: var(--color-bg-secondary);
+				border-color: var(--color-border-primary);
+				color: var(--color-text-primary);
+			}
+
+			.submit-btn {
+				background: var(--color-accent-primary);
+				color: var(--color-text-inverse);
+			}
+
+			p {
+				color: var(--color-text-secondary);
+			}
+		}
+	}
+
+	// ============================================
+	// CS CENTER PAGE DARK MODE
+	// ============================================
+	.cs-page {
+		background: var(--color-bg-primary);
+
+		.cs-main {
+			h1 {
+				color: var(--color-text-primary);
+			}
+
+			p {
+				color: var(--color-text-secondary);
+			}
+
+			.tab-btns {
+				background: var(--color-bg-secondary);
+
+				button {
+					color: var(--color-text-secondary);
+
+					&.active {
+						background: var(--color-accent-primary);
+						color: var(--color-text-inverse);
+					}
+				}
+			}
+
+			.notice-title {
+				color: var(--color-text-primary);
+			}
+
+			.notice-table {
+				.table-head {
+					background: var(--color-bg-secondary);
+					color: var(--color-text-primary);
+				}
+
+				.table-row {
+					border-color: var(--color-border-primary);
+
+					&:hover {
+						background: var(--color-bg-secondary);
+					}
+
+					.num {
+						color: var(--color-text-secondary);
+
+						&.event {
+							background: var(--color-accent-primary);
+							color: var(--color-text-inverse);
+						}
+					}
+
+					.title {
+						color: var(--color-text-primary);
+					}
+
+					.date {
+						color: var(--color-text-tertiary);
+					}
+				}
+			}
+
+			.faq-list {
+				.faq-item {
+					background: var(--color-bg-card);
+					border-color: var(--color-border-primary);
+
+					.question {
+						color: var(--color-text-primary);
+
+						svg {
+							color: var(--color-text-secondary);
+						}
+					}
+
+					.answer {
+						background: var(--color-bg-secondary);
+						color: var(--color-text-secondary);
+					}
+				}
+			}
+		}
+	}
+
+	// ============================================
+	// AGENTS PAGE DARK MODE
+	// ============================================
+	.agents-page {
+		background: var(--color-bg-primary);
+
+		.search-bar {
+			input {
+				background: var(--color-bg-card);
+				border-color: var(--color-border-primary);
+				color: var(--color-text-primary);
+
+				&::placeholder {
+					color: var(--color-text-tertiary);
+				}
+			}
+		}
+
+		.sort-select {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+			color: var(--color-text-primary);
+		}
+
+		.agent-card {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+
+			.badge {
+				background: var(--color-accent-primary);
+				color: var(--color-text-inverse);
+			}
+
+			.info {
+				.name {
+					color: var(--color-text-primary);
+				}
+
+				.role {
+					color: var(--color-text-secondary);
+				}
+
+				.stats {
+					color: var(--color-text-tertiary);
+
+					svg {
+						color: var(--color-text-tertiary);
+					}
+				}
+			}
+		}
+
+		.total-text {
+			color: var(--color-text-secondary);
+		}
+	}
+
+	// ============================================
+	// HEADER BASIC DARK MODE
+	// ============================================
+	.header-basic {
+		.container {
+			strong, span {
+				color: $color-white;
+			}
+		}
+	}
+
+	// ============================================
+	// PROPERTY PAGES DARK MODE
+	// ============================================
+	.property-page {
+		background: var(--color-bg-primary);
+
+		.filter-sidebar {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+
+			h3, label, span {
+				color: var(--color-text-primary);
+			}
+
+			input, select {
+				background: var(--color-bg-secondary);
+				border-color: var(--color-border-primary);
+				color: var(--color-text-primary);
+			}
+		}
+
+		.property-card {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+
+			.info {
+				.title {
+					color: var(--color-text-primary);
+				}
+
+				.desc {
+					color: var(--color-text-secondary);
+				}
+			}
+		}
+	}
+
+	// ============================================
+	// COMMUNITY PAGES DARK MODE
+	// ============================================
+	.community-page {
+		background: var(--color-bg-primary);
+
+		.article-card {
+			background: var(--color-bg-card);
+			border-color: var(--color-border-primary);
+
+			.title {
+				color: var(--color-text-primary);
+			}
+
+			.desc {
+				color: var(--color-text-secondary);
+			}
+		}
+	}
+
+	// ============================================
+	// MUI COMPONENTS OVERRIDE
+	// ============================================
+	.MuiPaper-root {
+		background: var(--color-bg-card) !important;
+		color: var(--color-text-primary) !important;
+	}
+
+	.MuiMenuItem-root {
+		color: var(--color-text-primary) !important;
+
+		&:hover {
+			background: var(--color-bg-secondary) !important;
+		}
+	}
+
+	.MuiDivider-root {
+		border-color: var(--color-border-primary) !important;
+	}
+
+	.MuiInputBase-root {
+		background: var(--color-bg-secondary);
+		color: var(--color-text-primary);
+
+		input, textarea {
+			color: var(--color-text-primary);
+
+			&::placeholder {
+				color: var(--color-text-tertiary);
+			}
+		}
+	}
+
+	.MuiOutlinedInput-notchedOutline {
+		border-color: var(--color-border-primary) !important;
+	}
+
+	.MuiButton-outlined {
+		border-color: var(--color-border-primary);
+		color: var(--color-text-primary);
+	}
+
+	.MuiButton-contained {
+		background: var(--color-accent-primary);
+		color: var(--color-text-inverse);
+	}
+
+	.MuiTab-root {
+		color: var(--color-text-secondary);
+
+		&.Mui-selected {
+			color: var(--color-accent-primary);
+		}
+	}
+
+	.MuiTabs-indicator {
+		background: var(--color-accent-primary);
+	}
+
+	.MuiIconButton-root {
+		color: var(--color-text-secondary);
+
+		&:hover {
+			color: var(--color-accent-primary);
+		}
+	}
+
+	.MuiSelect-icon {
+		color: var(--color-text-secondary);
+	}
+
+	// Scrollbar Dark Mode
+	body::-webkit-scrollbar-track {
+		background: var(--color-bg-secondary);
+	}
+
+	body::-webkit-scrollbar-thumb {
+		background: var(--color-accent-primary);
 	}
 }

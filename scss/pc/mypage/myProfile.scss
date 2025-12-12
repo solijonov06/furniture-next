@@ -14,7 +14,7 @@
 				.right-box {
 					width: 315px;
 					.main-title {
-						color: #181a20;
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 30px;
 						font-style: normal;
@@ -24,7 +24,7 @@
 						text-transform: capitalize;
 					}
 					.sub-title {
-						color: #181a20;
+						color: var(--color-text-secondary);
 						font-family: $font;
 						font-size: 14px;
 						font-style: normal;
@@ -39,13 +39,13 @@
 				margin-top: 35px;
 				gap: 25px;
 				border-radius: 12px;
-				border: 1px solid #c4c4c4;
-				background: #fff;
-				box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+				border: 1px solid var(--color-border-primary);
+				background: var(--color-bg-card);
+				box-shadow: var(--shadow-card);
 				.photo-box {
 					gap: 23px;
 					.title {
-						color: #181a20;
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 17px;
 						font-style: normal;
@@ -72,7 +72,7 @@
 								left: 10px;
 								width: 36px;
 								height: 32px;
-								background-color: #ffffff;
+								background-color: var(--color-bg-card);
 								align-items: center;
 								justify-content: center;
 								border-radius: 12px;
@@ -89,9 +89,10 @@
 								align-items: center;
 								cursor: pointer;
 								border-radius: 12px;
-								border: 1px solid #181a20;
+								border: 1px solid var(--color-border-primary);
+								background: var(--color-bg-secondary);
 								p {
-									color: #181a20;
+									color: var(--color-text-primary);
 									font-family: $font;
 									font-size: 13px;
 									font-style: normal;
@@ -100,7 +101,7 @@
 								}
 							}
 							.upload-text {
-								color: #181a20;
+								color: var(--color-text-secondary);
 								font-family: $font;
 								font-size: 12px;
 								font-style: normal;
@@ -120,7 +121,7 @@
 						width: 48%;
 						gap: 10px;
 						.title {
-							color: #181a20;
+							color: var(--color-text-primary);
 							font-family: $font;
 							font-size: 12px;
 							font-style: normal;
@@ -132,9 +133,11 @@
 							outline: none;
 							padding: 0px 15px;
 							border-radius: 8px;
-							border: 1px solid #ddd;
-							::placeholder {
-								color: #717171;
+							border: 1px solid var(--color-border-primary);
+							background: var(--color-bg-secondary);
+							color: var(--color-text-primary);
+							&::placeholder {
+								color: var(--color-text-tertiary);
 								font-family: $font;
 								font-size: 12px;
 								font-style: normal;
@@ -147,7 +150,7 @@
 				.address-box {
 					gap: 10px;
 					.title {
-						color: #181a20;
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 12px;
 						font-style: normal;
@@ -159,9 +162,11 @@
 						outline: none;
 						padding: 0px 15px;
 						border-radius: 8px;
-						border: 1px solid #ddd;
-						::placeholder {
-							color: #717171;
+						border: 1px solid var(--color-border-primary);
+						background: var(--color-bg-secondary);
+						color: var(--color-text-primary);
+						&::placeholder {
+							color: var(--color-text-tertiary);
 							font-family: $font;
 							font-size: 12px;
 							font-style: normal;
@@ -173,7 +178,7 @@
 				.about-me-box {
 					gap: 10px;
 					.title {
-						color: #181a20;
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 12px;
 						font-style: normal;
@@ -184,8 +189,9 @@
 						height: 170px;
 						padding: 20px 15px;
 						border-radius: 8px;
-						border: 1px solid #ddd;
-						color: #717171;
+						border: 1px solid var(--color-border-primary);
+						background: var(--color-bg-secondary);
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 12px;
 						font-style: normal;
@@ -202,7 +208,7 @@
 						align-self: flex-end;
 						margin-top: 30px;
 						border-radius: 12px;
-						background-color: #000000;
+						background-color: var(--color-accent-primary, #a78bfa);
 						p {
 							color: #fff;
 							font-family: $font;
@@ -213,7 +219,7 @@
 						}
 					}
 					button:disabled {
-						background: #181a2045;
+						background: var(--color-text-tertiary);
 					}
 				}
 			}
@@ -222,13 +228,13 @@
 				padding: 30px;
 				gap: 25px;
 				border-radius: 12px;
-				border: 1px solid #c4c4c4;
-				background: #fff;
-				box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+				border: 1px solid var(--color-border-primary);
+				background: var(--color-bg-card);
+				box-shadow: var(--shadow-card);
 				.top-inner-box {
 					gap: 20px;
 					.title {
-						color: #181a20;
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 15px;
 						font-style: normal;
@@ -238,7 +244,7 @@
 					.old-password-box {
 						gap: 10px;
 						.title {
-							color: #181a20;
+							color: var(--color-text-primary);
 							font-family: $font;
 							font-size: 12px;
 							font-style: normal;
@@ -251,9 +257,11 @@
 							outline: none;
 							padding: 0px 15px;
 							border-radius: 8px;
-							border: 1px solid #ddd;
-							::placeholder {
-								color: #717171;
+							border: 1px solid var(--color-border-primary);
+							background: var(--color-bg-secondary);
+							color: var(--color-text-primary);
+							&::placeholder {
+								color: var(--color-text-tertiary);
 								font-family: $font;
 								font-size: 12px;
 								font-style: normal;
@@ -271,7 +279,7 @@
 						width: 100%;
 						gap: 10px;
 						.title {
-							color: #181a20;
+							color: var(--color-text-primary);
 							font-family: $font;
 							font-size: 12px;
 							font-style: normal;
@@ -283,9 +291,11 @@
 							outline: none;
 							padding: 0px 15px;
 							border-radius: 8px;
-							border: 1px solid #ddd;
-							::placeholder {
-								color: #717171;
+							border: 1px solid var(--color-border-primary);
+							background: var(--color-bg-secondary);
+							color: var(--color-text-primary);
+							&::placeholder {
+								color: var(--color-text-tertiary);
 								font-family: $font;
 								font-size: 12px;
 								font-style: normal;
@@ -305,7 +315,7 @@
 					align-self: flex-end;
 					margin-top: 18px;
 					border-radius: 12px;
-					background-color: #000000;
+					background-color: var(--color-accent-primary, #a78bfa);
 					p {
 						color: #fff;
 						font-family: $font;

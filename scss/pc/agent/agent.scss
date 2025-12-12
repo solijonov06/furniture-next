@@ -1,79 +1,279 @@
+// ============================================
+// AGENT PAGES - April Ford Style
+// ============================================
+
 #pc-wrap {
 	.agent-list-page {
 		position: relative;
-		padding: 147px 0 75px;
+		padding: 80px 0 100px;
 		width: 100%;
-		height: auto;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
+		background: var(--color-bg-primary);
+
 		.container {
 			display: flex;
 			flex-direction: column;
+
+			// Section Title
+			.section-header {
+				text-align: center;
+				margin-bottom: 50px;
+
+				h2 {
+					font-family: $font-heading;
+					font-size: 42px;
+					font-weight: 700;
+					color: var(--color-text-primary);
+					text-transform: uppercase;
+					letter-spacing: 2px;
+					margin-bottom: 16px;
+				}
+
+				p {
+					font-family: $font;
+					font-size: 16px;
+					color: var(--color-text-secondary);
+				}
+			}
+
+			// Filter Bar
 			.filter {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: center;
+				padding: 24px 32px;
+				background: var(--color-bg-secondary);
+				border-radius: $radius-md;
+				margin-bottom: 40px;
+				border: 1px solid var(--color-border-primary);
+
 				.left {
 					display: flex;
 					flex-direction: row;
+					gap: 16px;
+
 					input {
-						padding: 22px 10px;
-						width: 333px;
-						height: 50px;
-						border-radius: 40px;
-						border: 1px solid #ddd;
-						background: #fff;
-						color: #181a20;
+						padding: 0 24px;
+						width: 360px;
+						height: 48px;
+						border-radius: $radius-full;
+						border: 1px solid var(--color-border-primary);
+						background: var(--color-bg-card);
+						color: var(--color-text-primary);
 						font-family: $font;
 						font-size: 14px;
-						font-style: normal;
-						font-weight: 400;
-						line-height: 26px;
-						box-sizing: border-box;
+						outline: none;
+						transition: border-color $transition-fast;
+
+						&:focus {
+							border-color: var(--color-accent-primary, $color-primary-blue);
+						}
+
+						&::placeholder {
+							color: var(--color-text-tertiary);
+						}
 					}
 				}
+
 				.right {
 					display: flex;
 					flex-direction: row;
 					align-items: center;
+					gap: 12px;
+
 					button {
-						margin-left: 10px;
-						color: #181a20;
+						padding: 12px 24px;
+						border-radius: $radius-full;
+						background: transparent;
+						border: 2px solid var(--color-border-primary);
+						color: var(--color-text-primary);
 						font-family: $font;
-						font-size: 14px;
-						font-style: normal;
-						font-weight: bold;
-						line-height: 26px;
-						&:hover {
-							background: none;
+						font-size: 13px;
+						font-weight: 600;
+						text-transform: uppercase;
+						letter-spacing: 0.5px;
+						transition: all $transition-fast;
+
+						&:hover,
+						&.active {
+							background: var(--color-accent-primary, $color-dark);
+							border-color: var(--color-accent-primary, $color-dark);
+							color: $color-white;
 						}
 					}
 				}
 			}
+
+			// Agent Cards Grid
 			.card-wrap {
 				position: relative;
-				margin-top: 35px;
 				width: 100%;
-				min-height: 500px;
-				height: auto;
-				display: flex;
-				flex-direction: row;
-				flex-wrap: wrap;
+				min-height: 400px;
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 30px;
+
+				// Individual Agent Card
+				.agent-general-card {
+					margin: 0;
+					padding: 24px;
+					background: var(--color-bg-card);
+					border-radius: $radius-md;
+					box-shadow: var(--shadow-card);
+					border: 1px solid var(--color-border-primary);
+					transition: all $transition-normal;
+
+					&:hover {
+						transform: translateY(-8px);
+						box-shadow: 0px 20px 50px rgba(167, 139, 250, 0.2);
+
+						.agent-img {
+							&::after {
+								opacity: 1;
+							}
+						}
+					}
+
+					.agent-img {
+						position: relative;
+						width: 100%;
+						height: 240px;
+						border-radius: $radius-md;
+						overflow: hidden;
+
+						&::after {
+							content: '';
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							background: $gradient-hero;
+							opacity: 0;
+							transition: opacity $transition-normal;
+							mix-blend-mode: overlay;
+						}
+
+						div {
+							position: absolute;
+							top: 12px;
+							left: 12px;
+							padding: 8px 16px;
+							border-radius: $radius-full;
+							background: var(--color-accent-primary, $color-primary-blue);
+							color: $color-white;
+							font-size: 11px;
+							font-weight: 600;
+							text-transform: uppercase;
+							letter-spacing: 0.5px;
+							z-index: 2;
+						}
+					}
+
+					.agent-desc {
+						margin-top: 20px;
+
+						.agent-info {
+							strong {
+								font-family: $font-heading;
+								font-size: 16px;
+								font-weight: 600;
+								color: var(--color-text-primary);
+								text-transform: uppercase;
+								letter-spacing: 0.5px;
+								transition: color $transition-fast;
+
+								&:hover {
+									color: var(--color-accent-primary, $color-primary-blue);
+								}
+							}
+
+							span {
+								display: block;
+								margin-top: 4px;
+								font-family: $font;
+								font-size: 14px;
+								color: var(--color-text-secondary);
+							}
+						}
+
+						.buttons {
+							gap: 8px;
+
+							svg {
+								color: var(--color-text-secondary);
+								transition: color $transition-fast;
+
+								&:hover {
+									color: var(--color-accent-primary, $color-primary-blue);
+								}
+							}
+						}
+					}
+				}
+
+				// Empty State
+				.no-data {
+					grid-column: 1 / -1;
+					text-align: center;
+					padding: 80px 20px;
+
+					img {
+						width: 80px;
+						opacity: 0.5;
+						margin-bottom: 16px;
+					}
+
+					p {
+						color: var(--color-text-secondary);
+						font-family: $font;
+						font-size: 16px;
+					}
+				}
 			}
+
+			// Pagination
 			.pagination {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				margin-top: 60px;
+
+				.MuiPagination-ul {
+					gap: 8px;
+
+					li {
+						button {
+							width: 40px;
+							height: 40px;
+							border-radius: 50%;
+							font-family: $font;
+							font-size: 14px;
+							font-weight: 500;
+							color: var(--color-text-primary);
+							transition: all $transition-fast;
+
+							&.Mui-selected {
+								background: var(--color-accent-primary, $color-primary-blue);
+								color: $color-white;
+							}
+
+							&:hover {
+								background: var(--color-bg-secondary);
+							}
+						}
+					}
+				}
+
 				span {
 					margin-top: 20px;
-					color: #181a20;
+					color: var(--color-text-secondary);
 					font-family: $font;
 					font-size: 14px;
-					font-style: normal;
-					font-weight: 400;
-					line-height: 26px; /* 185.714% */
 				}
 			}
 		}

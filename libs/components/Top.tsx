@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -17,6 +17,11 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { useTheme } from '../context/ThemeContext';
 
 const Top = () => {
 	const device = useDeviceDetect();
@@ -26,12 +31,13 @@ const Top = () => {
 	const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
 	const [lang, setLang] = useState<string | null>('en');
 	const drop = Boolean(anchorEl2);
-	const [colorChange, setColorChange] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
 	const [anchorEl, setAnchorEl] = React.useState<any | HTMLElement>(null);
 	let open = Boolean(anchorEl);
-	const [bgColor, setBgColor] = useState<boolean>(false);
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const { mode, toggleTheme, isDark } = useTheme();
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -44,18 +50,16 @@ const Top = () => {
 	}, [router]);
 
 	useEffect(() => {
-		switch (router.pathname) {
-			case '/property/detail':
-				setBgColor(true);
-				break;
-			default:
-				break;
-		}
-	}, [router]);
-
-	useEffect(() => {
 		const jwt = getJwtToken();
 		if (jwt) updateUserInfo(jwt);
+	}, []);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrolled(window.scrollY > 50);
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
 	/** HANDLERS **/
@@ -77,24 +81,8 @@ const Top = () => {
 		[router],
 	);
 
-	const changeNavbarColor = () => {
-		if (window.scrollY >= 50) {
-			setColorChange(true);
-		} else {
-			setColorChange(false);
-		}
-	};
-
 	const handleClose = () => {
 		setAnchorEl(null);
-	};
-
-	const handleHover = (event: any) => {
-		if (anchorEl !== event.currentTarget) {
-			setAnchorEl(event.currentTarget);
-		} else {
-			setAnchorEl(null);
-		}
 	};
 
 	const StyledMenu = styled((props: MenuProps) => (
@@ -112,173 +100,192 @@ const Top = () => {
 		/>
 	))(({ theme }) => ({
 		'& .MuiPaper-root': {
-			top: '109px',
-			borderRadius: 6,
+			borderRadius: 12,
 			marginTop: theme.spacing(1),
 			minWidth: 160,
-			color: theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
-			boxShadow:
-				'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+			color: '#181a20',
+			boxShadow: '0px 10px 40px rgba(0, 0, 0, 0.1)',
 			'& .MuiMenu-list': {
-				padding: '4px 0',
+				padding: '8px',
 			},
 			'& .MuiMenuItem-root': {
+				borderRadius: 8,
+				padding: '10px 16px',
 				'& .MuiSvgIcon-root': {
 					fontSize: 18,
 					color: theme.palette.text.secondary,
 					marginRight: theme.spacing(1.5),
 				},
-				'&:active': {
-					backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+				'&:hover': {
+					backgroundColor: '#f6f6f6',
 				},
 			},
 		},
 	}));
 
-	if (typeof window !== 'undefined') {
-		window.addEventListener('scroll', changeNavbarColor);
-	}
-
 	if (device == 'mobile') {
 		return (
-			<Stack className={'top'}>
-				<Link href={'/'}>
-					<div>{t('Home')}</div>
-				</Link>
-				<Link href={'/property'}>
-					<div>{t('Properties')}</div>
-				</Link>
-				<Link href={'/agent'}>
-					<div> {t('Agents')} </div>
-				</Link>
-				<Link href={'/community?articleCategory=FREE'}>
-					<div> {t('Community')} </div>
-				</Link>
-				<Link href={'/cs'}>
-					<div> {t('CS')} </div>
-				</Link>
+			<Stack className={'top-mobile'}>
+				<Stack className={'mobile-navbar'}>
+					<Link href={'/'}>
+						<img src={isDark ? "/img/logo/logoWhite.svg" : "/img/logo/logoText.svg"} alt="Nestar" className="logo" />
+					</Link>
+					<div className="mobile-actions">
+						<button className={'theme-toggle'} onClick={toggleTheme}>
+							{isDark ? <LightModeIcon /> : <DarkModeIcon />}
+						</button>
+						<button className={'menu-toggle'} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+							{mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+						</button>
+					</div>
+				</Stack>
+				
+				<Stack className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+					<Link href={'/'} onClick={() => setMobileMenuOpen(false)}>
+						<div className="menu-item">{t('Home')}</div>
+					</Link>
+					<Link href={'/property'} onClick={() => setMobileMenuOpen(false)}>
+						<div className="menu-item">{t('Properties')}</div>
+					</Link>
+					<Link href={'/agent'} onClick={() => setMobileMenuOpen(false)}>
+						<div className="menu-item">{t('Agents')}</div>
+					</Link>
+					<Link href={'/community?articleCategory=FREE'} onClick={() => setMobileMenuOpen(false)}>
+						<div className="menu-item">{t('Community')}</div>
+					</Link>
+					<Link href={'/cs'} onClick={() => setMobileMenuOpen(false)}>
+						<div className="menu-item">{t('CS')}</div>
+					</Link>
+					{user?._id && (
+						<Link href={'/mypage'} onClick={() => setMobileMenuOpen(false)}>
+							<div className="menu-item">{t('My Page')}</div>
+						</Link>
+					)}
+					<Link href={'/account/join'} onClick={() => setMobileMenuOpen(false)}>
+						<div className="menu-item contact-btn">{t('Contact')}</div>
+					</Link>
+				</Stack>
 			</Stack>
 		);
 	} else {
 		return (
 			<Stack className={'navbar'}>
-				<Stack className={`navbar-main ${colorChange ? 'transparent' : ''} ${bgColor ? 'transparent' : ''}`}>
+				<Stack className={`navbar-main ${scrolled ? 'scrolled' : ''}`}>
 					<Stack className={'container'}>
+						{/* Logo */}
 						<Box component={'div'} className={'logo-box'}>
 							<Link href={'/'}>
-								<img src="/img/logo/logoWhite.svg" alt="" />
+								<img src={isDark ? "/img/logo/logoWhite.svg" : "/img/logo/logoText.svg"} alt="Nestar" />
 							</Link>
 						</Box>
-						<Box component={'div'} className={'router-box'}>
+
+						{/* Center Navigation */}
+						<Box component={'div'} className={'nav-center'}>
 							<Link href={'/'}>
-								<div>{t('Home')}</div>
+								<div className={`nav-item ${router.pathname === '/' ? 'active' : ''}`}>
+									{t('Home')}
+								</div>
 							</Link>
 							<Link href={'/property'}>
-								<div>{t('Properties')}</div>
+								<div className={`nav-item ${router.pathname.includes('/property') ? 'active' : ''}`}>
+									{t('Properties')}
+								</div>
 							</Link>
 							<Link href={'/agent'}>
-								<div> {t('Agents')} </div>
+								<div className={`nav-item ${router.pathname.includes('/agent') ? 'active' : ''}`}>
+									{t('Agents')}
+								</div>
 							</Link>
 							<Link href={'/community?articleCategory=FREE'}>
-								<div> {t('Community')} </div>
+								<div className={`nav-item ${router.pathname.includes('/community') ? 'active' : ''}`}>
+									{t('Community')}
+								</div>
 							</Link>
 							{user?._id && (
 								<Link href={'/mypage'}>
-									<div> {t('My Page')} </div>
+									<div className={`nav-item ${router.pathname.includes('/mypage') ? 'active' : ''}`}>
+										{t('My Page')}
+									</div>
 								</Link>
 							)}
 							<Link href={'/cs'}>
-								<div> {t('CS')} </div>
+								<div className={`nav-item ${router.pathname.includes('/cs') ? 'active' : ''}`}>
+									{t('CS')}
+								</div>
 							</Link>
 						</Box>
-						<Box component={'div'} className={'user-box'}>
+
+						{/* Right Side Actions */}
+						<Box component={'div'} className={'nav-right'}>
+							{/* Dark Mode Toggle */}
+							<button className={'theme-toggle'} onClick={toggleTheme} title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+								{isDark ? <LightModeIcon /> : <DarkModeIcon />}
+							</button>
+
+							{/* Language Selector */}
+							<div className={'lang-selector'}>
+								<Button
+									disableRipple
+									className="btn-lang"
+									onClick={langClick}
+									endIcon={<CaretDown size={12} weight="bold" />}
+								>
+									<Box component={'div'} className={'flag'}>
+										{lang !== null ? (
+											<img src={`/img/flag/lang${lang}.png`} alt={'flag'} />
+										) : (
+											<img src={`/img/flag/langen.png`} alt={'flag'} />
+										)}
+									</Box>
+								</Button>
+
+								<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose}>
+									<MenuItem disableRipple onClick={langChoice} id="en">
+										<img className="img-flag" src={'/img/flag/langen.png'} id="en" alt={'usaFlag'} />
+										{t('English')}
+									</MenuItem>
+									<MenuItem disableRipple onClick={langChoice} id="kr">
+										<img className="img-flag" src={'/img/flag/langkr.png'} id="kr" alt={'koreanFlag'} />
+										{t('Korean')}
+									</MenuItem>
+									<MenuItem disableRipple onClick={langChoice} id="ru">
+										<img className="img-flag" src={'/img/flag/langru.png'} id="ru" alt={'russiaFlag'} />
+										{t('Russian')}
+									</MenuItem>
+								</StyledMenu>
+							</div>
+
+							{/* User Section */}
 							{user?._id ? (
-								<>
-									<div className={'login-user'} onClick={(event: any) => setLogoutAnchor(event.currentTarget)}>
+								<div className={'user-section'}>
+									<NotificationsOutlinedIcon className={'notification-icon'} />
+									<div className={'user-avatar'} onClick={(event: any) => setLogoutAnchor(event.currentTarget)}>
 										<img
-											src={
-												user?.memberImage ? `${REACT_APP_API_URL}/${user?.memberImage}` : '/img/profile/defaultUser.svg'
-											}
+											src={user?.memberImage ? `${REACT_APP_API_URL}/${user?.memberImage}` : '/img/profile/defaultUser.svg'}
 											alt=""
 										/>
 									</div>
 
 									<Menu
-										id="basic-menu"
+										id="user-menu"
 										anchorEl={logoutAnchor}
 										open={logoutOpen}
-										onClose={() => {
-											setLogoutAnchor(null);
-										}}
+										onClose={() => setLogoutAnchor(null)}
 										sx={{ mt: '5px' }}
 									>
 										<MenuItem onClick={() => logOut()}>
-											<Logout fontSize="small" style={{ color: 'blue', marginRight: '10px' }} />
-											Logout
+											<Logout fontSize="small" style={{ color: '#0047FF', marginRight: '10px' }} />
+											{t('Logout')}
 										</MenuItem>
 									</Menu>
-								</>
+								</div>
 							) : (
 								<Link href={'/account/join'}>
-									<div className={'join-box'}>
-										<AccountCircleOutlinedIcon />
-										<span>
-											{t('Login')} / {t('Register')}
-										</span>
-									</div>
+									<button className={'contact-btn'}>
+										{t('Contact')}
+									</button>
 								</Link>
 							)}
-
-							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
-								<Button
-									disableRipple
-									className="btn-lang"
-									onClick={langClick}
-									endIcon={<CaretDown size={14} color="#616161" weight="fill" />}
-								>
-									<Box component={'div'} className={'flag'}>
-										{lang !== null ? (
-											<img src={`/img/flag/lang${lang}.png`} alt={'usaFlag'} />
-										) : (
-											<img src={`/img/flag/langen.png`} alt={'usaFlag'} />
-										)}
-									</Box>
-								</Button>
-
-								<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose} sx={{ position: 'absolute' }}>
-									<MenuItem disableRipple onClick={langChoice} id="en">
-										<img
-											className="img-flag"
-											src={'/img/flag/langen.png'}
-											onClick={langChoice}
-											id="en"
-											alt={'usaFlag'}
-										/>
-										{t('English')}
-									</MenuItem>
-									<MenuItem disableRipple onClick={langChoice} id="kr">
-										<img
-											className="img-flag"
-											src={'/img/flag/langkr.png'}
-											onClick={langChoice}
-											id="uz"
-											alt={'koreanFlag'}
-										/>
-										{t('Korean')}
-									</MenuItem>
-									<MenuItem disableRipple onClick={langChoice} id="ru">
-										<img
-											className="img-flag"
-											src={'/img/flag/langru.png'}
-											onClick={langChoice}
-											id="ru"
-											alt={'russiaFlag'}
-										/>
-										{t('Russian')}
-									</MenuItem>
-								</StyledMenu>
-							</div>
 						</Box>
 					</Stack>
 				</Stack>

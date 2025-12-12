@@ -3,8 +3,7 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
-import { Stack } from '@mui/material';
-import FiberContainer from '../common/FiberContainer';
+import { Stack, Box } from '@mui/material';
 import HeaderFilter from '../homepage/HeaderFilter';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
@@ -24,8 +23,6 @@ const withLayoutMain = (Component: any) => {
 			const jwt = getJwtToken();
 			if (jwt) updateUserInfo(jwt);
 		}, []);
-
-		/** HANDLERS **/
 
 		if (device == 'mobile') {
 			return (
@@ -61,9 +58,31 @@ const withLayoutMain = (Component: any) => {
 							<Top />
 						</Stack>
 
+						{/* Hero Section - April Ford Style */}
 						<Stack className={'header-main'}>
-							<FiberContainer />
+							{/* Hero Content */}
 							<Stack className={'container'}>
+								<Box className={'hero-content'}>
+									{/* Breadcrumb */}
+									<Box className={'breadcrumb'}>
+										<span>Homepage</span>
+										<span className={'separator'}>&gt;</span>
+										<span>Properties</span>
+									</Box>
+
+									{/* Main Title */}
+									<h1 className={'hero-title'}>
+										FIND YOUR PERFECT HOME. START YOUR JOURNEY TODAY.
+									</h1>
+
+									{/* Subtitle */}
+									<p className={'hero-subtitle'}>
+										Discover premium properties with exceptional amenities and prime locations. 
+										Your dream home awaits.
+									</p>
+								</Box>
+
+								{/* Search Filter */}
 								<HeaderFilter />
 							</Stack>
 						</Stack>
@@ -72,7 +91,7 @@ const withLayoutMain = (Component: any) => {
 							<Component {...props} />
 						</Stack>
 
-					<Chat />
+						<Chat />
 
 						<Stack id={'footer'}>
 							<Footer />

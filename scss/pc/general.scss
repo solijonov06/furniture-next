@@ -1,316 +1,602 @@
+// ============================================
+// GLOBAL STYLES - April Ford Design System
+// ============================================
+
+// Utility Classes
+.gradient-bg {
+	background: $gradient-hero;
+}
+
+.gradient-text {
+	background: $gradient-text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.section-heading {
+	font-family: $font-heading;
+	font-size: 48px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	line-height: 1.1;
+}
+
+.section-heading-white {
+	@extend .section-heading;
+	color: $color-white;
+}
+
+// ============================================
+// PROPERTY CARDS - April Ford Style
+// ============================================
 .property-big-card-box {
 	position: relative;
 	margin-right: 8px;
 	margin-left: 8px;
 	margin-bottom: 35px;
 	width: 410px;
-	height: 455px;
+	height: auto;
 	display: flex;
 	flex-direction: column;
+	background: $color-white;
+	border-radius: $radius-md;
+	box-shadow: $shadow-card;
+	transition: all $transition-normal;
+	overflow: hidden;
+
+	&:hover {
+		transform: translateY(-8px);
+		box-shadow: 0px 12px 30px rgba(0, 71, 255, 0.15);
+		
+		.card-img {
+			&::after {
+				opacity: 1;
+			}
+		}
+	}
+
 	.card-img {
 		position: relative;
 		width: 100%;
 		height: 264px;
 		background-size: cover;
-		border-radius: 12px 12px 0px 0px;
+		background-position: center;
 		cursor: pointer;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(180deg, transparent 0%, rgba(0, 71, 255, 0.2) 100%);
+			opacity: 0;
+			transition: opacity $transition-normal;
+		}
+
 		div.status {
 			position: absolute;
-			padding: 6px 34px;
-			left: 20px;
-			top: 20px;
+			padding: 8px 16px;
+			left: 16px;
+			top: 16px;
 			display: flex;
 			align-items: center;
-			border-radius: 6px;
-			background: #eb6753;
+			border-radius: $radius-full;
+			background: $color-primary-blue;
+			z-index: 1;
+
 			img {
 				width: 14px;
 				height: 14px;
 			}
+
 			span {
-				margin-left: 5px;
-				color: #fff;
+				margin-left: 6px;
+				color: $color-white;
 				font-family: $font;
-				font-size: 12px;
-				font-style: normal;
+				font-size: 11px;
 				font-weight: 600;
-				line-height: normal;
 				text-transform: uppercase;
+				letter-spacing: 0.5px;
 			}
 		}
+
 		div.price {
 			position: absolute;
-			padding: 8px 12px;
-			left: 20px;
-			bottom: 20px;
-			border-radius: 6px;
-			background: #fff;
-			color: #181a20;
-			font-family: $font;
-			font-size: 15px;
-			font-style: normal;
+			padding: 10px 16px;
+			left: 16px;
+			bottom: 16px;
+			border-radius: $radius-sm;
+			background: $color-white;
+			color: $color-dark;
+			font-family: $font-heading;
+			font-size: 18px;
 			font-weight: 600;
-			line-height: normal;
+			z-index: 1;
 		}
 	}
+
 	.info {
-		padding: 20px 22px 17px;
+		padding: 24px;
 		display: flex;
 		flex-direction: column;
-		box-sizing: border-box;
-		border-radius: 0px 0px 12px 12px;
-		border: 1px solid #ddd;
-		border-top: none;
-		background: #fff;
+		background: $color-white;
+
 		.title {
 			overflow: hidden;
-			color: #181a20;
+			color: $color-dark;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			font-family: $font;
-			font-size: 15px;
-			font-style: normal;
+			font-family: $font-heading;
+			font-size: 18px;
 			font-weight: 600;
-			line-height: normal;
-			text-transform: capitalize;
+			text-transform: uppercase;
+			letter-spacing: 1px;
 			cursor: pointer;
+			transition: color $transition-fast;
+
+			&:hover {
+				color: $color-primary-blue;
+			}
 		}
+
 		.desc {
-			margin-top: 5px;
+			margin-top: 8px;
 			overflow: hidden;
-			color: #717171;
+			color: $color-text-light;
 			font-family: $font;
-			font-size: 13px;
-			font-style: normal;
+			font-size: 14px;
 			font-weight: 400;
-			line-height: normal;
+			line-height: 1.5;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
+
 		.options {
-			margin-top: 15px;
+			margin-top: 20px;
+			padding-top: 16px;
+			border-top: 1px solid $color-border;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+
 			div {
 				display: flex;
 				flex-direction: row;
+				align-items: center;
+
 				img {
-					margin-right: 5px;
-					width: 17px;
-					height: 17px;
+					margin-right: 6px;
+					width: 18px;
+					height: 18px;
+					opacity: 0.7;
 				}
+
 				span {
-					color: #181a20;
+					color: $color-text-light;
 					font-family: $font;
 					font-size: 13px;
-					font-style: normal;
-					font-weight: 400;
-					line-height: normal;
+					font-weight: 500;
 				}
 			}
 		}
+
 		.bott {
+			margin-top: 16px;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
+
 			div {
-				width: 65px;
+				width: auto;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				justify-content: space-between;
+				gap: 8px;
 			}
+
 			p {
-				color: #181a20;
+				color: $color-dark;
 				font-family: $font;
 				font-size: 13px;
-				font-style: normal;
 				font-weight: 500;
-				line-height: normal;
-				text-transform: capitalize;
 			}
+
 			span {
-				margin-left: 6px;
-				color: rgba(143, 143, 143, 0.54);
+				color: $color-text-light;
 				font-family: $font;
-				font-size: 15px;
-				font-style: normal;
-				font-weight: 500;
-				line-height: normal;
-				text-transform: capitalize;
+				font-size: 14px;
+				font-weight: 400;
 			}
+
 			button {
-				margin-left: 15px;
-				width: 16px;
-				height: 16px;
-				box-sizing: border-box;
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				background: $color-background;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: all $transition-fast;
+
+				&:hover {
+					background: $color-primary-blue;
+					color: $color-white;
+				}
 			}
+
 			.buttons-box {
 				width: auto;
-				height: auto;
 				display: flex;
 				flex-direction: row;
-				gap: 7px;
+				gap: 8px;
 			}
 		}
 	}
 }
+
+// ============================================
+// AGENT CARDS - April Ford Style
+// ============================================
 .agent-general-card {
 	position: relative;
-	margin-right: 27px;
-	margin-bottom: 34px;
+	margin-right: 20px;
+	margin-bottom: 30px;
 	display: flex;
 	flex-direction: column;
-	.agent-img {
-		border-radius: 12px;
-		width: 233px;
-		height: 273px;
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-		cursor: pointer;
-		div {
-			position: absolute;
-			padding: 12px;
-			top: 12px;
-			left: 12px;
-			border-radius: 6px;
-			background: #eb6753;
-			color: #fff;
-			font-family: $font;
-			font-size: 12px;
-			font-style: normal;
-			font-weight: 600;
-			line-height: normal;
+	background: var(--color-bg-card);
+	border-radius: $radius-md;
+	padding: 20px;
+	box-shadow: var(--shadow-card);
+	border: 1px solid var(--color-border-primary);
+	transition: all $transition-normal;
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: 0px 12px 30px rgba(167, 139, 250, 0.2);
+		
+		.agent-img {
+			&::before {
+				opacity: 1;
+			}
 		}
 	}
+
+	.agent-img {
+		position: relative;
+		border-radius: $radius-md;
+		width: 100%;
+		height: 260px;
+		background-size: cover;
+		background-position: center;
+		cursor: pointer;
+		overflow: hidden;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: $gradient-hero;
+			opacity: 0;
+			transition: opacity $transition-normal;
+			mix-blend-mode: overlay;
+		}
+
+		div {
+			position: absolute;
+			padding: 10px 16px;
+			top: 12px;
+			left: 12px;
+			border-radius: $radius-full;
+			background: var(--color-accent-primary, $color-primary-blue);
+			color: $color-white;
+			font-family: $font;
+			font-size: 11px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+	}
+
 	.agent-desc {
-		margin-top: 23px;
+		margin-top: 20px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+
 		.agent-info {
 			display: flex;
 			flex-direction: column;
+
 			strong {
-				color: #181a20;
-				font-family: $font;
-				font-size: 15px;
-				font-style: normal;
+				color: var(--color-text-primary);
+				font-family: $font-heading;
+				font-size: 16px;
 				font-weight: 600;
-				line-height: normal;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
 				cursor: pointer;
+				transition: color $transition-fast;
+
+				&:hover {
+					color: var(--color-accent-primary, $color-primary-blue);
+				}
 			}
+
 			span {
-				color: #181a20;
+				color: var(--color-text-secondary);
 				font-family: $font;
-				font-size: 15px;
-				font-style: normal;
+				font-size: 14px;
 				font-weight: 400;
-				line-height: 28px;
+				margin-top: 4px;
 			}
 		}
+
 		.buttons {
-			width: auto;
 			display: flex;
 			flex-direction: row;
-			justify-content: center;
 			align-items: center;
+			gap: 8px;
+
 			svg {
-				width: 24px;
-				height: 24px;
+				width: 20px;
+				height: 20px;
 				cursor: pointer;
+				color: var(--color-text-secondary);
+				transition: color $transition-fast;
+
+				&:hover {
+					color: var(--color-accent-primary, $color-primary-blue);
+				}
 			}
+
 			.view-cnt {
-				font-size: 13px;
+				font-size: 12px;
+				color: var(--color-text-secondary);
 			}
 		}
 	}
 }
+
+// ============================================
+// COMMUNITY CARDS - April Ford Style
+// ============================================
 .community-general-card-config {
 	position: relative;
 	height: auto;
-	gap: 20px;
-	border-radius: 12px;
+	border-radius: $radius-md;
 	cursor: pointer;
+	background: var(--color-bg-card);
+	box-shadow: var(--shadow-card);
+	border: 1px solid var(--color-border-primary);
+	overflow: hidden;
+	transition: all $transition-normal;
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: 0px 12px 30px rgba(167, 139, 250, 0.2);
+	}
+
 	.image-box {
 		width: 100%;
-		height: 283px;
+		height: 240px;
+		overflow: hidden;
+
 		.card-img {
 			width: 100%;
 			height: 100%;
-			border-radius: 12px;
+			object-fit: cover;
+			transition: transform $transition-slow;
+		}
+
+		&:hover .card-img {
+			transform: scale(1.05);
 		}
 	}
+
 	.desc-box {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		width: 100%;
-		height: 80px;
+		padding: 20px;
+
 		.title {
-			color: #717171;
+			color: var(--color-text-secondary);
 			font-family: $font;
-			font-size: 13px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: normal;
+			font-size: 12px;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 1px;
 		}
+
 		.desc {
-			color: #181a20;
-			font-family: $font;
-			font-size: 15px;
-			font-style: normal;
+			color: var(--color-text-primary);
+			font-family: $font-heading;
+			font-size: 16px;
 			font-weight: 600;
-			line-height: 26px;
-			text-transform: capitalize;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			margin-top: 6px;
 		}
+
 		.buttons {
-			width: auto;
 			display: flex;
 			flex-direction: row;
-			justify-content: center;
 			align-items: center;
+			gap: 8px;
+
 			svg {
-				width: 24px;
-				height: 24px;
+				width: 20px;
+				height: 20px;
 				cursor: pointer;
+				color: var(--color-text-secondary);
+				transition: color $transition-fast;
+
+				&:hover {
+					color: var(--color-accent-primary, $color-primary-blue);
+				}
 			}
+
 			.view-cnt {
-				font-size: 13px;
+				font-size: 12px;
+				color: var(--color-text-secondary);
 			}
 		}
 	}
+
 	.date-box {
 		position: absolute;
-		width: 70px;
-		height: 69.014px;
+		width: 60px;
+		height: 60px;
+		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		top: 235px;
-		right: 20px;
-		border-radius: 12px;
-		background: #fff;
-		box-shadow: 0px 6px 15px 0px rgba(64, 79, 104, 0.05);
+		top: 16px;
+		right: 16px;
+		border-radius: $radius-sm;
+		background: var(--color-bg-card);
+		box-shadow: var(--shadow-card);
+
 		.month {
-			color: #181a20;
-			text-align: center;
+			color: var(--color-accent-primary, $color-primary-blue);
 			font-family: $font;
-			font-size: 13px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: normal;
-		}
-		.day {
-			color: #181a20;
-			font-family: $font;
-			font-size: 20px;
-			font-style: normal;
+			font-size: 11px;
 			font-weight: 600;
-			line-height: normal;
+			text-transform: uppercase;
 		}
+
+		.day {
+			color: var(--color-text-primary);
+			font-family: $font-heading;
+			font-size: 22px;
+			font-weight: 700;
+		}
+	}
+}
+
+// ============================================
+// BUTTONS - April Ford Style
+// ============================================
+.btn-primary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 14px 32px;
+	background: $color-dark;
+	color: $color-white;
+	font-family: $font;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border-radius: $radius-full;
+	border: none;
+	cursor: pointer;
+	transition: all $transition-normal;
+
+	&:hover {
+		background: $color-primary-blue;
+		box-shadow: $shadow-button;
+	}
+}
+
+.btn-outline {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 28px;
+	background: transparent;
+	color: $color-dark;
+	font-family: $font;
+	font-size: 14px;
+	font-weight: 600;
+	border: 2px solid $color-dark;
+	border-radius: $radius-full;
+	cursor: pointer;
+	transition: all $transition-normal;
+
+	&:hover {
+		background: $color-dark;
+		color: $color-white;
+	}
+}
+
+// ============================================
+// SERVICE CARDS - April Ford Style (for property types)
+// ============================================
+.service-card {
+	position: relative;
+	padding: 32px;
+	background: $color-white;
+	border-radius: $radius-md;
+	border: 1px solid $color-border;
+	transition: all $transition-normal;
+	cursor: pointer;
+
+	&:hover {
+		border-color: transparent;
+		box-shadow: 0px 20px 40px rgba(0, 71, 255, 0.1);
+		
+		&::before {
+			opacity: 1;
+		}
+
+		.service-icon {
+			color: $color-primary-blue;
+		}
+
+		.service-title {
+			color: $color-primary-blue;
+		}
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: $gradient-primary;
+		border-radius: 0 0 $radius-md $radius-md;
+		opacity: 0;
+		transition: opacity $transition-normal;
+	}
+
+	.service-icon {
+		width: 32px;
+		height: 32px;
+		margin-bottom: 20px;
+		color: $color-dark;
+		transition: color $transition-fast;
+	}
+
+	.service-title {
+		font-family: $font-heading;
+		font-size: 18px;
+		font-weight: 600;
+		color: $color-dark;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: 12px;
+		transition: color $transition-fast;
+	}
+
+	.service-desc {
+		font-family: $font;
+		font-size: 14px;
+		font-weight: 400;
+		color: $color-text-light;
+		line-height: 1.6;
 	}
 }

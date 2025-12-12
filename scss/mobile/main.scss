@@ -1,12 +1,231 @@
 @import '/scss/variables.scss';
 
+// ============================================
+// MOBILE STYLES - April Ford Design
+// ============================================
+
 #mobile-wrap {
+  // ============================================
+  // MOBILE NAVBAR
+  // ============================================
+  .top-mobile {
+    position: relative;
+
+    .mobile-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      height: 70px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background: $color-white;
+      box-shadow: $shadow-navbar;
+
+      .logo {
+        height: 28px;
+        width: auto;
+      }
+
+      .menu-toggle {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $color-background;
+        border: none;
+        border-radius: $radius-sm;
+        cursor: pointer;
+
+        svg {
+          font-size: 24px;
+          color: $color-dark;
+        }
+      }
+
+      // Mobile Actions (Theme Toggle + Menu Toggle)
+      .mobile-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+        .theme-toggle {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: $color-background;
+          border: 1px solid $color-border;
+          border-radius: $radius-sm;
+          cursor: pointer;
+          transition: all $transition-fast;
+
+          svg {
+            font-size: 20px;
+            color: $color-dark;
+          }
+
+          &:hover {
+            background: darken($color-background, 5%);
+          }
+        }
+
+        .menu-toggle {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: $color-background;
+          border: 1px solid $color-border;
+          border-radius: $radius-sm;
+          cursor: pointer;
+
+          svg {
+            font-size: 22px;
+            color: $color-dark;
+          }
+        }
+      }
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 998;
+      display: flex;
+      flex-direction: column;
+      background: $color-white;
+      padding: 30px 20px;
+      transform: translateX(-100%);
+      transition: transform $transition-normal;
+
+      &.open {
+        transform: translateX(0);
+      }
+
+      .menu-item {
+        padding: 16px 0;
+        color: $color-dark;
+        font-family: $font-heading;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 1px solid $color-border;
+        transition: color $transition-fast;
+
+        &:hover {
+          color: $color-primary-blue;
+        }
+
+        &.contact-btn {
+          margin-top: 20px;
+          padding: 16px 24px;
+          background: $color-primary-blue;
+          color: $color-white;
+          text-align: center;
+          border-radius: $radius-full;
+          border: none;
+        }
+      }
+    }
+  }
+
+  // Legacy top class support
   .top {
     height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+  }
+
+  // Dark Mode Mobile Styles
+  [data-theme="dark"] & {
+    background: var(--color-bg-primary);
+
+    .top-mobile {
+      .mobile-navbar {
+        background: var(--color-bg-navbar);
+        border-bottom: 1px solid var(--color-border-primary);
+
+        .mobile-actions {
+          .theme-toggle {
+            background: var(--color-bg-tertiary);
+            border-color: var(--color-border-primary);
+
+            svg {
+              color: var(--color-text-primary);
+            }
+          }
+        }
+      }
+
+      .mobile-menu {
+        background: var(--color-bg-primary);
+
+        .menu-item {
+          color: var(--color-text-primary);
+          border-color: var(--color-border-primary);
+
+          &.contact-btn {
+            background: $color-primary-blue;
+            color: $color-white;
+          }
+        }
+      }
+    }
+  }
+
+  // ============================================
+  // MOBILE CTA SECTION
+  // ============================================
+  .cta-section {
+    padding: 60px 20px;
+    background: $gradient-hero;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .cta-title {
+        color: $color-white;
+        font-family: $font-heading;
+        font-size: 28px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.2;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+      }
+
+      .cta-button {
+        padding: 16px 32px;
+        background: $color-white;
+        color: $color-dark;
+        font-family: $font;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        border-radius: $radius-full;
+        cursor: pointer;
+      }
+    }
   }
 
   .info-box {
