@@ -48,7 +48,6 @@ export const UPDATE_PROPERTY_BY_ADMIN = gql`
 			propertyTitle
 			propertyPrice
 			propertySquare
-			propertyBeds
 			propertyViews
 			propertyLikes
 			propertyImages
@@ -76,7 +75,6 @@ export const REMOVE_PROPERTY_BY_ADMIN = gql`
 			propertyTitle
 			propertyPrice
 			propertySquare
-			propertyBeds
 			propertyViews
 			propertyLikes
 			propertyImages
