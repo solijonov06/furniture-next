@@ -24,6 +24,10 @@ p {
 }
 body {
 	font-family: $font;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	transition: background-color 0.3s ease, color 0.3s ease;
+	
 	&::-webkit-scrollbar {
 		width: 9px;
 	}
@@ -38,6 +42,66 @@ body {
 
 	.MuiPopover-paper {
 		box-shadow: none;
+	}
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+	a {
+		color: var(--color-text);
+	}
+	
+	.MuiPaper-root {
+		background-color: var(--color-card-bg) !important;
+		color: var(--color-text) !important;
+	}
+	
+	.MuiMenuItem-root {
+		color: var(--color-text) !important;
+		&:hover {
+			background-color: rgba(167, 139, 250, 0.1) !important;
+		}
+	}
+	
+	.MuiDivider-root {
+		border-color: var(--color-border) !important;
+	}
+	
+	.MuiInputBase-root,
+	.MuiOutlinedInput-root {
+		background-color: var(--color-input-bg) !important;
+		color: var(--color-text) !important;
+		
+		.MuiOutlinedInput-notchedOutline {
+			border-color: var(--color-border) !important;
+		}
+		
+		&:hover .MuiOutlinedInput-notchedOutline {
+			border-color: var(--color-accent) !important;
+		}
+	}
+	
+	.MuiInputLabel-root {
+		color: var(--color-text-muted) !important;
+	}
+	
+	.MuiButton-outlined {
+		border-color: var(--color-border) !important;
+		color: var(--color-text) !important;
+	}
+	
+	.MuiTab-root {
+		color: var(--color-text-muted) !important;
+		&.Mui-selected {
+			color: var(--color-accent) !important;
+		}
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background: #4a5568;
+	}
+	&::-webkit-scrollbar-track {
+		background: #1e293b;
 	}
 }
 hr {

@@ -5,9 +5,11 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import { Stack, Box } from '@mui/material';
 import moment from 'moment';
+import { useTheme } from '../context/ThemeContext';
 
 const Footer = () => {
 	const device = useDeviceDetect();
+	const { theme } = useTheme();
 
 	if (device == 'mobile') {
 		return (
@@ -15,7 +17,7 @@ const Footer = () => {
 				<Stack className={'main'}>
 					<Stack className={'left'}>
 						<Box component={'div'} className={'footer-box'}>
-							<img src="/img/logo/logoWhite.svg" alt="" className={'logo'} />
+							<img src={theme === 'dark' ? '/img/logo/logoWhite.svg' : '/img/logo/logoText.svg'} alt="" className={'logo'} />
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>total free customer care</span>
@@ -73,7 +75,7 @@ const Footer = () => {
 				<Stack className={'main'}>
 					<Stack className={'left'}>
 						<Box component={'div'} className={'footer-box'}>
-							<img src="/img/logo/logoWhite.svg" alt="" className={'logo'} />
+							<img src={theme === 'dark' ? '/img/logo/logoWhite.svg' : '/img/logo/logoText.svg'} alt="" className={'logo'} />
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>total free customer care</span>
