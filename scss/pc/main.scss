@@ -435,30 +435,89 @@ body::-webkit-scrollbar {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		background: var(--color-bg-secondary);
+		align-items: center;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		transition: background-color 0.3s ease;
+		
+		// Page-specific background images
+		&.header-property {
+			background-image: url('/img/banner/property-hero.jpg');
+		}
+		&.header-agent {
+			background-image: url('/img/banner/agent-hero.jpg');
+		}
+		&.header-community {
+			background-image: url('/img/banner/community-hero.jpg');
+		}
+		&.header-cs {
+			background-image: url('/img/banner/cs-hero.jpg');
+		}
+		&.header-mypage, &.header-member {
+			background-image: url('/img/banner/mypage-hero.jpg');
+		}
+		&.header-auth, &.header-about {
+			background-image: url('/img/banner/home-hero.jpg');
+		}
+		
 		&.auth {
 			height: 300px;
 		}
+		
 		.container {
-			margin-top: 175px;
-			strong {
-				color: var(--color-text);
-				font-family: $font;
-				font-size: 48px;
-				font-style: normal;
-				font-weight: 600;
-				line-height: normal;
-				letter-spacing: 0.96px;
-				text-transform: capitalize;
-			}
-			span {
-				color: var(--color-text-secondary);
-				font-family: $font;
-				font-size: 24px;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 26px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			
+			.text-content {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 40px 60px;
+				background: rgba(0, 0, 0, 0.55);
+				border-radius: $radius-lg;
+				
+				.breadcrumb {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 16px;
+					
+					span {
+						color: rgba(255, 255, 255, 0.8);
+						font-family: $font;
+						font-size: 14px;
+						font-weight: 400;
+						
+						&.separator {
+							margin: 0 10px;
+						}
+					}
+				}
+				
+				strong {
+					color: $color-white;
+					font-family: $font;
+					font-size: 48px;
+					font-style: normal;
+					font-weight: 600;
+					line-height: normal;
+					letter-spacing: 0.96px;
+					text-transform: uppercase;
+					text-align: center;
+					margin-bottom: 12px;
+				}
+				
+				span {
+					color: rgba(255, 255, 255, 0.8);
+					font-family: $font;
+					font-size: 18px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 26px;
+					text-align: center;
+				}
 			}
 		}
 	}
