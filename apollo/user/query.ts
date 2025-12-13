@@ -94,7 +94,6 @@ export const GET_PROPERTY = gql`
 			propertyPrice
 			propertySquare
 			propertyBeds
-			propertyRooms
 			propertyViews
 			propertyLikes
 			propertyImages
@@ -150,7 +149,6 @@ export const GET_PROPERTIES = gql`
 				propertyPrice
 				propertySquare
 				propertyBeds
-				propertyRooms
 				propertyViews
 				propertyLikes
 				propertyRank
@@ -212,7 +210,6 @@ export const GET_AGENT_PROPERTIES = gql`
 				propertyPrice
 				propertySquare
 				propertyBeds
-				propertyRooms
 				propertyViews
 				propertyLikes
 				propertyImages
@@ -246,7 +243,6 @@ export const GET_FAVORITES = gql`
 				propertyPrice
 				propertySquare
 				propertyBeds
-				propertyRooms
 				propertyViews
 				propertyLikes
 				propertyComments
@@ -309,7 +305,6 @@ export const GET_VISITED = gql`
 				propertyPrice
 				propertySquare
 				propertyBeds
-				propertyRooms
 				propertyViews
 				propertyLikes
 				propertyComments

@@ -134,7 +134,6 @@ export const CREATE_PROPERTY = gql`
 			propertyPrice
 			propertySquare
 			propertyBeds
-			propertyRooms
 			propertyViews
 			propertyLikes
 			propertyImages
@@ -163,7 +162,6 @@ export const UPDATE_PROPERTY = gql`
 			propertyPrice
 			propertySquare
 			propertyBeds
-			propertyRooms
 			propertyViews
 			propertyLikes
 			propertyImages
@@ -192,7 +190,6 @@ export const LIKE_TARGET_PROPERTY = gql`
 			propertyPrice
 			propertySquare
 			propertyBeds
-			propertyRooms
 			propertyViews
 			propertyLikes
 			propertyImages
