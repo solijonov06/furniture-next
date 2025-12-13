@@ -1,3 +1,6 @@
+// Must be first import to suppress Apollo warnings
+import '../libs/suppressWarnings';
+
 import type { AppProps } from 'next/app';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
