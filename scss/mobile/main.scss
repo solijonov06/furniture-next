@@ -24,7 +24,7 @@
       justify-content: space-between;
       align-items: center;
       background: $color-white;
-      box-shadow: $shadow-navbar;
+      box-shadow: $shadow-md;
 
       .logo {
         height: 28px;
@@ -37,14 +37,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: $color-background;
+        background: $color-gray-100;
         border: none;
         border-radius: $radius-sm;
         cursor: pointer;
 
         svg {
           font-size: 24px;
-          color: $color-dark;
+          color: $color-gray-900;
         }
       }
 
@@ -61,19 +61,19 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          background: $color-background;
-          border: 1px solid $color-border;
+          background: $color-gray-100;
+          border: 1px solid $color-gray-300;
           border-radius: $radius-sm;
           cursor: pointer;
           transition: all $transition-fast;
 
           svg {
             font-size: 20px;
-            color: $color-dark;
+            color: $color-gray-900;
           }
 
           &:hover {
-            background: darken($color-background, 5%);
+            background: darken($color-gray-100, 5%);
           }
         }
 
@@ -83,14 +83,14 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          background: $color-background;
-          border: 1px solid $color-border;
+          background: $color-gray-100;
+          border: 1px solid $color-gray-300;
           border-radius: $radius-sm;
           cursor: pointer;
 
           svg {
             font-size: 22px;
-            color: $color-dark;
+            color: $color-gray-900;
           }
         }
       }
@@ -116,23 +116,23 @@
 
       .menu-item {
         padding: 16px 0;
-        color: $color-dark;
+        color: $color-gray-900;
         font-family: $font-heading;
         font-size: 18px;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
-        border-bottom: 1px solid $color-border;
+        border-bottom: 1px solid $color-gray-300;
         transition: color $transition-fast;
 
         &:hover {
-          color: $color-primary-blue;
+          color: $color-primary;
         }
 
         &.contact-btn {
           margin-top: 20px;
           padding: 16px 24px;
-          background: $color-primary-blue;
+          background: $color-primary;
           color: $color-white;
           text-align: center;
           border-radius: $radius-full;
@@ -180,7 +180,7 @@
           border-color: var(--color-border-primary);
 
           &.contact-btn {
-            background: $color-primary-blue;
+            background: $color-primary;
             color: $color-white;
           }
         }
@@ -193,7 +193,7 @@
   // ============================================
   .cta-section {
     padding: 60px 20px;
-    background: $gradient-hero;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 
     .container {
       display: flex;
@@ -215,7 +215,7 @@
       .cta-button {
         padding: 16px 32px;
         background: $color-white;
-        color: $color-dark;
+        color: $color-gray-900;
         font-family: $font;
         font-size: 14px;
         font-weight: 600;
