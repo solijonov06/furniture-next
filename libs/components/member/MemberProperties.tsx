@@ -32,12 +32,14 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 		},
 		skip: !searchFilter?.search.memberId,
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: any) => {
-			setAgentProperties(data?.getProperties?.list);
-			setTotal(data?.getProperties?.metaCounter[0]?.total ?? 0)
-		}
+	});
 
-	})
+	useEffect(() => {
+		if (getPropertiesData?.getProperties) {
+			setAgentProperties(getPropertiesData.getProperties.list);
+			setTotal(getPropertiesData.getProperties.metaCounter[0]?.total ?? 0);
+		}
+	}, [getPropertiesData]);
 
 	/** LIFECYCLES **/
 	useEffect(() => {

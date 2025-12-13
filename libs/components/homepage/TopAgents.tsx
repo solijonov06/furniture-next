@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
@@ -32,10 +32,13 @@ const TopAgents = (props: TopAgentsProps) => {
 				fetchPolicy: 'cache-and-network',
 				variables: { input: initialInput },
 				notifyOnNetworkStatusChange: true,
-				onCompleted: (data: T) => {
-					setTopAgents(data?.getAgents ?.list);
-				},
 			});
+
+	useEffect(() => {
+		if (getAgentsData?.getAgents?.list) {
+			setTopAgents(getAgentsData.getAgents.list);
+		}
+	}, [getAgentsData]);
 	/** HANDLERS **/
 
 	if (device === 'mobile') {

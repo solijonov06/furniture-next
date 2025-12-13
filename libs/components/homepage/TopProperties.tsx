@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import WestIcon from '@mui/icons-material/West';
@@ -36,10 +36,13 @@ const TopProperties = (props: TopPropertiesProps) => {
 			fetchPolicy: 'cache-and-network',
 			variables: { input: initialInput },
 			notifyOnNetworkStatusChange: true,
-			onCompleted: (data: T) => {
-				setTopProperties(data?.getProperties?.list);
-			},
 		});
+
+	useEffect(() => {
+		if (getPropertiesData?.getProperties?.list) {
+			setTopProperties(getPropertiesData.getProperties.list);
+		}
+	}, [getPropertiesData]);
 	
 	/** HANDLERS **/
 	const likePropertyHandler = async (user: T, id: string) => {

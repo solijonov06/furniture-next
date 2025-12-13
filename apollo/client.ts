@@ -8,6 +8,24 @@ import { getJwtToken } from '../libs/auth';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { sweetErrorAlert } from '../libs/sweetAlert';
 import { socketVar } from './store';
+
+// Suppress Apollo Client deprecation warnings (runs immediately on import)
+(() => {
+	const originalError = console.error;
+	console.error = (...args: any[]) => {
+		const msg = String(args[0] || '');
+		if (
+			msg.includes('go.apollo.dev') ||
+			msg.includes('An error occurred!') ||
+			msg.includes('canonizeResults') ||
+			msg.includes('onCompleted')
+		) {
+			return;
+		}
+		originalError.apply(console, args);
+	};
+})();
+
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 function getHeaders() {

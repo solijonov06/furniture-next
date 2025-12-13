@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Stack, Typography } from '@mui/material';
@@ -30,9 +30,6 @@ const CommunityBoards = () => {
 			fetchPolicy: 'network-only',
 			variables: { input: { ...searchCommunity, limit: 6, search: { articleCategory: BoardArticleCategory.NEWS } } },
 			notifyOnNetworkStatusChange: true,
-			onCompleted: (data: T) => {
-				setNewsArticles(data?.getBoardArticles?.list);
-			},
 		});
 
 
@@ -45,10 +42,19 @@ const CommunityBoards = () => {
 			fetchPolicy: 'network-only',
 			variables: { input: { ...searchCommunity, limit: 3, search: { articleCategory: BoardArticleCategory.FREE } } },
 			notifyOnNetworkStatusChange: true,
-			onCompleted: (data: T) => {
-				setFreeArticles(data?.getBoardArticles?.list);
-			},
-		});	
+		});
+
+	useEffect(() => {
+		if (getNewsArticlesData?.getBoardArticles?.list) {
+			setNewsArticles(getNewsArticlesData.getBoardArticles.list);
+		}
+	}, [getNewsArticlesData]);
+
+	useEffect(() => {
+		if (getFreeArticlesData?.getBoardArticles?.list) {
+			setFreeArticles(getFreeArticlesData.getBoardArticles.list);
+		}
+	}, [getFreeArticlesData]);	
  
 	if (device === 'mobile') {
 		return <div>COMMUNITY BOARDS (MOBILE)</div>;

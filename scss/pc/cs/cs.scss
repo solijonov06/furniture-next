@@ -4,6 +4,8 @@
     padding: 60px 0px 60px;
     width: 100%;
     height: auto;
+    background: var(--color-bg, #fff);
+    transition: background-color 0.3s ease;
     .container {
       display: flex;
       flex-direction: column;
@@ -15,7 +17,7 @@
           flex-direction: column;
           align-items: center;
           span {
-            color: #000;
+            color: var(--color-text, #000);
             font-family: $font;
             font-size: 35px;
             font-style: normal;
@@ -24,7 +26,7 @@
             letter-spacing: 0.525px;
           }
           p {
-            color: #757575;
+            color: var(--color-text-secondary, #757575);
             font-family: $font;
             font-size: 16px;
             font-style: normal;
@@ -49,18 +51,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid #EEE;
+            border: 1px solid var(--color-border, #EEE);
             cursor: pointer;
-            color: #BDBDBD;
+            color: var(--color-text-muted, #BDBDBD);
             font-family: $font;
             font-size: 14px;
             font-style: normal;
             font-weight: 700;
             line-height: normal;
             letter-spacing: 0.42px;
+            background: var(--color-card-bg, #fff);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
             &.active {
-              border: 1px solid #725CE8;
-              background: #EB6753;
+              border: 1px solid var(--color-primary, #725CE8);
+              background: var(--color-primary, #EB6753);
               color: #FFF;
             }
           }
@@ -72,7 +76,7 @@
         flex-direction: column;
         .title {
           margin-bottom: 25px;
-          color: #000;
+          color: var(--color-text, #000);
           font-family: $font;
           font-size: 27px;
           font-style: normal;
@@ -88,14 +92,16 @@
         }
         .notice-content {
           .main {
-            border: 1px solid #EEE;
+            border: 1px solid var(--color-border, #EEE);
+            background: var(--color-card-bg, #fff);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
             .top {
               padding: 25px 33px;
               display: flex;
               flex-direction: row;
               justify-content: space-between;
               span {
-                color: #000;
+                color: var(--color-text, #000);
                 font-family: $font;
                 font-size: 14px;
                 font-style: normal;
@@ -112,15 +118,17 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                border: 1px solid #EEE;
+                border: 1px solid var(--color-border, #EEE);
+                background: var(--color-card-bg, #fff);
+                transition: background-color 0.3s ease, border-color 0.3s ease;
                 &.event {
                   background: #F6D79A;
                 }
                 div {
                   padding: 6px 9px;
                   border-radius: 12px;
-                  border: 1px solid #EB6753;
-                  color: #EB6753;
+                  border: 1px solid var(--color-primary, #EB6753);
+                  color: var(--color-primary, #EB6753);
                   font-family: $font;
                   font-size: 12px;
                   font-style: normal;
@@ -129,7 +137,7 @@
                 .notice-number {
                   margin-left: 18px;
                   width: 39px;
-                  color: #BDBDBD;
+                  color: var(--color-text-muted, #BDBDBD);
                   font-family: $font;
                   font-size: 14px;
                   font-style: normal;
@@ -138,7 +146,7 @@
                 }
                 .notice-title {
                   width: 1060px;
-                  color: #000;
+                  color: var(--color-text, #000);
                   font-family: $font;
                   font-size: 16px;
                   font-style: normal;
@@ -146,7 +154,7 @@
                   line-height: normal;
                 }
                 .notice-date {
-                  color: #BDBDBD;
+                  color: var(--color-text-muted, #BDBDBD);
                   font-family: $font;
                   font-size: 14px;
                   font-style: normal;
@@ -173,7 +181,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              color: #BDBDBD;
+              color: var(--color-text-muted, #BDBDBD);
               text-align: center;
               font-family: $font;
               font-size: 15px;
@@ -183,8 +191,8 @@
               letter-spacing: -0.225px;
               cursor: pointer;
               &.active {
-                border-bottom: 1px solid #EB6753;
-                color: #EB6753;
+                border-bottom: 1px solid var(--color-primary, #EB6753);
+                color: var(--color-primary, #EB6753);
               }
             }
           }
@@ -192,15 +200,23 @@
             margin-top: 50px;
             .MuiAccordionDetails-root {
               padding: 30px 20px;
-              background: #FAFAFA;
+              background: var(--color-bg-secondary, #FAFAFA);
+            }
+            .MuiAccordion-root {
+              background: var(--color-card-bg, #fff);
+              color: var(--color-text, #000);
+              transition: background-color 0.3s ease;
+            }
+            .MuiAccordionSummary-content {
+              color: var(--color-text, #000);
             }
             .badge {
               margin: 0 24px;
               display: inline-block;
               padding: 4px 10px;
-              border: 1px solid #725CE8;
+              border: 1px solid var(--color-primary, #725CE8);
               border-radius: 7px;
-              color: #725CE8;
+              color: var(--color-primary, #725CE8);
             }
             .question {
               .badge {
@@ -214,9 +230,10 @@
               white-space: nowrap;
               align-items: center;
               flex-direction: row;
+              color: var(--color-text, #000);
               .badge {
-                color: #EB6753;
-                border: 1px solid #EB6753;
+                color: var(--color-primary, #EB6753);
+                border: 1px solid var(--color-primary, #EB6753);
               }
             }
           }

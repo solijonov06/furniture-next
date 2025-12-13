@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getJwtToken, logOut, updateUserInfo } from '../auth';
-import { Stack, Box } from '@mui/material';
+import { Stack, Box, IconButton, Tooltip } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { CaretDown } from 'phosphor-react';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import Link from 'next/link';
@@ -17,12 +19,14 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import { useTheme } from '../context/ThemeContext';
 
 const Top = () => {
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const { t, i18n } = useTranslation('common');
 	const router = useRouter();
+	const { theme, toggleTheme } = useTheme();
 	const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
 	const [lang, setLang] = useState<string | null>('en');
 	const drop = Boolean(anchorEl2);
@@ -231,6 +235,18 @@ const Top = () => {
 
 							<div className={'lan-box'}>
 								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+								
+								{/* Theme Toggle Button */}
+								<Tooltip title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
+									<IconButton onClick={toggleTheme} className="theme-toggle-btn">
+										{theme === 'light' ? (
+											<DarkModeIcon sx={{ color: '#fff' }} />
+										) : (
+											<LightModeIcon sx={{ color: '#ffd700' }} />
+										)}
+									</IconButton>
+								</Tooltip>
+
 								<Button
 									disableRipple
 									className="btn-lang"

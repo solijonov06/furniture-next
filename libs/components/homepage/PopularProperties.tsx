@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -33,10 +33,13 @@ const PopularProperties = (props: PopularPropertiesProps) => {
 			fetchPolicy: 'cache-and-network',
 			variables: { input: initialInput },
 			notifyOnNetworkStatusChange: true,
-			onCompleted: (data: T) => {
-				setPopularProperties(data?.getProperties?.list);
-			},
 		});
+
+	useEffect(() => {
+		if (getPropertiesData?.getProperties?.list) {
+			setPopularProperties(getPropertiesData.getProperties.list);
+		}
+	}, [getPropertiesData]);
 		
 	/** HANDLERS **/
 

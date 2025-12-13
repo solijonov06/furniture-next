@@ -37,6 +37,9 @@ body {
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
 	scrollbar-width: none; /* for Firefox */
 	overflow-y: scroll;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body::-webkit-scrollbar {
@@ -44,6 +47,9 @@ body::-webkit-scrollbar {
 }
 
 #pc-wrap {
+	background-color: var(--color-bg);
+	transition: background-color 0.3s ease;
+	
 	#top {
 		.navbar {
 			.navbar-main {
@@ -56,9 +62,11 @@ body::-webkit-scrollbar {
 				box-sizing: border-box;
 				z-index: 99;
 				align-items: center;
+				background-color: var(--navbar-bg);
 				border-top: 1px solid rgba(255, 255, 255, 0.07);
+				transition: background-color 0.3s ease;
 				&.transparent {
-					background-color: #181a209e;
+					background-color: rgba(24, 26, 32, 0.62);
 				}
 				.container {
 					flex-direction: row;
@@ -78,7 +86,7 @@ body::-webkit-scrollbar {
 						justify-content: space-between;
 						div {
 							position: relative;
-							color: #eeeeeeed;
+							color: var(--navbar-text, #eeeeeeed);
 							font-family: $font;
 							font-size: 15px;
 							font-style: normal;
@@ -150,6 +158,15 @@ body::-webkit-scrollbar {
 						align-items: center;
 						.notification-icon {
 							color: white;
+						}
+						.theme-toggle-btn {
+							margin-right: 10px;
+							padding: 8px;
+							border-radius: 50%;
+							transition: background-color 0.3s ease;
+							&:hover {
+								background-color: rgba(255, 255, 255, 0.1);
+							}
 						}
 						.btn-lang {
 							border-radius: 4px;
@@ -418,14 +435,15 @@ body::-webkit-scrollbar {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		background: black;
+		background: var(--color-bg-secondary);
+		transition: background-color 0.3s ease;
 		&.auth {
 			height: 300px;
 		}
 		.container {
 			margin-top: 175px;
 			strong {
-				color: #fff;
+				color: var(--color-text);
 				font-family: $font;
 				font-size: 48px;
 				font-style: normal;
@@ -435,7 +453,7 @@ body::-webkit-scrollbar {
 				text-transform: capitalize;
 			}
 			span {
-				color: #fff;
+				color: var(--color-text-secondary);
 				font-family: $font;
 				font-size: 24px;
 				font-style: normal;
@@ -466,7 +484,7 @@ body::-webkit-scrollbar {
 					display: flex;
 					flex-direction: column;
 					strong {
-						color: #181a20;
+						color: var(--color-text, #181a20);
 						font-family: $font;
 						font-size: 15px;
 						font-style: normal;
@@ -475,7 +493,7 @@ body::-webkit-scrollbar {
 					}
 					span {
 						margin-top: 4px;
-						color: #181a20;
+						color: var(--color-text, #181a20);
 						font-family: $font;
 						font-size: 13px;
 						font-style: normal;
@@ -494,7 +512,7 @@ body::-webkit-scrollbar {
 		}
 		p {
 			margin-top: 10px;
-			color: #181a20;
+			color: var(--color-text, #181a20);
 			font-family: $font;
 			font-size: 14px;
 			font-style: normal;
@@ -507,10 +525,10 @@ body::-webkit-scrollbar {
 			flex-direction: row;
 			gap: 10px;
 			align-items: center;
-			border-bottom: 1px solid #ddd;
+			border-bottom: 1px solid var(--color-border, #ddd);
 			.reply-text {
 				padding-bottom: 10px;
-				color: #181a20;
+				color: var(--color-text, #181a20);
 				font-family: $font;
 				font-size: 14px;
 				font-style: normal;
@@ -661,7 +679,8 @@ body::-webkit-scrollbar {
 		height: auto;
 		display: flex;
 		flex-direction: row;
-		background: #181a20;
+		background: var(--footer-bg);
+		transition: background-color 0.3s ease;
 		.footer-container {
 			width: 1300px;
 			height: auto;
@@ -684,7 +703,8 @@ body::-webkit-scrollbar {
 							cursor: pointer;
 						}
 						span {
-							color: #bebdbd;
+							color: var(--footer-text, #bebdbd);
+							opacity: 0.8;
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
@@ -692,7 +712,7 @@ body::-webkit-scrollbar {
 							text-transform: capitalize;
 						}
 						p {
-							color: #fff;
+							color: var(--footer-text, #fff);
 							font-family: $font;
 							font-size: 15px;
 							font-style: normal;
@@ -702,7 +722,8 @@ body::-webkit-scrollbar {
 						}
 						.media-box {
 							margin-top: 12px;
-							color: #929495;
+							color: var(--footer-text, #929495);
+							opacity: 0.7;
 							svg {
 								font-size: 32px;
 								margin-right: 22px;
@@ -718,7 +739,7 @@ body::-webkit-scrollbar {
 						display: flex;
 						flex-direction: column;
 						strong {
-							color: #fff;
+							color: var(--footer-text, #fff);
 							font-family: $font;
 							font-size: 15px;
 							font-style: normal;
@@ -736,13 +757,13 @@ body::-webkit-scrollbar {
 							align-items: center;
 							box-sizing: border-box;
 							border-radius: 12px;
-							background: #212329;
+							background: var(--color-bg-tertiary, #212329);
 							input {
 								margin-right: 10px;
 								width: 85%;
 								border: none;
 								outline: none;
-								color: #fff;
+								color: var(--footer-text, #fff);
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -751,7 +772,7 @@ body::-webkit-scrollbar {
 								background: none;
 							}
 							span {
-								color: #fff;
+								color: var(--footer-text, #fff);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -771,7 +792,7 @@ body::-webkit-scrollbar {
 							flex-direction: column;
 							strong {
 								margin-bottom: 3px;
-								color: #fff;
+								color: var(--footer-text, #fff);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -781,14 +802,15 @@ body::-webkit-scrollbar {
 							}
 							span {
 								margin-top: 25px;
-								color: #bebdbd;
+								color: var(--footer-text, #bebdbd);
+								opacity: 0.8;
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 400;
 								cursor: pointer;
 								&:hover {
-									color: #ffffff;
+									opacity: 1;
 									text-decoration-line: underline;
 								}
 							}
@@ -799,13 +821,14 @@ body::-webkit-scrollbar {
 			.second {
 				margin-top: 60px;
 				height: 45px;
-				border-top: 1px solid #212329;
+				border-top: 1px solid var(--color-border, #212329);
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: flex-end;
 				span {
-					color: #bebdbd;
+					color: var(--footer-text, #bebdbd);
+					opacity: 0.8;
 					font-family: $font;
 					font-size: 14px;
 					font-style: normal;

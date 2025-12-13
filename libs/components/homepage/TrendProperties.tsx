@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import WestIcon from '@mui/icons-material/West';
@@ -38,10 +38,13 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: initialInput },
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			setTrendProperties(data?.getProperties?.list);
-		},
 	});
+
+	useEffect(() => {
+		if (getPropertiesData?.getProperties?.list) {
+			setTrendProperties(getPropertiesData.getProperties.list);
+		}
+	}, [getPropertiesData]);
 	
 	/** HANDLERS **/
 	const likePropertyHandler = async (user: T, id: string) => {

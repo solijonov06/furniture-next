@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
@@ -34,11 +34,14 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
          fetchPolicy: 'network-only',
 		 variables: { input: searchFilter },
 		 notifyOnNetworkStatusChange: true,
-		 onCompleted: (data: T) => {
-			setAgentProperties(data?.getAgentProperties?.list);
-			setTotal(data?.getAgentProperties?.metaCounter[0]?.total ?? 0);
-		 },
 	});
+
+	useEffect(() => {
+		if (getAgentPropertiesData?.getAgentProperties) {
+			setAgentProperties(getAgentPropertiesData.getAgentProperties.list);
+			setTotal(getAgentPropertiesData.getAgentProperties.metaCounter[0]?.total ?? 0);
+		}
+	}, [getAgentPropertiesData]);
 
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
