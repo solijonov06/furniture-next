@@ -18,12 +18,16 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import { REACT_APP_API_URL } from '../../config';
 import { MemberType } from '../../enums/member.enum';
+import { useTheme } from '../../context/ThemeContext';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 const drawerWidth = 280;
 
 const withAdminLayout = (Component: ComponentType) => {
 	return (props: object) => {
 		const router = useRouter();
 		const user = useReactiveVar(userVar);
+		const { theme, toggleTheme } = useTheme();
 		const [settingsState, setSettingsStateState] = useState(false);
 		const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 		const [openMenu, setOpenMenu] = useState(false);
@@ -73,6 +77,11 @@ const withAdminLayout = (Component: ComponentType) => {
 						}}
 					>
 						<Toolbar>
+							<Tooltip title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
+								<IconButton onClick={toggleTheme} sx={{ mr: 2, color: 'var(--admin-text)' }}>
+									{theme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+								</IconButton>
+							</Tooltip>
 							<Tooltip title="Open settings">
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 									<Avatar
