@@ -1,7 +1,7 @@
 #pc-wrap {
 	#property-detail-page {
 		position: relative;
-		background: #fff;
+		background: var(--color-bg);
 		padding-top: 87px;
 		padding-bottom: 200px;
 		.property-detail-config {
@@ -22,7 +22,7 @@
 						width: 50%;
 						height: auto;
 						.title-main {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 30px;
 							font-style: normal;
@@ -39,7 +39,7 @@
 							gap: 10px;
 							margin-bottom: 17px;
 							.city {
-								color: #717171;
+								color: var(--color-text-secondary);
 								font-family: $font;
 								font-size: 13px;
 								font-style: normal;
@@ -65,7 +65,7 @@
 								}
 							}
 							.date {
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -84,7 +84,7 @@
 								flex-direction: row;
 								gap: 8px;
 								p {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 15px;
 									font-style: normal;
@@ -106,7 +106,7 @@
 							gap: 11px;
 							margin: 0 10px 27px 0;
 							p {
-								color: #181a20;
+								color: var(--color-text);
 								text-align: right;
 								font-family: $font;
 								font-size: 18px;
@@ -132,7 +132,7 @@
 							cursor: pointer;
 						}
 						p {
-							color: #181a20;
+							color: var(--color-text);
 							text-align: right;
 							font-family: $font;
 							font-size: 26px;
@@ -143,7 +143,7 @@
 							text-transform: capitalize;
 						}
 						span {
-							color: #181a20;
+							color: var(--color-text);
 							text-align: right;
 							font-family: $font;
 							font-size: 15px;
@@ -213,7 +213,8 @@
 								align-items: center;
 								justify-content: center;
 								border-radius: 12px;
-								border: 1px solid #ddd;
+								border: 1px solid var(--color-border);
+								background: var(--color-card-bg);
 								img {
 									width: 35px;
 									height: auto;
@@ -223,7 +224,7 @@
 								width: auto;
 								height: auto;
 								.title {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 15px;
 									font-style: normal;
@@ -231,7 +232,7 @@
 									line-height: normal;
 								}
 								.option-data {
-									color: #181a20;
+									color: var(--color-text-secondary);
 									font-family: $font;
 									font-size: 15px;
 									font-style: normal;
@@ -247,13 +248,14 @@
 						gap: 50px;
 						padding: 29px 38px 50px 38px;
 						border-radius: 12px;
-						border: 1px solid #c4c4c4;
+						border: 1px solid var(--color-border);
+						background: var(--color-card-bg);
 						.top {
 							width: 100%;
 							height: auto;
 							gap: 30px;
 							.title {
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 17px;
 								font-style: normal;
@@ -261,7 +263,7 @@
 								line-height: normal;
 							}
 							.desc {
-								color: #181a20;
+								color: var(--color-text-secondary);
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -275,7 +277,7 @@
 							height: auto;
 							gap: 30px;
 							.title {
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 17px;
 								font-style: normal;
@@ -297,7 +299,7 @@
 										gap: 38px;
 										.title {
 											width: 121px;
-											color: #181a20;
+											color: var(--color-text);
 											font-family: $font;
 											font-size: 14px;
 											font-style: normal;
@@ -306,7 +308,7 @@
 										}
 										.data {
 											width: 88px;
-											color: #181a20;
+											color: var(--color-text-secondary);
 											font-family: $font;
 											font-size: 14px;
 											font-style: normal;
@@ -324,9 +326,10 @@
 						gap: 30px;
 						padding: 30px 38px;
 						border-radius: 12px;
-						border: 1px solid #c4c4c4;
+						border: 1px solid var(--color-border);
+						background: var(--color-card-bg);
 						.title {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 17px;
 							font-style: normal;
@@ -336,7 +339,7 @@
 						.image-box {
 							width: 100%;
 							height: 510px;
-							border: 1px solid #c4c4c4;
+							border: 1px solid var(--color-border);
 							img {
 								width: 100%;
 								height: 100%;
@@ -350,9 +353,10 @@
 						gap: 30px;
 						padding: 30px 38px;
 						border-radius: 12px;
-						border: 1px solid #c4c4c4;
+						border: 1px solid var(--color-border);
+						background: var(--color-card-bg);
 						.title {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 17px;
 							font-style: normal;
@@ -372,7 +376,8 @@
 						height: auto;
 						padding: 30px 38px 45px 38px;
 						border-radius: 12px;
-						border: 1px solid #c4c4c4;
+						border: 1px solid var(--color-border);
+						background: var(--color-card-bg);
 						.filter-box {
 							width: 100%;
 							height: auto;
@@ -387,7 +392,7 @@
 								gap: 12px;
 								.reviews {
 									width: 153.6px;
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 17px;
 									font-style: normal;
@@ -401,7 +406,7 @@
 								flex-direction: row;
 								gap: 10px;
 								.sort-title {
-									color: #717171;
+									color: var(--color-text-secondary);
 									font-family: $font;
 									font-size: 14px;
 									font-style: normal;
@@ -412,7 +417,8 @@
 									width: 140px;
 									border: none;
 									outline: none;
-									color: #181a20;
+									color: var(--color-text);
+									background: var(--color-card-bg);
 									font-family: $font;
 									font-size: 14px;
 									font-style: normal;
@@ -429,7 +435,7 @@
 								width: 100%;
 								height: auto;
 								padding-bottom: 10px;
-								border-bottom: 1px solid #c4c4c4;
+								border-bottom: 1px solid var(--color-border);
 								.review-mb-info {
 									width: 100%;
 									height: auto;
@@ -446,13 +452,13 @@
 											align-items: center;
 											justify-content: center;
 											border-radius: 50%;
-											background: #f6f6f6;
-											border: 1px solid #b9b9b9;
+											background: var(--color-bg-secondary);
+											border: 1px solid var(--color-border);
 											object-fit: cover;
 										}
 										.name {
 											width: 100%;
-											color: #181a20;
+											color: var(--color-text);
 											font-family: $font;
 											font-size: 15px;
 											font-style: normal;
@@ -462,7 +468,7 @@
 										}
 										.date {
 											width: 100%;
-											color: #181a20;
+											color: var(--color-text-secondary);
 											font-family: $font;
 											font-size: 13px;
 											font-style: normal;
@@ -479,7 +485,7 @@
 									height: auto;
 									margin-top: 15px;
 									.description {
-										color: #181a20;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 14px;
 										font-style: normal;
@@ -499,12 +505,12 @@
 					}
 					.leave-review-config {
 						border-radius: 12px;
-						border: 1px solid #c4c4c4;
-						background: #fff;
+						border: 1px solid var(--color-border);
+						background: var(--color-card-bg);
 						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 						padding: 30px 38px;
 						.main-title {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 17px;
 							font-style: normal;
@@ -513,7 +519,7 @@
 						}
 						.review-title {
 							margin-top: 20px;
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
@@ -526,8 +532,9 @@
 							margin-top: 8px;
 							padding: 20px;
 							border-radius: 8px;
-							border: 1px solid #ddd;
-							color: #717171;
+							border: 1px solid var(--color-border);
+							background: var(--color-input-bg);
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
@@ -550,10 +557,11 @@
 								align-items: center;
 								gap: 10px;
 								border-radius: 12px;
-								border: 1px solid #c4c4c4;
+								border: 1px solid var(--color-border);
+								background: var(--color-card-bg);
 								cursor: pointer;
 								.title {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 15px;
 									font-style: normal;
@@ -570,15 +578,15 @@
 					padding: 30px 25px;
 					gap: 20px;
 					border-radius: 12px;
-					border: 1px solid rgba(196, 196, 196, 0.79);
-					background: #fff;
+					border: 1px solid var(--color-border);
+					background: var(--color-card-bg);
 					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 					.info-box {
 						position: relative;
 						width: 100%;
 						gap: 8px;
 						.main-title {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 17px;
 							font-style: normal;
@@ -599,7 +607,7 @@
 							.name-phone-listings {
 								gap: 5px;
 								.name {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 15px;
 									font-style: normal;
@@ -612,7 +620,7 @@
 									align-items: center;
 									gap: 10px;
 									.number {
-										color: #181a20;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 15px;
 										font-style: normal;
@@ -621,7 +629,7 @@
 									}
 								}
 								.listings {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 14px;
 									font-style: normal;
@@ -632,7 +640,7 @@
 							}
 						}
 						.sub-title {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
@@ -644,11 +652,12 @@
 							height: 55px;
 							padding: 15px;
 							border-radius: 8px;
-							border: 1px solid #ddd;
-							background: #fff;
+							border: 1px solid var(--color-border);
+							background: var(--color-input-bg);
+							color: var(--color-text);
 							outline: none;
 							&::placeholder {
-								color: #717171;
+								color: var(--color-text-secondary);
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -656,7 +665,7 @@
 								line-height: 26px;
 							}
 							&:focus {
-								border: 1px solid black;
+								border: 1px solid var(--color-accent);
 							}
 						}
 						textarea {
@@ -664,14 +673,16 @@
 							height: 120px;
 							padding: 20px;
 							border-radius: 8px;
-							border: 1px solid #ddd;
+							border: 1px solid var(--color-border);
+							background: var(--color-input-bg);
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
 							font-weight: 400;
 							line-height: 26px;
 							&::placeholder {
-								color: #717171;
+								color: var(--color-text-secondary);
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -679,7 +690,7 @@
 								line-height: 26px;
 							}
 							&:focus {
-								border: 1px solid black;
+								border: 1px solid var(--color-accent);
 							}
 						}
 						.send-message {
@@ -716,7 +727,7 @@
 					.title-box {
 						width: 30%;
 						.main-title {
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 30px;
 							font-style: normal;
@@ -726,7 +737,7 @@
 							text-transform: capitalize;
 						}
 						.sub-title {
-							color: #181a20;
+							color: var(--color-text-secondary);
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
