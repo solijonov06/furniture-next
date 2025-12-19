@@ -1,37 +1,43 @@
-// Admin Dark Mode CSS Variables
+// Admin Dark Mode CSS Variables - Warm Earthy Theme
 :root {
-  --admin-bg: #f5f5f5;
+  --admin-bg: #FAF8F5;
   --admin-bg-secondary: #ffffff;
-  --admin-text: #212121;
-  --admin-text-secondary: #616161;
-  --admin-text-muted: #757575;
-  --admin-border: rgba(0, 0, 0, 0.12);
-  --admin-sidebar-bg: #ffffff;
-  --admin-sidebar-text: #212121;
+  --admin-text: #2C2416;
+  --admin-text-secondary: #6B5D4D;
+  --admin-text-muted: #9B8B7A;
+  --admin-border: rgba(139, 111, 78, 0.15);
+  --admin-sidebar-bg: #2D5A4A;
+  --admin-sidebar-text: #F5EDE3;
   --admin-card-bg: #ffffff;
-  --admin-table-header: #fafafa;
-  --admin-table-row-hover: #f5f5f5;
+  --admin-table-header: #F5EDE3;
+  --admin-table-row-hover: #FAF8F5;
   --admin-input-bg: #ffffff;
-  --admin-user-bg: #f5f5f5;
-  --admin-menu-active-bg: #FDF4F4;
-  --admin-shadow: rgb(145 158 171 / 20%) 0px 0px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px;
+  --admin-user-bg: rgba(255, 255, 255, 0.15);
+  --admin-menu-active-bg: rgba(196, 112, 79, 0.15);
+  --admin-accent: #C4704F;
+  --admin-accent-light: #D4886A;
+  --admin-secondary: #2D5A4A;
+  --admin-shadow: rgb(139 111 78 / 10%) 0px 0px 2px 0px, rgb(139 111 78 / 8%) 0px 12px 24px -4px;
 }
 
 [data-theme="dark"] {
-  --admin-bg: #121212;
-  --admin-bg-secondary: #1e1e1e;
-  --admin-text: #f5f5f5;
-  --admin-text-secondary: #b0b0b0;
-  --admin-text-muted: #888888;
-  --admin-border: rgba(255, 255, 255, 0.12);
-  --admin-sidebar-bg: #1a1a1a;
-  --admin-sidebar-text: #f5f5f5;
-  --admin-card-bg: #1e1e1e;
-  --admin-table-header: #252525;
-  --admin-table-row-hover: #2a2a2a;
-  --admin-input-bg: #2a2a2a;
-  --admin-user-bg: #2a2a2a;
-  --admin-menu-active-bg: rgba(245, 77, 86, 0.15);
+  --admin-bg: #1A1612;
+  --admin-bg-secondary: #252018;
+  --admin-text: #F5EDE3;
+  --admin-text-secondary: #C4B8A8;
+  --admin-text-muted: #8B7D6B;
+  --admin-border: rgba(245, 237, 227, 0.12);
+  --admin-sidebar-bg: #1A3D32;
+  --admin-sidebar-text: #F5EDE3;
+  --admin-card-bg: #252018;
+  --admin-table-header: #342C22;
+  --admin-table-row-hover: #2D2519;
+  --admin-input-bg: #1A1612;
+  --admin-user-bg: rgba(255, 255, 255, 0.08);
+  --admin-menu-active-bg: rgba(212, 136, 106, 0.2);
+  --admin-accent: #D4886A;
+  --admin-accent-light: #E4A88A;
+  --admin-secondary: #4D8A74;
   --admin-shadow: rgb(0 0 0 / 40%) 0px 0px 2px 0px, rgb(0 0 0 / 30%) 0px 12px 24px -4px;
 }
 
@@ -104,7 +110,7 @@
     li.on {
       font-weight: 600;
       background: var(--admin-menu-active-bg);
-      color: #F54D56;
+      color: #C4704F;
       span {
         color: var(--admin-text);
       }
@@ -132,8 +138,8 @@
       border-radius: 4px;
     }
     .success {
-      color: #229a16;
-      background: rgba(84, 214, 44, 0.16);
+      color: #2D5A4A;
+      background: rgba(45, 90, 74, 0.16);
     }
     .warning {
       color: #f57c00;
@@ -157,7 +163,7 @@
     }
     .success-txt {
       font-size: 14px;
-      color: #229a16;
+      color: #2D5A4A;
     }
     .warning-txt {
       font-size: 14px;
@@ -217,7 +223,7 @@
           min-width: 220px;
         }
         .active {
-          color: #229a16;
+          color: #2D5A4A;
           background: rgba(84, 214, 44, 0.16);
         }
         .warning {
@@ -301,7 +307,7 @@
         margin-left: 10px;
       }
       .connect.online {
-        color: #229a16;
+        color: #2D5A4A;
         background: rgba(84, 214, 44, 0.16);
       }
       .connect.offline {
@@ -338,12 +344,12 @@
       }
       button:nth-child(2) {
         color:#fff;
-        box-shadow: rgb(255 48 48 / 24%) 0px 8px 16px 0px;
+        box-shadow: rgb(196 112 79 / 24%) 0px 8px 16px 0px;
       }
     }
     .btn-complete {
       color:#fff;
-      box-shadow: rgb(255 48 48 / 24%) 0px 8px 16px 0px;
+      box-shadow: rgb(196 112 79 / 24%) 0px 8px 16px 0px;
     }
     .btn-action {
       position: static;
@@ -354,7 +360,7 @@
     .btn-add {
       color: #fff;
       font-weight: 500;
-      box-shadow: rgb(255 48 48 / 24%) 0px 8px 16px 0px;
+      box-shadow: rgb(196 112 79 / 24%) 0px 8px 16px 0px;
     }
     .btn-cancel {
       color: var(--admin-text-muted);
@@ -365,7 +371,7 @@
       border: 1px dashed var(--admin-border);
       background: var(--admin-card-bg);
     }
-    .btn-text { color: #e92c28; }
+    .btn-text { color: #C4704F; }
     .btn-window {
       color: #757575;
       margin-left: 8px;
@@ -398,8 +404,8 @@
         }
         li.on {
           font-weight: 500;
-          color: #e92c28;
-          border-bottom: 2px solid #e92c28;
+          color: #C4704F;
+          border-bottom: 2px solid #C4704F;
         }
       }
       &.check-table-wrap {
@@ -481,7 +487,7 @@
       }
       .flex-box {
         button {
-          color: #e92c28;
+          color: #C4704F;
           font-weight: 500;
           margin-right: 8px;
         }
@@ -528,7 +534,7 @@
       .MuiPaginationItem-root {
         color: var(--admin-text-secondary);
         &.Mui-selected {
-          background: #e92c28;
+          background: #C4704F;
           color: #fff;
         }
       }

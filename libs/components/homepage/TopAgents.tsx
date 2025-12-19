@@ -37,6 +37,7 @@ const TopAgents = (props: TopAgentsProps) => {
 	useEffect(() => {
 		if (getAgentsData?.getAgents?.list) {
 			setTopAgents(getAgentsData.getAgents.list);
+			
 		}
 	}, [getAgentsData]);
 	/** HANDLERS **/

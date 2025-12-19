@@ -7,15 +7,23 @@
 $font: 'Poppins', sans-serif;
 $font-heading: 'Oswald', sans-serif;
 
-// Base Colors
-$color-primary: #1976d2;
-$color-secondary: #6c757d;
-$color-success: #28a745;
-$color-danger: #dc3545;
-$color-warning: #ffc107;
-$color-info: #17a2b8;
+// Base Colors - Warm Earthy Furniture Theme
+$color-primary: #C4704F;           // Deep Terracotta
+$color-primary-light: #D4886A;     // Light Terracotta
+$color-primary-dark: #A85A3C;      // Dark Terracotta
+$color-secondary: #2D5A4A;         // Forest Green
+$color-secondary-light: #3D7A64;   // Light Forest
+$color-accent: #2D5A4A;            // Forest Green accent
+$color-cream: #F5EDE3;             // Warm Cream
+$color-sand: #E8DED1;              // Sand
+$color-wood: #8B6F4E;              // Wood Brown
+$color-wood-dark: #5C4A35;         // Dark Wood
+$color-success: #2D5A4A;
+$color-danger: #C4704F;
+$color-warning: #D4A853;
+$color-info: #5B8A8A;
 $color-white: #ffffff;
-$color-black: #000000;
+$color-black: #1a1a1a;
 
 // Neutrals
 $color-gray-100: #f8f9fa;
@@ -62,47 +70,55 @@ $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 $breakpoint-2xl: 1400px;
 
-// CSS Variables for Theme Switching
+// CSS Variables for Theme Switching - Warm Earthy Furniture Theme
 :root {
-	// Light Mode (Default)
-	--color-bg: #ffffff;
-	--color-bg-secondary: #f8f9fa;
-	--color-bg-tertiary: #e9ecef;
-	--color-text: #212529;
-	--color-text-secondary: #6c757d;
-	--color-text-muted: #adb5bd;
-	--color-primary: #1976d2;
-	--color-primary-hover: #1565c0;
-	--color-accent: #1976d2;
-	--color-border: #dee2e6;
+	// Light Mode (Default) - Warm Cream Base
+	--color-bg: #FAF8F5;
+	--color-bg-secondary: #F5EDE3;
+	--color-bg-tertiary: #E8DED1;
+	--color-text: #2C2416;
+	--color-text-secondary: #6B5D4D;
+	--color-text-muted: #9B8B7A;
+	--color-primary: #C4704F;
+	--color-primary-hover: #A85A3C;
+	--color-primary-light: #D4886A;
+	--color-accent: #2D5A4A;
+	--color-accent-light: #3D7A64;
+	--color-border: #E0D5C7;
 	--color-card-bg: #ffffff;
-	--color-card-shadow: rgba(0, 0, 0, 0.08);
+	--color-card-shadow: rgba(139, 111, 78, 0.1);
 	--color-input-bg: #ffffff;
-	--color-input-border: #ced4da;
-	--navbar-bg: rgba(255, 255, 255, 0.95);
-	--navbar-text: #212529;
-	--footer-bg: #1a1a2e;
-	--footer-text: #ffffff;
+	--color-input-border: #D4C9BA;
+	--color-wood: #8B6F4E;
+	--color-wood-dark: #5C4A35;
+	--navbar-bg: rgba(250, 248, 245, 0.98);
+	--navbar-text: #2C2416;
+	--footer-bg: #2C2416;
+	--footer-text: #F5EDE3;
 }
 
 [data-theme='dark'] {
-	// Dark Mode
-	--color-bg: #0f172a;
-	--color-bg-secondary: #1e293b;
-	--color-bg-tertiary: #334155;
-	--color-text: #f1f5f9;
-	--color-text-secondary: #94a3b8;
-	--color-text-muted: #64748b;
-	--color-primary: #a78bfa;
-	--color-primary-hover: #8b5cf6;
-	--color-accent: #a78bfa;
-	--color-border: #334155;
-	--color-card-bg: #1e293b;
-	--color-card-shadow: rgba(0, 0, 0, 0.3);
-	--color-input-bg: #1e293b;
-	--color-input-border: #475569;
-	--navbar-bg: rgba(15, 23, 42, 0.95);
-	--navbar-text: #f1f5f9;
-	--footer-bg: #0f172a;
-	--footer-text: #f1f5f9;
+	// Dark Mode - Rich Wood Tones
+	--color-bg: #1A1612;
+	--color-bg-secondary: #252018;
+	--color-bg-tertiary: #342C22;
+	--color-text: #F5EDE3;
+	--color-text-secondary: #C4B8A8;
+	--color-text-muted: #8B7D6B;
+	--color-primary: #D4886A;
+	--color-primary-hover: #C4704F;
+	--color-primary-light: #E4A88A;
+	--color-accent: #4D8A74;
+	--color-accent-light: #5DAA8A;
+	--color-border: #3D352A;
+	--color-card-bg: #252018;
+	--color-card-shadow: rgba(0, 0, 0, 0.4);
+	--color-input-bg: #1A1612;
+	--color-input-border: #4D4338;
+	--color-wood: #A68B6A;
+	--color-wood-dark: #7B6548;
+	--navbar-bg: rgba(26, 22, 18, 0.98);
+	--navbar-text: #F5EDE3;
+	--footer-bg: #1A1612;
+	--footer-text: #F5EDE3;
 }
