@@ -51,7 +51,7 @@
 							content: '🛋️ Find Your Perfect Piece';
 							display: block;
 							padding: 24px 28px;
-							background: linear-gradient(135deg, #2D5A4A 0%, #3D7A64 100%);
+							background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
 							color: #F5EDE3;
 							font-family: $font;
 							font-size: 17px;
@@ -105,7 +105,7 @@
 									content: '';
 									width: 4px;
 									height: 16px;
-									background: linear-gradient(180deg, #C4704F 0%, #D4886A 100%);
+									background: linear-gradient(180deg, #1E3A5F 0%, #2E4A6F 100%);
 									border-radius: 2px;
 								}
 							}
@@ -130,7 +130,7 @@
 									content: '';
 									width: 4px;
 									height: 16px;
-									background: linear-gradient(180deg, #C4704F 0%, #D4886A 100%);
+									background: linear-gradient(180deg, #1E3A5F 0%, #2E4A6F 100%);
 									border-radius: 2px;
 								}
 							}
@@ -168,7 +168,7 @@
 									transition: all 0.3s ease;
 
 									&:focus {
-										border-color: #C4704F;
+										border-color: #1E3A5F;
 										box-shadow: 0 0 0 4px rgba(196, 112, 79, 0.15);
 									}
 
@@ -192,7 +192,7 @@
 									height: 20px;
 									border-radius: 6px;
 									margin-right: 12px;
-									color: #C4704F;
+									color: #1E3A5F;
 									
 									svg {
 										width: 20px;
@@ -200,7 +200,7 @@
 									}
 
 									&.Mui-checked {
-										color: #2D5A4A;
+										color: #1E3A5F;
 									}
 								}
 							}
@@ -276,7 +276,7 @@
 
 									&.Mui-selected,
 									&.active {
-										background: linear-gradient(135deg, #C4704F 0%, #D4886A 100%);
+										background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
 										color: #fff;
 										box-shadow: 0 4px 12px rgba(196, 112, 79, 0.35);
 									}
@@ -312,7 +312,7 @@
 									transition: all 0.3s ease;
 
 									&:focus {
-										border-color: #C4704F;
+										border-color: #1E3A5F;
 										box-shadow: 0 0 0 4px rgba(196, 112, 79, 0.15);
 									}
 								}
@@ -343,11 +343,11 @@
 									background: var(--color-input-bg);
 									
 									&:hover .MuiOutlinedInput-notchedOutline {
-										border-color: #C4704F;
+										border-color: #1E3A5F;
 									}
 									
 									&.Mui-focused .MuiOutlinedInput-notchedOutline {
-										border-color: #C4704F;
+										border-color: #1E3A5F;
 										border-width: 2px;
 									}
 								}
@@ -356,7 +356,7 @@
 									color: var(--color-text-secondary);
 									
 									&.Mui-focused {
-										color: #C4704F;
+										color: #1E3A5F;
 									}
 								}
 
@@ -370,7 +370,7 @@
 						.reset-btn {
 							margin: 20px 24px 24px;
 							padding: 14px 24px;
-							background: linear-gradient(135deg, #2D5A4A 0%, #3D7A64 100%);
+							background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
 							color: #F5EDE3;
 							border-radius: 12px;
 							font-family: $font;
@@ -448,7 +448,7 @@
 									align-items: center;
 									border-radius: 8px;
 									padding: 6px 14px;
-									background: linear-gradient(135deg, #C4704F 0%, #D4886A 100%);
+									background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
 									color: #fff;
 									text-align: center;
 									font-family: $font;
@@ -475,7 +475,7 @@
 									backdrop-filter: blur(10px);
 									box-shadow: 0 4px 16px rgba(139, 111, 78, 0.15);
 									p {
-										color: #2D5A4A;
+										color: #1E3A5F;
 										font-family: $font;
 										font-size: 16px;
 										font-style: normal;
@@ -598,7 +598,7 @@
 											transition: all 0.2s ease;
 
 											&:hover {
-												color: #C4704F;
+												color: #1E3A5F;
 												transform: scale(1.1);
 											}
 										}
@@ -630,7 +630,7 @@
 									margin: 0 4px;
 									
 									&.Mui-selected {
-										background: linear-gradient(135deg, #C4704F 0%, #D4886A 100%);
+										background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
 										color: #fff;
 										box-shadow: 0 4px 12px rgba(196, 112, 79, 0.35);
 									}

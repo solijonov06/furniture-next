@@ -7,21 +7,22 @@
 $font: 'Poppins', sans-serif;
 $font-heading: 'Oswald', sans-serif;
 
-// Base Colors - Warm Earthy Furniture Theme
-$color-primary: #C4704F;           // Deep Terracotta
-$color-primary-light: #D4886A;     // Light Terracotta
-$color-primary-dark: #A85A3C;      // Dark Terracotta
-$color-secondary: #2D5A4A;         // Forest Green
-$color-secondary-light: #3D7A64;   // Light Forest
-$color-accent: #2D5A4A;            // Forest Green accent
-$color-cream: #F5EDE3;             // Warm Cream
-$color-sand: #E8DED1;              // Sand
+// Base Colors - Deep Navy & Gold Luxury Theme
+$color-primary: #1E3A5F;           // Deep Navy
+$color-primary-light: #2E4A6F;     // Light Navy
+$color-primary-dark: #0E2A4F;      // Dark Navy
+$color-secondary: #D4A853;         // Gold
+$color-secondary-light: #E4B863;   // Light Gold
+$color-accent: #D4A853;            // Gold accent
+$color-accent-dark: #B8923D;       // Dark Gold
+$color-cream: #F8F6F1;             // Cream
+$color-sand: #EDE8DF;              // Sand
 $color-wood: #8B6F4E;              // Wood Brown
 $color-wood-dark: #5C4A35;         // Dark Wood
-$color-success: #2D5A4A;
-$color-danger: #C4704F;
-$color-warning: #D4A853;
-$color-info: #5B8A8A;
+$color-success: #2D7A5A;           // Success Green
+$color-danger: #C45050;            // Danger Red
+$color-warning: #D4A853;           // Warning (Gold)
+$color-info: #1E3A5F;              // Info (Navy)
 $color-white: #ffffff;
 $color-black: #1a1a1a;
 
@@ -70,55 +71,57 @@ $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 $breakpoint-2xl: 1400px;
 
-// CSS Variables for Theme Switching - Warm Earthy Furniture Theme
+// CSS Variables for Theme Switching - Deep Navy & Gold Luxury Theme
 :root {
-	// Light Mode (Default) - Warm Cream Base
-	--color-bg: #FAF8F5;
-	--color-bg-secondary: #F5EDE3;
-	--color-bg-tertiary: #E8DED1;
-	--color-text: #2C2416;
-	--color-text-secondary: #6B5D4D;
-	--color-text-muted: #9B8B7A;
-	--color-primary: #C4704F;
-	--color-primary-hover: #A85A3C;
-	--color-primary-light: #D4886A;
-	--color-accent: #2D5A4A;
-	--color-accent-light: #3D7A64;
-	--color-border: #E0D5C7;
+	// Light Mode (Default) - Elegant Cream Base
+	--color-bg: #FAFAF8;
+	--color-bg-secondary: #F5F3EE;
+	--color-bg-tertiary: #EDE8DF;
+	--color-text: #1A1A2E;
+	--color-text-secondary: #4A4A5A;
+	--color-text-muted: #7A7A8A;
+	--color-primary: #1E3A5F;
+	--color-primary-hover: #0E2A4F;
+	--color-primary-light: #2E4A6F;
+	--color-accent: #D4A853;
+	--color-accent-light: #E4B863;
+	--color-accent-dark: #B8923D;
+	--color-border: #E0DDD5;
 	--color-card-bg: #ffffff;
-	--color-card-shadow: rgba(139, 111, 78, 0.1);
+	--color-card-shadow: rgba(30, 58, 95, 0.08);
 	--color-input-bg: #ffffff;
-	--color-input-border: #D4C9BA;
+	--color-input-border: #D4D0C8;
 	--color-wood: #8B6F4E;
 	--color-wood-dark: #5C4A35;
-	--navbar-bg: rgba(250, 248, 245, 0.98);
-	--navbar-text: #2C2416;
-	--footer-bg: #2C2416;
-	--footer-text: #F5EDE3;
+	--navbar-bg: rgba(250, 250, 248, 0.98);
+	--navbar-text: #1A1A2E;
+	--footer-bg: #1E3A5F;
+	--footer-text: #F5F3EE;
 }
 
 [data-theme='dark'] {
-	// Dark Mode - Rich Wood Tones
-	--color-bg: #1A1612;
-	--color-bg-secondary: #252018;
-	--color-bg-tertiary: #342C22;
-	--color-text: #F5EDE3;
-	--color-text-secondary: #C4B8A8;
-	--color-text-muted: #8B7D6B;
-	--color-primary: #D4886A;
-	--color-primary-hover: #C4704F;
-	--color-primary-light: #E4A88A;
-	--color-accent: #4D8A74;
-	--color-accent-light: #5DAA8A;
-	--color-border: #3D352A;
-	--color-card-bg: #252018;
+	// Dark Mode - Rich Navy Tones
+	--color-bg: #0D1B2A;
+	--color-bg-secondary: #1B2838;
+	--color-bg-tertiary: #243447;
+	--color-text: #F5F3EE;
+	--color-text-secondary: #B8C4D0;
+	--color-text-muted: #7A8A9A;
+	--color-primary: #3A5A7F;
+	--color-primary-hover: #4A6A8F;
+	--color-primary-light: #5A7A9F;
+	--color-accent: #E4B863;
+	--color-accent-light: #F4C873;
+	--color-accent-dark: #D4A853;
+	--color-border: #2A3A4A;
+	--color-card-bg: #1B2838;
 	--color-card-shadow: rgba(0, 0, 0, 0.4);
-	--color-input-bg: #1A1612;
-	--color-input-border: #4D4338;
+	--color-input-bg: #0D1B2A;
+	--color-input-border: #3A4A5A;
 	--color-wood: #A68B6A;
 	--color-wood-dark: #7B6548;
-	--navbar-bg: rgba(26, 22, 18, 0.98);
-	--navbar-text: #F5EDE3;
-	--footer-bg: #1A1612;
-	--footer-text: #F5EDE3;
+	--navbar-bg: rgba(13, 27, 42, 0.98);
+	--navbar-text: #F5F3EE;
+	--footer-bg: #0D1B2A;
+	--footer-text: #F5F3EE;
 }
