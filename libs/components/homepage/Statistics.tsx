@@ -184,7 +184,7 @@ const StatItem = ({ icon, value, label, suffix, chartData, chartColor, trend }: 
 			<Box className={'stat-chart'}>
 				{isVisible && <MiniLineChart data={chartData} color={chartColor} />}
 			</Box>
-			<strong className={'stat-value'}>
+			<strong className={'stat-value'} suppressHydrationWarning>
 				{count.toLocaleString()}{suffix}
 			</strong>
 			<span className={'stat-label'}>{label}</span>
@@ -327,3 +327,4 @@ const Statistics = () => {
 };
 
 export default Statistics;
+

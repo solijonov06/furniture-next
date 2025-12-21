@@ -92,16 +92,18 @@ export const GET_PROPERTY = gql`
 			propertyAddress
 			propertyTitle
 			propertyPrice
+			propertyVolume
 			propertyViews
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
+			propertyMaterial
+			propertyCategory
+			furnitureCondition
+			deliveryAvailable
 			memberId
 			soldAt
 			deletedAt
-			constructedAt
 			createdAt
 			updatedAt
 			memberData {
@@ -145,17 +147,19 @@ export const GET_PROPERTIES = gql`
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyVolume
 				propertyViews
 				propertyLikes
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -204,16 +208,18 @@ export const GET_AGENT_PROPERTIES = gql`
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyVolume
 				propertyViews
 				propertyLikes
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 			}
@@ -235,18 +241,20 @@ export const GET_FAVORITES = gql`
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyVolume
 				propertyViews
 				propertyLikes
 				propertyComments
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -295,18 +303,20 @@ export const GET_VISITED = gql`
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyVolume
 				propertyViews
 				propertyLikes
 				propertyComments
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 				memberData {
