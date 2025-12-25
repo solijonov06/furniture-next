@@ -1,27 +1,44 @@
-import React from 'react';
-import { Stack, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Stack, Box, Pagination, CircularProgress } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
+import { useQuery } from '@apollo/client';
+import { GET_NOTICES } from '../../../apollo/user/query';
+import { Notice as NoticeType, NoticeCategory, Notices } from '../../types/cs/notice';
+import { NoticesInquiry } from '../../types/cs/notice.input';
+import moment from 'moment';
 
 const Notice = () => {
 	const device = useDeviceDetect();
+	const [noticesInquiry, setNoticesInquiry] = useState<NoticesInquiry>({
+		page: 1,
+		limit: 10,
+		search: {},
+	});
 
 	/** APOLLO REQUESTS **/
-	/** LIFECYCLES **/
-	/** HANDLERS **/
+	const {
+		loading: getNoticesLoading,
+		data: getNoticesData,
+		error: getNoticesError,
+		refetch: getNoticesRefetch,
+	} = useQuery(GET_NOTICES, {
+		fetchPolicy: 'network-only',
+		variables: { input: noticesInquiry },
+		notifyOnNetworkStatusChange: true,
+	});
 
-	const data = [
-		{
-			no: 1,
-			event: true,
-			title: 'Register to use and get discounts',
-			date: '01.03.2024',
-		},
-		{
-			no: 2,
-			title: "It's absolutely free to upload and trade properties",
-			date: '31.03.2024',
-		},
-	];
+	/** LIFECYCLES **/
+	useEffect(() => {
+		getNoticesRefetch({ input: noticesInquiry });
+	}, [noticesInquiry]);
+
+	/** HANDLERS **/
+	const paginationHandler = (e: any, value: number) => {
+		setNoticesInquiry({ ...noticesInquiry, page: value });
+	};
+
+	const notices: Notices = getNoticesData?.getNotices;
+	const total = notices?.metaCounter?.[0]?.total ?? 0;
 
 	if (device === 'mobile') {
 		return <div>NOTICE MOBILE</div>;
@@ -31,20 +48,55 @@ const Notice = () => {
 				<span className={'title'}>Notice</span>
 				<Stack className={'main'}>
 					<Box component={'div'} className={'top'}>
-						<span>number</span>
-						<span>title</span>
-						<span>date</span>
+						<span>Number</span>
+						<span>Title</span>
+						<span>Date</span>
 					</Box>
 					<Stack className={'bottom'}>
-						{data.map((ele: any) => (
-							<div className={`notice-card ${ele?.event && 'event'}`} key={ele.title}>
-								{ele?.event ? <div>event</div> : <span className={'notice-number'}>{ele.no}</span>}
-								<span className={'notice-title'}>{ele.title}</span>
-								<span className={'notice-date'}>{ele.date}</span>
-							</div>
-						))}
+						{getNoticesLoading ? (
+							<Box sx={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+								<CircularProgress />
+							</Box>
+						) : notices?.list?.length === 0 ? (
+							<Box className={'no-data'} sx={{ textAlign: 'center', padding: '40px', color: '#717171' }}>
+								No notices available
+							</Box>
+						) : (
+							notices?.list?.map((notice: NoticeType, index: number) => {
+								const isEvent = notice.noticeCategory === NoticeCategory.EVENT;
+								const isPromotion = notice.noticeCategory === NoticeCategory.PROMOTION;
+								return (
+									<div
+										className={`notice-card ${isEvent ? 'event' : ''} ${isPromotion ? 'promotion' : ''}`}
+										key={notice._id}
+									>
+										{isEvent ? (
+											<div className={'badge event'}>EVENT</div>
+										) : isPromotion ? (
+											<div className={'badge promotion'}>PROMO</div>
+										) : (
+											<span className={'notice-number'}>
+												{(noticesInquiry.page - 1) * noticesInquiry.limit + index + 1}
+											</span>
+										)}
+										<span className={'notice-title'}>{notice.noticeTitle}</span>
+										<span className={'notice-date'}>{moment(notice.createdAt).format('DD.MM.YYYY')}</span>
+									</div>
+								);
+							})
+						)}
 					</Stack>
 				</Stack>
+				{total > noticesInquiry.limit && (
+					<Box className={'pagination-box'} sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+						<Pagination
+							count={Math.ceil(total / noticesInquiry.limit)}
+							page={noticesInquiry.page}
+							onChange={paginationHandler}
+							color="primary"
+						/>
+					</Box>
+				)}
 			</Stack>
 		);
 	}
