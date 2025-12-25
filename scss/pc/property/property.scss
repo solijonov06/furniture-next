@@ -46,17 +46,65 @@
 						overflow: hidden;
 						transition: all 0.3s ease;
 
-						// Filter Header - Warm Earthy
-						&::before {
-							content: '🛋️ Find Your Perfect Piece';
-							display: block;
-							padding: 24px 28px;
-							background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
-							color: #F5EDE3;
-							font-family: $font;
-							font-size: 17px;
-							font-weight: 700;
-							letter-spacing: 0.5px;
+						// Decorative Furniture Banner
+						.filter-banner {
+							position: relative;
+							padding: 30px 24px;
+							background: linear-gradient(135deg, #0D1B2A 0%, #1E3A5F 50%, #2E4A6F 100%);
+							overflow: hidden;
+							
+							&::before {
+								content: '';
+								position: absolute;
+								top: -50%;
+								right: -50%;
+								width: 200%;
+								height: 200%;
+								background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 50%);
+								animation: rotateBanner 20s linear infinite;
+							}
+							
+							.banner-content {
+								position: relative;
+								z-index: 1;
+								display: flex;
+								flex-direction: column;
+								align-items: center;
+								text-align: center;
+								
+								.banner-icon {
+									font-size: 48px;
+									color: #D4A853;
+									margin-bottom: 12px;
+									animation: floatIcon 3s ease-in-out infinite;
+								}
+								
+								.banner-title {
+									color: #ffffff;
+									font-family: $font;
+									font-size: 18px;
+									font-weight: 700;
+									letter-spacing: 1px;
+									margin-bottom: 4px;
+								}
+								
+								.banner-subtitle {
+									color: rgba(255, 255, 255, 0.7);
+									font-family: $font;
+									font-size: 12px;
+									font-weight: 400;
+								}
+							}
+						}
+						
+						@keyframes rotateBanner {
+							0% { transform: rotate(0deg); }
+							100% { transform: rotate(360deg); }
+						}
+						
+						@keyframes floatIcon {
+							0%, 100% { transform: translateY(0); }
+							50% { transform: translateY(-8px); }
 						}
 
 						.find-your-home {
@@ -279,6 +327,132 @@
 										background: linear-gradient(135deg, #1E3A5F 0%, #2E4A6F 100%);
 										color: #fff;
 										box-shadow: 0 4px 12px rgba(196, 112, 79, 0.35);
+									}
+								}
+							}
+							
+							// Category Grid with Icons
+							.category-grid {
+								display: grid;
+								grid-template-columns: repeat(2, 1fr);
+								gap: 10px;
+								width: 100%;
+								
+								.category-card {
+									display: flex;
+									flex-direction: column;
+									align-items: center;
+									padding: 16px 8px;
+									border-radius: 12px;
+									background: var(--color-bg-secondary);
+									border: 2px solid transparent;
+									cursor: pointer;
+									transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+									
+									&:hover {
+										background: var(--color-card-bg);
+										border-color: rgba(212, 168, 83, 0.3);
+										transform: translateY(-2px);
+									}
+									
+									&.active {
+										background: linear-gradient(135deg, rgba(13, 27, 42, 0.1) 0%, rgba(30, 58, 95, 0.15) 100%);
+										border-color: #D4A853;
+										
+										.category-icon {
+											background: linear-gradient(135deg, #D4A853 0%, #E4B863 100%);
+											color: #0D1B2A;
+										}
+									}
+									
+									.category-icon {
+										width: 44px;
+										height: 44px;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										border-radius: 10px;
+										background: var(--color-card-bg);
+										margin-bottom: 8px;
+										transition: all 0.3s ease;
+										
+										svg {
+											font-size: 22px;
+											color: #1E3A5F;
+										}
+									}
+									
+									.category-label {
+										color: var(--color-text);
+										font-family: $font;
+										font-size: 11px;
+										font-weight: 600;
+										text-transform: uppercase;
+										letter-spacing: 0.5px;
+										text-align: center;
+									}
+								}
+							}
+							
+							// Material Chips with Color Swatches
+							.material-chips {
+								display: flex;
+								flex-wrap: wrap;
+								gap: 8px;
+								width: 100%;
+								
+								.material-chip {
+									display: flex;
+									align-items: center;
+									gap: 8px;
+									padding: 10px 14px;
+									border-radius: 20px;
+									background: var(--color-bg-secondary);
+									border: 2px solid transparent;
+									cursor: pointer;
+									transition: all 0.3s ease;
+									
+									&:hover {
+										border-color: rgba(212, 168, 83, 0.3);
+									}
+									
+									&.active {
+										background: linear-gradient(135deg, rgba(13, 27, 42, 0.1) 0%, rgba(30, 58, 95, 0.15) 100%);
+										border-color: #D4A853;
+									}
+									
+									.material-swatch {
+										width: 16px;
+										height: 16px;
+										border-radius: 50%;
+										border: 2px solid rgba(0, 0, 0, 0.1);
+										
+										&[data-material="wood"] {
+											background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+										}
+										&[data-material="metal"] {
+											background: linear-gradient(135deg, #71797E 0%, #A9A9A9 100%);
+										}
+										&[data-material="fabric"] {
+											background: linear-gradient(135deg, #6B8E23 0%, #9ACD32 100%);
+										}
+										&[data-material="leather"] {
+											background: linear-gradient(135deg, #3D2914 0%, #5C4033 100%);
+										}
+										&[data-material="plastic"] {
+											background: linear-gradient(135deg, #4169E1 0%, #6495ED 100%);
+										}
+										&[data-material="glass"] {
+											background: linear-gradient(135deg, rgba(173, 216, 230, 0.8) 0%, rgba(135, 206, 235, 0.9) 100%);
+										}
+									}
+									
+									p {
+										color: var(--color-text);
+										font-family: $font;
+										font-size: 12px;
+										font-weight: 600;
+										text-transform: capitalize;
 									}
 								}
 							}

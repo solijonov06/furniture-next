@@ -11,6 +11,7 @@ import {
 	MenuItem,
 	Tooltip,
 	IconButton,
+	Box,
 } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { PropertyLocation, PropertyType, PropertyCategory, PropertyMaterial } from '../../enums/property.enum';
@@ -19,6 +20,12 @@ import { useRouter } from 'next/router';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { propertyVolume } from '../../config';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import WeekendOutlinedIcon from '@mui/icons-material/WeekendOutlined';
+import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
+import BedOutlinedIcon from '@mui/icons-material/BedOutlined';
+import KitchenOutlinedIcon from '@mui/icons-material/KitchenOutlined';
+import DeskOutlinedIcon from '@mui/icons-material/DeskOutlined';
+import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
 
 const MenuProps = {
 	PaperProps: {
@@ -439,11 +446,29 @@ const Filter = (props: FilterType) => {
 		}
 	};
 
+	// Category icons mapping
+	const categoryIcons: { [key: string]: JSX.Element } = {
+		BEDROOM: <BedOutlinedIcon />,
+		LIVING_ROOM: <WeekendOutlinedIcon />,
+		KITCHEN: <KitchenOutlinedIcon />,
+		OFFICE: <DeskOutlinedIcon />,
+		OUTDOOR: <YardOutlinedIcon />,
+	};
+
 	if (device === 'mobile') {
 		return <div>PROPERTIES FILTER</div>;
 	} else {
 		return (
 			<Stack className={'filter-main'}>
+				{/* Decorative Furniture Banner */}
+				<Box className={'filter-banner'}>
+					<Box className={'banner-content'}>
+						<ChairOutlinedIcon className={'banner-icon'} />
+						<Typography className={'banner-title'}>Discover Quality</Typography>
+						<Typography className={'banner-subtitle'}>Premium furniture for every space</Typography>
+					</Box>
+				</Box>
+
 				<Stack className={'find-your-home'} mb={'40px'}>
 					<Typography className={'title-main'}>Find Your Furniture</Typography>
 					<Stack className={'input-box'}>
@@ -538,55 +563,35 @@ const Filter = (props: FilterType) => {
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Category</Typography>
-					<Stack className="button-group">
-						<Button
-							sx={{
-								borderRadius: '12px 0 0 12px',
-								border: !searchFilter?.search?.categoryList ? '2px solid #181A20' : '1px solid #b9b9b9',
-							}}
-							onClick={() => propertyCategorySelectHandler('ANY')}
-						>
-							Any
-						</Button>
-						{propertyCategory.map((category: string, index: number) => (
-						<Button
+					<Stack className="category-grid">
+						{propertyCategory.map((category: string) => (
+							<Box 
 								key={category}
-							sx={{
-									borderRadius: index === propertyCategory.length - 1 ? '0 12px 12px 0' : 0,
-									border: searchFilter?.search?.categoryList?.includes(category as PropertyCategory) ? '2px solid #181A20' : '1px solid #b9b9b9',
-									borderLeft: searchFilter?.search?.categoryList?.includes(category as PropertyCategory) ? undefined : 'none',
-								}}
+								className={`category-card ${searchFilter?.search?.categoryList?.includes(category as PropertyCategory) ? 'active' : ''}`}
 								onClick={() => propertyCategorySelectHandler(category)}
 							>
-								{category.replace('_', ' ')}
-						</Button>
+								<Box className="category-icon">
+									{categoryIcons[category] || <ChairOutlinedIcon />}
+								</Box>
+								<Typography className="category-label">
+									{category.replace('_', ' ')}
+								</Typography>
+							</Box>
 						))}
 					</Stack>
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Material</Typography>
-					<Stack className="button-group">
-						<Button
-							sx={{
-								borderRadius: '12px 0 0 12px',
-								border: !searchFilter?.search?.materialList ? '2px solid #181A20' : '1px solid #b9b9b9',
-							}}
-							onClick={() => propertyMaterialSelectHandler('ANY')}
-						>
-							Any
-						</Button>
-						{propertyMaterial.map((material: string, index: number) => (
-						<Button
+					<Stack className="material-chips">
+						{propertyMaterial.map((material: string) => (
+							<Box 
 								key={material}
-							sx={{
-									borderRadius: index === propertyMaterial.length - 1 ? '0 12px 12px 0' : 0,
-									border: searchFilter?.search?.materialList?.includes(material as PropertyMaterial) ? '2px solid #181A20' : '1px solid #b9b9b9',
-									borderLeft: searchFilter?.search?.materialList?.includes(material as PropertyMaterial) ? undefined : 'none',
-								}}
+								className={`material-chip ${searchFilter?.search?.materialList?.includes(material as PropertyMaterial) ? 'active' : ''}`}
 								onClick={() => propertyMaterialSelectHandler(material)}
 							>
-								{material}
-						</Button>
+								<span className="material-swatch" data-material={material.toLowerCase()} />
+								<Typography>{material}</Typography>
+							</Box>
 						))}
 					</Stack>
 				</Stack>
