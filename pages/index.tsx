@@ -8,6 +8,7 @@ import Events from '../libs/components/homepage/Events';
 import TrendProperties from '../libs/components/homepage/TrendProperties';
 import TopProperties from '../libs/components/homepage/TopProperties';
 import Statistics from '../libs/components/homepage/Statistics';
+import VideoShowcase from '../libs/components/homepage/VideoShowcase';
 import { Stack } from '@mui/material';
 import Advertisement from '../libs/components/homepage/Advertisement';
 import CallToAction from '../libs/components/homepage/CallToAction';
@@ -38,6 +39,7 @@ const Home: NextPage = () => {
 			<Stack className={'home-page'}>
 				<TrendProperties />
 				<PopularProperties />
+				<VideoShowcase />
 				<Statistics />
 				<TopProperties />
 				<TopAgents />

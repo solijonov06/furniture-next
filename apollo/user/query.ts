@@ -728,3 +728,50 @@ export const GET_NOTIFICATIONS = gql`
 		}
 	}
 `;
+
+/**************************
+ *         EVENTS         *
+ *************************/
+
+export const GET_EVENTS = gql`
+	query GetEvents($input: EventsInquiry!) {
+		getEvents(input: $input) {
+			list {
+				_id
+				eventTitle
+				eventCity
+				eventDescription
+				eventImage
+				eventStartDate
+				eventEndDate
+				eventLocation
+				eventLink
+				eventStatus
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_EVENT = gql`
+	query GetEvent($input: String!) {
+		getEvent(eventId: $input) {
+			_id
+			eventTitle
+			eventCity
+			eventDescription
+			eventImage
+			eventStartDate
+			eventEndDate
+			eventLocation
+			eventLink
+			eventStatus
+			createdAt
+			updatedAt
+		}
+	}
+`;

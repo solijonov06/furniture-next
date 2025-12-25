@@ -13,12 +13,24 @@ interface HeroSlide {
 	link: string;
 }
 
+/**
+ * HERO CAROUSEL IMAGES
+ * 
+ * Place your hero background images in: /public/img/banner/
+ * Required files:
+ *   - hero-slide-1.webp (or .jpg/.png) - Living room furniture image
+ *   - hero-slide-2.webp (or .jpg/.png) - Bedroom furniture image
+ *   - hero-slide-3.webp (or .jpg/.png) - General furniture collection image
+ * 
+ * Recommended image size: 1920x1080px or larger for best quality
+ * Use high-quality furniture photography with good lighting
+ */
 const slides: HeroSlide[] = [
 	{
 		id: 1,
 		title: 'Handcrafted Excellence',
 		subtitle: 'Discover timeless furniture pieces designed for modern living',
-		image: '/img/banner/hero-1.webp',
+		image: '/img/banner/hero-slide-1.webp',
 		cta: 'Shop Living Room',
 		link: '/property?input={"page":1,"limit":9,"search":{"categoryList":["LIVING_ROOM"]}}',
 	},
@@ -26,7 +38,7 @@ const slides: HeroSlide[] = [
 		id: 2,
 		title: 'Comfort Meets Style',
 		subtitle: 'Premium materials, exceptional craftsmanship',
-		image: '/img/banner/hero-2.webp',
+		image: '/img/banner/hero-slide-2.webp',
 		cta: 'Explore Bedroom',
 		link: '/property?input={"page":1,"limit":9,"search":{"categoryList":["BEDROOM"]}}',
 	},
@@ -34,7 +46,7 @@ const slides: HeroSlide[] = [
 		id: 3,
 		title: 'Transform Your Space',
 		subtitle: 'Curated collections for every room',
-		image: '/img/banner/hero-3.webp',
+		image: '/img/banner/hero-slide-3.webp',
 		cta: 'View All Products',
 		link: '/property',
 	},
