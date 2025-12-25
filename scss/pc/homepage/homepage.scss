@@ -264,7 +264,7 @@
 				display: flex;
 				flex-direction: column;
 				span {
-					color: #181a20;
+					color: var(--color-text);
 					font-family: $font;
 					font-size: 34px;
 					font-style: normal;
@@ -277,7 +277,7 @@
 					}
 				}
 				p {
-					color: #181a20;
+					color: var(--color-text);
 					font-family: $font;
 					font-size: 14px;
 					font-style: normal;
@@ -297,7 +297,7 @@
 					flex-direction: row;
 					align-items: center;
 					.swiper-pagination-bullet.swiper-pagination-bullet-active {
-						background: #000000;
+						background: var(--color-text);
 					}
 					.swiper-trend-next {
 						margin-left: 20px;
@@ -322,7 +322,7 @@
 					cursor: pointer;
 					align-items: center;
 					span {
-						color: #181a20;
+						color: var(--color-text);
 						font-family: $font;
 						font-size: 15px;
 						font-style: normal;
@@ -353,9 +353,9 @@
 							margin-right: 20px;
 						}
 						&.active {
-							border: 1px solid #181a20;
+							border: 1px solid var(--color-text);
 							background: #fff;
-							color: #181a20;
+							color: var(--color-text);
 							font-family: $font;
 							font-size: 14px;
 							font-style: normal;
@@ -426,7 +426,7 @@
 								bottom: 12px;
 								border-radius: 6px;
 								background: #fff;
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -446,7 +446,7 @@
 							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 							.title {
 								overflow: hidden;
-								color: #181a20;
+								color: var(--color-text);
 								text-overflow: ellipsis;
 								white-space: nowrap;
 								font-family: $font;
@@ -483,7 +483,7 @@
 										height: 17px;
 									}
 									span {
-										color: #181a20;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 13px;
 										font-style: normal;
@@ -498,7 +498,7 @@
 								justify-content: space-between;
 								align-items: center;
 								p {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 13px;
 									font-style: normal;
@@ -613,7 +613,7 @@
 								bottom: 20px;
 								border-radius: 6px;
 								background: #fff;
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -633,7 +633,7 @@
 							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 							.title {
 								overflow: hidden;
-								color: #181a20;
+								color: var(--color-text);
 								text-overflow: ellipsis;
 								white-space: nowrap;
 								font-family: $font;
@@ -670,7 +670,7 @@
 										height: 17px;
 									}
 									span {
-										color: #181a20;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 13px;
 										font-style: normal;
@@ -685,7 +685,7 @@
 								justify-content: space-between;
 								align-items: center;
 								p {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 13px;
 									font-style: normal;
@@ -724,7 +724,7 @@
 					justify-content: center;
 					align-items: center;
 					.swiper-pagination-bullet.swiper-pagination-bullet-active {
-						background: #000000;
+						background: var(--color-text);
 					}
 					.swiper-popular-next {
 						margin-left: 20px;
@@ -797,7 +797,7 @@
 								bottom: 12px;
 								border-radius: 6px;
 								background: #fff;
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -817,7 +817,7 @@
 							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 							.title {
 								overflow: hidden;
-								color: #181a20;
+								color: var(--color-text);
 								text-overflow: ellipsis;
 								white-space: nowrap;
 								font-family: $font;
@@ -854,7 +854,7 @@
 										height: 17px;
 									}
 									span {
-										color: #181a20;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 13px;
 										font-style: normal;
@@ -869,7 +869,7 @@
 								justify-content: space-between;
 								align-items: center;
 								p {
-									color: #181a20;
+									color: var(--color-text);
 									font-family: $font;
 									font-size: 13px;
 									font-style: normal;
@@ -971,7 +971,7 @@
 							}
 							strong {
 								margin-top: 20px;
-								color: #181a20;
+								color: var(--color-text);
 								text-align: center;
 								font-family: $font;
 								font-size: 15px;
@@ -982,7 +982,7 @@
 								cursor: pointer;
 							}
 							span {
-								color: #181a20;
+								color: var(--color-text);
 								text-align: center;
 								font-family: $font;
 								font-size: 15px;
@@ -1174,7 +1174,7 @@
 									font-size: 18px;
 									line-height: 36px;
 									letter-spacing: 0.105em;
-									color: #000000;
+									color: var(--color-text);
 								}
 								span {
 									font-family: $font;
