@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
 import { Stack, Box } from '@mui/material';
 import HeaderFilter from '../homepage/HeaderFilter';
+import HeroCarousel from '../homepage/HeroCarousel';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
 import { getJwtToken, updateUserInfo } from '../../auth';
@@ -17,28 +18,11 @@ const withLayoutMain = (Component: any) => {
 	return (props: any) => {
 		const device = useDeviceDetect();
 		const user = useReactiveVar(userVar);
-		const heroRef = useRef<HTMLDivElement>(null);
-		const [scrollY, setScrollY] = useState(0);
 
 		/** LIFECYCLES **/
 		useEffect(() => {
 			const jwt = getJwtToken();
 			if (jwt) updateUserInfo(jwt);
-		}, []);
-
-		// Parallax scroll effect
-		useEffect(() => {
-			const handleScroll = () => {
-				if (heroRef.current) {
-					const scrolled = window.scrollY;
-					setScrollY(scrolled);
-					// Apply parallax to background
-					heroRef.current.style.backgroundPositionY = `${scrolled * 0.5}px`;
-				}
-			};
-
-			window.addEventListener('scroll', handleScroll, { passive: true });
-			return () => window.removeEventListener('scroll', handleScroll);
 		}, []);
 
 		if (device == 'mobile') {
@@ -75,43 +59,12 @@ const withLayoutMain = (Component: any) => {
 							<Top />
 						</Stack>
 
-						{/* Hero Section - Furniture Store Style */}
-						<Stack 
-							className={'header-main'} 
-							ref={heroRef}
-							style={{
-								transform: `translateY(${scrollY * 0.1}px)`,
-							}}
-						>
-							{/* Hero Content */}
+						{/* Hero Section with Image Carousel */}
+						<HeroCarousel />
+						
+						{/* Search Filter Section */}
+						<Stack className={'search-filter-section'}>
 							<Stack className={'container'}>
-								<Box 
-									className={'hero-content'}
-									style={{
-										opacity: Math.max(0, 1 - scrollY / 600),
-										transform: `translateY(${scrollY * 0.15}px)`,
-									}}
-								>
-									{/* Breadcrumb */}
-									<Box className={'breadcrumb'}>
-										<span>Homepage</span>
-										<span className={'separator'}>›</span>
-										<span>Products</span>
-									</Box>
-
-									{/* Main Title */}
-									<h1 className={'hero-title'}>
-										DISCOVER TIMELESS FURNITURE. CRAFTED FOR YOUR SPACE.
-									</h1>
-
-									{/* Subtitle */}
-									<p className={'hero-subtitle'}>
-										Explore our curated collection of premium furniture pieces. 
-										From modern minimalist to classic elegance — find the perfect fit for your home.
-									</p>
-								</Box>
-
-								{/* Search Filter */}
 								<HeaderFilter />
 							</Stack>
 						</Stack>

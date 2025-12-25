@@ -79,7 +79,7 @@ const TopAgents = (props: TopAgentsProps) => {
 							<p>Our Top Agents always ready to serve you</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
-							<div className={'more-box'}>
+							<div className={'more-box'} onClick={() => router.push('/agent')} style={{ cursor: 'pointer' }}>
 								<span>See All Agents</span>
 								<img src="/img/icons/rightup.svg" alt="" />
 							</div>
