@@ -56,6 +56,12 @@ const TopAgents = (props: TopAgentsProps) => {
 							centeredSlides={true}
 							spaceBetween={29}
 							modules={[Autoplay]}
+							autoplay={{
+								delay: 3000,
+								disableOnInteraction: false,
+							}}
+							speed={1200}
+							loop={true}
 						>
 							{topAgents.map((agent: Member) => {
 								return (
@@ -99,6 +105,13 @@ const TopAgents = (props: TopAgentsProps) => {
 									nextEl: '.swiper-agents-next',
 									prevEl: '.swiper-agents-prev',
 								}}
+								autoplay={{
+									delay: 3000,
+									disableOnInteraction: false,
+									pauseOnMouseEnter: true,
+								}}
+								speed={1200}
+								loop={true}
 							>
 								{topAgents.map((agent: Member) => {
 									return (
