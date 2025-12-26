@@ -5,7 +5,7 @@ import Top from '../Top';
 import Footer from '../Footer';
 import { Stack, Box } from '@mui/material';
 import HeaderFilter from '../homepage/HeaderFilter';
-import HeroCarousel from '../homepage/HeroCarousel';
+import Hero3DCarousel from '../homepage/Hero3DCarousel';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
 import { getJwtToken, updateUserInfo } from '../../auth';
@@ -59,8 +59,8 @@ const withLayoutMain = (Component: any) => {
 							<Top />
 						</Stack>
 
-						{/* Hero Section with Image Carousel */}
-						<HeroCarousel />
+						{/* Hero Section with 3D Image Carousel */}
+						<Hero3DCarousel />
 						
 						{/* Search Filter Section */}
 						<Stack className={'search-filter-section'}>

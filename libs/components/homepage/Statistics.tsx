@@ -95,16 +95,14 @@ const MiniLineChart = ({ data, color }: MiniChartProps) => {
 	return <canvas ref={chartRef} />;
 };
 
-// Generate trend data based on current value
+// Generate trend data based on current value (deterministic - no random)
 const generateTrendData = (currentValue: number, months: number = 7): number[] => {
 	const data: number[] = [];
-	const growthRate = 0.08 + Math.random() * 0.07; // 8-15% monthly growth
+	const growthRate = 0.12; // Fixed 12% monthly growth (no randomness)
 	
 	for (let i = months - 1; i >= 0; i--) {
 		const historicalValue = Math.floor(currentValue / Math.pow(1 + growthRate, i));
-		// Add some variance
-		const variance = historicalValue * (0.95 + Math.random() * 0.1);
-		data.push(Math.floor(variance));
+		data.push(historicalValue);
 	}
 	
 	return data;
@@ -177,7 +175,7 @@ const StatItem = ({ icon, value, label, suffix, chartData, chartColor, trend }: 
 		<Box ref={ref} className={'stat-item'}>
 			<Box className={'stat-header'}>
 				<Box className={'stat-icon'}>{icon}</Box>
-				<Box className={'stat-trend'} style={{ color: trend >= 0 ? '#4ade80' : '#f87171' }}>
+				<Box className={'stat-trend'} style={{ color: trend >= 0 ? '#4ade80' : '#f87171' }} suppressHydrationWarning>
 					{trend >= 0 ? '↑' : '↓'} {Math.abs(trend)}%
 				</Box>
 			</Box>

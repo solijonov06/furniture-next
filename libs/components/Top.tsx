@@ -240,9 +240,9 @@ const Top = () => {
 								<Tooltip title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
 									<IconButton onClick={toggleTheme} className="theme-toggle-btn">
 										{theme === 'light' ? (
-											<DarkModeIcon sx={{ color: '#fff' }} />
+											<DarkModeIcon />
 										) : (
-											<LightModeIcon sx={{ color: '#ffd700' }} />
+											<LightModeIcon />
 										)}
 									</IconButton>
 								</Tooltip>

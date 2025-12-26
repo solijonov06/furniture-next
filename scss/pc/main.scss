@@ -128,11 +128,13 @@ body::-webkit-scrollbar {
 							align-items: center;
 							justify-content: center;
 							border-radius: 60px;
-							border: 1px solid #ffffff;
+							border: 1px solid var(--navbar-text, #ffffff);
 							cursor: pointer;
+							transition: all 0.3s ease;
 							svg {
-								color: #ffffff;
+								color: var(--navbar-text, #ffffff);
 								margin-right: 10px;
+								transition: color 0.3s ease;
 							}
 							span {
 								font-family: $font;
@@ -140,7 +142,15 @@ body::-webkit-scrollbar {
 								font-style: normal;
 								font-weight: 600;
 								line-height: normal;
-								color: #ffffff;
+								color: var(--navbar-text, #ffffff);
+								transition: color 0.3s ease;
+							}
+							&:hover {
+								background-color: var(--color-accent, #D4A853);
+								border-color: var(--color-accent, #D4A853);
+								svg, span {
+									color: #ffffff;
+								}
 							}
 						}
 						.login-user {
@@ -157,15 +167,23 @@ body::-webkit-scrollbar {
 						display: flex;
 						align-items: center;
 						.notification-icon {
-							color: white;
+							color: var(--navbar-text, #ffffff);
+							transition: color 0.3s ease;
 						}
 						.theme-toggle-btn {
 							margin-right: 10px;
 							padding: 8px;
 							border-radius: 50%;
-							transition: background-color 0.3s ease;
+							transition: all 0.3s ease;
+							svg {
+								color: var(--navbar-text, #ffffff) !important;
+								transition: color 0.3s ease;
+							}
 							&:hover {
-								background-color: rgba(255, 255, 255, 0.1);
+								background-color: rgba(212, 168, 83, 0.2);
+								svg {
+									color: var(--color-accent, #D4A853) !important;
+								}
 							}
 						}
 						.btn-lang {
