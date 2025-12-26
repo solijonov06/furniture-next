@@ -50,27 +50,33 @@ const TopAgents = (props: TopAgentsProps) => {
 						<span>Top Agents</span>
 					</Stack>
 					<Stack className={'wrapper'}>
-						<Swiper
-							className={'top-agents-swiper'}
-							slidesPerView={'auto'}
-							centeredSlides={true}
-							spaceBetween={29}
-							modules={[Autoplay]}
-							autoplay={{
-								delay: 3000,
-								disableOnInteraction: false,
-							}}
-							speed={1200}
-							loop={true}
-						>
-							{topAgents.map((agent: Member) => {
-								return (
-									<SwiperSlide className={'top-agents-slide'} key={agent?._id}>
-										<TopAgentCard agent={agent} key={agent?.memberNick} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{topAgents.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Top Agents
+							</Box>
+						) : (
+							<Swiper
+								className={'top-agents-swiper'}
+								slidesPerView={'auto'}
+								centeredSlides={true}
+								spaceBetween={29}
+								modules={[Autoplay]}
+								autoplay={{
+									delay: 3000,
+									disableOnInteraction: false,
+								}}
+								speed={1200}
+								loop={topAgents.length > 3}
+							>
+								{topAgents.map((agent: Member) => {
+									return (
+										<SwiperSlide className={'top-agents-slide'} key={agent?._id}>
+											<TopAgentCard agent={agent} key={agent?.memberNick} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>
@@ -92,39 +98,47 @@ const TopAgents = (props: TopAgentsProps) => {
 						</Box>
 					</Stack>
 					<Stack className={'wrapper'}>
-						<Box component={'div'} className={'switch-btn swiper-agents-prev'}>
-							<ArrowBackIosNewIcon />
-						</Box>
-						<Box component={'div'} className={'card-wrapper'}>
-							<Swiper
-								className={'top-agents-swiper'}
-								slidesPerView={'auto'}
-								spaceBetween={29}
-								modules={[Autoplay, Navigation, Pagination]}
-								navigation={{
-									nextEl: '.swiper-agents-next',
-									prevEl: '.swiper-agents-prev',
-								}}
-								autoplay={{
-									delay: 3000,
-									disableOnInteraction: false,
-									pauseOnMouseEnter: true,
-								}}
-								speed={1200}
-								loop={true}
-							>
-								{topAgents.map((agent: Member) => {
-									return (
-										<SwiperSlide className={'top-agents-slide'} key={agent?._id}>
-											<TopAgentCard agent={agent} key={agent?.memberNick} />
-										</SwiperSlide>
-									);
-								})}
-							</Swiper>
-						</Box>
-						<Box component={'div'} className={'switch-btn swiper-agents-next'}>
-							<ArrowBackIosNewIcon />
-						</Box>
+						{topAgents.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Top Agents
+							</Box>
+						) : (
+							<>
+								<Box component={'div'} className={'switch-btn swiper-agents-prev'}>
+									<ArrowBackIosNewIcon />
+								</Box>
+								<Box component={'div'} className={'card-wrapper'}>
+									<Swiper
+										className={'top-agents-swiper'}
+										slidesPerView={'auto'}
+										spaceBetween={29}
+										modules={[Autoplay, Navigation, Pagination]}
+										navigation={{
+											nextEl: '.swiper-agents-next',
+											prevEl: '.swiper-agents-prev',
+										}}
+										autoplay={{
+											delay: 3000,
+											disableOnInteraction: false,
+											pauseOnMouseEnter: true,
+										}}
+										speed={1200}
+										loop={topAgents.length > 3}
+									>
+										{topAgents.map((agent: Member) => {
+											return (
+												<SwiperSlide className={'top-agents-slide'} key={agent?._id}>
+													<TopAgentCard agent={agent} key={agent?.memberNick} />
+												</SwiperSlide>
+											);
+										})}
+									</Swiper>
+								</Box>
+								<Box component={'div'} className={'switch-btn swiper-agents-next'}>
+									<ArrowBackIosNewIcon />
+								</Box>
+							</>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>

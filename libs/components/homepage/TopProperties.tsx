@@ -69,21 +69,27 @@ const TopProperties = (props: TopPropertiesProps) => {
 						<span>Top properties</span>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'top-property-swiper'}
-							slidesPerView={'auto'}
-							centeredSlides={true}
-							spaceBetween={15}
-							modules={[Autoplay]}
-						>
-							{topProperties.map((property: Property) => {
-								return (
-									<SwiperSlide className={'top-property-slide'} key={property?._id}>
-										<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{topProperties.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Top Properties
+							</Box>
+						) : (
+							<Swiper
+								className={'top-property-swiper'}
+								slidesPerView={'auto'}
+								centeredSlides={true}
+								spaceBetween={15}
+								modules={[Autoplay]}
+							>
+								{topProperties.map((property: Property) => {
+									return (
+										<SwiperSlide className={'top-property-slide'} key={property?._id}>
+											<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>
@@ -106,27 +112,33 @@ const TopProperties = (props: TopPropertiesProps) => {
 						</Box>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'top-property-swiper'}
-							slidesPerView={'auto'}
-							spaceBetween={15}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-top-next',
-								prevEl: '.swiper-top-prev',
-							}}
-							pagination={{
-								el: '.swiper-top-pagination',
-							}}
-						>
-							{topProperties.map((property: Property) => {
-								return (
-									<SwiperSlide className={'top-property-slide'} key={property?._id}>
-										<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler}  />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{topProperties.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Top Properties
+							</Box>
+						) : (
+							<Swiper
+								className={'top-property-swiper'}
+								slidesPerView={'auto'}
+								spaceBetween={15}
+								modules={[Autoplay, Navigation, Pagination]}
+								navigation={{
+									nextEl: '.swiper-top-next',
+									prevEl: '.swiper-top-prev',
+								}}
+								pagination={{
+									el: '.swiper-top-pagination',
+								}}
+							>
+								{topProperties.map((property: Property) => {
+									return (
+										<SwiperSlide className={'top-property-slide'} key={property?._id}>
+											<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler}  />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>

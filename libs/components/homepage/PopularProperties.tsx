@@ -53,21 +53,27 @@ const PopularProperties = (props: PopularPropertiesProps) => {
 						<span>Popular properties</span>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'popular-property-swiper'}
-							slidesPerView={'auto'}
-							centeredSlides={true}
-							spaceBetween={25}
-							modules={[Autoplay]}
-						>
-							{popularProperties.map((property: Property) => {
-								return (
-									<SwiperSlide key={property._id} className={'popular-property-slide'}>
-										<PopularPropertyCard property={property} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{popularProperties.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Popular Properties
+							</Box>
+						) : (
+							<Swiper
+								className={'popular-property-swiper'}
+								slidesPerView={'auto'}
+								centeredSlides={true}
+								spaceBetween={25}
+								modules={[Autoplay]}
+							>
+								{popularProperties.map((property: Property) => {
+									return (
+										<SwiperSlide key={property._id} className={'popular-property-slide'}>
+											<PopularPropertyCard property={property} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>
@@ -91,27 +97,33 @@ const PopularProperties = (props: PopularPropertiesProps) => {
 						</Box>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'popular-property-swiper'}
-							slidesPerView={'auto'}
-							spaceBetween={25}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-popular-next',
-								prevEl: '.swiper-popular-prev',
-							}}
-							pagination={{
-								el: '.swiper-popular-pagination',
-							}}
-						>
-							{popularProperties.map((property: Property) => {
-								return (
-									<SwiperSlide key={property._id} className={'popular-property-slide'}>
-										<PopularPropertyCard property={property} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{popularProperties.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Popular Properties
+							</Box>
+						) : (
+							<Swiper
+								className={'popular-property-swiper'}
+								slidesPerView={'auto'}
+								spaceBetween={25}
+								modules={[Autoplay, Navigation, Pagination]}
+								navigation={{
+									nextEl: '.swiper-popular-next',
+									prevEl: '.swiper-popular-prev',
+								}}
+								pagination={{
+									el: '.swiper-popular-pagination',
+								}}
+							>
+								{popularProperties.map((property: Property) => {
+									return (
+										<SwiperSlide key={property._id} className={'popular-property-slide'}>
+											<PopularPropertyCard property={property} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 					<Stack className={'pagination-box'}>
 						<WestIcon className={'swiper-popular-prev'} />
