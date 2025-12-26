@@ -142,6 +142,42 @@ const Hero3DCarousel = () => {
 				transformStyle: 'preserve-3d',
 			}}
 		>
+			{/* Beautiful Background Image Layer */}
+			<Box
+				sx={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					backgroundImage: 'url(/img/hero/hero-bg.webp)',
+					backgroundSize: 'cover',
+					backgroundPosition: 'center',
+					backgroundRepeat: 'no-repeat',
+					opacity: 0.15,
+					filter: 'blur(2px)',
+					transform: 'scale(1.1)',
+				}}
+			/>
+
+			{/* Elegant Geometric Pattern Overlay */}
+			<Box
+				sx={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					opacity: 0.4,
+					background: `
+						radial-gradient(circle at 20% 80%, rgba(212, 168, 83, 0.1) 0%, transparent 50%),
+						radial-gradient(circle at 80% 20%, rgba(212, 168, 83, 0.08) 0%, transparent 40%),
+						radial-gradient(circle at 40% 40%, rgba(30, 58, 95, 0.2) 0%, transparent 60%)
+					`,
+					pointerEvents: 'none',
+				}}
+			/>
+
 			{/* Animated Background Grid */}
 			<Box
 				sx={{
@@ -151,14 +187,52 @@ const Hero3DCarousel = () => {
 					right: 0,
 					bottom: 0,
 					backgroundImage: `
-						linear-gradient(rgba(212, 168, 83, 0.03) 1px, transparent 1px),
-						linear-gradient(90deg, rgba(212, 168, 83, 0.03) 1px, transparent 1px)
+						linear-gradient(rgba(212, 168, 83, 0.04) 1px, transparent 1px),
+						linear-gradient(90deg, rgba(212, 168, 83, 0.04) 1px, transparent 1px)
 					`,
-					backgroundSize: '60px 60px',
-					animation: 'gridMove 20s linear infinite',
+					backgroundSize: '80px 80px',
+					animation: 'gridMove 30s linear infinite',
 					'@keyframes gridMove': {
 						'0%': { transform: 'translate(0, 0)' },
-						'100%': { transform: 'translate(60px, 60px)' },
+						'100%': { transform: 'translate(80px, 80px)' },
+					},
+				}}
+			/>
+
+			{/* Floating Light Orbs */}
+			<Box
+				sx={{
+					position: 'absolute',
+					top: '10%',
+					left: '10%',
+					width: '400px',
+					height: '400px',
+					background: 'radial-gradient(circle, rgba(212, 168, 83, 0.15) 0%, transparent 70%)',
+					borderRadius: '50%',
+					filter: 'blur(60px)',
+					animation: 'floatOrb1 15s ease-in-out infinite',
+					pointerEvents: 'none',
+					'@keyframes floatOrb1': {
+						'0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+						'50%': { transform: 'translate(50px, 30px) scale(1.1)' },
+					},
+				}}
+			/>
+			<Box
+				sx={{
+					position: 'absolute',
+					bottom: '20%',
+					right: '15%',
+					width: '300px',
+					height: '300px',
+					background: 'radial-gradient(circle, rgba(30, 58, 95, 0.2) 0%, transparent 70%)',
+					borderRadius: '50%',
+					filter: 'blur(50px)',
+					animation: 'floatOrb2 12s ease-in-out infinite',
+					pointerEvents: 'none',
+					'@keyframes floatOrb2': {
+						'0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+						'50%': { transform: 'translate(-40px, -20px) scale(0.9)' },
 					},
 				}}
 			/>
