@@ -2,20 +2,25 @@ import React, { useEffect, useState } from 'react';
 import {
 	Badge,
 	Box,
+	Button,
 	CircularProgress,
 	Divider,
 	IconButton,
 	Menu,
 	MenuItem,
 	Stack,
+	Tooltip,
 	Typography,
 } from '@mui/material';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_NOTIFICATIONS } from '../../../apollo/user/query';
-import { UPDATE_NOTIFICATION } from '../../../apollo/user/mutation';
+import { GET_NOTIFICATIONS, GET_UNREAD_NOTIFICATION_COUNT } from '../../../apollo/user/query';
+import { UPDATE_NOTIFICATION, MARK_ALL_NOTIFICATIONS_AS_READ, DELETE_NOTIFICATION } from '../../../apollo/user/mutation';
 import { Notification, Notifications } from '../../types/notification/notification';
 import { NotificationsInquiry } from '../../types/notification/notification.input';
 import { NotificationStatus, NotificationType } from '../../enums/notification.enum';
@@ -33,7 +38,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 	const open = Boolean(anchorEl);
 	const [notificationsInquiry] = useState<NotificationsInquiry>({
 		page: 1,
-		limit: 10,
+		limit: 20,
 		search: {},
 	});
 
@@ -49,18 +54,40 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 		notifyOnNetworkStatusChange: true,
 	});
 
+	const {
+		data: unreadCountData,
+		refetch: refetchUnreadCount,
+	} = useQuery(GET_UNREAD_NOTIFICATION_COUNT, {
+		fetchPolicy: 'network-only',
+		skip: !userId,
+	});
+
 	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
+	const [markAllAsRead] = useMutation(MARK_ALL_NOTIFICATIONS_AS_READ);
+	const [deleteNotification] = useMutation(DELETE_NOTIFICATION);
 
 	/** LIFECYCLES **/
 	useEffect(() => {
 		if (userId) {
 			getNotificationsRefetch({ input: notificationsInquiry });
+			refetchUnreadCount();
 		}
+	}, [userId]);
+
+	// Refetch every 30 seconds for real-time updates
+	useEffect(() => {
+		if (!userId) return;
+		const interval = setInterval(() => {
+			refetchUnreadCount();
+		}, 30000);
+		return () => clearInterval(interval);
 	}, [userId]);
 
 	/** HANDLERS **/
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
+		// Refetch notifications when opening
+		getNotificationsRefetch({ input: notificationsInquiry });
 	};
 
 	const handleClose = () => {
@@ -75,6 +102,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 					variables: { input: notification._id },
 				});
 				getNotificationsRefetch({ input: notificationsInquiry });
+				refetchUnreadCount();
 			} catch (err) {
 				console.error('Error updating notification:', err);
 			}
@@ -85,23 +113,49 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 			router.push(`/property/detail?id=${notification.propertyId}`);
 		} else if (notification.articleId) {
 			router.push(`/community/detail?articleCategory=FREE&id=${notification.articleId}`);
+		} else if (notification.authorData?._id) {
+			router.push(`/member?memberId=${notification.authorData._id}`);
 		}
 		handleClose();
 	};
 
+	const handleMarkAllAsRead = async (e: React.MouseEvent) => {
+		e.stopPropagation();
+		try {
+			await markAllAsRead();
+			getNotificationsRefetch({ input: notificationsInquiry });
+			refetchUnreadCount();
+		} catch (err) {
+			console.error('Error marking all as read:', err);
+		}
+	};
+
+	const handleDeleteNotification = async (e: React.MouseEvent, notificationId: string) => {
+		e.stopPropagation();
+		try {
+			await deleteNotification({
+				variables: { input: notificationId },
+			});
+			getNotificationsRefetch({ input: notificationsInquiry });
+			refetchUnreadCount();
+		} catch (err) {
+			console.error('Error deleting notification:', err);
+		}
+	};
+
 	const notifications: Notifications = getNotificationsData?.getNotifications;
-	const unreadCount = notifications?.list?.filter(
-		(n: Notification) => n.notificationStatus === NotificationStatus.WAIT
-	).length || 0;
+	const unreadCount = unreadCountData?.getUnreadNotificationCount || 0;
 
 	const getNotificationIcon = (type: NotificationType) => {
 		switch (type) {
 			case NotificationType.LIKE:
-				return <FavoriteIcon sx={{ fontSize: 18, color: '#e91e63' }} />;
+				return <FavoriteIcon sx={{ fontSize: 16, color: '#e91e63' }} />;
 			case NotificationType.COMMENT:
-				return <ChatBubbleOutlineIcon sx={{ fontSize: 18, color: '#2196f3' }} />;
+				return <ChatBubbleOutlineIcon sx={{ fontSize: 16, color: '#2196f3' }} />;
+			case NotificationType.FOLLOW:
+				return <PersonAddIcon sx={{ fontSize: 16, color: '#4caf50' }} />;
 			default:
-				return <NotificationsOutlinedIcon sx={{ fontSize: 18, color: '#9e9e9e' }} />;
+				return <NotificationsOutlinedIcon sx={{ fontSize: 16, color: '#9e9e9e' }} />;
 		}
 	};
 
@@ -120,7 +174,18 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 					},
 				}}
 			>
-				<Badge badgeContent={unreadCount} color="error" max={99}>
+				<Badge 
+					badgeContent={unreadCount} 
+					color="error" 
+					max={99}
+					sx={{
+						'& .MuiBadge-badge': {
+							backgroundColor: '#D4A853',
+							color: '#0D1B2A',
+							fontWeight: 700,
+						}
+					}}
+				>
 					<NotificationsOutlinedIcon />
 				</Badge>
 			</IconButton>
@@ -131,41 +196,67 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 				onClose={handleClose}
 				PaperProps={{
 					sx: {
-						width: 360,
-						maxHeight: 450,
+						width: 380,
+						maxHeight: 500,
 						mt: 1.5,
-						borderRadius: '12px',
-						boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+						borderRadius: '16px',
+						boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)',
 						overflow: 'hidden',
+						border: '1px solid rgba(212, 168, 83, 0.1)',
 					},
 				}}
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
 				{/* Header */}
-				<Box sx={{ px: 2, py: 1.5, backgroundColor: '#1E3A5F' }}>
-					<Typography sx={{ fontWeight: 600, color: '#fff', fontSize: '16px' }}>
-						Notifications
-					</Typography>
-					{unreadCount > 0 && (
-						<Typography sx={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}>
-							{unreadCount} unread notification{unreadCount !== 1 ? 's' : ''}
+				<Box sx={{ 
+					px: 2.5, 
+					py: 2, 
+					background: 'linear-gradient(135deg, #1E3A5F 0%, #0D1B2A 100%)',
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}>
+					<Box>
+						<Typography sx={{ fontWeight: 700, color: '#fff', fontSize: '18px' }}>
+							Notifications
 						</Typography>
+						{unreadCount > 0 && (
+							<Typography sx={{ fontSize: '12px', color: '#D4A853' }}>
+								{unreadCount} new notification{unreadCount !== 1 ? 's' : ''}
+							</Typography>
+						)}
+					</Box>
+					{unreadCount > 0 && (
+						<Tooltip title="Mark all as read">
+							<IconButton 
+								onClick={handleMarkAllAsRead}
+								sx={{ 
+									color: '#D4A853',
+									'&:hover': { backgroundColor: 'rgba(212, 168, 83, 0.1)' }
+								}}
+							>
+								<DoneAllIcon fontSize="small" />
+							</IconButton>
+						</Tooltip>
 					)}
 				</Box>
 
 				<Divider />
 
 				{/* Notification List */}
-				<Box sx={{ maxHeight: 350, overflow: 'auto' }}>
+				<Box sx={{ maxHeight: 380, overflow: 'auto' }}>
 					{getNotificationsLoading ? (
-						<Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-							<CircularProgress size={30} />
+						<Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
+							<CircularProgress size={32} sx={{ color: '#D4A853' }} />
 						</Box>
 					) : !notifications?.list?.length ? (
-						<Box sx={{ textAlign: 'center', py: 4, color: '#9e9e9e' }}>
-							<NotificationsOutlinedIcon sx={{ fontSize: 48, mb: 1, opacity: 0.5 }} />
-							<Typography variant="body2">No notifications yet</Typography>
+						<Box sx={{ textAlign: 'center', py: 6, color: '#9e9e9e' }}>
+							<NotificationsOutlinedIcon sx={{ fontSize: 56, mb: 1.5, opacity: 0.4 }} />
+							<Typography variant="body1" fontWeight={500}>No notifications yet</Typography>
+							<Typography variant="body2" sx={{ mt: 0.5, opacity: 0.7 }}>
+								When you get notifications, they'll show up here
+							</Typography>
 						</Box>
 					) : (
 						notifications.list.map((notification: Notification) => (
@@ -177,10 +268,13 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 									px: 2,
 									backgroundColor:
 										notification.notificationStatus === NotificationStatus.WAIT
-											? 'rgba(30, 58, 95, 0.05)'
+											? 'rgba(212, 168, 83, 0.08)'
 											: 'transparent',
+									borderLeft: notification.notificationStatus === NotificationStatus.WAIT 
+										? '3px solid #D4A853' 
+										: '3px solid transparent',
 									'&:hover': {
-										backgroundColor: 'rgba(30, 58, 95, 0.1)',
+										backgroundColor: 'rgba(30, 58, 95, 0.08)',
 									},
 								}}
 							>
@@ -188,12 +282,13 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 									{/* Author Image */}
 									<Box
 										sx={{
-											width: 44,
-											height: 44,
+											width: 48,
+											height: 48,
 											borderRadius: '50%',
 											overflow: 'hidden',
 											flexShrink: 0,
 											position: 'relative',
+											border: '2px solid #f5f5f5',
 										}}
 									>
 										<img
@@ -209,12 +304,15 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 										<Box
 											sx={{
 												position: 'absolute',
-												bottom: -2,
-												right: -2,
+												bottom: -3,
+												right: -3,
 												backgroundColor: '#fff',
 												borderRadius: '50%',
-												p: 0.3,
-												boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+												p: 0.4,
+												boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+												display: 'flex',
+												alignItems: 'center',
+												justifyContent: 'center',
 											}}
 										>
 											{getNotificationIcon(notification.notificationType)}
@@ -227,7 +325,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 											sx={{
 												fontSize: '14px',
 												fontWeight: notification.notificationStatus === NotificationStatus.WAIT ? 600 : 400,
-												color: '#181a20',
+												color: 'var(--color-text)',
 												lineHeight: 1.4,
 												overflow: 'hidden',
 												textOverflow: 'ellipsis',
@@ -236,50 +334,75 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 												WebkitBoxOrient: 'vertical',
 											}}
 										>
-											<strong>{notification.authorData?.memberNick || 'Someone'}</strong>{' '}
+											<strong style={{ color: '#1E3A5F' }}>
+												{notification.authorData?.memberNick || 'Someone'}
+											</strong>{' '}
 											{notification.notificationTitle}
 										</Typography>
 										{notification.notificationDesc && (
 											<Typography
 												sx={{
 													fontSize: '12px',
-													color: '#717171',
+													color: 'var(--color-text-secondary)',
 													mt: 0.5,
 													overflow: 'hidden',
 													textOverflow: 'ellipsis',
 													whiteSpace: 'nowrap',
+													fontStyle: 'italic',
 												}}
 											>
 												"{notification.notificationDesc}"
 											</Typography>
 										)}
-										<Typography sx={{ fontSize: '11px', color: '#9e9e9e', mt: 0.5 }}>
+										<Typography sx={{ fontSize: '11px', color: '#D4A853', mt: 0.5, fontWeight: 500 }}>
 											{getTimeAgo(notification.createdAt)}
 										</Typography>
 									</Box>
 
-									{/* Unread Indicator */}
-									{notification.notificationStatus === NotificationStatus.WAIT && (
-										<Box
-											sx={{
-												width: 8,
-												height: 8,
-												borderRadius: '50%',
-												backgroundColor: '#D4A853',
-												flexShrink: 0,
-												mt: 1,
+									{/* Delete Button */}
+									<Tooltip title="Delete">
+										<IconButton
+											size="small"
+											onClick={(e) => handleDeleteNotification(e, notification._id)}
+											sx={{ 
+												opacity: 0.5,
+												'&:hover': { opacity: 1, color: '#e91e63' }
 											}}
-										/>
-									)}
+										>
+											<DeleteOutlineIcon fontSize="small" />
+										</IconButton>
+									</Tooltip>
 								</Stack>
 							</MenuItem>
 						))
 					)}
 				</Box>
+
+				{/* Footer */}
+				{notifications?.list?.length > 0 && (
+					<>
+						<Divider />
+						<Box sx={{ p: 1.5, textAlign: 'center' }}>
+							<Button
+								size="small"
+								sx={{ 
+									color: '#1E3A5F',
+									fontWeight: 600,
+									'&:hover': { backgroundColor: 'rgba(30, 58, 95, 0.08)' }
+								}}
+								onClick={() => {
+									router.push('/mypage?tab=notifications');
+									handleClose();
+								}}
+							>
+								View All Notifications
+							</Button>
+						</Box>
+					</>
+				)}
 			</Menu>
 		</>
 	);
 };
 
 export default NotificationDropdown;
-

@@ -775,3 +775,33 @@ export const GET_EVENT = gql`
 		}
 	}
 `;
+
+export const GET_UPCOMING_EVENTS = gql`
+	query GetUpcomingEvents($input: EventsInquiry!) {
+		getUpcomingEvents(input: $input) {
+			list {
+				_id
+				eventTitle
+				eventCity
+				eventDescription
+				eventImage
+				eventStartDate
+				eventEndDate
+				eventLocation
+				eventLink
+				eventStatus
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_UNREAD_NOTIFICATION_COUNT = gql`
+	query GetUnreadNotificationCount {
+		getUnreadNotificationCount
+	}
+`;
