@@ -164,12 +164,6 @@ const HeroCarousel = () => {
 					/>
 				))}
 			</Box>
-
-			{/* Scroll Indicator */}
-			<Box className="hero-scroll-indicator">
-				<Box className="scroll-line" />
-				<span>Scroll</span>
-			</Box>
 		</Stack>
 	);
 };
