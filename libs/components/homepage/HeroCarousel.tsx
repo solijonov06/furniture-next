@@ -55,19 +55,16 @@ const slides: HeroSlide[] = [
 const HeroCarousel = () => {
 	const router = useRouter();
 	const [current, setCurrent] = useState(0);
-	const [isAutoPlay, setIsAutoPlay] = useState(true);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
-	// Auto-play functionality
+	// Auto-play functionality - slides every 3.5 seconds
 	useEffect(() => {
-		if (!isAutoPlay) return;
-
 		const timer = setInterval(() => {
-			goToNext();
-		}, 5000);
+			setCurrent((prev) => (prev + 1) % slides.length);
+		}, 3500);
 
 		return () => clearInterval(timer);
-	}, [isAutoPlay, current]);
+	}, []);
 
 	const goToNext = useCallback(() => {
 		if (isTransitioning) return;
@@ -86,7 +83,6 @@ const HeroCarousel = () => {
 	const goToSlide = (index: number) => {
 		if (isTransitioning || index === current) return;
 		setIsTransitioning(true);
-		setIsAutoPlay(false);
 		setCurrent(index);
 		setTimeout(() => setIsTransitioning(false), 800);
 	};
@@ -146,19 +142,13 @@ const HeroCarousel = () => {
 			{/* Navigation Arrows */}
 			<IconButton
 				className="hero-nav-btn hero-prev-btn"
-				onClick={() => {
-					goToPrev();
-					setIsAutoPlay(false);
-				}}
+				onClick={goToPrev}
 			>
 				<ArrowBackIosNewIcon />
 			</IconButton>
 			<IconButton
 				className="hero-nav-btn hero-next-btn"
-				onClick={() => {
-					goToNext();
-					setIsAutoPlay(false);
-				}}
+				onClick={goToNext}
 			>
 				<ArrowForwardIosIcon />
 			</IconButton>
@@ -179,13 +169,6 @@ const HeroCarousel = () => {
 			<Box className="hero-scroll-indicator">
 				<Box className="scroll-line" />
 				<span>Scroll</span>
-			</Box>
-
-			{/* Slide Counter */}
-			<Box className="hero-counter">
-				<span className="current">{String(current + 1).padStart(2, '0')}</span>
-				<span className="divider">/</span>
-				<span className="total">{String(slides.length).padStart(2, '0')}</span>
 			</Box>
 		</Stack>
 	);

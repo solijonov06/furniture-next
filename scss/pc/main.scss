@@ -796,20 +796,27 @@ body::-webkit-scrollbar {
 					gap: 40px;
 					visibility: hidden;
 					border-radius: 12px;
-					background: #ffffff;
+					background: var(--color-bg);
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 					box-sizing: border-box;
 					z-index: 2;
 					&.on {
 						visibility: visible;
 						transition: 0.2s ease-out;
-						background: #fffdfd;
+						background: var(--color-bg);
 					}
 					div {
 						width: 295px;
 						display: flex;
 						flex-direction: row;
 						align-items: center;
+						cursor: pointer;
+						padding: 8px;
+						border-radius: 8px;
+						transition: background 0.2s ease;
+						&:hover {
+							background: var(--color-bg-secondary);
+						}
 						img {
 							width: 122px;
 							height: 85px;
@@ -845,37 +852,54 @@ body::-webkit-scrollbar {
 					justify-content: space-between;
 					visibility: hidden;
 					border-radius: 12px;
-					background: #fff;
+					background: var(--color-bg);
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 					box-sizing: border-box;
 					z-index: 1;
 					&.on {
 						visibility: visible;
 						transition: 0.2s ease-out;
-						background: #fffdfd;
+						background: var(--color-bg);
 					}
 					div {
 						position: relative;
-						width: 272px;
-						height: 168px;
+						width: 310px;
+						height: 200px;
 						border-radius: 15px;
 						cursor: pointer;
 						background-size: cover;
+						background-position: center;
+						overflow: hidden;
+						transition: transform 0.3s ease, box-shadow 0.3s ease;
+						border: 2px solid transparent;
+						&:hover {
+							transform: translateY(-5px);
+							box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+							border-color: $color-secondary;
+						}
+						&::before {
+							content: '';
+							position: absolute;
+							inset: 0;
+							background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+							z-index: 1;
+						}
 						span {
 							position: absolute;
-							top: 13px;
-							right: 12px;
-							padding: 1px 5px 5px 5px;
-							border-radius: 2px 2px 0px 0px;
+							bottom: 15px;
+							left: 15px;
+							padding: 8px 16px;
+							border-radius: 8px;
 							font-family: $font;
-							font-size: 20px;
+							font-size: 18px;
 							font-style: normal;
 							font-weight: 700;
-							line-height: 26px;
-							background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
-							// -webkit-background-clip: text;
-							// -webkit-text-fill-color: transparent;
+							line-height: 24px;
+							color: #fff;
+							background: rgba(0, 0, 0, 0.5);
+							backdrop-filter: blur(4px);
 							text-transform: capitalize;
+							z-index: 2;
 						}
 					}
 				}
@@ -893,20 +917,21 @@ body::-webkit-scrollbar {
 					align-items: center;
 					visibility: hidden;
 					border-radius: 12px;
-					background: #fff;
+					background: var(--color-bg);
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 					box-sizing: border-box;
 					z-index: 1;
 					&.on {
 						visibility: visible;
 						transition: 0.2s ease-out;
-						background: #fffdfd;
+						background: var(--color-bg);
 					}
 					span {
 						display: flex;
 						align-items: center;
 						padding: 10px 30px;
-						border: 1px solid #fffdfd;
+						border: 1px solid var(--color-border);
+						border-radius: 8px;
 						color: var(--color-text);
 						font-family: $font;
 						font-size: 20px;
@@ -914,9 +939,11 @@ body::-webkit-scrollbar {
 						font-weight: 400;
 						line-height: 26px;
 						cursor: pointer;
+						transition: all 0.2s ease;
 						&:hover {
-							border-radius: 5px;
-							border: 1px solid #b9b9b9;
+							border-radius: 8px;
+							border: 1px solid $color-secondary;
+							background: var(--color-bg-secondary);
 							box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 						}
 					}
