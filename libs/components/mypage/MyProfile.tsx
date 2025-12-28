@@ -23,13 +23,16 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		setUpdateData({
-			...updateData,
-			memberNick: user.memberNick,
-			memberPhone: user.memberPhone,
-			memberAddress: user.memberAddress,
-			memberImage: user.memberImage,
-		});
+		console.log('+user from userVar:', user);
+		if (user && user._id) {
+			setUpdateData({
+				...updateData,
+				memberNick: user.memberNick || '',
+				memberPhone: user.memberPhone || '',
+				memberAddress: user.memberAddress || '',
+				memberImage: user.memberImage || '',
+			});
+		}
 	}, [user]);
 
 	/** HANDLERS **/
