@@ -25,13 +25,13 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 	useEffect(() => {
 		console.log('+user from userVar:', user);
 		if (user && user._id) {
-			setUpdateData({
-				...updateData,
+			setUpdateData(prev => ({
+				...prev,
 				memberNick: user.memberNick || '',
 				memberPhone: user.memberPhone || '',
 				memberAddress: user.memberAddress || '',
 				memberImage: user.memberImage || '',
-			});
+			}));
 		}
 	}, [user]);
 
@@ -43,8 +43,15 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 				console.log('No image selected');
 				return;
 			}
+			
 			console.log('+image:', image);
+			console.log('+token:', token ? 'exists' : 'missing');
 			console.log('+API URL:', process.env.REACT_APP_API_GRAPHQL_URL);
+
+			if (!token) {
+				await sweetErrorAlert('Please login first!');
+				return;
+			}
 
 			const formData = new FormData();
 			formData.append(
@@ -83,18 +90,24 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 				return;
 			}
 
-			const responseImage = response.data.data.imageUploader;
+			const responseImage = response.data.data?.imageUploader;
 			console.log('+responseImage: ', responseImage);
 			
 			if (responseImage) {
-				setUpdateData({ ...updateData, memberImage: responseImage });
+				// Use functional setState to avoid stale closure
+				setUpdateData(prev => ({ ...prev, memberImage: responseImage }));
 				await sweetMixinSuccessAlert('Image uploaded! Click "Update Profile" to save.');
+			} else {
+				await sweetErrorAlert('No image returned from server');
 			}
 
 			return `${REACT_APP_API_URL}/${responseImage}`;
 		} catch (err: any) {
-			console.log('Error, uploadImage:', err);
-			await sweetErrorAlert(err?.response?.data?.errors?.[0]?.message || err.message || 'Upload failed. Is the backend running?');
+			console.error('Upload error:', err);
+			const errorMsg = err?.response?.data?.errors?.[0]?.message 
+				|| err?.message 
+				|| 'Upload failed. Is the backend running on port 3005?';
+			await sweetErrorAlert(errorMsg);
 		}
 	};
 
