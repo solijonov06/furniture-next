@@ -147,7 +147,7 @@ const Hero3DCarousel = () => {
 					left: 0,
 					right: 0,
 					bottom: 0,
-					backgroundImage: 'url(/img/hero/hero-bg.webp)',
+					backgroundImage: 'url(/img/hero/hero-1sofa.webp)',
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',
