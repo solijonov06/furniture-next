@@ -89,6 +89,7 @@ const PropertyCard = (props: PropertyCardType) => {
 							>
 								Delivery
 							</Typography>
+							<Typography sx={{ fontWeight: 500, fontSize: '13px', margin: '0 6px' }}>/</Typography>
 							<Typography
 								sx={{ fontWeight: 500, fontSize: '13px' }}
 							>

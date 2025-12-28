@@ -24,3 +24,4 @@ export interface Notifications {
 	metaCounter: TotalCounter[];
 }
 
+

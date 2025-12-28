@@ -1119,13 +1119,13 @@
 					}
 					.card-wrapper {
 						width: calc(100% - 140px);
-						height: 220px;
+						height: 280px;
 						display: flex;
 						flex-direction: row;
 						overflow: hidden;
 						.top-agents-swiper {
 							width: 100%;
-							height: 220px;
+							height: 280px;
 							display: flex;
 							flex-direction: row;
 							align-items: center;
@@ -1142,25 +1142,30 @@
 							}
 						}
 						.top-agent-card {
-							width: 180px;
+							width: 200px;
 							height: auto;
+							min-height: 240px;
 							display: flex;
 							flex-direction: column;
 							align-items: center;
-							padding: 0;
-							background: transparent;
-							border: none;
+							justify-content: flex-start;
+							padding: 0 !important;
+							background: transparent !important;
+							background-color: transparent !important;
+							border: none !important;
+							box-shadow: none !important;
+							border-radius: 0 !important;
 							transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 							cursor: pointer;
 							position: relative;
 
 							&:hover {
-								transform: translateY(-8px);
+								transform: translateY(-10px);
 
 								img {
-									transform: scale(1.08);
+									transform: scale(1.1);
 									border-color: #D4A853;
-									box-shadow: 0 12px 40px rgba(212, 168, 83, 0.4);
+									box-shadow: 0 15px 50px rgba(212, 168, 83, 0.5);
 								}
 
 								strong {
@@ -1169,38 +1174,40 @@
 							}
 
 							img {
-								width: 140px;
-								height: 140px;
-								border-radius: 50%;
+								width: 160px;
+								height: 160px;
+								border-radius: 50% !important;
 								cursor: pointer;
 								object-fit: cover;
-								border: 4px solid rgba(255, 255, 255, 0.3);
+								border: 5px solid rgba(255, 255, 255, 0.4);
 								transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-								box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-								background: var(--color-card-bg);
+								box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+								background: #f5f5f5;
 							}
 							strong {
-								margin-top: 16px;
+								margin-top: 20px;
 								color: var(--color-text);
 								text-align: center;
 								font-family: $font;
-								font-size: 16px;
+								font-size: 18px;
 								font-style: normal;
-								font-weight: 600;
+								font-weight: 700;
 								line-height: normal;
 								text-transform: capitalize;
 								cursor: pointer;
 								transition: color 0.3s ease;
 							}
 							span {
+								margin-top: 4px;
 								color: var(--color-text-secondary);
 								text-align: center;
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
-								font-weight: 400;
+								font-weight: 500;
 								line-height: 24px;
-								text-transform: capitalize;
+								text-transform: uppercase;
+								letter-spacing: 1px;
 							}
 						}
 					}

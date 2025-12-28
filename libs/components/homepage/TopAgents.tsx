@@ -110,8 +110,8 @@ const TopAgents = (props: TopAgentsProps) => {
 									<Swiper
 										className={'top-agents-swiper'}
 										slidesPerView={5}
-										spaceBetween={30}
-										modules={[Autoplay, Navigation, Pagination, FreeMode]}
+										spaceBetween={40}
+										modules={[Autoplay, Navigation, FreeMode]}
 										navigation={{
 											nextEl: '.swiper-agents-next',
 											prevEl: '.swiper-agents-prev',
@@ -119,7 +119,7 @@ const TopAgents = (props: TopAgentsProps) => {
 										freeMode={{
 											enabled: true,
 											momentum: true,
-											momentumRatio: 0.5,
+											momentumRatio: 0.8,
 										}}
 										autoplay={{
 											delay: 0,
@@ -127,9 +127,9 @@ const TopAgents = (props: TopAgentsProps) => {
 											pauseOnMouseEnter: true,
 											reverseDirection: false,
 										}}
-										speed={3000}
+										speed={2500}
 										loop={true}
-										loopAdditionalSlides={5}
+										loopAdditionalSlides={10}
 										allowTouchMove={true}
 										grabCursor={true}
 									>

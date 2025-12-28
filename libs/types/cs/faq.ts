@@ -33,3 +33,4 @@ export interface Faqs {
 	metaCounter: TotalCounter[];
 }
 
+

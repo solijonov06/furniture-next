@@ -67,7 +67,22 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 			const selectedFiles = inputRef.current.files;
 
 			if (selectedFiles.length == 0) return false;
-			if (selectedFiles.length > 5) throw new Error('Cannot upload more than 5 images!');
+			
+			// Check if total images (existing + new) would exceed 5
+			const currentImageCount = insertPropertyData.propertyImages?.length || 0;
+			const newImageCount = selectedFiles.length;
+			const totalImages = currentImageCount + newImageCount;
+			
+			if (totalImages > 5) {
+				throw new Error(`Cannot have more than 5 images! You have ${currentImageCount} images, trying to add ${newImageCount} more.`);
+			}
+
+			// Create file array mapping based on actual number of files
+			const filesArray = Array(selectedFiles.length).fill(null);
+			const mapObject: { [key: string]: string[] } = {};
+			for (let i = 0; i < selectedFiles.length; i++) {
+				mapObject[String(i)] = [`variables.files.${i}`];
+			}
 
 			formData.append(
 				'operations',
@@ -76,21 +91,13 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 						imagesUploader(files: $files, target: $target)
 				  }`,
 					variables: {
-						files: [null, null, null, null, null],
+						files: filesArray,
 						target: 'property',
 					},
 				}),
 			);
-			formData.append(
-				'map',
-				JSON.stringify({
-					'0': ['variables.files.0'],
-					'1': ['variables.files.1'],
-					'2': ['variables.files.2'],
-					'3': ['variables.files.3'],
-					'4': ['variables.files.4'],
-				}),
-			);
+			formData.append('map', JSON.stringify(mapObject));
+			
 			for (const key in selectedFiles) {
 				if (/^\d+$/.test(key)) formData.append(`${key}`, selectedFiles[key]);
 			}
@@ -106,7 +113,14 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 			const responseImages = response.data.data.imagesUploader;
 
 			console.log('+responseImages: ', responseImages);
-			setInsertPropertyData({ ...insertPropertyData, propertyImages: responseImages });
+			// Append new images to existing ones instead of replacing
+			const existingImages = insertPropertyData.propertyImages || [];
+			setInsertPropertyData({ ...insertPropertyData, propertyImages: [...existingImages, ...responseImages] });
+			
+			// Reset file input
+			if (inputRef.current) {
+				inputRef.current.value = '';
+			}
 		} catch (err: any) {
 			console.log('err: ', err.message);
 			await sweetMixinErrorAlert(err.message);
