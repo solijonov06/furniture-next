@@ -14,7 +14,7 @@ const fallbackEvents = [
 		eventTitle: 'Design Week 2025',
 		eventCity: 'New York',
 		eventDescription: 'Discover the latest furniture trends and meet top designers at the annual Design Week!',
-		eventImage: '/img/events/SEOUL.webp',
+		eventImage: '/img/hero/hero-1sofa.webp',
 		eventStatus: EventStatus.ACTIVE,
 	},
 	{
@@ -22,7 +22,7 @@ const fallbackEvents = [
 		eventTitle: 'Furniture Expo',
 		eventCity: 'Los Angeles',
 		eventDescription: 'Explore premium furniture collections from leading brands around the world!',
-		eventImage: '/img/events/BUSAN.webp',
+		eventImage: '/img/hero/hero-8armchair.webp',
 		eventStatus: EventStatus.ACTIVE,
 	},
 	{
@@ -30,7 +30,7 @@ const fallbackEvents = [
 		eventTitle: 'Home & Living Fair',
 		eventCity: 'Chicago',
 		eventDescription: 'Your one-stop destination for home decor inspiration and exclusive deals!',
-		eventImage: '/img/events/DAEGU.webp',
+		eventImage: '/img/hero/hero-9bed.webp',
 		eventStatus: EventStatus.ACTIVE,
 	},
 	{
@@ -38,7 +38,7 @@ const fallbackEvents = [
 		eventTitle: 'Artisan Craft Show',
 		eventCity: 'Houston',
 		eventDescription: 'Meet the craftsmen behind handmade furniture and home accessories!',
-		eventImage: '/img/events/INCHEON.webp',
+		eventImage: '/img/hero/hero-2table.webp',
 		eventStatus: EventStatus.ACTIVE,
 	},
 ];
