@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination, FreeMode } from 'swiper';
 import TopAgentCard from './TopAgentCard';
 import { Member } from '../../types/member/member';
 import { AgentsInquiry } from '../../types/member/member.input';
@@ -17,11 +20,6 @@ const TopAgents = (props: TopAgentsProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [topAgents, setTopAgents] = useState<Member[]>([]);
-	const [isPaused, setIsPaused] = useState(false);
-	const sliderRef = useRef<HTMLDivElement>(null);
-	const [isDragging, setIsDragging] = useState(false);
-	const [startX, setStartX] = useState(0);
-	const [scrollLeft, setScrollLeft] = useState(0);
 
 	/** APOLLO REQUESTS **/
 	const {
@@ -41,47 +39,6 @@ const TopAgents = (props: TopAgentsProps) => {
 		}
 	}, [getAgentsData]);
 
-	// Touch/swipe handlers for mobile
-	const handleTouchStart = (e: React.TouchEvent) => {
-		setIsDragging(true);
-		setStartX(e.touches[0].pageX - (sliderRef.current?.offsetLeft || 0));
-		setScrollLeft(sliderRef.current?.scrollLeft || 0);
-	};
-
-	const handleTouchMove = (e: React.TouchEvent) => {
-		if (!isDragging) return;
-		const x = e.touches[0].pageX - (sliderRef.current?.offsetLeft || 0);
-		const walk = (x - startX) * 2;
-		if (sliderRef.current) {
-			sliderRef.current.scrollLeft = scrollLeft - walk;
-		}
-	};
-
-	const handleTouchEnd = () => {
-		setIsDragging(false);
-	};
-
-	// Mouse drag handlers for desktop
-	const handleMouseDown = (e: React.MouseEvent) => {
-		setIsDragging(true);
-		setStartX(e.pageX - (sliderRef.current?.offsetLeft || 0));
-		setScrollLeft(sliderRef.current?.scrollLeft || 0);
-	};
-
-	const handleMouseMove = (e: React.MouseEvent) => {
-		if (!isDragging) return;
-		e.preventDefault();
-		const x = e.pageX - (sliderRef.current?.offsetLeft || 0);
-		const walk = (x - startX) * 2;
-		if (sliderRef.current) {
-			sliderRef.current.scrollLeft = scrollLeft - walk;
-		}
-	};
-
-	const handleMouseUp = () => {
-		setIsDragging(false);
-	};
-
 	if (device === 'mobile') {
 		return (
 			<Stack className={'top-agents'}>
@@ -95,37 +52,35 @@ const TopAgents = (props: TopAgentsProps) => {
 								No Top Agents
 							</Box>
 						) : (
-							<Box
-								ref={sliderRef}
-								className={'agents-slider-container'}
-								onTouchStart={handleTouchStart}
-								onTouchMove={handleTouchMove}
-								onTouchEnd={handleTouchEnd}
-								sx={{
-									display: 'flex',
-									overflowX: 'auto',
-									scrollBehavior: 'smooth',
-									'&::-webkit-scrollbar': { display: 'none' },
-									scrollbarWidth: 'none',
-									gap: '20px',
-									padding: '20px 0',
+							<Swiper
+								className={'top-agents-swiper'}
+								slidesPerView={'auto'}
+								centeredSlides={true}
+								spaceBetween={29}
+								modules={[Autoplay, FreeMode]}
+								freeMode={true}
+								autoplay={{
+									delay: 0,
+									disableOnInteraction: false,
+									pauseOnMouseEnter: true,
 								}}
+								speed={4000}
+								loop={true}
 							>
-								{topAgents.map((agent: Member) => (
-									<Box key={agent?._id} sx={{ flexShrink: 0 }}>
-										<TopAgentCard agent={agent} />
-									</Box>
-								))}
-							</Box>
+								{topAgents.map((agent: Member) => {
+									return (
+										<SwiperSlide className={'top-agents-slide'} key={agent?._id}>
+											<TopAgentCard agent={agent} key={agent?.memberNick} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
 						)}
 					</Stack>
 				</Stack>
 			</Stack>
 		);
 	} else {
-		// Duplicate agents for seamless infinite scroll
-		const duplicatedAgents = [...topAgents, ...topAgents, ...topAgents];
-
 		return (
 			<Stack className={'top-agents'}>
 				<Stack className={'container'}>
@@ -147,75 +102,50 @@ const TopAgents = (props: TopAgentsProps) => {
 								No Top Agents
 							</Box>
 						) : (
-							<Box
-								className={'infinite-slider-wrapper'}
-								onMouseEnter={() => setIsPaused(true)}
-								onMouseLeave={() => setIsPaused(false)}
-								sx={{
-									width: '100%',
-									overflow: 'hidden',
-									position: 'relative',
-									'&::before': {
-										content: '""',
-										position: 'absolute',
-										left: 0,
-										top: 0,
-										bottom: 0,
-										width: '100px',
-										background: 'linear-gradient(to right, var(--color-bg-secondary), transparent)',
-										zIndex: 2,
-										pointerEvents: 'none',
-									},
-									'&::after': {
-										content: '""',
-										position: 'absolute',
-										right: 0,
-										top: 0,
-										bottom: 0,
-										width: '100px',
-										background: 'linear-gradient(to left, var(--color-bg-secondary), transparent)',
-										zIndex: 2,
-										pointerEvents: 'none',
-									},
-								}}
-							>
-								<Box
-									ref={sliderRef}
-									className={'agents-slider'}
-									onMouseDown={handleMouseDown}
-									onMouseMove={handleMouseMove}
-									onMouseUp={handleMouseUp}
-									onMouseLeave={handleMouseUp}
-									sx={{
-										display: 'flex',
-										gap: '30px',
-										animation: `infiniteScroll 40s linear infinite`,
-										animationPlayState: isPaused ? 'paused' : 'running',
-										width: 'fit-content',
-										cursor: isDragging ? 'grabbing' : 'grab',
-										padding: '20px 0',
-										'@keyframes infiniteScroll': {
-											'0%': { transform: 'translateX(0)' },
-											'100%': { transform: 'translateX(-33.333%)' },
-										},
-									}}
-								>
-									{duplicatedAgents.map((agent: Member, index: number) => (
-										<Box
-											key={`${agent?._id}-${index}`}
-											sx={{
-												flexShrink: 0,
-												transition: 'transform 0.3s ease',
-												'&:hover': {
-													transform: 'translateY(-5px)',
-												},
-											}}
-										>
-											<TopAgentCard agent={agent} />
-										</Box>
-									))}
+							<>
+								<Box component={'div'} className={'switch-btn swiper-agents-prev'}>
+									<ArrowBackIosNewIcon />
 								</Box>
-							</Box>
+								<Box component={'div'} className={'card-wrapper'}>
+									<Swiper
+										className={'top-agents-swiper'}
+										slidesPerView={5}
+										spaceBetween={30}
+										modules={[Autoplay, Navigation, Pagination, FreeMode]}
+										navigation={{
+											nextEl: '.swiper-agents-next',
+											prevEl: '.swiper-agents-prev',
+										}}
+										freeMode={{
+											enabled: true,
+											momentum: true,
+											momentumRatio: 0.5,
+										}}
+										autoplay={{
+											delay: 0,
+											disableOnInteraction: false,
+											pauseOnMouseEnter: true,
+											reverseDirection: false,
+										}}
+										speed={3000}
+										loop={true}
+										loopAdditionalSlides={5}
+										allowTouchMove={true}
+										grabCursor={true}
+									>
+										{topAgents.map((agent: Member) => {
+											return (
+												<SwiperSlide className={'top-agents-slide'} key={agent?._id}>
+													<TopAgentCard agent={agent} key={agent?.memberNick} />
+												</SwiperSlide>
+											);
+										})}
+									</Swiper>
+								</Box>
+								<Box component={'div'} className={'switch-btn swiper-agents-next'}>
+									<ArrowBackIosNewIcon />
+								</Box>
+							</>
 						)}
 					</Stack>
 				</Stack>

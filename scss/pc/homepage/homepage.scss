@@ -1075,7 +1075,7 @@
 			position: relative;
 			padding: 100px 0px 100px;
 			width: 100%;
-			min-height: 500px;
+			min-height: 550px;
 			display: flex;
 			flex-direction: row;
 			background: var(--color-bg-secondary);
@@ -1083,29 +1083,13 @@
 				position: relative;
 				flex-direction: column;
 				align-items: center;
-				max-width: 100%;
 				.wrapper {
 					width: 100%;
-					margin-top: 50px;
+					margin-top: 60px;
 					display: flex;
 					flex-direction: row;
 					align-items: center;
-					justify-content: center;
-					
-					// Infinite slider wrapper styles
-					.infinite-slider-wrapper {
-						width: 100%;
-						max-width: 100vw;
-						overflow: hidden;
-						
-						.agents-slider {
-							display: flex;
-							gap: 30px;
-							width: fit-content;
-						}
-					}
-					
-					// Old swiper styles (kept for backwards compatibility)
+					justify-content: space-between;
 					.switch-btn {
 						width: 53px;
 						height: 53px;
@@ -1114,26 +1098,41 @@
 						justify-content: center;
 						border-radius: 50%;
 						background: var(--color-card-bg);
-						filter: drop-shadow(0px 10px 35px rgba(5, 16, 54, 0.1));
+						box-shadow: 0px 10px 35px rgba(5, 16, 54, 0.1);
 						cursor: pointer;
+						transition: all 0.3s ease;
+						z-index: 10;
 						svg {
 							width: 14px;
 							height: 14px;
+							color: var(--color-text);
+						}
+						&:hover {
+							background: #D4A853;
+							svg {
+								color: #fff;
+							}
 						}
 						&.swiper-agents-next {
 							transform: rotate(180deg);
 						}
 					}
 					.card-wrapper {
-						width: 1174px;
-						height: 280px;
+						width: calc(100% - 140px);
+						height: 320px;
 						display: flex;
 						flex-direction: row;
+						overflow: hidden;
 						.top-agents-swiper {
-							width: 99.7%;
-							height: 280px;
+							width: 100%;
+							height: 320px;
 							display: flex;
 							flex-direction: row;
+							
+							.swiper-wrapper {
+								transition-timing-function: linear !important;
+							}
+							
 							.top-agents-slide {
 								width: auto;
 								height: auto;
@@ -1141,19 +1140,20 @@
 							}
 						}
 						.top-agent-card {
-							width: 205px;
-							height: 280px;
+							width: 220px;
+							height: 300px;
 							display: flex;
 							flex-direction: column;
 							align-items: center;
-							padding: 20px;
-							border-radius: 16px;
+							padding: 24px;
+							border-radius: 20px;
 							background: var(--color-card-bg);
-							border: 1px solid transparent;
+							border: 1px solid var(--color-border);
 							transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 							cursor: pointer;
 							position: relative;
 							overflow: hidden;
+							box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 
 							// Glow effect on hover
 							&::before {
@@ -1170,18 +1170,18 @@
 							}
 
 							&:hover {
-								transform: translateY(-12px) scale(1.02);
-								border-color: rgba(212, 168, 83, 0.4);
-								box-shadow: 0 20px 40px rgba(212, 168, 83, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+								transform: translateY(-10px);
+								border-color: rgba(212, 168, 83, 0.5);
+								box-shadow: 0 20px 50px rgba(212, 168, 83, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
 
 								&::before {
 									opacity: 1;
 								}
 
 								img {
-									transform: scale(1.08);
+									transform: scale(1.05);
 									border-color: #D4A853;
-									box-shadow: 0 8px 24px rgba(212, 168, 83, 0.3);
+									box-shadow: 0 8px 30px rgba(212, 168, 83, 0.4);
 								}
 
 								strong {
@@ -1190,17 +1190,17 @@
 							}
 
 							img {
-								width: 180px;
-								height: 180px;
+								width: 160px;
+								height: 160px;
 								border-radius: 50%;
 								cursor: pointer;
 								object-fit: cover;
-								border: 4px solid transparent;
+								border: 4px solid rgba(212, 168, 83, 0.2);
 								transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-								box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+								box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 							}
 							strong {
-								margin-top: 16px;
+								margin-top: 20px;
 								color: var(--color-text);
 								text-align: center;
 								font-family: $font;

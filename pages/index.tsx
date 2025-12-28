@@ -10,8 +10,6 @@ import TopProperties from '../libs/components/homepage/TopProperties';
 import Statistics from '../libs/components/homepage/Statistics';
 import VideoShowcase from '../libs/components/homepage/VideoShowcase';
 import { Stack } from '@mui/material';
-import Advertisement from '../libs/components/homepage/Advertisement';
-import CallToAction from '../libs/components/homepage/CallToAction';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps = async ({ locale }: any) => ({
@@ -31,7 +29,6 @@ const Home: NextPage = () => {
 				<Statistics />
 				<TopProperties />
 				<TopAgents />
-				<CallToAction />
 			</Stack>
 		);
 	} else {
@@ -45,7 +42,6 @@ const Home: NextPage = () => {
 				<TopAgents />
 				<Events />
 				<CommunityBoards />
-				<CallToAction />
 			</Stack>
 		);
 	}
