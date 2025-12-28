@@ -4,7 +4,7 @@ import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination, FreeMode } from 'swiper';
+import { Autoplay, Navigation, FreeMode } from 'swiper';
 import TopAgentCard from './TopAgentCard';
 import { Member } from '../../types/member/member';
 import { AgentsInquiry } from '../../types/member/member.input';
@@ -39,6 +39,9 @@ const TopAgents = (props: TopAgentsProps) => {
 		}
 	}, [getAgentsData]);
 
+	// Check if we have enough slides for loop mode
+	const canLoop = topAgents.length > 5;
+
 	if (device === 'mobile') {
 		return (
 			<Stack className={'top-agents'}>
@@ -59,13 +62,13 @@ const TopAgents = (props: TopAgentsProps) => {
 								spaceBetween={29}
 								modules={[Autoplay, FreeMode]}
 								freeMode={true}
-								autoplay={{
-									delay: 0,
+								autoplay={canLoop ? {
+									delay: 1,
 									disableOnInteraction: false,
 									pauseOnMouseEnter: true,
-								}}
+								} : false}
 								speed={4000}
-								loop={true}
+								loop={canLoop}
 							>
 								{topAgents.map((agent: Member) => {
 									return (
@@ -121,15 +124,14 @@ const TopAgents = (props: TopAgentsProps) => {
 											momentum: true,
 											momentumRatio: 0.8,
 										}}
-										autoplay={{
-											delay: 0,
+										autoplay={canLoop ? {
+											delay: 1,
 											disableOnInteraction: false,
 											pauseOnMouseEnter: true,
 											reverseDirection: false,
-										}}
+										} : false}
 										speed={2500}
-										loop={true}
-										loopAdditionalSlides={10}
+										loop={canLoop}
 										allowTouchMove={true}
 										grabCursor={true}
 									>
