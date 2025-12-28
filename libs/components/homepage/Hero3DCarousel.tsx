@@ -74,17 +74,15 @@ const Hero3DCarousel = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [isAnimating, setIsAnimating] = useState(false);
-	const [isAutoPlay, setIsAutoPlay] = useState(true);
 	const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-	// Auto-play
+	// Auto-play - runs continuously every 3.5 seconds
 	useEffect(() => {
-		if (!isAutoPlay) return;
 		const timer = setInterval(() => {
-			goToNext();
-		}, 6000);
+			setCurrentSlide((prev) => (prev + 1) % slideGroups.length);
+		}, 3500);
 		return () => clearInterval(timer);
-	}, [isAutoPlay, currentSlide]);
+	}, []);
 
 	// Mouse parallax effect
 	useEffect(() => {
@@ -118,7 +116,6 @@ const Hero3DCarousel = () => {
 	const goToSlide = (index: number) => {
 		if (isAnimating || index === currentSlide) return;
 		setIsAnimating(true);
-		setIsAutoPlay(false);
 		setCurrentSlide(index);
 		setTimeout(() => setIsAnimating(false), 1200);
 	};
@@ -377,28 +374,7 @@ const Hero3DCarousel = () => {
 										(e.target as HTMLImageElement).style.transform = 'scale(1)';
 									}}
 								/>
-								{/* Image Number Badge */}
-								<Box
-									sx={{
-										position: 'absolute',
-										bottom: '15px',
-										right: '15px',
-										width: '36px',
-										height: '36px',
-										borderRadius: '50%',
-										background: 'linear-gradient(135deg, #D4A853, #B8923D)',
-										display: 'flex',
-										alignItems: 'center',
-										justifyContent: 'center',
-										color: '#fff',
-										fontSize: '14px',
-										fontWeight: 700,
-										zIndex: 4,
-										boxShadow: '0 4px 15px rgba(212, 168, 83, 0.5)',
-									}}
-								>
-									{groupIndex * 3 + imgIndex + 1}
-								</Box>
+								{/* No more number badges on images */}
 							</Box>
 						))}
 					</Box>
@@ -517,10 +493,7 @@ const Hero3DCarousel = () => {
 
 			{/* Navigation Arrows */}
 			<IconButton
-				onClick={() => {
-					goToPrev();
-					setIsAutoPlay(false);
-				}}
+				onClick={goToPrev}
 				sx={{
 					position: 'absolute',
 					left: { xs: '15px', md: '40px' },
@@ -545,10 +518,7 @@ const Hero3DCarousel = () => {
 			</IconButton>
 
 			<IconButton
-				onClick={() => {
-					goToNext();
-					setIsAutoPlay(false);
-				}}
+				onClick={goToNext}
 				sx={{
 					position: 'absolute',
 					right: { xs: '15px', md: '40px' },
@@ -572,7 +542,7 @@ const Hero3DCarousel = () => {
 				<ArrowForwardIosIcon sx={{ fontSize: { xs: '20px', md: '24px' } }} />
 			</IconButton>
 
-			{/* Pagination Dots */}
+			{/* Pagination Dots Only - No numbers, no scroll text */}
 			<Box
 				sx={{
 					position: 'absolute',
@@ -602,96 +572,8 @@ const Hero3DCarousel = () => {
 					/>
 				))}
 			</Box>
-
-			{/* Slide Counter */}
-			<Box
-				sx={{
-					position: 'absolute',
-					bottom: '40px',
-					right: { xs: '20px', md: '50px' },
-					display: 'flex',
-					alignItems: 'baseline',
-					gap: '8px',
-					zIndex: 20,
-				}}
-			>
-				<Typography
-					sx={{
-						fontSize: { xs: '32px', md: '48px' },
-						fontWeight: 700,
-						color: '#D4A853',
-						fontFamily: "'Oswald', sans-serif",
-						lineHeight: 1,
-					}}
-				>
-					{String(currentSlide + 1).padStart(2, '0')}
-				</Typography>
-				<Typography sx={{ fontSize: '20px', color: 'rgba(255,255,255,0.5)' }}>/</Typography>
-				<Typography
-					sx={{
-						fontSize: { xs: '18px', md: '24px' },
-						fontWeight: 400,
-						color: 'rgba(255,255,255,0.5)',
-						fontFamily: "'Oswald', sans-serif",
-					}}
-				>
-					{String(slideGroups.length).padStart(2, '0')}
-				</Typography>
-			</Box>
-
-			{/* Scroll Indicator */}
-			<Box
-				sx={{
-					position: 'absolute',
-					bottom: '40px',
-					left: { xs: '20px', md: '50px' },
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					gap: '10px',
-					zIndex: 20,
-				}}
-			>
-				<Typography
-					sx={{
-						fontSize: '11px',
-						letterSpacing: '3px',
-						textTransform: 'uppercase',
-						color: 'rgba(255,255,255,0.6)',
-						writingMode: 'vertical-rl',
-						transform: 'rotate(180deg)',
-					}}
-				>
-					Scroll
-				</Typography>
-				<Box
-					sx={{
-						width: '2px',
-						height: '50px',
-						backgroundColor: 'rgba(255,255,255,0.2)',
-						position: 'relative',
-						overflow: 'hidden',
-						'&::after': {
-							content: '""',
-							position: 'absolute',
-							top: 0,
-							left: 0,
-							width: '100%',
-							height: '100%',
-							backgroundColor: '#D4A853',
-							animation: 'scrollLine 2s ease-in-out infinite',
-							'@keyframes scrollLine': {
-								'0%': { transform: 'translateY(-100%)' },
-								'50%': { transform: 'translateY(0)' },
-								'100%': { transform: 'translateY(100%)' },
-							},
-						},
-					}}
-				/>
-			</Box>
 		</Box>
 	);
 };
 
 export default Hero3DCarousel;
-
