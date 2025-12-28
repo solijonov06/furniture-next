@@ -52,6 +52,10 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 		variables: { input: notificationsInquiry },
 		skip: !userId,
 		notifyOnNetworkStatusChange: true,
+		onError: (error) => {
+			// Silently handle - backend might not have notifications endpoint
+			console.log('Notifications not available');
+		},
 	});
 
 	const {
@@ -60,6 +64,10 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 	} = useQuery(GET_UNREAD_NOTIFICATION_COUNT, {
 		fetchPolicy: 'network-only',
 		skip: !userId,
+		onError: (error) => {
+			// Silently handle - backend might not have notifications endpoint
+			console.log('Unread count not available');
+		},
 	});
 
 	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
