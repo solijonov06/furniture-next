@@ -36,7 +36,12 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 	const uploadImage = async (e: any) => {
 		try {
 			const image = e.target.files[0];
+			if (!image) {
+				console.log('No image selected');
+				return;
+			}
 			console.log('+image:', image);
+			console.log('+API URL:', process.env.REACT_APP_API_GRAPHQL_URL);
 
 			const formData = new FormData();
 			formData.append(
@@ -67,14 +72,26 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 				},
 			});
 
+			console.log('+response:', response.data);
+			
+			if (response.data.errors) {
+				console.error('GraphQL Errors:', response.data.errors);
+				await sweetErrorAlert(response.data.errors[0]?.message || 'Upload failed');
+				return;
+			}
+
 			const responseImage = response.data.data.imageUploader;
 			console.log('+responseImage: ', responseImage);
-			updateData.memberImage = responseImage;
-			setUpdateData({ ...updateData });
+			
+			if (responseImage) {
+				setUpdateData({ ...updateData, memberImage: responseImage });
+				await sweetMixinSuccessAlert('Image uploaded! Click "Update Profile" to save.');
+			}
 
 			return `${REACT_APP_API_URL}/${responseImage}`;
-		} catch (err) {
+		} catch (err: any) {
 			console.log('Error, uploadImage:', err);
+			await sweetErrorAlert(err?.response?.data?.errors?.[0]?.message || err.message || 'Upload failed. Is the backend running?');
 		}
 	};
 
