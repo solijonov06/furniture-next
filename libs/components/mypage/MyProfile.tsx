@@ -174,15 +174,33 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 								<input
 									type="file"
 									ref={fileInputRef}
-									style={{ display: 'none' }}
-									onChange={uploadImage}
-									accept="image/jpg, image/jpeg, image/png"
+									style={{ 
+										position: 'absolute',
+										width: '1px',
+										height: '1px',
+										padding: 0,
+										margin: '-1px',
+										overflow: 'hidden',
+										clip: 'rect(0, 0, 0, 0)',
+										whiteSpace: 'nowrap',
+										border: 0,
+									}}
+									onChange={(e) => {
+										console.log('onChange triggered!', e.target.files);
+										uploadImage(e);
+									}}
+									accept="image/jpg,image/jpeg,image/png"
 								/>
 								<Button 
 									variant="outlined"
-									onClick={() => {
+									component="span"
+									onClick={(e) => {
+										e.preventDefault();
 										console.log('Button clicked, opening file picker...');
-										fileInputRef.current?.click();
+										if (fileInputRef.current) {
+											fileInputRef.current.value = '';
+											fileInputRef.current.click();
+										}
 									}}
 									sx={{
 										borderColor: '#8B5A2B',
