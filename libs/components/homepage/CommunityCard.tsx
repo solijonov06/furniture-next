@@ -14,9 +14,18 @@ interface CommunityCardProps {
 const CommunityCard = (props: CommunityCardProps) => {
 	const { vertical, article, index } = props;
 	const device = useDeviceDetect();
-	const articleImage = article?.articleImage
-		? `${process.env.REACT_APP_API_URL}/${article?.articleImage}`
-		: '/img/event.svg';
+	
+	// Handle different image sources: base64, full URL, or server path
+	const getArticleImage = () => {
+		if (!article?.articleImage) return '/img/community/default-article.jpg';
+		// Check if it's a base64 image
+		if (article.articleImage.startsWith('data:image')) return article.articleImage;
+		// Check if it's already a full URL
+		if (article.articleImage.startsWith('http')) return article.articleImage;
+		// Otherwise, prepend the API URL
+		return `${process.env.REACT_APP_API_URL}/${article.articleImage}`;
+	};
+	const articleImage = getArticleImage();
 
 	if (device === 'mobile') {
 		return <div>COMMUNITY CARD (MOBILE)</div>;

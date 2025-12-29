@@ -33,6 +33,7 @@ const TuiEditor = () => {
 	/** HANDLERS **/
 	const uploadImage = async (image: any) => {
 		try {
+			// Try backend upload first
 			const formData = new FormData();
 			formData.append(
 				'operations',
@@ -68,7 +69,17 @@ const TuiEditor = () => {
 
 			return `${REACT_APP_API_URL}/${responseImage}`;
 		} catch (err) {
-			console.log('Error, uploadImage:', err);
+			console.log('Backend unavailable, using local image storage');
+			// Fallback: Convert image to base64 for localStorage
+			return new Promise((resolve) => {
+				const reader = new FileReader();
+				reader.onloadend = () => {
+					const base64String = reader.result as string;
+					memoizedValues.articleImage = base64String;
+					resolve(base64String);
+				};
+				reader.readAsDataURL(image);
+			});
 		}
 	};
 
