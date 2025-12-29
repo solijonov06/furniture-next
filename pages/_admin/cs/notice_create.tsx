@@ -246,12 +246,15 @@ const NoticeCreate: NextPage = () => {
 								mb: 2,
 								borderStyle: 'dashed',
 								borderWidth: 2,
+								borderColor: '#bdbdbd',
+								color: '#666',
 								py: 2,
 								px: 4,
 								'&:hover': {
 									borderStyle: 'dashed',
 									borderWidth: 2,
-									backgroundColor: 'rgba(244, 67, 54, 0.04)',
+									borderColor: '#999',
+									backgroundColor: 'rgba(0, 0, 0, 0.04)',
 								},
 							}}
 						>
@@ -303,7 +306,7 @@ const NoticeCreate: NextPage = () => {
 												right: 4,
 												backgroundColor: 'rgba(255, 255, 255, 0.9)',
 												'&:hover': {
-													backgroundColor: '#f44336',
+													backgroundColor: '#424242',
 													color: 'white',
 												},
 											}}
@@ -331,9 +334,9 @@ const NoticeCreate: NextPage = () => {
 							disabled={loading}
 							startIcon={<SaveIcon />}
 							sx={{
-								backgroundColor: '#f44336',
+								backgroundColor: '#1E3A5F',
 								'&:hover': {
-									backgroundColor: '#d32f2f',
+									backgroundColor: '#0D1B2A',
 								},
 							}}
 						>

@@ -203,7 +203,7 @@ const EventCreate: NextPage = () => {
 										right: 8,
 										backgroundColor: 'rgba(255, 255, 255, 0.9)',
 										'&:hover': {
-											backgroundColor: '#f44336',
+											backgroundColor: '#424242',
 											color: 'white',
 										},
 									}}
@@ -212,27 +212,30 @@ const EventCreate: NextPage = () => {
 								</IconButton>
 							</Box>
 						) : (
-							<Button
-								component="label"
-								variant="outlined"
-								startIcon={<CloudUploadIcon />}
-								sx={{
+						<Button
+							component="label"
+							variant="outlined"
+							startIcon={<CloudUploadIcon />}
+							sx={{
+								borderStyle: 'dashed',
+								borderWidth: 2,
+								borderColor: '#bdbdbd',
+								color: '#666',
+								py: 4,
+								px: 6,
+								width: '100%',
+								maxWidth: 400,
+								'&:hover': {
 									borderStyle: 'dashed',
 									borderWidth: 2,
-									py: 4,
-									px: 6,
-									width: '100%',
-									maxWidth: 400,
-									'&:hover': {
-										borderStyle: 'dashed',
-										borderWidth: 2,
-										backgroundColor: 'rgba(244, 67, 54, 0.04)',
-									},
-								}}
-							>
-								Upload Event Image
-								<input type="file" hidden accept="image/*" onChange={handleImageUpload} />
-							</Button>
+									borderColor: '#999',
+									backgroundColor: 'rgba(0, 0, 0, 0.04)',
+								},
+							}}
+						>
+							Upload Event Image
+							<input type="file" hidden accept="image/*" onChange={handleImageUpload} />
+						</Button>
 						)}
 					</Box>
 
@@ -267,9 +270,22 @@ const EventCreate: NextPage = () => {
 						onChange={(e) => handleInputChange('eventDescription', e.target.value)}
 						placeholder="Brief description of the event..."
 						multiline
-						minRows={3}
-						maxRows={6}
+						minRows={4}
+						maxRows={8}
 						required
+						InputProps={{
+							sx: {
+								alignItems: 'flex-start',
+							},
+						}}
+						sx={{
+							'& .MuiInputBase-root': {
+								alignItems: 'flex-start',
+							},
+							'& .MuiInputBase-input': {
+								overflow: 'auto !important',
+							},
+						}}
 					/>
 
 					{/* Event Link (Optional) */}
@@ -337,9 +353,9 @@ const EventCreate: NextPage = () => {
 							disabled={loading}
 							startIcon={<SaveIcon />}
 							sx={{
-								backgroundColor: '#f44336',
+								backgroundColor: '#1E3A5F',
 								'&:hover': {
-									backgroundColor: '#d32f2f',
+									backgroundColor: '#0D1B2A',
 								},
 							}}
 						>
