@@ -52,10 +52,15 @@ const AdminMenuList = (props: any) => {
 				setClickSubMenu('1:1 Inquiry');
 				break;
 			case 'notice':
+			case 'notice_create':
 				setClickSubMenu('Notice');
 				break;
 			case 'faq':
 				setClickSubMenu('FAQ');
+				break;
+			case 'events':
+			case 'event_create':
+				setClickSubMenu('Events');
 				break;
 			case 'board_create':
 				setClickSubMenu('Board Create');
@@ -107,6 +112,7 @@ const AdminMenuList = (props: any) => {
 		Cs: [
 			{ title: 'FAQ', url: '/_admin/cs/faq' },
 			{ title: 'Notice', url: '/_admin/cs/notice' },
+			{ title: 'Events', url: '/_admin/cs/events' },
 		],
 	};
 
