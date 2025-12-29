@@ -93,13 +93,13 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 	}
 
 	if (device === 'mobile') {
-		return <div>NESTAR PROPERTIES MOBILE</div>;
+		return <div>MY FURNISHINGS MOBILE</div>;
 	} else {
 		return (
 			<div id="my-property-page">
 				<Stack className="main-title-box">
 					<Stack className="right-box">
-						<Typography className="main-title">My Properties</Typography>
+						<Typography className="main-title">My Furnishings</Typography>
 						<Typography className="sub-title">We are glad to see you again!</Typography>
 					</Stack>
 				</Stack>
@@ -130,7 +130,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 						{agentProperties?.length === 0 ? (
 							<div className={'no-data'}>
 								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>No Property found!</p>
+								<p>No Furniture found!</p>
 							</div>
 						) : (
 							agentProperties.map((property: Property) => {
@@ -156,7 +156,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 									/>
 								</Stack>
 								<Stack className="total-result">
-									<Typography>{total} property available</Typography>
+									<Typography>{total} furnishings available</Typography>
 								</Stack>
 							</Stack>
 						)}

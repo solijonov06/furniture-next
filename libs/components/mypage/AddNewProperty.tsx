@@ -197,7 +197,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		return (
 			<div id="add-property-page">
 				<Stack className="main-title-box">
-					<Typography className="main-title">Add New Product</Typography>
+					<Typography className="main-title">Add New Furniture</Typography>
 					<Typography className="sub-title">We are glad to see you again!</Typography>
 				</Stack>
 
