@@ -30,9 +30,9 @@ const withLayoutBasic = (Component: any) => {
 
 			switch (router.pathname) {
 				case '/property':
-					title = 'FIND YOUR PERFECT PROPERTY';
-					desc = 'Discover premium properties with exceptional amenities';
-					breadcrumb = ['Homepage', 'Properties'];
+					title = 'FIND YOUR PERFECT FURNITURE';
+					desc = 'Discover premium furnishings with exceptional quality';
+					breadcrumb = [];
 					headerClass = 'header-property';
 					break;
 				case '/agent':

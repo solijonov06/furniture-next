@@ -66,12 +66,12 @@ const TopProperties = (props: TopPropertiesProps) => {
 			<Stack className={'top-properties'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>Top properties</span>
+						<span>Top Furnishings</span>
 					</Stack>
 					<Stack className={'card-box'}>
 						{topProperties.length === 0 ? (
 							<Box component={'div'} className={'empty-list'}>
-								No Top Properties
+								No Top Furnishings
 							</Box>
 						) : (
 							<Swiper
@@ -100,8 +100,8 @@ const TopProperties = (props: TopPropertiesProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>Top properties</span>
-							<p>Check out our Top Properties</p>
+							<span>Top Furnishings</span>
+							<p>Check out our Top Furnishings</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
 							<div className={'pagination-box'}>
@@ -114,7 +114,7 @@ const TopProperties = (props: TopPropertiesProps) => {
 					<Stack className={'card-box'}>
 						{topProperties.length === 0 ? (
 							<Box component={'div'} className={'empty-list'}>
-								No Top Properties
+								No Top Furnishings
 							</Box>
 						) : (
 							<Swiper
