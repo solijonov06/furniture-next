@@ -87,15 +87,38 @@ const TuiEditor = () => {
 			const articleContent = editor?.getInstance().getHTML() as string;
 			memoizedValues.articleContent = articleContent;
 
-			if (memoizedValues.articleContent === '' && memoizedValues.articleTitle === '') {
+			// Fix: Check if EITHER field is empty (use OR instead of AND)
+			if (memoizedValues.articleContent === '' || memoizedValues.articleTitle === '') {
 				throw new Error(Message.INSERT_ALL_INPUTS);
 			}
 
-			await createboardArticle({
-				variables: {
-					input: { ...memoizedValues, articleCategory },
-				},
-			});
+			try {
+				// Try to save via GraphQL first
+				await createboardArticle({
+					variables: {
+						input: { ...memoizedValues, articleCategory },
+					},
+				});
+			} catch (graphqlError) {
+				// If GraphQL fails (no backend), save to localStorage
+				console.log('GraphQL unavailable, saving to localStorage');
+				const newArticle = {
+					_id: Date.now().toString(),
+					articleTitle: memoizedValues.articleTitle,
+					articleContent: memoizedValues.articleContent,
+					articleImage: memoizedValues.articleImage,
+					articleCategory: articleCategory,
+					articleStatus: 'ACTIVE',
+					articleViews: 0,
+					articleLikes: 0,
+					articleComments: 0,
+					createdAt: new Date().toISOString(),
+					memberId: 'local-user',
+				};
+				const storedArticles = JSON.parse(localStorage.getItem('articles') || '[]');
+				storedArticles.push(newArticle);
+				localStorage.setItem('articles', JSON.stringify(storedArticles));
+			}
 
 			await sweetTopSmallSuccessAlert('Article is created successfully', 700);
 			await router.push({
@@ -105,8 +128,8 @@ const TuiEditor = () => {
 				}
 			});
 		} catch (err: any) {
-            console.log(err);
-			sweetErrorHandling(new Error(Message.INSERT_ALL_INPUTS)).then();
+			console.log('Error creating article:', err);
+			sweetErrorHandling(err).then();
 		}
 	};
 

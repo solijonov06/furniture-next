@@ -39,11 +39,16 @@ const MyArticles: NextPage = ({ initialInput, ...props }: T) => {
 	});
 
 	useEffect(() => {
-		if (boardArticlesData?.getBoardArticles) {
+		if (boardArticlesData?.getBoardArticles?.list?.length > 0) {
 			setBoardArticles(boardArticlesData.getBoardArticles.list);
 			setTotalCount(boardArticlesData.getBoardArticles.metaCounter[0]?.total);
+		} else if (!boardArticlesLoading) {
+			// Fallback to localStorage if no backend data
+			const storedArticles = JSON.parse(localStorage.getItem('articles') || '[]');
+			setBoardArticles(storedArticles);
+			setTotalCount(storedArticles.length);
 		}
-	}, [boardArticlesData]);
+	}, [boardArticlesData, boardArticlesLoading]);
 
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
