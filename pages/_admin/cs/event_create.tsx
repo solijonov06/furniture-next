@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
@@ -28,6 +28,48 @@ enum EventStatus {
 	HOLD = 'HOLD',
 }
 
+// Event type
+interface EventData {
+	_id: string;
+	eventTitle: string;
+	eventCity: string;
+	eventDescription: string;
+	eventImage: string;
+	eventLink?: string;
+	eventStatus: string;
+	createdAt: string;
+}
+
+// localStorage key
+const EVENTS_STORAGE_KEY = 'furniture_admin_events';
+
+// Helper functions
+const getStoredEvents = (): EventData[] => {
+	if (typeof window === 'undefined') return [];
+	const stored = localStorage.getItem(EVENTS_STORAGE_KEY);
+	return stored ? JSON.parse(stored) : [];
+};
+
+const saveEvent = (eventData: EventData): void => {
+	const events = getStoredEvents();
+	const existingIndex = events.findIndex((e) => e._id === eventData._id);
+	
+	if (existingIndex >= 0) {
+		// Update existing
+		events[existingIndex] = eventData;
+	} else {
+		// Add new
+		events.unshift(eventData); // Add to beginning
+	}
+	
+	localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(events));
+};
+
+const getEventById = (id: string): EventData | null => {
+	const events = getStoredEvents();
+	return events.find((e) => e._id === id) || null;
+};
+
 const EventCreate: NextPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
@@ -43,6 +85,23 @@ const EventCreate: NextPage = () => {
 	const [eventImage, setEventImage] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 
+	// Load event data if editing
+	useEffect(() => {
+		if (isEditMode && id) {
+			const event = getEventById(id as string);
+			if (event) {
+				setFormData({
+					eventTitle: event.eventTitle,
+					eventCity: event.eventCity,
+					eventDescription: event.eventDescription,
+					eventLink: event.eventLink || '',
+					eventStatus: event.eventStatus as EventStatus,
+				});
+				setEventImage(event.eventImage);
+			}
+		}
+	}, [isEditMode, id]);
+
 	/** HANDLERS **/
 	const handleInputChange = (field: string, value: any) => {
 		setFormData((prev) => ({
@@ -51,7 +110,7 @@ const EventCreate: NextPage = () => {
 		}));
 	};
 
-	// Image upload handler
+	// Image upload handler - converts to base64 for localStorage
 	const handleImageUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		if (!files || files.length === 0) return;
@@ -64,26 +123,18 @@ const EventCreate: NextPage = () => {
 			return;
 		}
 
-		// Validate file size (max 5MB)
-		if (file.size > 5 * 1024 * 1024) {
-			alert('Image size must be less than 5MB');
+		// Validate file size (max 2MB for localStorage)
+		if (file.size > 2 * 1024 * 1024) {
+			alert('Image size must be less than 2MB (localStorage limit)');
 			return;
 		}
 
-		// Create preview URL
-		const previewUrl = URL.createObjectURL(file);
-		setEventImage(previewUrl);
-
-		// TODO: Upload to server when backend is ready
-		// const formData = new FormData();
-		// formData.append('file', file);
-		// formData.append('type', 'event');
-		// const response = await fetch(`${process.env.REACT_APP_API_URL}/upload`, {
-		//   method: 'POST',
-		//   body: formData,
-		// });
-		// const data = await response.json();
-		// setEventImage(data.url);
+		// Convert to base64 for localStorage storage
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			setEventImage(reader.result as string);
+		};
+		reader.readAsDataURL(file);
 
 		e.target.value = '';
 	}, []);
@@ -113,18 +164,22 @@ const EventCreate: NextPage = () => {
 
 		setLoading(true);
 		try {
-			// TODO: Implement GraphQL mutation when backend is ready
-			// const input = {
-			//   ...formData,
-			//   eventImage: eventImage,
-			// };
-			// if (isEditMode) {
-			//   await updateEvent({ variables: { input: { _id: id, ...input } } });
-			// } else {
-			//   await createEvent({ variables: { input } });
-			// }
+			const eventData: EventData = {
+				_id: isEditMode ? (id as string) : `event-${Date.now()}`,
+				eventTitle: formData.eventTitle,
+				eventCity: formData.eventCity,
+				eventDescription: formData.eventDescription,
+				eventLink: formData.eventLink,
+				eventStatus: formData.eventStatus,
+				eventImage: eventImage,
+				createdAt: isEditMode 
+					? (getEventById(id as string)?.createdAt || new Date().toISOString().split('T')[0])
+					: new Date().toISOString().split('T')[0],
+			};
 
-			console.log('Event data:', { ...formData, eventImage });
+			// Save to localStorage
+			saveEvent(eventData);
+
 			alert(isEditMode ? 'Event updated successfully!' : 'Event created successfully!');
 			router.push('/_admin/cs/events');
 		} catch (error) {
@@ -169,8 +224,7 @@ const EventCreate: NextPage = () => {
 							<ImageIcon /> Event Banner Image *
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-							This image will be displayed as the event banner on the homepage. Recommended size:
-							800x600px
+							This image will be displayed as the event banner on the homepage. Max 2MB.
 						</Typography>
 
 						{eventImage ? (
@@ -212,30 +266,30 @@ const EventCreate: NextPage = () => {
 								</IconButton>
 							</Box>
 						) : (
-						<Button
-							component="label"
-							variant="outlined"
-							startIcon={<CloudUploadIcon />}
-							sx={{
-								borderStyle: 'dashed',
-								borderWidth: 2,
-								borderColor: '#bdbdbd',
-								color: '#666',
-								py: 4,
-								px: 6,
-								width: '100%',
-								maxWidth: 400,
-								'&:hover': {
+							<Button
+								component="label"
+								variant="outlined"
+								startIcon={<CloudUploadIcon />}
+								sx={{
 									borderStyle: 'dashed',
 									borderWidth: 2,
-									borderColor: '#999',
-									backgroundColor: 'rgba(0, 0, 0, 0.04)',
-								},
-							}}
-						>
-							Upload Event Image
-							<input type="file" hidden accept="image/*" onChange={handleImageUpload} />
-						</Button>
+									borderColor: '#bdbdbd',
+									color: '#666',
+									py: 4,
+									px: 6,
+									width: '100%',
+									maxWidth: 400,
+									'&:hover': {
+										borderStyle: 'dashed',
+										borderWidth: 2,
+										borderColor: '#999',
+										backgroundColor: 'rgba(0, 0, 0, 0.04)',
+									},
+								}}
+							>
+								Upload Event Image
+								<input type="file" hidden accept="image/*" onChange={handleImageUpload} />
+							</Button>
 						)}
 					</Box>
 
@@ -369,4 +423,3 @@ const EventCreate: NextPage = () => {
 };
 
 export default withAdminLayout(EventCreate);
-

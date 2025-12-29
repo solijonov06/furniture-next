@@ -7,7 +7,20 @@ import { Event, EventStatus } from '../../types/event/event';
 import { EventsInquiry } from '../../types/event/event.input';
 import { useRouter } from 'next/router';
 
-// Fallback data if no events from backend
+// localStorage key (same as admin)
+const EVENTS_STORAGE_KEY = 'furniture_admin_events';
+
+// Get events from localStorage
+const getLocalStorageEvents = (): Event[] => {
+	if (typeof window === 'undefined') return [];
+	const stored = localStorage.getItem(EVENTS_STORAGE_KEY);
+	if (!stored) return [];
+	const events = JSON.parse(stored);
+	// Only return ACTIVE events
+	return events.filter((e: any) => e.eventStatus === 'ACTIVE');
+};
+
+// Fallback data if no events from backend or localStorage
 const fallbackEvents = [
 	{
 		_id: '1',
@@ -112,11 +125,27 @@ const Events = () => {
 	});
 
 	useEffect(() => {
+		// First, check localStorage for admin-created events
+		const localEvents = getLocalStorageEvents();
+		
 		if (eventsData?.getEvents?.list?.length > 0) {
-			setEvents(eventsData.getEvents.list);
-		} else if (!loading && !eventsData?.getEvents?.list?.length) {
-			// Use fallback data if no events from backend
-			setEvents(fallbackEvents as Event[]);
+			// Backend data available - combine with localStorage
+			const backendEvents = eventsData.getEvents.list;
+			// Merge: localStorage events first, then backend events (avoiding duplicates)
+			const mergedEvents = [...localEvents];
+			backendEvents.forEach((be: Event) => {
+				if (!mergedEvents.find((le) => le._id === be._id)) {
+					mergedEvents.push(be);
+				}
+			});
+			setEvents(mergedEvents.slice(0, 4)); // Limit to 4 events
+		} else if (!loading) {
+			// No backend data - use localStorage or fallback
+			if (localEvents.length > 0) {
+				setEvents(localEvents.slice(0, 4));
+			} else {
+				setEvents(fallbackEvents as Event[]);
+			}
 		}
 	}, [eventsData, loading]);
 
