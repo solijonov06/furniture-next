@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
@@ -20,7 +20,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageIcon from '@mui/icons-material/Image';
 
-// Notice categories - adjust based on your backend enum
+// Notice categories
 enum NoticeCategory {
 	GENERAL = 'GENERAL',
 	EVENT = 'EVENT',
@@ -33,9 +33,48 @@ enum NoticeStatus {
 	HOLD = 'HOLD',
 }
 
+// Notice type
+interface NoticeData {
+	_id: string;
+	noticeCategory: string;
+	noticeStatus: string;
+	noticeTitle: string;
+	noticeContent: string;
+	noticeImages?: string[];
+	createdAt: string;
+}
+
+// localStorage key
+const NOTICES_STORAGE_KEY = 'furniture_admin_notices';
+
+// Helper functions
+const getStoredNotices = (): NoticeData[] => {
+	if (typeof window === 'undefined') return [];
+	const stored = localStorage.getItem(NOTICES_STORAGE_KEY);
+	return stored ? JSON.parse(stored) : [];
+};
+
+const saveNotice = (noticeData: NoticeData): void => {
+	const notices = getStoredNotices();
+	const existingIndex = notices.findIndex((n) => n._id === noticeData._id);
+
+	if (existingIndex >= 0) {
+		notices[existingIndex] = noticeData;
+	} else {
+		notices.unshift(noticeData);
+	}
+
+	localStorage.setItem(NOTICES_STORAGE_KEY, JSON.stringify(notices));
+};
+
+const getNoticeById = (id: string): NoticeData | null => {
+	const notices = getStoredNotices();
+	return notices.find((n) => n._id === id) || null;
+};
+
 const NoticeCreate: NextPage = () => {
 	const router = useRouter();
-	const { id } = router.query; // For edit mode
+	const { id } = router.query;
 	const isEditMode = Boolean(id);
 
 	const [formData, setFormData] = useState({
@@ -47,6 +86,22 @@ const NoticeCreate: NextPage = () => {
 	const [noticeImages, setNoticeImages] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 
+	// Load notice data if editing
+	useEffect(() => {
+		if (isEditMode && id) {
+			const notice = getNoticeById(id as string);
+			if (notice) {
+				setFormData({
+					noticeCategory: notice.noticeCategory as NoticeCategory,
+					noticeStatus: notice.noticeStatus as NoticeStatus,
+					noticeTitle: notice.noticeTitle,
+					noticeContent: notice.noticeContent,
+				});
+				setNoticeImages(notice.noticeImages || []);
+			}
+		}
+	}, [isEditMode, id]);
+
 	/** HANDLERS **/
 	const handleInputChange = (field: string, value: any) => {
 		setFormData((prev) => ({
@@ -55,42 +110,30 @@ const NoticeCreate: NextPage = () => {
 		}));
 	};
 
-	// Image upload handler
+	// Image upload handler - converts to base64 for localStorage
 	const handleImageUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		if (!files || files.length === 0) return;
 
 		const file = files[0];
-		
-		// Validate file type
+
 		if (!file.type.startsWith('image/')) {
 			alert('Please upload an image file');
 			return;
 		}
 
-		// Validate file size (max 5MB)
-		if (file.size > 5 * 1024 * 1024) {
-			alert('Image size must be less than 5MB');
+		if (file.size > 2 * 1024 * 1024) {
+			alert('Image size must be less than 2MB (localStorage limit)');
 			return;
 		}
 
-		// For now, create a local preview URL
-		// When backend is ready, this should upload to server and return URL
-		const previewUrl = URL.createObjectURL(file);
-		setNoticeImages((prev) => [...prev, previewUrl]);
+		// Convert to base64
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			setNoticeImages((prev) => [...prev, reader.result as string]);
+		};
+		reader.readAsDataURL(file);
 
-		// TODO: Implement actual file upload to backend
-		// const formData = new FormData();
-		// formData.append('file', file);
-		// formData.append('type', 'notice');
-		// const response = await fetch(`${process.env.REACT_APP_API_URL}/upload`, {
-		//   method: 'POST',
-		//   body: formData,
-		// });
-		// const data = await response.json();
-		// setNoticeImages((prev) => [...prev, data.url]);
-
-		// Reset input
 		e.target.value = '';
 	}, []);
 
@@ -99,7 +142,6 @@ const NoticeCreate: NextPage = () => {
 	};
 
 	const handleSubmit = async () => {
-		// Validate
 		if (!formData.noticeTitle.trim()) {
 			alert('Please enter a title');
 			return;
@@ -111,18 +153,21 @@ const NoticeCreate: NextPage = () => {
 
 		setLoading(true);
 		try {
-			// TODO: Implement GraphQL mutation when backend is ready
-			// const input = {
-			//   ...formData,
-			//   noticeImages: noticeImages,
-			// };
-			// if (isEditMode) {
-			//   await updateNotice({ variables: { input: { _id: id, ...input } } });
-			// } else {
-			//   await createNotice({ variables: { input } });
-			// }
-			
-			console.log('Notice data:', { ...formData, noticeImages });
+			const noticeData: NoticeData = {
+				_id: isEditMode ? (id as string) : `notice-${Date.now()}`,
+				noticeCategory: formData.noticeCategory,
+				noticeStatus: formData.noticeStatus,
+				noticeTitle: formData.noticeTitle,
+				noticeContent: formData.noticeContent,
+				noticeImages: noticeImages,
+				createdAt: isEditMode
+					? getNoticeById(id as string)?.createdAt || new Date().toISOString().split('T')[0]
+					: new Date().toISOString().split('T')[0],
+			};
+
+			// Save to localStorage
+			saveNotice(noticeData);
+
 			alert(isEditMode ? 'Notice updated successfully!' : 'Notice created successfully!');
 			router.push('/_admin/cs/notice');
 		} catch (error) {
@@ -136,9 +181,7 @@ const NoticeCreate: NextPage = () => {
 	return (
 		<Box component={'div'} className={'content'}>
 			<Box component={'div'} className={'title flex_space'}>
-				<Typography variant={'h2'}>
-					{isEditMode ? 'Edit Notice' : 'Create Notice'}
-				</Typography>
+				<Typography variant={'h2'}>{isEditMode ? 'Edit Notice' : 'Create Notice'}</Typography>
 				<Button
 					variant={'outlined'}
 					size={'medium'}
@@ -184,11 +227,32 @@ const NoticeCreate: NextPage = () => {
 							label="Status"
 							onChange={(e) => handleInputChange('noticeStatus', e.target.value)}
 						>
-							{Object.values(NoticeStatus).map((status) => (
-								<MenuItem key={status} value={status}>
-									{status}
-								</MenuItem>
-							))}
+							<MenuItem value={NoticeStatus.ACTIVE}>
+								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+									<Box
+										sx={{
+											width: 8,
+											height: 8,
+											borderRadius: '50%',
+											backgroundColor: '#4caf50',
+										}}
+									/>
+									ACTIVE - Visible to all users
+								</Box>
+							</MenuItem>
+							<MenuItem value={NoticeStatus.HOLD}>
+								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+									<Box
+										sx={{
+											width: 8,
+											height: 8,
+											borderRadius: '50%',
+											backgroundColor: '#ff9800',
+										}}
+									/>
+									HOLD - Hidden from users
+								</Box>
+							</MenuItem>
 						</Select>
 					</FormControl>
 
@@ -202,7 +266,7 @@ const NoticeCreate: NextPage = () => {
 						required
 					/>
 
-					{/* Content - Fixed multiline textarea */}
+					{/* Content */}
 					<TextField
 						fullWidth
 						label="Content"
@@ -230,14 +294,16 @@ const NoticeCreate: NextPage = () => {
 
 					{/* Image Upload Section */}
 					<Box>
-						<Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}>
+						<Typography
+							variant="subtitle1"
+							sx={{ mb: 2, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}
+						>
 							<ImageIcon /> Notice Images (Optional)
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-							Upload images that will be displayed to all users viewing this notice. Max 5MB per image.
+							Upload images for this notice. Max 2MB per image.
 						</Typography>
-						
-						{/* Upload Button */}
+
 						<Button
 							component="label"
 							variant="outlined"
@@ -259,15 +325,9 @@ const NoticeCreate: NextPage = () => {
 							}}
 						>
 							Upload Image
-							<input
-								type="file"
-								hidden
-								accept="image/*"
-								onChange={handleImageUpload}
-							/>
+							<input type="file" hidden accept="image/*" onChange={handleImageUpload} />
 						</Button>
 
-						{/* Image Preview Grid */}
 						{noticeImages.length > 0 && (
 							<Box
 								sx={{
