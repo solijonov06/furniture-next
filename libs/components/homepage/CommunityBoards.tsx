@@ -45,16 +45,26 @@ const CommunityBoards = () => {
 		});
 
 	useEffect(() => {
-		if (getNewsArticlesData?.getBoardArticles?.list) {
+		if (getNewsArticlesData?.getBoardArticles?.list?.length > 0) {
 			setNewsArticles(getNewsArticlesData.getBoardArticles.list);
+		} else if (!getNewsArticlesLoading) {
+			// Fallback to localStorage
+			const storedArticles = JSON.parse(localStorage.getItem('articles') || '[]');
+			const newsFromLocal = storedArticles.filter((a: any) => a.articleCategory === 'NEWS').slice(0, 6);
+			setNewsArticles(newsFromLocal);
 		}
-	}, [getNewsArticlesData]);
+	}, [getNewsArticlesData, getNewsArticlesLoading]);
 
 	useEffect(() => {
-		if (getFreeArticlesData?.getBoardArticles?.list) {
+		if (getFreeArticlesData?.getBoardArticles?.list?.length > 0) {
 			setFreeArticles(getFreeArticlesData.getBoardArticles.list);
+		} else if (!getFreeArticlesLoading) {
+			// Fallback to localStorage
+			const storedArticles = JSON.parse(localStorage.getItem('articles') || '[]');
+			const freeFromLocal = storedArticles.filter((a: any) => a.articleCategory === 'FREE').slice(0, 3);
+			setFreeArticles(freeFromLocal);
 		}
-	}, [getFreeArticlesData]);	
+	}, [getFreeArticlesData, getFreeArticlesLoading]);	
  
 	if (device === 'mobile') {
 		return <div>COMMUNITY BOARDS (MOBILE)</div>;

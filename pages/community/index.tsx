@@ -48,11 +48,23 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 			input: searchCommunity,
 		},
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			setBoardArticles(data?.getBoardArticles?.list);
-			setTotalCount(data?.getBoardArticles?.metaCounter[0]?.total); 
+	});
+
+	// Update articles from GraphQL or localStorage fallback
+	useEffect(() => {
+		if (boardArticlesData?.getBoardArticles?.list?.length > 0) {
+			setBoardArticles(boardArticlesData.getBoardArticles.list);
+			setTotalCount(boardArticlesData.getBoardArticles.metaCounter[0]?.total || 0);
+		} else if (!boardArticlesLoading) {
+			// Fallback to localStorage when no backend data
+			const storedArticles = JSON.parse(localStorage.getItem('articles') || '[]');
+			const filteredArticles = storedArticles.filter(
+				(a: any) => a.articleCategory === searchCommunity.search.articleCategory
+			);
+			setBoardArticles(filteredArticles);
+			setTotalCount(filteredArticles.length);
 		}
-	})
+	}, [boardArticlesData, boardArticlesLoading, searchCommunity.search.articleCategory]);
 
 	/** LIFECYCLES **/
 	useEffect(() => {
