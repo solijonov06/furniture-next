@@ -134,7 +134,19 @@ const Chat = () => {
 		<Stack className="chatting">
 			{openButton ? (
 				<button className="chat-button" onClick={handleOpenChat}>
-					{open ? <CloseFullscreenIcon /> : <MarkChatUnreadIcon />}
+					{open ? (
+						<CloseFullscreenIcon />
+					) : (
+						<img 
+							src="/img/icons/chat-icon.png" 
+							alt="Chat" 
+							style={{ 
+								width: '32px', 
+								height: '32px', 
+								objectFit: 'contain' 
+							}} 
+						/>
+					)}
 				</button>
 			) : null}
 			<Stack className={`chat-frame ${open ? 'open' : ''}`}>
