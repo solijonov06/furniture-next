@@ -9,6 +9,7 @@ import TrendProperties from '../libs/components/homepage/TrendProperties';
 import TopProperties from '../libs/components/homepage/TopProperties';
 import Statistics from '../libs/components/homepage/Statistics';
 import VideoShowcase from '../libs/components/homepage/VideoShowcase';
+import MobileHero from '../libs/components/homepage/MobileHero';
 import { Stack } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -23,7 +24,8 @@ const Home: NextPage = () => {
 
 	if (device === 'mobile') {
 		return (
-			<Stack className={'home-page'}>
+			<Stack className={'home-page mobile'}>
+				<MobileHero />
 				<TrendProperties />
 				<PopularProperties />
 				<Statistics />
