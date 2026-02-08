@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
 	Badge,
-	Box,
 	Button,
 	CircularProgress,
 	Divider,
@@ -52,8 +51,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 		variables: { input: notificationsInquiry },
 		skip: !userId,
 		notifyOnNetworkStatusChange: true,
-		onError: (error) => {
-			// Silently handle - backend might not have notifications endpoint
+		onError: () => {
 			console.log('Notifications not available');
 		},
 	});
@@ -64,8 +62,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 	} = useQuery(GET_UNREAD_NOTIFICATION_COUNT, {
 		fetchPolicy: 'network-only',
 		skip: !userId,
-		onError: (error) => {
-			// Silently handle - backend might not have notifications endpoint
+		onError: () => {
 			console.log('Unread count not available');
 		},
 	});
@@ -82,7 +79,6 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 		}
 	}, [userId]);
 
-	// Refetch every 30 seconds for real-time updates
 	useEffect(() => {
 		if (!userId) return;
 		const interval = setInterval(() => {
@@ -94,7 +90,6 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 	/** HANDLERS **/
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
-		// Refetch notifications when opening
 		getNotificationsRefetch({ input: notificationsInquiry });
 	};
 
@@ -103,7 +98,6 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 	};
 
 	const handleNotificationClick = async (notification: Notification) => {
-		// Mark as read if not already
 		if (notification.notificationStatus === NotificationStatus.WAIT) {
 			try {
 				await updateNotification({
@@ -116,7 +110,6 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 			}
 		}
 
-		// Navigate based on notification type
 		if (notification.propertyId) {
 			router.push(`/property/detail?id=${notification.propertyId}`);
 		} else if (notification.articleId) {
@@ -217,15 +210,14 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
 				{/* Header */}
-				<Box sx={{ 
-					px: 2.5, 
-					py: 2, 
+				<div style={{ 
+					padding: '16px 20px', 
 					background: 'linear-gradient(135deg, #1E3A5F 0%, #0D1B2A 100%)',
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
 				}}>
-					<Box>
+					<div>
 						<Typography sx={{ fontWeight: 700, color: '#fff', fontSize: '18px' }}>
 							Notifications
 						</Typography>
@@ -234,7 +226,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 								{unreadCount} new notification{unreadCount !== 1 ? 's' : ''}
 							</Typography>
 						)}
-					</Box>
+					</div>
 					{unreadCount > 0 && (
 						<Tooltip title="Mark all as read">
 							<IconButton 
@@ -248,24 +240,24 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 							</IconButton>
 						</Tooltip>
 					)}
-				</Box>
+				</div>
 
 				<Divider />
 
 				{/* Notification List */}
-				<Box sx={{ maxHeight: 380, overflow: 'auto' }}>
+				<div style={{ maxHeight: 380, overflow: 'auto' }}>
 					{getNotificationsLoading ? (
-						<Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
+						<div style={{ display: 'flex', justifyContent: 'center', padding: '40px 0' }}>
 							<CircularProgress size={32} sx={{ color: '#D4A853' }} />
-						</Box>
+						</div>
 					) : !notifications?.list?.length ? (
-						<Box sx={{ textAlign: 'center', py: 6, color: '#9e9e9e' }}>
+						<div style={{ textAlign: 'center', padding: '48px 0', color: '#9e9e9e' }}>
 							<NotificationsOutlinedIcon sx={{ fontSize: 56, mb: 1.5, opacity: 0.4 }} />
 							<Typography variant="body1" fontWeight={500}>No notifications yet</Typography>
 							<Typography variant="body2" sx={{ mt: 0.5, opacity: 0.7 }}>
 								When you get notifications, they'll show up here
 							</Typography>
-						</Box>
+						</div>
 					) : (
 						notifications.list.map((notification: Notification) => (
 							<MenuItem
@@ -288,8 +280,8 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 							>
 								<Stack direction="row" spacing={1.5} alignItems="flex-start" sx={{ width: '100%' }}>
 									{/* Author Image */}
-									<Box
-										sx={{
+									<div
+										style={{
 											width: 48,
 											height: 48,
 											borderRadius: '50%',
@@ -309,14 +301,14 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 											style={{ width: '100%', height: '100%', objectFit: 'cover' }}
 										/>
 										{/* Notification Type Icon */}
-										<Box
-											sx={{
+										<div
+											style={{
 												position: 'absolute',
 												bottom: -3,
 												right: -3,
 												backgroundColor: '#fff',
 												borderRadius: '50%',
-												p: 0.4,
+												padding: 3,
 												boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
 												display: 'flex',
 												alignItems: 'center',
@@ -324,11 +316,11 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 											}}
 										>
 											{getNotificationIcon(notification.notificationType)}
-										</Box>
-									</Box>
+										</div>
+									</div>
 
 									{/* Content */}
-									<Box sx={{ flex: 1, minWidth: 0 }}>
+									<div style={{ flex: 1, minWidth: 0 }}>
 										<Typography
 											sx={{
 												fontSize: '14px',
@@ -365,7 +357,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 										<Typography sx={{ fontSize: '11px', color: '#D4A853', mt: 0.5, fontWeight: 500 }}>
 											{getTimeAgo(notification.createdAt)}
 										</Typography>
-									</Box>
+									</div>
 
 									{/* Delete Button */}
 									<Tooltip title="Delete">
@@ -384,13 +376,13 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 							</MenuItem>
 						))
 					)}
-				</Box>
+				</div>
 
 				{/* Footer */}
 				{notifications?.list?.length > 0 && (
 					<>
 						<Divider />
-						<Box sx={{ p: 1.5, textAlign: 'center' }}>
+						<div style={{ padding: 12, textAlign: 'center' }}>
 							<Button
 								size="small"
 								sx={{ 
@@ -405,7 +397,7 @@ const NotificationDropdown = ({ userId }: NotificationDropdownProps) => {
 							>
 								View All Notifications
 							</Button>
-						</Box>
+						</div>
 					</>
 				)}
 			</Menu>
