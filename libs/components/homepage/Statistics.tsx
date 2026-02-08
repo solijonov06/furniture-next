@@ -7,6 +7,7 @@ import HomeWorkOutlinedIcon from '@mui/icons-material/HomeWorkOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+// @ts-ignore
 import Chart from 'chart.js/auto';
 
 // Mini Line Chart Component
@@ -67,10 +68,10 @@ const MiniLineChart = ({ data, color }: MiniChartProps) => {
 						bodyColor: '#fff',
 						padding: 8,
 						displayColors: false,
-						callbacks: {
-							title: () => '',
-							label: (context) => `${context.parsed.y.toLocaleString()}`
-						}
+					callbacks: {
+						title: () => '',
+						label: (context: any) => `${context.parsed.y.toLocaleString()}`
+					}
 					}
 				},
 				scales: {
@@ -172,21 +173,21 @@ const StatItem = ({ icon, value, label, suffix, chartData, chartColor, trend }: 
 	const { count, ref, isVisible } = useCountUp(value);
 
 	return (
-		<Box ref={ref} className={'stat-item'}>
-			<Box className={'stat-header'}>
-				<Box className={'stat-icon'}>{icon}</Box>
-				<Box className={'stat-trend'} style={{ color: trend >= 0 ? '#4ade80' : '#f87171' }} suppressHydrationWarning>
+		<div ref={ref} className={'stat-item'}>
+			<div className={'stat-header'}>
+				<div className={'stat-icon'}>{icon}</div>
+				<div className={'stat-trend'} style={{ color: trend >= 0 ? '#4ade80' : '#f87171' }} suppressHydrationWarning>
 					{trend >= 0 ? '↑' : '↓'} {Math.abs(trend)}%
-				</Box>
-			</Box>
-			<Box className={'stat-chart'}>
+				</div>
+			</div>
+			<div className={'stat-chart'}>
 				{isVisible && <MiniLineChart data={chartData} color={chartColor} />}
-			</Box>
+			</div>
 			<strong className={'stat-value'} suppressHydrationWarning>
 				{count.toLocaleString()}{suffix}
 			</strong>
 			<span className={'stat-label'}>{label}</span>
-		</Box>
+		</div>
 	);
 };
 

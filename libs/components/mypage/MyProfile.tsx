@@ -194,7 +194,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 								<Button 
 									variant="outlined"
 									component="span"
-									onClick={(e) => {
+									onClick={(e: React.MouseEvent) => {
 										e.preventDefault();
 										console.log('Button clicked, opening file picker...');
 										if (fileInputRef.current) {

@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { GET_EVENTS } from '../../../apollo/user/query';
 import { Event, EventStatus } from '../../types/event/event';
 import { EventsInquiry } from '../../types/event/event.input';
+import { Direction } from '../../types/common';
 import { useRouter } from 'next/router';
 
 // localStorage key (same as admin)
@@ -102,7 +103,7 @@ const Events = () => {
 		page: 1,
 		limit: 4,
 		sort: 'createdAt',
-		direction: 'DESC',
+		direction: Direction.DESC,
 		search: {
 			eventStatus: EventStatus.ACTIVE,
 		},
@@ -164,9 +165,9 @@ const Events = () => {
 				</Stack>
 				<Stack className={'card-wrapper'}>
 					{loading ? (
-						<Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', py: 10 }}>
+						<div style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '80px 0' }}>
 							<CircularProgress sx={{ color: '#D4A853' }} />
-						</Box>
+						</div>
 					) : (
 						events.map((event: Event) => (
 							<EventCard event={event} key={event?._id} />

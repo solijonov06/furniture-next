@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  furniture-next-client: 
+    container_name: furniture-next-client
+    restart: always
+    image: node:20.10.0
+    ports:
+      - "4000:3000"
+    environment:
+      - PORT=3000
+    volumes:
+      - ./:/usr/src/furniture-next-client
+    working_dir: /usr/src/furniture-next-client
+    networks:
+      - client-network
+    env_file:
+      - .env
+    command: bash -c "yarn && yarn run build && yarn run start"
+
+
+networks:
+  client-network:
+    driver: bridge
+    
+# Port mapping:
+# nestar-api: localhost:4001 => container:3005
+# nestar-batch: localhost:4002 => container:3005

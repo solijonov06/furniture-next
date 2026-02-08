@@ -2,9 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
 	Stack,
 	Typography,
-	Box,
 	Collapse,
-	IconButton,
 	Chip,
 } from '@mui/material';
 import { PropertyLocation, PropertyType, PropertyCategory } from '../../enums/property.enum';
@@ -17,7 +15,6 @@ import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import ViewInArOutlinedIcon from '@mui/icons-material/ViewInArOutlined';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import { propertyVolume } from '../../config';
 
 interface CascadingFilterProps {
 	searchFilter: PropertiesInquiry;
@@ -35,10 +32,9 @@ const STEPS = {
 };
 
 const CascadingFilter = (props: CascadingFilterProps) => {
-	const { searchFilter, setSearchFilter, initialInput } = props;
+	const { searchFilter, initialInput } = props;
 	const router = useRouter();
 	
-	// Track which step is currently active/expanded
 	const [activeStep, setActiveStep] = useState<number>(STEPS.LOCATION);
 	const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
@@ -46,7 +42,6 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 	const types = Object.values(PropertyType);
 	const categories = Object.values(PropertyCategory);
 
-	// Determine completed steps based on searchFilter
 	useEffect(() => {
 		const completed = new Set<number>();
 		
@@ -59,17 +54,16 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		if (searchFilter?.search?.categoryList?.length) {
 			completed.add(STEPS.CATEGORY);
 		}
-		if (searchFilter?.search?.squaresRange?.start > 0 || searchFilter?.search?.squaresRange?.end < 500) {
+		if ((searchFilter?.search?.squaresRange?.start ?? 0) > 0 || (searchFilter?.search?.squaresRange?.end ?? 500) < 500) {
 			completed.add(STEPS.VOLUME);
 		}
-		if (searchFilter?.search?.pricesRange?.start > 0 || searchFilter?.search?.pricesRange?.end < 2000000) {
+		if ((searchFilter?.search?.pricesRange?.start ?? 0) > 0 || (searchFilter?.search?.pricesRange?.end ?? 2000000) < 2000000) {
 			completed.add(STEPS.PRICE);
 		}
 		
 		setCompletedSteps(completed);
 	}, [searchFilter]);
 
-	// Auto-advance to next step
 	const advanceToNextStep = (currentStep: number) => {
 		if (currentStep < STEPS.PRICE) {
 			setActiveStep(currentStep + 1);
@@ -84,13 +78,12 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		);
 	}, [router]);
 
-	// Location handler
-	const handleLocationSelect = useCallback(async (location: string) => {
+	const handleLocationSelect = useCallback(async (location: PropertyLocation) => {
 		const currentList = searchFilter?.search?.locationList || [];
-		let newList: string[];
+		let newList: PropertyLocation[];
 		
 		if (currentList.includes(location)) {
-			newList = currentList.filter((l: string) => l !== location);
+			newList = currentList.filter((l: PropertyLocation) => l !== location);
 		} else {
 			newList = [...currentList, location];
 		}
@@ -112,13 +105,12 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		}
 	}, [searchFilter, completedSteps, updateFilter]);
 
-	// Type handler
-	const handleTypeSelect = useCallback(async (type: string) => {
+	const handleTypeSelect = useCallback(async (type: PropertyType) => {
 		const currentList = searchFilter?.search?.typeList || [];
-		let newList: string[];
+		let newList: PropertyType[];
 		
 		if (currentList.includes(type)) {
-			newList = currentList.filter((t: string) => t !== type);
+			newList = currentList.filter((t: PropertyType) => t !== type);
 		} else {
 			newList = [...currentList, type];
 		}
@@ -140,13 +132,12 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		}
 	}, [searchFilter, completedSteps, updateFilter]);
 
-	// Category handler
-	const handleCategorySelect = useCallback(async (category: string) => {
+	const handleCategorySelect = useCallback(async (category: PropertyCategory) => {
 		const currentList = searchFilter?.search?.categoryList || [];
-		let newList: string[];
+		let newList: PropertyCategory[];
 		
 		if (currentList.includes(category)) {
-			newList = currentList.filter((c: string) => c !== category);
+			newList = currentList.filter((c: PropertyCategory) => c !== category);
 		} else {
 			newList = [...currentList, category];
 		}
@@ -168,7 +159,6 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		}
 	}, [searchFilter, completedSteps, updateFilter]);
 
-	// Volume handler
 	const handleVolumeSelect = useCallback(async (min: number, max: number) => {
 		const newFilter = {
 			...searchFilter,
@@ -185,7 +175,6 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		}
 	}, [searchFilter, completedSteps, updateFilter]);
 
-	// Price handler
 	const handlePriceSelect = useCallback(async (min: number, max: number) => {
 		const newFilter = {
 			...searchFilter,
@@ -198,7 +187,6 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		await updateFilter(newFilter);
 	}, [searchFilter, updateFilter]);
 
-	// Reset handler
 	const handleReset = async () => {
 		setActiveStep(STEPS.LOCATION);
 		await router.push(
@@ -219,10 +207,10 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 		const isAccessible = step <= Math.max(activeStep, ...Array.from(completedSteps)) + 1;
 		
 		return (
-			<Box
+			<div
 				className={`step-header ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''} ${!isAccessible ? 'disabled' : ''}`}
 				onClick={() => isAccessible && setActiveStep(step)}
-				sx={{
+				style={{
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'space-between',
@@ -234,14 +222,11 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 					transition: 'all 0.3s ease',
 					border: isCompleted ? '2px solid #D4A853' : '2px solid transparent',
 					marginBottom: isActive ? 0 : '12px',
-					'&:hover': isAccessible ? {
-						backgroundColor: isActive ? 'var(--color-primary)' : 'var(--color-bg-secondary)',
-					} : {},
 				}}
 			>
-				<Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-					<Box
-						sx={{
+				<div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+					<div
+						style={{
 							width: '40px',
 							height: '40px',
 							borderRadius: '10px',
@@ -254,8 +239,8 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 						}}
 					>
 						{isCompleted && !isActive ? <CheckCircleIcon /> : icon}
-					</Box>
-					<Box>
+					</div>
+					<div>
 						<Typography
 							sx={{
 								fontWeight: 600,
@@ -276,8 +261,8 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 								{selectedCount} selected
 							</Typography>
 						)}
-					</Box>
-				</Box>
+					</div>
+				</div>
 				<ExpandMoreIcon
 					sx={{
 						transform: isActive ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -285,16 +270,38 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 						color: isActive ? '#fff' : 'var(--color-text-muted)',
 					}}
 				/>
-			</Box>
+			</div>
 		);
+	};
+
+	const stepContentStyle: React.CSSProperties = {
+		backgroundColor: 'var(--color-card-bg)',
+		padding: '20px',
+		borderRadius: '0 0 12px 12px',
+		marginBottom: '12px',
+		border: '2px solid var(--color-primary)',
+		borderTop: 'none',
+	};
+
+	const chipGridStyle: React.CSSProperties = {
+		display: 'flex',
+		flexWrap: 'wrap',
+		gap: '10px',
+	};
+
+	const boxGridStyle: React.CSSProperties = {
+		display: 'grid',
+		gridTemplateColumns: 'repeat(2, 1fr)',
+		gap: '10px',
 	};
 
 	return (
 		<Stack className="cascading-filter" sx={{ width: '100%' }}>
 			{/* Reset Button */}
-			<Box
+			<div
 				onClick={handleReset}
-				sx={{
+				className="reset-button"
+				style={{
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -304,40 +311,19 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 					borderRadius: '10px',
 					cursor: 'pointer',
 					marginBottom: '20px',
-					transition: 'all 0.3s ease',
-					'&:hover': {
-						backgroundColor: 'var(--color-primary)',
-						color: '#fff',
-						'& svg': { color: '#fff' },
-						'& p': { color: '#fff' },
-					},
 				}}
 			>
-				<RestartAltIcon sx={{ color: 'var(--color-text-muted)', transition: 'color 0.3s ease' }} />
-				<Typography sx={{ color: 'var(--color-text)', fontWeight: 500, transition: 'color 0.3s ease' }}>
+				<RestartAltIcon sx={{ color: 'var(--color-text-muted)' }} />
+				<Typography sx={{ color: 'var(--color-text)', fontWeight: 500 }}>
 					Reset All Filters
 				</Typography>
-			</Box>
+			</div>
 
 			{/* Step 1: Location */}
-			{renderStepHeader(
-				STEPS.LOCATION, 
-				'Select City', 
-				<LocationOnOutlinedIcon />,
-				searchFilter?.search?.locationList?.length
-			)}
+			{renderStepHeader(STEPS.LOCATION, 'Select City', <LocationOnOutlinedIcon />, searchFilter?.search?.locationList?.length)}
 			<Collapse in={activeStep === STEPS.LOCATION}>
-				<Box
-					sx={{
-						backgroundColor: 'var(--color-card-bg)',
-						padding: '20px',
-						borderRadius: '0 0 12px 12px',
-						marginBottom: '12px',
-						border: '2px solid var(--color-primary)',
-						borderTop: 'none',
-					}}
-				>
-					<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+				<div style={stepContentStyle}>
+					<div style={chipGridStyle}>
 						{locations.map((location) => {
 							const isSelected = searchFilter?.search?.locationList?.includes(location);
 							return (
@@ -350,36 +336,20 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 										color: isSelected ? '#fff' : 'var(--color-text)',
 										fontWeight: 500,
 										padding: '8px 4px',
-										'&:hover': {
-											backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)',
-										},
+										'&:hover': { backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)' },
 									}}
 								/>
 							);
 						})}
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</Collapse>
 
 			{/* Step 2: Product Type */}
-			{renderStepHeader(
-				STEPS.TYPE, 
-				'Product Type', 
-				<ViewInArOutlinedIcon />,
-				searchFilter?.search?.typeList?.length
-			)}
+			{renderStepHeader(STEPS.TYPE, 'Product Type', <ViewInArOutlinedIcon />, searchFilter?.search?.typeList?.length)}
 			<Collapse in={activeStep === STEPS.TYPE}>
-				<Box
-					sx={{
-						backgroundColor: 'var(--color-card-bg)',
-						padding: '20px',
-						borderRadius: '0 0 12px 12px',
-						marginBottom: '12px',
-						border: '2px solid var(--color-primary)',
-						borderTop: 'none',
-					}}
-				>
-					<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+				<div style={stepContentStyle}>
+					<div style={chipGridStyle}>
 						{types.map((type) => {
 							const isSelected = searchFilter?.search?.typeList?.includes(type);
 							return (
@@ -392,43 +362,27 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 										color: isSelected ? '#fff' : 'var(--color-text)',
 										fontWeight: 500,
 										padding: '8px 4px',
-										'&:hover': {
-											backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)',
-										},
+										'&:hover': { backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)' },
 									}}
 								/>
 							);
 						})}
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</Collapse>
 
 			{/* Step 3: Category */}
-			{renderStepHeader(
-				STEPS.CATEGORY, 
-				'Category', 
-				<CategoryOutlinedIcon />,
-				searchFilter?.search?.categoryList?.length
-			)}
+			{renderStepHeader(STEPS.CATEGORY, 'Category', <CategoryOutlinedIcon />, searchFilter?.search?.categoryList?.length)}
 			<Collapse in={activeStep === STEPS.CATEGORY}>
-				<Box
-					sx={{
-						backgroundColor: 'var(--color-card-bg)',
-						padding: '20px',
-						borderRadius: '0 0 12px 12px',
-						marginBottom: '12px',
-						border: '2px solid var(--color-primary)',
-						borderTop: 'none',
-					}}
-				>
-					<Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+				<div style={stepContentStyle}>
+					<div style={boxGridStyle}>
 						{categories.map((category) => {
 							const isSelected = searchFilter?.search?.categoryList?.includes(category);
 							return (
-								<Box
+								<div
 									key={category}
 									onClick={() => handleCategorySelect(category)}
-									sx={{
+									style={{
 										padding: '14px 16px',
 										backgroundColor: isSelected ? '#D4A853' : 'var(--color-bg-secondary)',
 										color: isSelected ? '#fff' : 'var(--color-text)',
@@ -438,52 +392,33 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 										fontWeight: 500,
 										fontSize: '13px',
 										transition: 'all 0.2s ease',
-										'&:hover': {
-											backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)',
-											transform: 'translateY(-2px)',
-										},
 									}}
 								>
 									{category.replace('_', ' ')}
-								</Box>
+								</div>
 							);
 						})}
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</Collapse>
 
 			{/* Step 4: Volume/Size */}
-			{renderStepHeader(
-				STEPS.VOLUME, 
-				'Size Range', 
-				<ViewInArOutlinedIcon />
-			)}
+			{renderStepHeader(STEPS.VOLUME, 'Size Range', <ViewInArOutlinedIcon />)}
 			<Collapse in={activeStep === STEPS.VOLUME}>
-				<Box
-					sx={{
-						backgroundColor: 'var(--color-card-bg)',
-						padding: '20px',
-						borderRadius: '0 0 12px 12px',
-						marginBottom: '12px',
-						border: '2px solid var(--color-primary)',
-						borderTop: 'none',
-					}}
-				>
-					<Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+				<div style={stepContentStyle}>
+					<div style={boxGridStyle}>
 						{[
 							{ label: 'Small (0-50 m³)', min: 0, max: 50 },
 							{ label: 'Medium (50-150 m³)', min: 50, max: 150 },
 							{ label: 'Large (150-300 m³)', min: 150, max: 300 },
 							{ label: 'X-Large (300+ m³)', min: 300, max: 500 },
 						].map((range) => {
-							const isSelected = 
-								searchFilter?.search?.squaresRange?.start === range.min && 
-								searchFilter?.search?.squaresRange?.end === range.max;
+							const isSelected = searchFilter?.search?.squaresRange?.start === range.min && searchFilter?.search?.squaresRange?.end === range.max;
 							return (
-								<Box
+								<div
 									key={range.label}
 									onClick={() => handleVolumeSelect(range.min, range.max)}
-									sx={{
+									style={{
 										padding: '14px 16px',
 										backgroundColor: isSelected ? '#D4A853' : 'var(--color-bg-secondary)',
 										color: isSelected ? '#fff' : 'var(--color-text)',
@@ -493,38 +428,21 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 										fontWeight: 500,
 										fontSize: '13px',
 										transition: 'all 0.2s ease',
-										'&:hover': {
-											backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)',
-											transform: 'translateY(-2px)',
-										},
 									}}
 								>
 									{range.label}
-								</Box>
+								</div>
 							);
 						})}
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</Collapse>
 
 			{/* Step 5: Price */}
-			{renderStepHeader(
-				STEPS.PRICE, 
-				'Price Range', 
-				<AttachMoneyIcon />
-			)}
+			{renderStepHeader(STEPS.PRICE, 'Price Range', <AttachMoneyIcon />)}
 			<Collapse in={activeStep === STEPS.PRICE}>
-				<Box
-					sx={{
-						backgroundColor: 'var(--color-card-bg)',
-						padding: '20px',
-						borderRadius: '0 0 12px 12px',
-						marginBottom: '12px',
-						border: '2px solid var(--color-primary)',
-						borderTop: 'none',
-					}}
-				>
-					<Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+				<div style={stepContentStyle}>
+					<div style={boxGridStyle}>
 						{[
 							{ label: 'Under $500', min: 0, max: 500 },
 							{ label: '$500 - $1,000', min: 500, max: 1000 },
@@ -533,14 +451,12 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 							{ label: '$10,000 - $50,000', min: 10000, max: 50000 },
 							{ label: '$50,000+', min: 50000, max: 2000000 },
 						].map((range) => {
-							const isSelected = 
-								searchFilter?.search?.pricesRange?.start === range.min && 
-								searchFilter?.search?.pricesRange?.end === range.max;
+							const isSelected = searchFilter?.search?.pricesRange?.start === range.min && searchFilter?.search?.pricesRange?.end === range.max;
 							return (
-								<Box
+								<div
 									key={range.label}
 									onClick={() => handlePriceSelect(range.min, range.max)}
-									sx={{
+									style={{
 										padding: '14px 16px',
 										backgroundColor: isSelected ? '#D4A853' : 'var(--color-bg-secondary)',
 										color: isSelected ? '#fff' : 'var(--color-text)',
@@ -550,26 +466,17 @@ const CascadingFilter = (props: CascadingFilterProps) => {
 										fontWeight: 500,
 										fontSize: '13px',
 										transition: 'all 0.2s ease',
-										'&:hover': {
-											backgroundColor: isSelected ? '#B8923D' : 'var(--color-bg-tertiary)',
-											transform: 'translateY(-2px)',
-										},
 									}}
 								>
 									{range.label}
-								</Box>
+								</div>
 							);
 						})}
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</Collapse>
 		</Stack>
 	);
 };
 
 export default CascadingFilter;
-
-
-
-
-

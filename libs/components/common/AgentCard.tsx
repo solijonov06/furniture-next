@@ -65,7 +65,7 @@ const AgentCard = (props: AgentCardProps) => {
 							<RemoveRedEyeIcon />
 						</IconButton> 
 						<Typography className="view-cnt">{agent?.memberViews}</Typography>
-						<IconButton color={'defaul t'}>
+						<IconButton color={'default'}>
 							{agent?.meLiked && agent?.meLiked[0]?.myFavorite ? (
 								<FavoriteIcon color={'primary'} />
 							) : (

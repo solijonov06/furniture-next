@@ -52,18 +52,18 @@ const Footer = () => {
 		return (
 			<Stack className={'footer-container'}>
 				<Stack className={'footer-main'}>
-					<Box className={'footer-brand'}>
+					<div className={'footer-brand'}>
 						<img src="/img/logo/logoWhite.svg" alt="Logo" className={'footer-logo'} />
 						<p className={'footer-tagline'}>
 							Crafting comfort, designing dreams. Premium furniture for modern living.
 						</p>
-					</Box>
-					<Box className={'footer-social'}>
+					</div>
+					<div className={'footer-social'}>
 						<FacebookOutlinedIcon />
 						<InstagramIcon />
 						<TwitterIcon />
 						<PinterestIcon />
-					</Box>
+					</div>
 				</Stack>
 				<Stack className={'footer-bottom'}>
 					<span>© {moment().year()} FurniCraft. All rights reserved.</span>
@@ -74,42 +74,42 @@ const Footer = () => {
 		return (
 			<Stack className={'footer-container'}>
 				{/* Features Bar */}
-				<Box className={'footer-features'}>
+				<div className={'footer-features'}>
 					{features.map((feature, index) => (
-						<Box className={'feature-item'} key={index}>
-							<Box className={'feature-icon'}>{feature.icon}</Box>
-							<Box className={'feature-text'}>
+						<div className={'feature-item'} key={index}>
+							<div className={'feature-icon'}>{feature.icon}</div>
+							<div className={'feature-text'}>
 								<strong>{feature.title}</strong>
 								<span>{feature.desc}</span>
-							</Box>
-						</Box>
+							</div>
+						</div>
 					))}
-				</Box>
+				</div>
 
 				{/* Main Footer */}
 				<Stack className={'footer-main'}>
-					<Box className={'footer-grid'}>
+					<div className={'footer-grid'}>
 						{/* Brand Column */}
-						<Box className={'footer-brand'}>
+						<div className={'footer-brand'}>
 							<img src="/img/logo/logoWhite.svg" alt="Logo" className={'footer-logo'} />
 							<p className={'footer-tagline'}>
 								Crafting comfort, designing dreams. We bring premium furniture pieces 
 								that transform your space into a sanctuary of style and elegance.
 							</p>
-							<Box className={'footer-contact'}>
-								<Box className={'contact-item'}>
+							<div className={'footer-contact'}>
+								<div className={'contact-item'}>
 									<span className={'label'}>Call Us</span>
 									<a href="tel:+1234567890" className={'value'}>+1 (234) 567-890</a>
-								</Box>
-								<Box className={'contact-item'}>
+								</div>
+								<div className={'contact-item'}>
 									<span className={'label'}>Email</span>
 									<a href="mailto:hello@furnicraft.com" className={'value'}>hello@furnicraft.com</a>
-								</Box>
-							</Box>
-						</Box>
+								</div>
+							</div>
+						</div>
 
 						{/* Shop Links */}
-						<Box className={'footer-links'}>
+						<div className={'footer-links'}>
 							<h4>Shop by Room</h4>
 							<ul>
 								{footerLinks.shop.map((link, index) => (
@@ -118,10 +118,10 @@ const Footer = () => {
 									</li>
 								))}
 							</ul>
-						</Box>
+						</div>
 
 						{/* Company Links */}
-						<Box className={'footer-links'}>
+						<div className={'footer-links'}>
 							<h4>Company</h4>
 							<ul>
 								{footerLinks.company.map((link, index) => (
@@ -130,10 +130,10 @@ const Footer = () => {
 									</li>
 								))}
 							</ul>
-						</Box>
+						</div>
 
 						{/* Support Links */}
-						<Box className={'footer-links'}>
+						<div className={'footer-links'}>
 							<h4>Support</h4>
 							<ul>
 								{footerLinks.support.map((link, index) => (
@@ -142,52 +142,52 @@ const Footer = () => {
 									</li>
 								))}
 							</ul>
-						</Box>
+						</div>
 
 						{/* Newsletter */}
-						<Box className={'footer-newsletter'}>
+						<div className={'footer-newsletter'}>
 							<h4>Stay Updated</h4>
 							<p>Subscribe for exclusive offers, design tips, and new arrivals.</p>
-							<Box className={'newsletter-form'}>
+							<div className={'newsletter-form'}>
 								<input type="email" placeholder="Enter your email" />
 								<button type="submit">
 									<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
 										<path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 									</svg>
 								</button>
-							</Box>
-							<Box className={'footer-social'}>
+							</div>
+							<div className={'footer-social'}>
 								<a href="#" aria-label="Facebook"><FacebookOutlinedIcon /></a>
 								<a href="#" aria-label="Instagram"><InstagramIcon /></a>
 								<a href="#" aria-label="Twitter"><TwitterIcon /></a>
 								<a href="#" aria-label="Pinterest"><PinterestIcon /></a>
 								<a href="#" aria-label="YouTube"><YouTubeIcon /></a>
 								<a href="#" aria-label="Telegram"><TelegramIcon /></a>
-							</Box>
-						</Box>
-					</Box>
+							</div>
+						</div>
+					</div>
 				</Stack>
 
 				{/* Footer Bottom */}
 				<Stack className={'footer-bottom'}>
-					<Box className={'footer-bottom-content'}>
+					<div className={'footer-bottom-content'}>
 						<span className={'copyright'}>
 							© {moment().year()} FurniCraft. All rights reserved.
 						</span>
-						<Box className={'footer-bottom-links'}>
+						<div className={'footer-bottom-links'}>
 							<Link href="/cs">Privacy Policy</Link>
 							<span className={'divider'}>|</span>
 							<Link href="/cs">Terms of Service</Link>
 							<span className={'divider'}>|</span>
 							<Link href="/cs">Cookie Settings</Link>
-						</Box>
-						<Box className={'payment-methods'}>
+						</div>
+						<div className={'payment-methods'}>
 							<img src="/img/icons/visa.svg" alt="Visa" />
 							<img src="/img/icons/mastercard.svg" alt="Mastercard" />
 							<img src="/img/icons/paypal.svg" alt="PayPal" />
 							<img src="/img/icons/amex.svg" alt="Amex" />
-						</Box>
-					</Box>
+						</div>
+					</div>
 				</Stack>
 			</Stack>
 		);

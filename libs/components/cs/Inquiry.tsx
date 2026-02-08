@@ -44,7 +44,7 @@ const Inquiry = () => {
 		inquiryCategory: InquiryCategory.PRODUCT,
 		inquiryTitle: '',
 		inquiryContent: '',
-		inquiryEmail: user?.memberEmail || '',
+		inquiryEmail: '',
 		inquiryPhone: user?.memberPhone || '',
 	});
 
@@ -101,7 +101,7 @@ const Inquiry = () => {
 				inquiryCategory: InquiryCategory.PRODUCT,
 				inquiryTitle: '',
 				inquiryContent: '',
-				inquiryEmail: user?.memberEmail || '',
+				inquiryEmail: '',
 				inquiryPhone: user?.memberPhone || '',
 			});
 		} catch (err: any) {
@@ -194,72 +194,72 @@ const Inquiry = () => {
 
 	return (
 		<Stack className={'inquiry-content'}>
-			<Box className={'inquiry-wrapper'}>
+			<div className={'inquiry-wrapper'}>
 				{/* Left Side - Contact Info */}
-				<Box className={'contact-info'}>
-					<Box className={'info-header'}>
-						<SupportAgentIcon sx={{ fontSize: 48, color: '#D4A853', mb: 2 }} />
+				<div className={'contact-info'}>
+					<div className={'info-header'}>
+						<SupportAgentIcon sx={{ fontSize: 48, color: '#D4A853', marginBottom: '16px' }} />
 						<Typography variant="h4" sx={{ fontWeight: 700, color: '#1E3A5F', mb: 1 }}>
 							Get in Touch
 						</Typography>
 						<Typography sx={{ color: '#717171', mb: 4 }}>
 							Have a question or need help? We're here for you!
 						</Typography>
-					</Box>
+					</div>
 
-					<Box className={'info-items'}>
-						<Box className={'info-item'}>
-							<Box className={'icon-box'}>
+					<div className={'info-items'}>
+						<div className={'info-item'}>
+							<div className={'icon-box'}>
 								<EmailOutlinedIcon />
-							</Box>
-							<Box>
+							</div>
+							<div>
 								<Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#1E3A5F' }}>
 									Email Us
 								</Typography>
 								<Typography variant="body2" sx={{ color: '#717171' }}>
 									support@furniture.com
 								</Typography>
-							</Box>
-						</Box>
+							</div>
+						</div>
 
-						<Box className={'info-item'}>
-							<Box className={'icon-box'}>
+						<div className={'info-item'}>
+							<div className={'icon-box'}>
 								<PhoneOutlinedIcon />
-							</Box>
-							<Box>
+							</div>
+							<div>
 								<Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#1E3A5F' }}>
 									Call Us
 								</Typography>
 								<Typography variant="body2" sx={{ color: '#717171' }}>
 									+1 (555) 123-4567
 								</Typography>
-							</Box>
-						</Box>
+							</div>
+						</div>
 
-						<Box className={'info-item'}>
-							<Box className={'icon-box'}>
+						<div className={'info-item'}>
+							<div className={'icon-box'}>
 								<AccessTimeOutlinedIcon />
-							</Box>
-							<Box>
+							</div>
+							<div>
 								<Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#1E3A5F' }}>
 									Working Hours
 								</Typography>
 								<Typography variant="body2" sx={{ color: '#717171' }}>
 									Mon - Fri: 9AM - 6PM
 								</Typography>
-							</Box>
-						</Box>
-					</Box>
+							</div>
+						</div>
+					</div>
 
-					<Box className={'response-time'}>
+					<div className={'response-time'}>
 						<Typography variant="body2" sx={{ color: '#1E3A5F', fontWeight: 500 }}>
 							⚡ Average response time: 2-4 hours
 						</Typography>
-					</Box>
-				</Box>
+					</div>
+				</div>
 
 				{/* Right Side - Form */}
-				<Box className={'inquiry-form'}>
+				<div className={'inquiry-form'}>
 					<Typography variant="h5" sx={{ fontWeight: 700, color: '#1E3A5F', mb: 1 }}>
 						Send us a Message
 					</Typography>
@@ -399,8 +399,8 @@ const Inquiry = () => {
 							{loading ? <CircularProgress size={24} color="inherit" /> : 'Send Message'}
 						</Button>
 					</Box>
-				</Box>
-			</Box>
+				</div>
+			</div>
 
 			{/* Success Snackbar */}
 			<Snackbar
