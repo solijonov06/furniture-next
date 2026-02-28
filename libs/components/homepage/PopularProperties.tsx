@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
@@ -54,9 +54,9 @@ const PopularProperties = (props: PopularPropertiesProps) => {
 					</Stack>
 					<Stack className={'card-box'}>
 						{popularProperties.length === 0 ? (
-							<Box component={'div'} className={'empty-list'}>
+							<div className={'empty-list'}>
 								No Popular Furnishings
-							</Box>
+							</div>
 						) : (
 							<Swiper
 								className={'popular-property-swiper'}
@@ -83,24 +83,24 @@ const PopularProperties = (props: PopularPropertiesProps) => {
 			<Stack className={'popular-properties'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<Box component={'div'} className={'left'}>
+						<div className={'left'}>
 							<span>Popular Furnishings</span>
 							<p>Popularity is based on views</p>
-						</Box>
-						<Box component={'div'} className={'right'}>
+						</div>
+						<div className={'right'}>
 							<div className={'more-box'}>
 								<Link href={'/property'}>
 									<span>See All Categories</span>
 								</Link>
 								<img src="/img/icons/rightup.svg" alt="" />
 							</div>
-						</Box>
+						</div>
 					</Stack>
 					<Stack className={'card-box'}>
 						{popularProperties.length === 0 ? (
-							<Box component={'div'} className={'empty-list'}>
+							<div className={'empty-list'}>
 								No Popular Furnishings
-							</Box>
+							</div>
 						) : (
 							<Swiper
 								className={'popular-property-swiper'}

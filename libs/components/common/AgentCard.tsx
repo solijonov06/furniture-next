@@ -1,6 +1,6 @@
 import React from 'react';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { Stack, Box, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { REACT_APP_API_URL } from '../../config';
 import IconButton from '@mui/material/IconButton';
@@ -34,8 +34,7 @@ const AgentCard = (props: AgentCardProps) => {
 						query: { agentId: agent?._id },
 					}}
 				>
-					<Box
-						component={'div'}
+					<div
 						className={'agent-img'}
 						style={{
 							backgroundImage: `url(${imagePath})`,
@@ -45,11 +44,11 @@ const AgentCard = (props: AgentCardProps) => {
 						}}
 					>
 						<div>{agent?.memberProperties} properties</div>
-					</Box>
+					</div>
 				</Link>
 
 				<Stack className={'agent-desc'}>
-					<Box component={'div'} className={'agent-info'}>
+					<div className={'agent-info'}>
 						<Link
 							href={{
 								pathname: '/agent/detail',
@@ -59,8 +58,8 @@ const AgentCard = (props: AgentCardProps) => {
 							<strong>{agent?.memberFullName ?? agent?.memberNick}</strong>
 						</Link> 
 						<span>Agent</span>
-					</Box>
-					<Box component={'div'} className={'buttons'}>
+					</div>
+					<div className={'buttons'}>
 						<IconButton color={'default'} onClick={() => likeMemberHandler(user, agent?._id)} >
 							<RemoveRedEyeIcon />
 						</IconButton> 
@@ -73,7 +72,7 @@ const AgentCard = (props: AgentCardProps) => {
 							)}
 						</IconButton>
 						<Typography className="view-cnt">{agent?.memberLikes}</Typography>
-					</Box>
+					</div>
 				</Stack>
 			</Stack>
 		);

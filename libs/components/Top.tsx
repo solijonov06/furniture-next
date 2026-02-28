@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getJwtToken, logOut, updateUserInfo } from '../auth';
-import { Stack, Box, IconButton, Tooltip } from '@mui/material';
+import { Stack, IconButton, Tooltip } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
@@ -168,15 +168,15 @@ const Top = () => {
 			<Stack className={'navbar'}>
 				<Stack className={`navbar-main ${colorChange ? 'transparent' : ''} ${bgColor ? 'transparent' : ''}`}>
 					<Stack className={'container'}>
-						<Box component={'div'} className={'logo-box'}>
+						<div className={'logo-box'}>
 							<Link href={'/'}>
 								<img 
 									src={colorChange || bgColor ? "/img/logo/logoWhite.svg" : "/img/logo/logoDark.svg"} 
 									alt="Vesta Living" 
 								/>
 							</Link>
-						</Box>
-						<Box component={'div'} className={'router-box'}>
+						</div>
+						<div className={'router-box'}>
 							<Link href={'/'}>
 								<div>{t('Home')}</div>
 							</Link>
@@ -197,8 +197,8 @@ const Top = () => {
 							<Link href={'/cs'}>
 								<div> {t('CS')} </div>
 							</Link>
-						</Box>
-						<Box component={'div'} className={'user-box'}>
+						</div>
+						<div className={'user-box'}>
 							{user?._id ? (
 								<>
 									<div className={'login-user'} onClick={(event: any) => setLogoutAnchor(event.currentTarget)}>
@@ -256,13 +256,13 @@ const Top = () => {
 									onClick={langClick}
 									endIcon={<CaretDown size={14} color="#616161" weight="fill" />}
 								>
-									<Box component={'div'} className={'flag'}>
+									<div className={'flag'}>
 										{lang !== null ? (
 											<img src={`/img/flag/lang${lang}.png`} alt={'usaFlag'} />
 										) : (
 											<img src={`/img/flag/langen.png`} alt={'usaFlag'} />
 										)}
-									</Box>
+									</div>
 								</Button>
 
 								<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose} sx={{ position: 'absolute' }}>
@@ -298,7 +298,7 @@ const Top = () => {
 									</MenuItem>
 								</StyledMenu>
 							</div>
-						</Box>
+						</div>
 					</Stack>
 				</Stack>
 			</Stack>

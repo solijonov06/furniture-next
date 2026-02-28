@@ -4,7 +4,7 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import { getJwtToken, updateUserInfo } from '../../auth';
 import Chat from '../Chat';
 import { useReactiveVar } from '@apollo/client';
@@ -141,9 +141,9 @@ const withLayoutBasic = (Component: any) => {
 						<Stack className={`header-basic ${memoizedValues.headerClass} ${authHeader && 'auth'}`}>
 							<Stack className={'container'}>
 								{/* Text content with backdrop */}
-								<Box className={'text-content'}>
+								<div className={'text-content'}>
 									{/* Breadcrumb */}
-									<Box className={'breadcrumb'}>
+									<div className={'breadcrumb'}>
 										{memoizedValues.breadcrumb.map((item, index) => (
 											<React.Fragment key={index}>
 												<span>{t(item)}</span>
@@ -152,14 +152,14 @@ const withLayoutBasic = (Component: any) => {
 												)}
 											</React.Fragment>
 										))}
-									</Box>
+									</div>
 									
 									{/* Title */}
 									<strong>{t(memoizedValues.title)}</strong>
 									
 									{/* Description */}
 									<span>{t(memoizedValues.desc)}</span>
-								</Box>
+								</div>
 							</Stack>
 						</Stack>
 

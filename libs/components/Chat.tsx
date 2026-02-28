@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Avatar, Box, Stack } from '@mui/material';
+import { Avatar, Stack } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Badge from '@mui/material/Badge';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
@@ -17,23 +17,18 @@ import { Message } from '@mui/icons-material';
 const NewMessage = (type: any) => {
 	if (type === 'right') {
 		return (
-			<Box
-				component={'div'}
-				flexDirection={'row'}
-				style={{ display: 'flex' }}
-				alignItems={'flex-end'}
-				justifyContent={'flex-end'}
-				sx={{ m: '10px 0px' }}
+			<div
+				style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', margin: '10px 0px' }}
 			>
 				<div className={'msg_right'}></div>
-			</Box>
+			</div>
 		);
 	} else {
 		return (
-			<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
+			<div style={{ display: 'flex', flexDirection: 'row', margin: '10px 0px' }}>
 				<Avatar alt={'jonik'} src={'/img/profile/defaultUser.svg'} />
 				<div className={'msg_left'}></div>
-			</Box>
+			</div>
 		);
 	}
 };
@@ -150,19 +145,19 @@ const Chat = () => {
 				</button>
 			) : null}
 			<Stack className={`chat-frame ${open ? 'open' : ''}`}>
-				<Box className={'chat-top'} component={'div'}>
+				<div className={'chat-top'}>
 					<div style={{ fontFamily: 'Nunito' }}>Online Chat</div>
 				<RippleBadge 
 				style={{ margin: "-18px 0 0 21px"}} 
 				badgeContent={onlineUsers}
 				/>
-				</Box>
-				<Box className={'chat-content'} id="chat-content" ref={chatContentRef} component={'div'}>
+				</div>
+				<div className={'chat-content'} id="chat-content" ref={chatContentRef}>
 					<ScrollableFeed>
 						<Stack className={'chat-main'}>
-							<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
+							<div style={{ display: 'flex', flexDirection: 'row', margin: '10px 0px' }}>
 								<div className={'welcome'}>Welcome to Live chat!</div>
-							</Box>
+							</div>
 							{messagesList.map((ele: MessagePayLoad) => {
 								const { text, memberData } = ele;
 								const memberImage = memberData?.memberImage
@@ -170,27 +165,22 @@ const Chat = () => {
 								: '/img/profile/defaultUser.svg';
 								
 								return memberData?._id === user?._id ? (
-								<Box
-									component={'div'}
-									flexDirection={'row'}
-									style={{ display: 'flex' }}
-									alignItems={'flex-end'}
-									justifyContent={'flex-end'}
-									sx={{ m: '10px 0px' }}
+								<div
+									style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', margin: '10px 0px' }}
 								>
 									<div className={'msg-right'}>{text}</div>
-								</Box>
+								</div>
 								) : (
-								<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
+								<div style={{ display: 'flex', flexDirection: 'row', margin: '10px 0px' }}>
 									<Avatar alt={'jonik'} src={memberImage} />
 									<div className={'msg-left'}>{text}</div>
-								</Box>
+								</div>
 							    )
 							})}
 						</Stack>
 					</ScrollableFeed>
-				</Box>
-				<Box className={'chat-bott'} component={'div'}>
+				</div>
+				<div className={'chat-bott'}>
 					<input
 						type={'text'}
 						name={'message'}
@@ -203,7 +193,7 @@ const Chat = () => {
 					<button className={'send-msg-btn'} onClick={onClickHandler}>
 						<SendIcon style={{ color: '#fff' }} />
 					</button>
-				</Box>
+				</div>
 			</Stack>
 		</Stack>
 	);

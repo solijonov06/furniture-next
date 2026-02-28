@@ -3,7 +3,6 @@ import {
 	Stack,
 	Typography,
 	Checkbox,
-	Button,
 	OutlinedInput,
 	FormControl,
 	InputLabel,
@@ -11,7 +10,6 @@ import {
 	MenuItem,
 	Tooltip,
 	IconButton,
-	Box,
 } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { PropertyLocation, PropertyType, PropertyCategory, PropertyMaterial } from '../../enums/property.enum';
@@ -461,13 +459,13 @@ const Filter = (props: FilterType) => {
 		return (
 			<Stack className={'filter-main'}>
 				{/* Decorative Furniture Banner */}
-				<Box className={'filter-banner'}>
-					<Box className={'banner-content'}>
+				<div className={'filter-banner'}>
+					<div className={'banner-content'}>
 						<ChairOutlinedIcon className={'banner-icon'} />
 						<Typography className={'banner-title'}>Discover Quality</Typography>
 						<Typography className={'banner-subtitle'}>Premium furniture for every space</Typography>
-					</Box>
-				</Box>
+					</div>
+				</div>
 
 				<Stack className={'find-your-home'} mb={'40px'}>
 					<Typography className={'title-main'}>Find Your Furniture</Typography>
@@ -565,18 +563,18 @@ const Filter = (props: FilterType) => {
 					<Typography className={'title'}>Category</Typography>
 					<Stack className="category-grid">
 						{propertyCategory.map((category: string) => (
-							<Box 
+							<div 
 								key={category}
 								className={`category-card ${searchFilter?.search?.categoryList?.includes(category as PropertyCategory) ? 'active' : ''}`}
 								onClick={() => propertyCategorySelectHandler(category)}
 							>
-								<Box className="category-icon">
+								<div className="category-icon">
 									{categoryIcons[category] || <ChairOutlinedIcon />}
-								</Box>
+								</div>
 								<Typography className="category-label">
 									{category.replace('_', ' ')}
 								</Typography>
-							</Box>
+							</div>
 						))}
 					</Stack>
 				</Stack>
@@ -584,14 +582,14 @@ const Filter = (props: FilterType) => {
 					<Typography className={'title'}>Material</Typography>
 					<Stack className="material-chips">
 						{propertyMaterial.map((material: string) => (
-							<Box 
+							<div 
 								key={material}
 								className={`material-chip ${searchFilter?.search?.materialList?.includes(material as PropertyMaterial) ? 'active' : ''}`}
 								onClick={() => propertyMaterialSelectHandler(material)}
 							>
 								<span className="material-swatch" data-material={material.toLowerCase()} />
 								<Typography>{material}</Typography>
-							</Box>
+							</div>
 						))}
 					</Stack>
 				</Stack>

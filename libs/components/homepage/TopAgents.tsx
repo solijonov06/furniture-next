@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -51,9 +51,9 @@ const TopAgents = (props: TopAgentsProps) => {
 					</Stack>
 					<Stack className={'wrapper'}>
 						{topAgents.length === 0 ? (
-							<Box component={'div'} className={'empty-list'}>
+							<div className={'empty-list'}>
 								No Top Agents
-							</Box>
+							</div>
 						) : (
 							<Swiper
 								className={'top-agents-swiper'}
@@ -88,28 +88,28 @@ const TopAgents = (props: TopAgentsProps) => {
 			<Stack className={'top-agents'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<Box component={'div'} className={'left'}>
+						<div className={'left'}>
 							<span>Top Agents</span>
 							<p>Our Top Agents always ready to serve you</p>
-						</Box>
-						<Box component={'div'} className={'right'}>
+						</div>
+						<div className={'right'}>
 							<div className={'more-box'} onClick={() => router.push('/agent')} style={{ cursor: 'pointer' }}>
 								<span>See All Agents</span>
 								<img src="/img/icons/rightup.svg" alt="" />
 							</div>
-						</Box>
+						</div>
 					</Stack>
 					<Stack className={'wrapper'}>
 						{topAgents.length === 0 ? (
-							<Box component={'div'} className={'empty-list'}>
+							<div className={'empty-list'}>
 								No Top Agents
-							</Box>
+							</div>
 						) : (
 							<>
-								<Box component={'div'} className={'switch-btn swiper-agents-prev'}>
+								<div className={'switch-btn swiper-agents-prev'}>
 									<ArrowBackIosNewIcon />
-								</Box>
-								<Box component={'div'} className={'card-wrapper'}>
+								</div>
+								<div className={'card-wrapper'}>
 									<Swiper
 										className={'top-agents-swiper'}
 										slidesPerView={5}
@@ -143,10 +143,10 @@ const TopAgents = (props: TopAgentsProps) => {
 											);
 										})}
 									</Swiper>
-								</Box>
-								<Box component={'div'} className={'switch-btn swiper-agents-next'}>
+								</div>
+								<div className={'switch-btn swiper-agents-next'}>
 									<ArrowBackIosNewIcon />
-								</Box>
+								</div>
 							</>
 						)}
 					</Stack>

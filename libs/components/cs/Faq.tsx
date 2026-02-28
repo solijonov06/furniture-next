@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
-import { AccordionDetails, Box, CircularProgress, Pagination, Stack, Typography } from '@mui/material';
+import { AccordionDetails, CircularProgress, Pagination, Stack, Typography } from '@mui/material';
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
@@ -104,7 +104,7 @@ const Faq = () => {
 	} else {
 		return (
 			<Stack className={'faq-content'}>
-				<Box className={'categories'} component={'div'}>
+				<div className={'categories'}>
 					{Object.values(FaqCategory).map((cat) => (
 						<div
 							key={cat}
@@ -114,16 +114,16 @@ const Faq = () => {
 							{categoryLabels[cat] || cat}
 						</div>
 					))}
-				</Box>
-				<Box className={'wrap'} component={'div'}>
+				</div>
+				<div className={'wrap'}>
 					{getFaqsLoading ? (
-						<Box sx={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+						<div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
 							<CircularProgress />
-						</Box>
+						</div>
 					) : faqs?.list?.length === 0 ? (
-						<Box sx={{ textAlign: 'center', padding: '40px', color: '#717171' }}>
+						<div style={{ textAlign: 'center', padding: '40px', color: '#717171' }}>
 							No FAQs available for this category
-						</Box>
+						</div>
 					) : (
 						faqs?.list?.map((faq: FaqType) => (
 							<Accordion expanded={expanded === faq._id} onChange={handleChange(faq._id)} key={faq._id}>
@@ -144,16 +144,16 @@ const Faq = () => {
 							</Accordion>
 						))
 					)}
-				</Box>
+				</div>
 				{total > faqsInquiry.limit && (
-					<Box className={'pagination-box'} sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+					<div className={'pagination-box'} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
 						<Pagination
 							count={Math.ceil(total / faqsInquiry.limit)}
 							page={faqsInquiry.page}
 							onChange={paginationHandler}
 							color="primary"
 						/>
-					</Box>
+					</div>
 				)}
 			</Stack>
 		);

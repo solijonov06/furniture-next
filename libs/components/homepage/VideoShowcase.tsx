@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Stack, Box, IconButton } from '@mui/material';
+import { Stack, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -37,7 +37,7 @@ const VideoShowcase = () => {
 	return (
 		<Stack className="video-showcase-full">
 			{/* Video Container - Full Width */}
-			<Box className="video-wrapper">
+			<div className="video-wrapper">
 				<video
 					ref={videoRef}
 					className="showcase-video"
@@ -51,15 +51,15 @@ const VideoShowcase = () => {
 				</video>
 
 				{/* Minimal Video Controls */}
-				<Box className="video-controls">
+				<div className="video-controls">
 					<IconButton onClick={togglePlay} className="control-btn">
 						{isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
 					</IconButton>
 					<IconButton onClick={toggleMute} className="control-btn">
 						{isMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
 					</IconButton>
-				</Box>
-			</Box>
+				</div>
+			</div>
 		</Stack>
 	);
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Stack, Box, Pagination, CircularProgress } from '@mui/material';
+import { Stack, Pagination, CircularProgress } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { useQuery } from '@apollo/client';
 import { GET_NOTICES } from '../../../apollo/user/query';
@@ -93,20 +93,20 @@ const Notice = () => {
 			<Stack className={'notice-content'}>
 				<span className={'title'}>Notice</span>
 				<Stack className={'main'}>
-					<Box component={'div'} className={'top'}>
+					<div className={'top'}>
 						<span>Number</span>
 						<span>Title</span>
 						<span>Date</span>
-					</Box>
+					</div>
 					<Stack className={'bottom'}>
 						{getNoticesLoading && localNotices.length === 0 ? (
-							<Box sx={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+							<div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
 								<CircularProgress />
-							</Box>
+							</div>
 						) : paginatedNotices.length === 0 ? (
-							<Box className={'no-data'} sx={{ textAlign: 'center', padding: '40px', color: '#717171' }}>
+							<div className={'no-data'} style={{ textAlign: 'center', padding: '40px', color: '#717171' }}>
 								No notices available
-							</Box>
+							</div>
 						) : (
 							paginatedNotices.map((notice, index: number) => {
 								const isEvent = notice.noticeCategory === NoticeCategory.EVENT || notice.noticeCategory === 'EVENT';
@@ -143,14 +143,14 @@ const Notice = () => {
 					</Stack>
 				</Stack>
 				{total > noticesInquiry.limit && (
-					<Box className={'pagination-box'} sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+					<div className={'pagination-box'} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
 						<Pagination
 							count={Math.ceil(total / noticesInquiry.limit)}
 							page={noticesInquiry.page}
 							onChange={paginationHandler}
 							color="primary"
 						/>
-					</Box>
+					</div>
 				)}
 			</Stack>
 		);

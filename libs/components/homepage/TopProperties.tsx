@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import WestIcon from '@mui/icons-material/West';
 import EastIcon from '@mui/icons-material/East';
@@ -70,9 +70,9 @@ const TopProperties = (props: TopPropertiesProps) => {
 					</Stack>
 					<Stack className={'card-box'}>
 						{topProperties.length === 0 ? (
-							<Box component={'div'} className={'empty-list'}>
+							<div className={'empty-list'}>
 								No Top Furnishings
-							</Box>
+							</div>
 						) : (
 							<Swiper
 								className={'top-property-swiper'}
@@ -99,23 +99,23 @@ const TopProperties = (props: TopPropertiesProps) => {
 			<Stack className={'top-properties'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<Box component={'div'} className={'left'}>
+						<div className={'left'}>
 							<span>Top Furnishings</span>
 							<p>Check out our Top Furnishings</p>
-						</Box>
-						<Box component={'div'} className={'right'}>
+						</div>
+						<div className={'right'}>
 							<div className={'pagination-box'}>
 								<WestIcon className={'swiper-top-prev'} />
 								<div className={'swiper-top-pagination'}></div>
 								<EastIcon className={'swiper-top-next'} />
 							</div>
-						</Box>
+						</div>
 					</Stack>
 					<Stack className={'card-box'}>
 						{topProperties.length === 0 ? (
-							<Box component={'div'} className={'empty-list'}>
+							<div className={'empty-list'}>
 								No Top Furnishings
-							</Box>
+							</div>
 						) : (
 							<Swiper
 								className={'top-property-swiper'}
