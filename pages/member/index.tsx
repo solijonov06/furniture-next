@@ -48,6 +48,8 @@ const MemberPage: NextPage = () => {
 
 	const unsubscribeHandler = async (id: string, refetch: any, query: any) => {};
 
+	const likeMemberHandler = async (id: string) => {};
+
 	const redirectToMemberPageHandler = async (memberId: string) => {
 		try {
 			if (memberId === user?._id) await router.push(`/mypage?memberId=${memberId}`);
@@ -76,6 +78,7 @@ const MemberPage: NextPage = () => {
 											subscribeHandler={subscribeHandler}
 											unsubscribeHandler={unsubscribeHandler}
 											redirectToMemberPageHandler={redirectToMemberPageHandler}
+											likeMemberHandler={likeMemberHandler}
 										/>
 									)}
 									{category === 'followings' && (
@@ -83,6 +86,7 @@ const MemberPage: NextPage = () => {
 											subscribeHandler={subscribeHandler}
 											unsubscribeHandler={unsubscribeHandler}
 											redirectToMemberPageHandler={redirectToMemberPageHandler}
+											likeMemberHandler={likeMemberHandler}
 										/>
 									)}
 									{category === 'articles' && <MemberArticles />}

@@ -53,6 +53,8 @@ const MyPage: NextPage = () => {
 		}
 	};
 
+	const likeMemberHandler = async (id: string) => {};
+
 	const redirectToMemberPageHandler = async (memberId: string) => {
 		try {
 			if (memberId === user?._id) await router.push(`/mypage?memberId=${memberId}`);
@@ -87,6 +89,7 @@ const MyPage: NextPage = () => {
 											subscribeHandler={subscribeHandler}
 											unsubscribeHandler={unsubscribeHandler}
 											redirectToMemberPageHandler={redirectToMemberPageHandler}
+											likeMemberHandler={likeMemberHandler}
 										/>
 									)}
 									{category === 'followings' && (
@@ -94,6 +97,7 @@ const MyPage: NextPage = () => {
 											subscribeHandler={subscribeHandler}
 											unsubscribeHandler={unsubscribeHandler}
 											redirectToMemberPageHandler={redirectToMemberPageHandler}
+											likeMemberHandler={likeMemberHandler}
 										/>
 									)}
 								</Stack>

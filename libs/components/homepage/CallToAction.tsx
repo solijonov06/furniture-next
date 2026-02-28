@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
@@ -27,7 +27,7 @@ const CallToAction = () => {
 		return (
 			<Stack className={'cta-section'}>
 				<Stack className={'container'}>
-					<Box className={'cta-content'}>
+					<div className={'cta-content'}>
 						<h2 className={'cta-title'}>
 							OUR MISSION IS TO HELP YOU FIND YOUR DREAM HOME.
 						</h2>
@@ -36,7 +36,7 @@ const CallToAction = () => {
 								{t('Get Started')}
 							</button>
 						</Link>
-					</Box>
+					</div>
 				</Stack>
 			</Stack>
 		);
@@ -44,5 +44,3 @@ const CallToAction = () => {
 };
 
 export default CallToAction;
-
-

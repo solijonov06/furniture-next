@@ -125,13 +125,13 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 
 	useEffect(() => {
 		if (searchFilter.search.memberId) {
-			getPropertiesRefetch({ variables: { input: searchFilter }}).then()
+			getPropertiesRefetch({ input: searchFilter }).then()
 		}
 	}, [searchFilter]);
 
 	useEffect(() => {
 		if (commentInquiry.search.commentRefId) {
-			getCommentsRefetch({ variables: { input: commentInquiry }}).then()
+			getCommentsRefetch({ input: commentInquiry }).then()
 		}
 	}, [commentInquiry]);
 
