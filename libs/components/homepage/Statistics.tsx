@@ -273,11 +273,11 @@ const Statistics = () => {
 		return (
 			<Stack className={'statistics-section'}>
 				<Stack className={'container'}>
-					<Box className={'section-header'}>
+					<div className={'section-header'}>
 						<span className={'subtitle'}>Analytics</span>
 						<h2 className={'title'}>Real-Time Stats</h2>
-					</Box>
-					<Box className={'statistics-grid'}>
+					</div>
+					<div className={'statistics-grid'}>
 						{statisticsItems.map((item, index) => (
 							<StatItem
 								key={index}
@@ -290,7 +290,7 @@ const Statistics = () => {
 								trend={item.trend}
 							/>
 						))}
-					</Box>
+					</div>
 				</Stack>
 			</Stack>
 		);
@@ -298,14 +298,14 @@ const Statistics = () => {
 		return (
 			<Stack className={'statistics-section'}>
 				<Stack className={'container'}>
-					<Box className={'section-header'}>
+					<div className={'section-header'}>
 						<span className={'subtitle'}>Analytics Dashboard</span>
 						<h2 className={'title'}>Real-Time Statistics</h2>
 						<p className={'description'}>
 							Track our growth with live data and trends from our platform
 						</p>
-					</Box>
-					<Box className={'statistics-grid'}>
+					</div>
+					<div className={'statistics-grid'}>
 						{statisticsItems.map((item, index) => (
 							<StatItem
 								key={index}
@@ -318,7 +318,7 @@ const Statistics = () => {
 								trend={item.trend}
 							/>
 						))}
-					</Box>
+					</div>
 				</Stack>
 			</Stack>
 		);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box, Divider, Typography } from '@mui/material';
+import { Stack,  Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -34,8 +34,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 	} else {
 		return (
 			<Stack className="property-big-card-box" onClick={() => goPropertyDetatilPage(property?._id)}>
-				<Box
-					component={'div'}
+				<div
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages?.[0]})` }}
 				>
@@ -47,8 +46,8 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 					)}
 
 					<div className={'price'}>${formatterStr(property?.propertyPrice)}</div>
-				</Box>
-				<Box component={'div'} className={'info'}>
+				</div>
+				<div className={'info'}>
 					<strong className={'title'}>{property?.propertyTitle}</strong>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
@@ -91,7 +90,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 						</div>
 					</div>
-				</Box>
+				</div>
 			</Stack>
 		);
 	}

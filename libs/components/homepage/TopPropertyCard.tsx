@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box, Divider, Typography } from '@mui/material';
+import { Stack,  Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -30,15 +30,14 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 	if (device === 'mobile') {
 		return (
 			<Stack className="top-card-box">
-				<Box
-					component={'div'}
+				<div
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
 					onClick={() => {pushDetailHandler(property._id)}} 
 				>
 					<div>${property?.propertyPrice}</div>
-				</Box>
-				<Box component={'div'} className={'info'}>
+				</div>
+				<div className={'info'}>
 					<strong className={'title'} onClick={() => {pushDetailHandler(property._id)}} >{property?.propertyTitle}</strong>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
@@ -77,21 +76,20 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 						</div>
 					</div>
-				</Box>
+				</div>
 			</Stack>
 		);
 	} else {
 		return (
 			<Stack className="top-card-box">
-				<Box
-					component={'div'}
+				<div
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
 					onClick={() => {pushDetailHandler(property._id)}} 
 				>
 					<div>${property?.propertyPrice}</div>
-				</Box>
-				<Box component={'div'} className={'info'}>
+				</div>
+				<div className={'info'}>
 					<strong className={'title'} onClick={() => {pushDetailHandler(property._id)}} >{property?.propertyTitle}</strong>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
@@ -130,7 +128,7 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 						</div>
 					</div>
-				</Box>
+				</div>
 			</Stack>
 		);
 	}

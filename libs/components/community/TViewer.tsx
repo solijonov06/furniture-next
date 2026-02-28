@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Viewer } from '@toast-ui/react-editor';
-import { Box, Stack, CircularProgress } from '@mui/material';
+import { Stack, CircularProgress } from '@mui/material';
 
 const TViewer = (props: any) => {
 	const [editorLoaded, setEditorLoaded] = useState(false);
@@ -17,7 +17,7 @@ const TViewer = (props: any) => {
 
 	return (
 		<Stack sx={{ background: 'white', mt: '30px', borderRadius: '10px' }}>
-			<Box component={'div'} sx={{ m: '40px' }}>
+			<div style={{ margin: '40px' }}>
 				{editorLoaded ? (
 					<Viewer
 						initialValue={props.markdown}
@@ -55,7 +55,7 @@ const TViewer = (props: any) => {
 				) : (
 					<CircularProgress />
 				)}
-			</Box>
+			</div>
 		</Stack>
 	);
 };

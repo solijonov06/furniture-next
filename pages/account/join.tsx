@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import { Box, Button, Checkbox, FormControlLabel, Stack } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import { logIn, signUp } from '../../libs/auth';
 import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
@@ -130,11 +130,11 @@ const Join: NextPage = () => {
 			<Stack className={'join-page creative'}>
 				<Stack className={'container'}>
 					<Stack className={'creative-form-mobile'}>
-						<Box className={'form-header'}>
+						<div className={'form-header'}>
 							<h2>{loginView ? 'Welcome Back' : 'Join Us'}</h2>
 							<p>Crafting your perfect home experience</p>
-						</Box>
-						<Box className={'form-inputs'}>
+						</div>
+						<div className={'form-inputs'}>
 							<div className={'input-group'}>
 								<label>Nickname</label>
 								<input
@@ -161,7 +161,7 @@ const Join: NextPage = () => {
 									/>
 								</div>
 							)}
-						</Box>
+						</div>
 						<Button
 							className={'submit-btn'}
 							onClick={loginView ? doLogin : doSignUp}
@@ -185,7 +185,7 @@ const Join: NextPage = () => {
 				<Stack className={'container'}>
 					<Stack className={'creative-workshop'}>
 						{/* Left Side - Mechanical System */}
-						<Box className={'workshop-animation'}>
+						<div className={'workshop-animation'}>
 							<svg className={'machine-svg'} viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
 								<defs>
 									{/* Wood pattern */}
@@ -409,11 +409,11 @@ const Join: NextPage = () => {
 									</div>
 								)}
 							</div>
-						</Box>
+						</div>
 
 						{/* Right Side - Form */}
-						<Box className={'form-section'}>
-							<Box className={'form-header'}>
+						<div className={'form-section'}>
+							<div className={'form-header'}>
 								<div className={'logo-creative'}>
 									<svg viewBox="0 0 50 50">
 										<path d="M25,5 L45,15 L45,35 L25,45 L5,35 L5,15 Z" fill="#1E3A5F" opacity="0.2"/>
@@ -424,9 +424,9 @@ const Join: NextPage = () => {
 								</div>
 								<h1>{loginView ? 'Welcome Back' : 'Create Account'}</h1>
 								<p>Start typing to activate the workshop!</p>
-							</Box>
+							</div>
 
-							<Box className={'form-body'}>
+							<div className={'form-body'}>
 								{/* NICKNAME INPUT */}
 								<div className={`input-creative ${nickActivated ? 'activated' : ''}`}>
 									<label>
@@ -541,17 +541,17 @@ const Join: NextPage = () => {
 										</svg>
 									</button>
 								</div>
-							</Box>
+							</div>
 
-							<Box className={'form-footer'}>
+							<div className={'form-footer'}>
 								<p>
 									{loginView ? "Don't have an account?" : 'Already have an account?'}
 									<span onClick={() => viewChangeHandler(!loginView)}>
 										{loginView ? ' Sign Up' : ' Login'}
 									</span>
 								</p>
-							</Box>
-						</Box>
+							</div>
+						</div>
 					</Stack>
 				</Stack>
 			</Stack>

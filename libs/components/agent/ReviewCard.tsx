@@ -1,6 +1,6 @@
 import React from 'react';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { Stack, Box, Typography } from '@mui/material';
+import { Stack,  Typography } from '@mui/material';
 import { Comment } from '../../types/comment/comment';
 import Moment from 'react-moment';
 import { REACT_APP_API_URL } from '../../config';
@@ -20,7 +20,7 @@ const ReviewCard = (props: ReviewCardProps) => {
 		return <div>REVIEW CARD</div>;
 	} else {
 		return (
-			<Box component={'div'} className={'review-card'}>
+			<div className={'review-card'}>
 				<div className={'info'}>
 					<div className={'left'}>
 						<img src={imagePath} alt="" />
@@ -51,7 +51,7 @@ const ReviewCard = (props: ReviewCardProps) => {
 						<Typography className="reply-text">Reply</Typography>
 					</Stack>
 				)}
-			</Box>
+			</div>
 		);
 	}
 };

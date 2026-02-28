@@ -66,7 +66,7 @@ const withAdminLayout = (Component: ComponentType) => {
 
 		return (
 			<main id="pc-wrap" className="admin">
-				<Box component={'div'} sx={{ display: 'flex' }}>
+				<div style={{ display: 'flex' }}>
 					<AppBar
 						position="fixed"
 						sx={{
@@ -108,10 +108,9 @@ const withAdminLayout = (Component: ComponentType) => {
 								open={Boolean(anchorElUser)}
 								onClose={handleCloseUserMenu}
 							>
-								<Box
-									component={'div'}
+								<div
 									onClick={handleCloseUserMenu}
-									sx={{
+									style={{
 										width: '200px',
 									}}
 								>
@@ -124,14 +123,14 @@ const withAdminLayout = (Component: ComponentType) => {
 										</Typography>
 									</Stack>
 									<Divider />
-									<Box component={'div'} sx={{ p: 1, py: '6px' }} onClick={logoutHandler}>
+									<div style={{ padding: '6px 8px' }} onClick={logoutHandler}>
 										<MenuItem sx={{ px: '16px', py: '6px' }}>
 											<Typography variant={'subtitle1'} component={'span'}>
 												Logout
 											</Typography>
 										</MenuItem>
-									</Box>
-								</Box>
+									</div>
+								</div>
 							</Menu>
 						</Toolbar>
 					</AppBar>
@@ -180,11 +179,11 @@ const withAdminLayout = (Component: ComponentType) => {
 						<MenuList />
 					</Drawer>
 
-					<Box component={'div'} id="bunker" sx={{ flexGrow: 1 }}>
+					<div id="bunker" style={{ flexGrow: 1 }}>
 						{/*@ts-ignore*/}
 						<Component {...props} setSnackbar={setSnackbar} setTitle={setTitle} />
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</main>
 		);
 	};

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box, Divider, Typography } from '@mui/material';
+import { Stack,  Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -30,8 +30,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 	if (device === 'mobile') {
 		return (
 			<Stack className="trend-card-box" key={property._id}>
-				<Box
-					component={'div'}
+				<div
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
 					onClick={() => {
@@ -39,8 +38,8 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					}} 
 				>
 					<div>${property.propertyPrice}</div>
-				</Box>
-				<Box component={'div'} className={'info'}>
+				</div>
+				<div className={'info'}>
 					<strong className={'title'} 
 					onClick={() => {
 						pushDetailHandler(property._id)
@@ -82,14 +81,13 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 						</div>
 					</div>
-				</Box>
+				</div>
 			</Stack>
 		);
 	} else {
 		return (
 			<Stack className="trend-card-box" key={property._id}>
-				<Box
-					component={'div'}
+				<div
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
 					onClick={() => {
@@ -98,8 +96,8 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 				>
 
 					<div>${property.propertyPrice}</div>
-				</Box>
-				<Box component={'div'} className={'info'}>
+				</div>
+				<div className={'info'}>
 					<strong className={'title'} 
 					onClick={() => {
 						pushDetailHandler(property._id)
@@ -142,7 +140,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 						</div>
 					</div>
-				</Box>
+				</div>
 			</Stack>
 		);
 	}

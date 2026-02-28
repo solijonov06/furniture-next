@@ -53,18 +53,18 @@ const About: NextPage = () => {
 							<img src="/img/banner/header1.svg" alt="" />
 						</Stack>
 						<Stack className={'info'}>
-							<Box component={'div'}>
+							<div>
 								<strong>4M</strong>
 								<p>Award Winning</p>
-							</Box>
-							<Box component={'div'}>
+							</div>
+							<div>
 								<strong>12K</strong>
 								<p>Property Ready</p>
-							</Box>
-							<Box component={'div'}>
+							</div>
+							<div>
 								<strong>20M</strong>
 								<p>Happy Customer</p>
-							</Box>
+							</div>
 						</Stack>
 					</Stack>
 				</Stack>
@@ -130,11 +130,11 @@ const About: NextPage = () => {
 				</Stack>
 				<Stack className={'help'}>
 					<Stack className={'container'}>
-						<Box component={'div'} className={'left'}>
+						<div className={'left'}>
 							<strong>Need help? Talk to our expert.</strong>
 							<p>Talk to our experts or Browse through more properties.</p>
-						</Box>
-						<Box component={'div'} className={'right'}>
+						</div>
+						<div className={'right'}>
 							<div className={'white'}>
 								Contact Us
 								<img src="/img/icons/rightup.svg" alt="" />
@@ -143,7 +143,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/call.svg" alt="" />
 								920 851 9087
 							</div>
-						</Box>
+						</div>
 					</Stack>
 				</Stack>
 			</Stack>

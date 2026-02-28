@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { Box, Button, FormControl, MenuItem, Stack, Typography, Select, TextField } from '@mui/material';
+import { Button, FormControl, MenuItem, Stack, Typography, Select, TextField } from '@mui/material';
 import { BoardArticleCategory } from '../../enums/board-article.enum';
 import { Editor } from '@toast-ui/react-editor';
 import { getJwtToken } from '../../auth';
@@ -153,7 +153,7 @@ const TuiEditor = () => {
 	return (
 		<Stack>
 			<Stack direction="row" style={{ margin: '40px' }} justifyContent="space-evenly">
-				<Box component={'div'} className={'form_row'} style={{ width: '300px' }}>
+				<div className={'form_row'} style={{ width: '300px' }}>
 					<Typography style={{ color: '#7f838d', margin: '10px' }} variant="h3">
 						Category
 					</Typography>
@@ -172,8 +172,8 @@ const TuiEditor = () => {
 							<MenuItem value={BoardArticleCategory.RECOMMEND}>Recommendation</MenuItem>
 						</Select>
 					</FormControl>
-				</Box>
-				<Box component={'div'} style={{ width: '300px', flexDirection: 'column' }}>
+				</div>
+				<div style={{ width: '300px', flexDirection: 'column' }}>
 					<Typography style={{ color: '#7f838d', margin: '10px' }} variant="h3">
 						Title
 					</Typography>
@@ -183,7 +183,7 @@ const TuiEditor = () => {
 						label="Type Title"
 						style={{ width: '300px', background: 'white' }}
 					/>
-				</Box>
+				</div>
 			</Stack>
 
 			<Editor

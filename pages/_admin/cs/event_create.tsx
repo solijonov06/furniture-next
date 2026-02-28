@@ -191,8 +191,8 @@ const EventCreate: NextPage = () => {
 	};
 
 	return (
-		<Box component={'div'} className={'content'}>
-			<Box component={'div'} className={'title flex_space'}>
+		<Stack component={'div'} className={'content'}>
+			<Stack component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>{isEditMode ? 'Edit Event' : 'Create Event'}</Typography>
 				<Button
 					variant={'outlined'}
@@ -202,9 +202,9 @@ const EventCreate: NextPage = () => {
 				>
 					Back to List
 				</Button>
-			</Box>
+			</Stack>
 
-			<Box
+			<Stack
 				component={'div'}
 				sx={{
 					mt: 3,
@@ -216,7 +216,7 @@ const EventCreate: NextPage = () => {
 			>
 				<Stack spacing={3}>
 					{/* Event Image Upload - REQUIRED */}
-					<Box>
+					<Stack>
 						<Typography
 							variant="subtitle1"
 							sx={{ mb: 2, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}
@@ -228,7 +228,7 @@ const EventCreate: NextPage = () => {
 						</Typography>
 
 						{eventImage ? (
-							<Box
+							<Stack
 								sx={{
 									position: 'relative',
 									width: '100%',
@@ -264,7 +264,7 @@ const EventCreate: NextPage = () => {
 								>
 									<DeleteIcon fontSize="small" />
 								</IconButton>
-							</Box>
+							</Stack>
 						) : (
 							<Button
 								component="label"
@@ -291,7 +291,7 @@ const EventCreate: NextPage = () => {
 								<input type="file" hidden accept="image/*" onChange={handleImageUpload} />
 							</Button>
 						)}
-					</Box>
+					</Stack>
 
 					{/* Event Title */}
 					<TextField
@@ -364,8 +364,8 @@ const EventCreate: NextPage = () => {
 							onChange={(e) => handleInputChange('eventStatus', e.target.value)}
 						>
 							<MenuItem value={EventStatus.ACTIVE}>
-								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-									<Box
+								<Stack sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+									<Stack
 										sx={{
 											width: 8,
 											height: 8,
@@ -374,11 +374,11 @@ const EventCreate: NextPage = () => {
 										}}
 									/>
 									ACTIVE - Visible to all users
-								</Box>
+								</Stack>
 							</MenuItem>
 							<MenuItem value={EventStatus.HOLD}>
-								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-									<Box
+								<Stack sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+									<Stack
 										sx={{
 											width: 8,
 											height: 8,
@@ -387,13 +387,13 @@ const EventCreate: NextPage = () => {
 										}}
 									/>
 									HOLD - Hidden from users
-								</Box>
+								</Stack>
 							</MenuItem>
 						</Select>
 					</FormControl>
 
 					{/* Submit Button */}
-					<Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
+					<Stack sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
 						<Button
 							variant="outlined"
 							onClick={() => router.push('/_admin/cs/events')}
@@ -415,10 +415,10 @@ const EventCreate: NextPage = () => {
 						>
 							{loading ? 'Saving...' : isEditMode ? 'Update Event' : 'Create Event'}
 						</Button>
-					</Box>
+					</Stack>
 				</Stack>
-			</Box>
-		</Box>
+			</Stack>
+		</Stack>
 	);
 };
 

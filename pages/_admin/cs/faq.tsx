@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
-import { Box, Button, InputAdornment, Stack } from '@mui/material';
+import { Stack, Button, InputAdornment} from '@mui/material';
 import { List, ListItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -23,8 +23,8 @@ const FaqArticles: NextPage = (props: any) => {
 
 	return (
 		// @ts-ignore
-		<Box component={'div'} className={'content'}>
-			<Box component={'div'} className={'title flex_space'}>
+		<Stack component={'div'} className={'content'}>
+			<Stack component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>FAQ Management</Typography>
 				<Button
 					className="btn_add"
@@ -35,11 +35,11 @@ const FaqArticles: NextPage = (props: any) => {
 					<AddRoundedIcon sx={{ mr: '8px' }} />
 					ADD
 				</Button>
-			</Box>
-			<Box component={'div'} className={'table-wrap'}>
-				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
+			</Stack>
+			<Stack component={'div'} className={'table-wrap'}>
+				<Stack component={'div'} sx={{ width: '100%', typography: 'body1' }}>
 					<TabContext value={'value'}>
-						<Box component={'div'}>
+						<Stack component={'div'}>
 							<List className={'tab-menu'}>
 								<ListItem
 									// onClick={(e) => handleTabChange(e, 'all')}
@@ -97,7 +97,7 @@ const FaqArticles: NextPage = (props: any) => {
 								/>
 							</Stack>
 							<Divider />
-						</Box>
+						</Stack>
 						<FaqArticlesPanelList
 							// dense={dense}
 							// membersData={membersData}
@@ -118,9 +118,9 @@ const FaqArticles: NextPage = (props: any) => {
 							onRowsPerPageChange={() => {}}
 						/>
 					</TabContext>
-				</Box>
-			</Box>
-		</Box>
+				</Stack>
+			</Stack>
+		</Stack>
 	);
 };
 

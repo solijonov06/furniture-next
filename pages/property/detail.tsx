@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Box, Button, Checkbox, Stack, Typography } from '@mui/material';
+import { Button, Checkbox, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import { NextPage } from 'next';
@@ -334,38 +334,38 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Typography className={'title'}>Product Details</Typography>
 										<Stack className={'info-box'}>
 											<Stack className={'left'}>
-												<Box component={'div'} className={'info'}>
+												<div className={'info'}>
 													<Typography className={'title'}>Price</Typography>
 													<Typography className={'data'}>${formatterStr(property?.propertyPrice)}</Typography>
-												</Box>
-												<Box component={'div'} className={'info'}>
+												</div>
+												<div className={'info'}>
 													<Typography className={'title'}>Size</Typography>
 													<Typography className={'data'}>{property?.propertyVolume} m³</Typography>
-												</Box>
-												<Box component={'div'} className={'info'}>
+												</div>
+												<div className={'info'}>
 													<Typography className={'title'}>Category</Typography>
 													<Typography className={'data'}>{property?.propertyCategory}</Typography>
-												</Box>
-												<Box component={'div'} className={'info'}>
+												</div>
+												<div className={'info'}>
 													<Typography className={'title'}>Material</Typography>
 													<Typography className={'data'}>{property?.propertyMaterial}</Typography>
-												</Box>
+												</div>
 											</Stack>
 											<Stack className={'right'}>
-												<Box component={'div'} className={'info'}>
+												<div className={'info'}>
 													<Typography className={'title'}>Condition</Typography>
 													<Typography className={'data'}>{property?.furnitureCondition}</Typography>
-												</Box>
-												<Box component={'div'} className={'info'}>
+												</div>
+												<div className={'info'}>
 													<Typography className={'title'}>Product Type</Typography>
 													<Typography className={'data'}>{property?.propertyType}</Typography>
-												</Box>
-												<Box component={'div'} className={'info'}>
+												</div>
+												<div className={'info'}>
 													<Typography className={'title'}>Delivery</Typography>
 													<Typography className={'data'}>
 														{property?.deliveryAvailable ? 'Available' : 'Not Available'}
 													</Typography>
-												</Box>
+												</div>
 											</Stack>
 										</Stack>
 									</Stack>
@@ -408,7 +408,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 											{propertyComments?.map((comment: Comment) => {
 												return <Review comment={comment} key={comment?._id} />;
 											})}
-											<Box component={'div'} className={'pagination-box'}>
+											<div className={'pagination-box'}>
 												<MuiPagination
 													page={commentInquiry.page}
 													count={Math.ceil(commentTotal / commentInquiry.limit)}
@@ -416,7 +416,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 													shape="circular"
 													color="primary"
 												/>
-											</Box>
+											</div>
 										</Stack>
 									</Stack>
 								)}
@@ -429,7 +429,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										}}
 										value={insertCommentData.commentContent}
 									></textarea>
-									<Box className={'submit-btn'} component={'div'}>
+									<div className={'submit-btn'}>
 										<Button
 											className={'submit-review'}
 											disabled={insertCommentData.commentContent === '' || user?._id === ''}
@@ -449,7 +449,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</defs>
 											</svg>
 										</Button>
-									</Box>
+									</div>
 								</Stack>
 							</Stack>
 							<Stack className={'right-config'}>

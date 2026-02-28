@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
-import { Box, Button, InputAdornment, Stack } from '@mui/material';
+import { Stack, Button, InputAdornment} from '@mui/material';
 import { List, ListItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -125,8 +125,8 @@ const AdminNotice: NextPage = () => {
 	});
 
 	return (
-		<Box component={'div'} className={'content'}>
-			<Box component={'div'} className={'title flex_space'}>
+		<Stack component={'div'} className={'content'}>
+			<Stack component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>Notice Management</Typography>
 				<Button
 					className="btn_add"
@@ -137,11 +137,11 @@ const AdminNotice: NextPage = () => {
 					<AddRoundedIcon sx={{ mr: '8px' }} />
 					ADD
 				</Button>
-			</Box>
-			<Box component={'div'} className={'table-wrap'}>
-				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
+			</Stack>
+			<Stack component={'div'} className={'table-wrap'}>
+				<Stack component={'div'} sx={{ width: '100%', typography: 'body1' }}>
 					<TabContext value={activeTab}>
-						<Box component={'div'}>
+						<Stack component={'div'}>
 							<List className={'tab-menu'}>
 								<ListItem
 									onClick={() => handleTabChange('all')}
@@ -194,7 +194,7 @@ const AdminNotice: NextPage = () => {
 								/>
 							</Stack>
 							<Divider />
-						</Box>
+						</Stack>
 
 						{/* Notices Table */}
 						<TableContainer>
@@ -225,7 +225,7 @@ const AdminNotice: NextPage = () => {
 													<Checkbox color="primary" />
 												</TableCell>
 												<TableCell>
-													<Box
+													<Stack
 														sx={{
 															px: 2,
 															py: 0.5,
@@ -238,7 +238,7 @@ const AdminNotice: NextPage = () => {
 														}}
 													>
 														{notice.noticeCategory}
-													</Box>
+													</Stack>
 												</TableCell>
 												<TableCell>
 													<Typography
@@ -253,7 +253,7 @@ const AdminNotice: NextPage = () => {
 													</Typography>
 												</TableCell>
 												<TableCell>
-													<Box
+													<Stack
 														sx={{
 															px: 2,
 															py: 0.5,
@@ -268,7 +268,7 @@ const AdminNotice: NextPage = () => {
 														}}
 													>
 														{notice.noticeStatus}
-													</Box>
+													</Stack>
 												</TableCell>
 												<TableCell>{notice.createdAt}</TableCell>
 												<TableCell align="right">
@@ -304,9 +304,9 @@ const AdminNotice: NextPage = () => {
 							onRowsPerPageChange={() => {}}
 						/>
 					</TabContext>
-				</Box>
-			</Box>
-		</Box>
+				</Stack>
+			</Stack>
+		</Stack>
 	);
 };
 

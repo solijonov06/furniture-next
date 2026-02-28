@@ -113,8 +113,8 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 			{numSelected > 0 ? (
 				<>
 					<Toolbar>
-						<Box component={'div'}>
-							<Box component={'div'} className="flex_box">
+						<div>
+							<div className="flex_box">
 								<Checkbox
 									color="primary"
 									indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -124,14 +124,14 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 										'aria-label': 'select all',
 									}}
 								/>
-								<Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="h6" component="div">
+								<Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="h6">
 									{numSelected} selected
 								</Typography>
-							</Box>
+							</div>
 							<Button variant={'text'} size={'large'}>
 								Delete
 							</Button>
-						</Box>
+						</div>
 					</Toolbar>
 				</>
 			) : (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Box, CircularProgress } from '@mui/material';
+import { Stack,  CircularProgress } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { useQuery } from '@apollo/client';
 import { GET_EVENTS } from '../../../apollo/user/query';
@@ -83,13 +83,13 @@ const EventCard = ({ event }: { event: Event }) => {
 				cursor: event.eventLink ? 'pointer' : 'default',
 			}}
 		>
-			<Box component={'div'} className={'info'}>
+			<div className={'info'}>
 				<strong>{event?.eventCity}</strong>
 				<span>{event?.eventTitle}</span>
-			</Box>
-			<Box component={'div'} className={'more'}>
+			</div>
+			<div className={'more'}>
 				<span>{event?.eventDescription}</span>
-			</Box>
+			</div>
 		</Stack>
 	);
 };
@@ -158,10 +158,10 @@ const Events = () => {
 		<Stack className={'events'}>
 			<Stack className={'container'}>
 				<Stack className={'info-box'}>
-					<Box component={'div'} className={'left'}>
+					<div className={'left'}>
 						<span className={'white'}>Events</span>
 						<p className={'white'}>Events waiting your attention!</p>
-					</Box>
+					</div>
 				</Stack>
 				<Stack className={'card-wrapper'}>
 					{loading ? (

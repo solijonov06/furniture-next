@@ -12,9 +12,9 @@ const Article = () => {
 			<Stack className="card-config">
 				<Stack className="top">
 					<img src="/img/apartmentMain.png" alt="" />
-					<Box component={'div'} className={'date'}>
+					<div className={'date'}>
 						<Typography>July 28</Typography>
-					</Box>
+					</div>
 				</Stack>
 				<Stack className="bottom">
 					<Stack className="name-address">

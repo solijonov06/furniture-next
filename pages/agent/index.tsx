@@ -2,7 +2,7 @@ import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import { Stack, Box, Button, Pagination } from '@mui/material';
+import { Stack,  Button, Pagination } from '@mui/material';
 import { Menu, MenuItem } from '@mui/material';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import AgentCard from '../../libs/components/common/AgentCard';
@@ -142,7 +142,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 			<Stack className={'agent-list-page'}>
 				<Stack className={'container'}>
 					<Stack className={'filter'}>
-						<Box component={'div'} className={'left'}>
+						<div className={'left'}>
 							<input
 								type="text"
 								placeholder={'Search for an agent'}
@@ -157,8 +157,8 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 									}
 								}}
 							/>
-						</Box>
-						<Box component={'div'} className={'right'}>
+						</div>
+						<div className={'right'}>
 							<span>Sort by</span>
 							<div>
 								<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
@@ -179,7 +179,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 									</MenuItem>
 								</Menu>
 							</div>
-						</Box>
+						</div>
 					</Stack>
 					<Stack className={'card-wrap'}>
 						{agents?.length === 0 ? (

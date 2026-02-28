@@ -179,8 +179,8 @@ const NoticeCreate: NextPage = () => {
 	};
 
 	return (
-		<Box component={'div'} className={'content'}>
-			<Box component={'div'} className={'title flex_space'}>
+		<Stack component={'div'} className={'content'}>
+			<Stack component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>{isEditMode ? 'Edit Notice' : 'Create Notice'}</Typography>
 				<Button
 					variant={'outlined'}
@@ -190,9 +190,9 @@ const NoticeCreate: NextPage = () => {
 				>
 					Back to List
 				</Button>
-			</Box>
+			</Stack>
 
-			<Box
+			<Stack
 				component={'div'}
 				sx={{
 					mt: 3,
@@ -228,8 +228,8 @@ const NoticeCreate: NextPage = () => {
 							onChange={(e) => handleInputChange('noticeStatus', e.target.value)}
 						>
 							<MenuItem value={NoticeStatus.ACTIVE}>
-								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-									<Box
+								<Stack sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+									<Stack
 										sx={{
 											width: 8,
 											height: 8,
@@ -238,11 +238,11 @@ const NoticeCreate: NextPage = () => {
 										}}
 									/>
 									ACTIVE - Visible to all users
-								</Box>
+								</Stack>
 							</MenuItem>
 							<MenuItem value={NoticeStatus.HOLD}>
-								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-									<Box
+								<Stack sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+									<Stack
 										sx={{
 											width: 8,
 											height: 8,
@@ -251,7 +251,7 @@ const NoticeCreate: NextPage = () => {
 										}}
 									/>
 									HOLD - Hidden from users
-								</Box>
+								</Stack>
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -293,7 +293,7 @@ const NoticeCreate: NextPage = () => {
 					/>
 
 					{/* Image Upload Section */}
-					<Box>
+					<Stack>
 						<Typography
 							variant="subtitle1"
 							sx={{ mb: 2, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}
@@ -329,7 +329,7 @@ const NoticeCreate: NextPage = () => {
 						</Button>
 
 						{noticeImages.length > 0 && (
-							<Box
+							<Stack
 								sx={{
 									display: 'grid',
 									gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
@@ -338,7 +338,7 @@ const NoticeCreate: NextPage = () => {
 								}}
 							>
 								{noticeImages.map((image, index) => (
-									<Box
+									<Stack
 										key={index}
 										sx={{
 											position: 'relative',
@@ -373,14 +373,14 @@ const NoticeCreate: NextPage = () => {
 										>
 											<DeleteIcon fontSize="small" />
 										</IconButton>
-									</Box>
+									</Stack>
 								))}
-							</Box>
+							</Stack>
 						)}
-					</Box>
+					</Stack>
 
 					{/* Submit Button */}
-					<Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
+					<Stack sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
 						<Button
 							variant="outlined"
 							onClick={() => router.push('/_admin/cs/notice')}
@@ -402,10 +402,10 @@ const NoticeCreate: NextPage = () => {
 						>
 							{loading ? 'Saving...' : isEditMode ? 'Update Notice' : 'Create Notice'}
 						</Button>
-					</Box>
+					</Stack>
 				</Stack>
-			</Box>
-		</Box>
+			</Stack>
+		</Stack>
 	);
 };
 

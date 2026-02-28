@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
-import { Box, Button, InputAdornment, Stack } from '@mui/material';
+import { Stack, Button, InputAdornment} from '@mui/material';
 import { List, ListItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -151,8 +151,8 @@ const AdminEvents: NextPage = () => {
 	});
 
 	return (
-		<Box component={'div'} className={'content'}>
-			<Box component={'div'} className={'title flex_space'}>
+		<Stack component={'div'} className={'content'}>
+			<Stack component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>Events Management</Typography>
 				<Button
 					className="btn_add"
@@ -163,11 +163,11 @@ const AdminEvents: NextPage = () => {
 					<AddRoundedIcon sx={{ mr: '8px' }} />
 					ADD EVENT
 				</Button>
-			</Box>
-			<Box component={'div'} className={'table-wrap'}>
-				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
+			</Stack>
+			<Stack component={'div'} className={'table-wrap'}>
+				<Stack component={'div'} sx={{ width: '100%', typography: 'body1' }}>
 					<TabContext value={activeTab}>
-						<Box component={'div'}>
+						<Stack component={'div'}>
 							<List className={'tab-menu'}>
 								<ListItem
 									onClick={() => handleTabChange('all')}
@@ -215,7 +215,7 @@ const AdminEvents: NextPage = () => {
 								/>
 							</Stack>
 							<Divider />
-						</Box>
+						</Stack>
 
 						{/* Events Table */}
 						<TableContainer>
@@ -256,7 +256,7 @@ const AdminEvents: NextPage = () => {
 												<TableCell>{event.eventTitle}</TableCell>
 												<TableCell>{event.eventCity}</TableCell>
 												<TableCell>
-													<Box
+													<Stack
 														sx={{
 															px: 2,
 															py: 0.5,
@@ -270,7 +270,7 @@ const AdminEvents: NextPage = () => {
 														}}
 													>
 														{event.eventStatus}
-													</Box>
+													</Stack>
 												</TableCell>
 												<TableCell>{event.createdAt}</TableCell>
 												<TableCell align="right">
@@ -306,9 +306,9 @@ const AdminEvents: NextPage = () => {
 							onRowsPerPageChange={() => {}}
 						/>
 					</TabContext>
-				</Box>
-			</Box>
-		</Box>
+				</Stack>
+			</Stack>
+		</Stack>
 	);
 };
 

@@ -42,14 +42,14 @@ const PropertyCard = (props: PropertyCardType) => {
 						<img src={imagePath} alt="" />
 					</Link>
 					{property && property?.propertyRank > 50 && (
-						<Box component={'div'} className={'top-badge'}>
+						<div className={'top-badge'}>
 							<img src="/img/icons/electricity.svg" alt="" />
 							<Typography>TOP</Typography>
-						</Box>
+						</div>
 					)}
-					<Box component={'div'} className={'price-box'}>
+					<div className={'price-box'}>
 						<Typography>${formatterStr(property?.propertyPrice)}</Typography>
-					</Box>
+					</div>
 				</Stack>
 				<Stack className="bottom">
 					<Stack className="name-address">

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { Box } from '@mui/material';
+import { } from '@mui/material';
 import Moment from 'react-moment';
 import { BoardArticle } from '../../types/board-article/board-article';
 
@@ -33,20 +33,20 @@ const CommunityCard = (props: CommunityCardProps) => {
 		if (vertical) {
 			return (
 				<Link href={`/community/detail?articleCategory=${article?.articleCategory}&id=${article?._id}`}>
-					<Box component={'div'} className={'vertical-card'}>
+					<div className={'vertical-card'}>
 						<div className={'community-img'} style={{ backgroundImage: `url(${articleImage})` }}>
 							<div>{index + 1}</div>
 						</div>
 						<strong>{article?.articleTitle}</strong>
 						<span>Free Board</span>
-					</Box>
+					</div>
 				</Link>
 			);
 		} else {
 			return (
 				<>
 					<Link href={`/community/detail?articleCategory=${article?.articleCategory}&id=${article?._id}`}>
-						<Box component={'div'} className="horizontal-card">
+						<div className="horizontal-card">
 							<img src={articleImage} alt="" />
 							<div>
 								<strong>{article.articleTitle}</strong>
@@ -54,7 +54,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 									<Moment format="DD.MM.YY">{article?.createdAt}</Moment>
 								</span>
 							</div>
-						</Box>
+						</div>
 					</Link>
 				</>
 			);

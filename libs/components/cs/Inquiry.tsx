@@ -117,7 +117,7 @@ const Inquiry = () => {
 				<Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
 					Contact Us
 				</Typography>
-				<Box component="form" onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit}>
 					<FormControl fullWidth sx={{ mb: 2 }}>
 						<InputLabel>Category</InputLabel>
 						<Select
@@ -187,7 +187,7 @@ const Inquiry = () => {
 					>
 						{loading ? <CircularProgress size={24} color="inherit" /> : 'Submit Inquiry'}
 					</Button>
-				</Box>
+				</form>
 			</Stack>
 		);
 	}
@@ -267,7 +267,7 @@ const Inquiry = () => {
 						Fill out the form below and we'll get back to you shortly.
 					</Typography>
 
-					<Box component="form" onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit}>
 						<FormControl fullWidth sx={{ mb: 3 }}>
 							<InputLabel>Category</InputLabel>
 							<Select
@@ -398,7 +398,7 @@ const Inquiry = () => {
 						>
 							{loading ? <CircularProgress size={24} color="inherit" /> : 'Send Message'}
 						</Button>
-					</Box>
+					</form>
 				</div>
 			</div>
 

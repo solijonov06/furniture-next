@@ -4,7 +4,7 @@ import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import PropertyBigCard from '../../libs/components/common/PropertyBigCard';
 import ReviewCard from '../../libs/components/agent/ReviewCard';
-import { Box, Button, Pagination, Stack, Typography } from '@mui/material';
+import { Button, Pagination, Stack, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useRouter } from 'next/router';
@@ -199,13 +199,13 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 							src={agent?.memberImage ? `${REACT_APP_API_URL}/${agent?.memberImage}` : '/img/profile/defaultUser.svg'}
 							alt=""
 						/>
-						<Box component={'div'} className={'info'} onClick={() => redirectToMemberPageHandler(agent?._id as string)}>
+						<div className={'info'} onClick={() => redirectToMemberPageHandler(agent?._id as string)}>
 							<strong>{agent?.memberFullName ?? agent?.memberNick}</strong>
 							<div>
 								<img src="/img/icons/call.svg" alt="" />
 								<span>{agent?.memberPhone}</span>
 							</div>
-						</Box>
+						</div>
 					</Stack>
 					<Stack className={'agent-home-list'}>
 						<Stack className={'card-wrap'}>
@@ -248,16 +248,16 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 						</Stack>
 						{commentTotal !== 0 && (
 							<Stack className={'review-wrap'}>
-								<Box component={'div'} className={'title-box'}>
+								<div className={'title-box'}>
 									<StarIcon />
 									<span>
 										{commentTotal} review{commentTotal > 1 ? 's' : ''}
 									</span>
-								</Box>
+								</div>
 								{agentComments?.map((comment: Comment) => {
 									return <ReviewCard comment={comment} key={comment?._id} />;
 								})}
-								<Box component={'div'} className={'pagination-box'}>
+								<div className={'pagination-box'}>
 									<Pagination
 										page={commentInquiry.page}
 										count={Math.ceil(commentTotal / commentInquiry.limit) || 1}
@@ -265,7 +265,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 										shape="circular"
 										color="primary"
 									/>
-								</Box>
+								</div>
 							</Stack>
 						)}
 
@@ -278,7 +278,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 								}}
 								value={insertCommentData.commentContent}
 							></textarea>
-							<Box className={'submit-btn'} component={'div'}>
+							<div className={'submit-btn'}>
 								<Button
 									className={'submit-review'}
 									disabled={insertCommentData.commentContent === '' || user?._id === ''}
@@ -299,7 +299,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 										</defs>
 									</svg>
 								</Button>
-							</Box>
+							</div>
 						</Stack>
 					</Stack>
 				</Stack>

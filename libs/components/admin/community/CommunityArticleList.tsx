@@ -152,7 +152,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 								<TableRow hover key={article._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell align="left">{article._id}</TableCell>
 									<TableCell align="left">
-										<Box component={'div'}>
+										<div>
 											{article.articleTitle}
 											{article.articleStatus === BoardArticleStatus.ACTIVE && (
 											<Link
@@ -166,7 +166,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 												</IconButton>
 											</Link>
 											)}
-										</Box>
+										</div>
 									</TableCell>
 									<TableCell align="left">{article.articleCategory}</TableCell>
 									<TableCell align="left" className={'name'}>

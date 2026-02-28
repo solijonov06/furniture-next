@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import Notice from '../../libs/components/cs/Notice';
@@ -37,12 +37,12 @@ const CS: NextPage = () => {
 		return (
 			<Stack className={'cs-page'}>
 				<Stack className={'container'}>
-					<Box component={'div'} className={'cs-main-info'}>
-						<Box component={'div'} className={'info'}>
+					<div className={'cs-main-info'}>
+						<div className={'info'}>
 							<span>Cs center</span>
 							<p>I will answer your questions</p>
-						</Box>
-						<Box component={'div'} className={'btns'}>
+						</div>
+						<div className={'btns'}>
 							<div
 								className={tab == 'notice' ? 'active' : ''}
 								onClick={() => {
@@ -59,14 +59,14 @@ const CS: NextPage = () => {
 							>
 								FAQ
 							</div>
-						</Box>
-					</Box>
+						</div>
+					</div>
 
-					<Box component={'div'} className={'cs-content'}>
+					<div className={'cs-content'}>
 						{tab === 'notice' && <Notice />}
 
 						{tab === 'faq' && <Faq />}
-					</Box>
+					</div>
 				</Stack>
 			</Stack>
 		);
