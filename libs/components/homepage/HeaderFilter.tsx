@@ -12,16 +12,16 @@ import { PropertiesInquiry } from '../../types/property/property.input';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
-const style = {
-	position: 'absolute' as 'absolute',
+const modalStyle: React.CSSProperties = {
+	position: 'absolute',
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
 	width: 'auto',
-	bgcolor: 'background.paper',
+	backgroundColor: '#fff',
 	borderRadius: '12px',
 	outline: 'none',
-	boxShadow: 24,
+	boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
 };
 
 const MenuProps = {
@@ -367,7 +367,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					aria-labelledby="modal-modal-title"
 					aria-describedby="modal-modal-description"
 				>
-					<div style={style}>
+					<div style={modalStyle}>
 						<div className={'advanced-filter-modal'}>
 							<div className={'close'} onClick={() => advancedFilterHandler(false)}>
 								<CloseIcon />
