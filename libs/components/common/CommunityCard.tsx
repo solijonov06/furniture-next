@@ -23,9 +23,18 @@ const CommunityCard = (props: CommunityCardProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
-	const imagePath: string = boardArticle?.articleImage
-		? `${REACT_APP_API_URL}/${boardArticle?.articleImage}`
-		: '/img/community/communityImg.png';
+	
+	// Handle different image sources: base64, full URL, or server path
+	const getImagePath = () => {
+		if (!boardArticle?.articleImage) return '/img/community/communityImg.png';
+		// Check if it's a base64 image
+		if (boardArticle.articleImage.startsWith('data:image')) return boardArticle.articleImage;
+		// Check if it's already a full URL
+		if (boardArticle.articleImage.startsWith('http')) return boardArticle.articleImage;
+		// Otherwise, prepend the API URL
+		return `${REACT_APP_API_URL}/${boardArticle.articleImage}`;
+	};
+	const imagePath: string = getImagePath();
 
 	/** HANDLERS **/
 	const chooseArticleHandler = (e: React.SyntheticEvent, boardArticle: BoardArticle) => {

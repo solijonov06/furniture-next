@@ -7,9 +7,10 @@ import TopAgents from '../libs/components/homepage/TopAgents';
 import Events from '../libs/components/homepage/Events';
 import TrendProperties from '../libs/components/homepage/TrendProperties';
 import TopProperties from '../libs/components/homepage/TopProperties';
+import Statistics from '../libs/components/homepage/Statistics';
+import VideoShowcase from '../libs/components/homepage/VideoShowcase';
+import MobileHero from '../libs/components/homepage/MobileHero';
 import { Stack } from '@mui/material';
-import Advertisement from '../libs/components/homepage/Advertisement';
-import CallToAction from '../libs/components/homepage/CallToAction';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps = async ({ locale }: any) => ({
@@ -23,12 +24,13 @@ const Home: NextPage = () => {
 
 	if (device === 'mobile') {
 		return (
-			<Stack className={'home-page'}>
+			<Stack className={'home-page mobile'}>
+				<MobileHero />
 				<TrendProperties />
 				<PopularProperties />
+				<Statistics />
 				<TopProperties />
 				<TopAgents />
-				<CallToAction />
 			</Stack>
 		);
 	} else {
@@ -36,11 +38,12 @@ const Home: NextPage = () => {
 			<Stack className={'home-page'}>
 				<TrendProperties />
 				<PopularProperties />
+				<VideoShowcase />
+				<Statistics />
 				<TopProperties />
 				<TopAgents />
 				<Events />
 				<CommunityBoards />
-				<CallToAction />
 			</Stack>
 		);
 	}

@@ -1,104 +1,128 @@
 /** VARIABLES **/
 
-// Fonts - Adding Oswald for bold condensed headings (April Ford style)
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 
+// Fonts
 $font: 'Poppins', sans-serif;
 $font-heading: 'Oswald', sans-serif;
 
-// Primary Colors
-$color-primary-blue: #0047FF;
-$color-primary-purple: #7B2FFF;
-$color-primary-pink: #E040FB;
-$color-primary-magenta: #FF00FF;
-
-// Neutral Colors
-$color-dark: #181a20;
-$color-text: #181a20;
-$color-text-light: #717171;
+// Base Colors - Deep Navy & Gold Luxury Theme
+$color-primary: #1E3A5F;           // Deep Navy
+$color-primary-light: #2E4A6F;     // Light Navy
+$color-primary-dark: #0E2A4F;      // Dark Navy
+$color-secondary: #D4A853;         // Gold
+$color-secondary-light: #E4B863;   // Light Gold
+$color-accent: #D4A853;            // Gold accent
+$color-accent-dark: #B8923D;       // Dark Gold
+$color-cream: #F8F6F1;             // Cream
+$color-sand: #EDE8DF;              // Sand
+$color-wood: #8B6F4E;              // Wood Brown
+$color-wood-dark: #5C4A35;         // Dark Wood
+$color-success: #2D7A5A;           // Success Green
+$color-danger: #C45050;            // Danger Red
+$color-warning: #D4A853;           // Warning (Gold)
+$color-info: #1E3A5F;              // Info (Navy)
 $color-white: #ffffff;
-$color-background: #f6f6f6;
-$color-border: #e0e0e0;
+$color-black: #1a1a1a;
 
-// Accent Colors
-$color-accent-red: #eb6753;
-$color-accent-blue: #0066FF;
+// Neutrals
+$color-gray-100: #f8f9fa;
+$color-gray-200: #e9ecef;
+$color-gray-300: #dee2e6;
+$color-gray-400: #ced4da;
+$color-gray-500: #adb5bd;
+$color-gray-600: #6c757d;
+$color-gray-700: #495057;
+$color-gray-800: #343a40;
+$color-gray-900: #212529;
 
-// Gradients (April Ford style - blue to purple to pink)
-$gradient-primary: linear-gradient(135deg, $color-primary-blue 0%, $color-primary-purple 50%, $color-primary-pink 100%);
-$gradient-hero: linear-gradient(135deg, #0047FF 0%, #5C2FFF 35%, #9B2FFF 60%, #D040FB 85%, #FF40FF 100%);
-$gradient-footer: linear-gradient(90deg, $color-primary-blue 0%, $color-primary-purple 50%, $color-primary-pink 100%);
-$gradient-text: linear-gradient(90deg, #0047FF 0%, #7B2FFF 50%, #E040FB 100%);
-$gradient-card-hover: linear-gradient(180deg, rgba(0, 71, 255, 0.05) 0%, rgba(123, 47, 255, 0.1) 100%);
-
-// Shadows
-$shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.08);
-$shadow-navbar: 0px 2px 10px rgba(0, 0, 0, 0.05);
-$shadow-button: 0px 4px 15px rgba(0, 71, 255, 0.3);
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+$spacing-3xl: 64px;
 
 // Border Radius
-$radius-sm: 6px;
-$radius-md: 12px;
-$radius-lg: 20px;
-$radius-full: 50px;
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 // Transitions
-$transition-fast: 0.2s ease;
-$transition-normal: 0.3s ease;
-$transition-slow: 0.5s ease;
+$transition-fast: 150ms ease;
+$transition-normal: 250ms ease;
+$transition-slow: 350ms ease;
 
 // Breakpoints
-$breakpoint-mobile: 768px;
-$breakpoint-tablet: 1024px;
-$breakpoint-desktop: 1300px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-2xl: 1400px;
 
-// ============================================
-// CSS VARIABLES FOR DARK MODE
-// ============================================
+// CSS Variables for Theme Switching - Deep Navy & Gold Luxury Theme
 :root {
-	// Light Mode (Default)
-	--color-bg-primary: #ffffff;
-	--color-bg-secondary: #f6f6f6;
-	--color-bg-tertiary: #f0f0f0;
-	--color-bg-card: #ffffff;
-	--color-bg-navbar: #ffffff;
-	--color-bg-footer: #181a20;
-	
-	--color-text-primary: #181a20;
-	--color-text-secondary: #717171;
-	--color-text-tertiary: #9e9e9e;
-	--color-text-inverse: #ffffff;
-	
-	--color-border-primary: #e0e0e0;
-	--color-border-secondary: #f0f0f0;
-	
-	--shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.08);
-	--shadow-navbar: 0px 2px 10px rgba(0, 0, 0, 0.05);
-	--shadow-elevated: 0px 10px 40px rgba(0, 0, 0, 0.12);
+	// Light Mode (Default) - Warm Cream/Taupe Base
+	--color-bg: #F5F1EB;              // Warm cream
+	--color-bg-secondary: #EDE8E0;     // Soft sand
+	--color-bg-tertiary: #E5DFD5;      // Warm beige
+	--color-bg-warm: #B8A99A;          // Taupe for special sections
+	--color-text: #2C2416;
+	--color-text-secondary: #5A4D3E;
+	--color-text-muted: #8B7D6B;
+	--color-primary: #1E3A5F;
+	--color-primary-hover: #0E2A4F;
+	--color-primary-light: #2E4A6F;
+	--color-accent: #D4A853;
+	--color-accent-light: #E4B863;
+	--color-accent-dark: #B8923D;
+	--color-border: #D8D0C4;
+	--color-card-bg: #FAF8F5;           // Warm white
+	--color-card-shadow: rgba(139, 111, 78, 0.12);
+	--color-input-bg: #FAF8F5;
+	--color-input-border: #D4CFC5;
+	--color-wood: #8B6F4E;
+	--color-wood-dark: #5C4A35;
+	--navbar-bg: rgba(245, 241, 235, 0.98);
+	--navbar-text: #2C2416;
+	--footer-bg: #1E3A5F;
+	--footer-text: #F5F3EE;
 }
 
-[data-theme="dark"] {
-	// Dark Mode - Deep Slate & Soft Violet Theme
-	--color-bg-primary: #0f172a;
-	--color-bg-secondary: #1e293b;
-	--color-bg-tertiary: #334155;
-	--color-bg-card: #1e293b;
-	--color-bg-navbar: #0f172a;
-	--color-bg-footer: #0f172a;
-	
-	--color-text-primary: #f8fafc;
-	--color-text-secondary: #cbd5e1;
-	--color-text-tertiary: #94a3b8;
-	--color-text-inverse: #0f172a;
-	
-	--color-border-primary: #334155;
-	--color-border-secondary: #475569;
-	
-	--color-accent-primary: #a78bfa;
-	--color-accent-hover: #c4b5fd;
-	
-	--shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.4);
-	--shadow-navbar: 0px 2px 10px rgba(0, 0, 0, 0.3);
-	--shadow-elevated: 0px 10px 40px rgba(0, 0, 0, 0.5);
+[data-theme='dark'] {
+	// Dark Mode - Rich Navy Tones
+	--color-bg: #0D1B2A;
+	--color-bg-secondary: #1B2838;
+	--color-bg-tertiary: #243447;
+	--color-text: #F5F3EE;
+	--color-text-secondary: #B8C4D0;
+	--color-text-muted: #7A8A9A;
+	--color-primary: #3A5A7F;
+	--color-primary-hover: #4A6A8F;
+	--color-primary-light: #5A7A9F;
+	--color-accent: #E4B863;
+	--color-accent-light: #F4C873;
+	--color-accent-dark: #D4A853;
+	--color-border: #2A3A4A;
+	--color-card-bg: #1B2838;
+	--color-card-shadow: rgba(0, 0, 0, 0.4);
+	--color-input-bg: #0D1B2A;
+	--color-input-border: #3A4A5A;
+	--color-wood: #A68B6A;
+	--color-wood-dark: #7B6548;
+	--navbar-bg: rgba(13, 27, 42, 0.98);
+	--navbar-text: #F5F3EE;
+	--footer-bg: #0D1B2A;
+	--footer-text: #F5F3EE;
 }

@@ -5,6 +5,7 @@ import Top from '../Top';
 import Footer from '../Footer';
 import { Stack, Box } from '@mui/material';
 import HeaderFilter from '../homepage/HeaderFilter';
+import Hero3DCarousel from '../homepage/Hero3DCarousel';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
 import { getJwtToken, updateUserInfo } from '../../auth';
@@ -28,8 +29,8 @@ const withLayoutMain = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>Vesta Living</title>
+						<meta name={'title'} content={`Vesta Living`} />
 					</Head>
 					<Stack id="mobile-wrap">
 						<Stack id={'top'}>
@@ -50,39 +51,20 @@ const withLayoutMain = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>Vesta Living</title>
+						<meta name={'title'} content={`Vesta Living`} />
 					</Head>
 					<Stack id="pc-wrap">
 						<Stack id={'top'}>
 							<Top />
 						</Stack>
 
-						{/* Hero Section - April Ford Style */}
-						<Stack className={'header-main'}>
-							{/* Hero Content */}
+						{/* Hero Section with 3D Image Carousel */}
+						<Hero3DCarousel />
+						
+						{/* Search Filter Section */}
+						<Stack className={'search-filter-section'}>
 							<Stack className={'container'}>
-								<Box className={'hero-content'}>
-									{/* Breadcrumb */}
-									<Box className={'breadcrumb'}>
-										<span>Homepage</span>
-										<span className={'separator'}>&gt;</span>
-										<span>Properties</span>
-									</Box>
-
-									{/* Main Title */}
-									<h1 className={'hero-title'}>
-										FIND YOUR PERFECT HOME. START YOUR JOURNEY TODAY.
-									</h1>
-
-									{/* Subtitle */}
-									<p className={'hero-subtitle'}>
-										Discover premium properties with exceptional amenities and prime locations. 
-										Your dream home awaits.
-									</p>
-								</Box>
-
-								{/* Search Filter */}
 								<HeaderFilter />
 							</Stack>
 						</Stack>

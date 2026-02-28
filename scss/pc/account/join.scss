@@ -1,194 +1,528 @@
+// ============================================
+// CREATIVE LOGIN PAGE - Furniture Workshop Machine
+// ============================================
+
 #pc-wrap {
-  .join-page {
+  .join-page.creative {
     position: relative;
-    padding: 90px 0px;
+    padding: 40px 0;
     width: 100%;
-    height: auto;
-   .container {
-     align-items: center;
-     .main {
-       width: 1200px;
-       height: 900px;
-       display: flex;
-       flex-direction: row;
-       border-radius: 12px 0px 0px 12px;
-       background: #FFF;
-       box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
-       .left {
-         width: 50%;
-         height: 100%;
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: center;
-         .logo {
-           display: flex;
-           flex-direction: row;
-           align-items: center;
-           img {
-             width: 40px;
-             height: 40px;
-           }
-           span {
-             margin-left: 10px;
-             font-family: $font ;
-             font-size: 22px;
-             font-style: normal;
-             font-weight: 600;
-             line-height: normal;
-             letter-spacing: 0.44px;
-             color:#181A20;
-           }
-         }
-         .info {
-           margin-top: 30px;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           span {
-             font-family: $font;
-             font-size: 20px;
-             font-style: normal;
-             font-weight: 600;
-             line-height: normal;
-             text-transform: uppercase;
-             color:  #181A20;
-           }
-           p {
-             margin-top: 5px;
-             font-family: $font;
-             font-size: 14px;
-             font-style: normal;
-             font-weight: 400;
-             line-height: 26px;
-             color: #181A20;
+    min-height: calc(100vh - 200px);
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-           }
-         }
-         .input-wrap {
-           margin-top: 45px;
-           width: 470px;
-           display: flex;
-           flex-direction: column;
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-          .input-box {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            &:first-child {
-              margin-top: 0px;
-            }
-            span {
-              margin-bottom: 8px;
-              font-family: $font;
-              font-size: 14px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: normal;
-              color:  #181A20;
-            }
-            input {
-              padding: 0px 15px;
-              width: 100%;
-              height: 55px;
-              border-radius: 8px;
-              border: 1px solid #DDD;
-              background:  #FFF;
-              font-family: $font;
-              font-size: 14px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 26px;
-              color: #717171;
+    .creative-workshop {
+      width: 100%;
+      max-width: 1200px;
+      min-height: 750px;
+      display: flex;
+      flex-direction: row;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px var(--color-border);
+      background: var(--color-card-bg);
+    }
+
+    // ============================================
+    // LEFT SIDE - MACHINE SVG
+    // ============================================
+    .workshop-animation {
+      position: relative;
+      width: 50%;
+      min-height: 750px;
+      background: linear-gradient(145deg, #F5EDE3 0%, #E8DED1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      .machine-svg {
+        width: 100%;
+        height: 100%;
+        max-height: 750px;
+
+        // Gear system glow when active
+        .gear-system.active {
+          filter: drop-shadow(0 0 20px rgba(196, 112, 79, 0.4));
+        }
+
+        // Conveyor system glow when active
+        .conveyor-system.active {
+          filter: drop-shadow(0 0 20px rgba(45, 90, 74, 0.4));
+        }
+
+        // Saw system glow when active
+        .saw-system.active {
+          filter: drop-shadow(0 0 25px rgba(45, 90, 74, 0.5));
+        }
+
+        // Drill system glow when active
+        .drill-system.active {
+          filter: drop-shadow(0 0 20px rgba(212, 168, 83, 0.4));
+        }
+      }
+
+      // Machine Labels
+      .machine-labels {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+
+        .label {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 16px;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 8px;
+          font-family: $font;
+          font-size: 11px;
+          font-weight: 700;
+          color: #666;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+
+          .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s ease;
+          }
+
+          &.active {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+            .dot {
+              background: #4ade80;
+              box-shadow: 0 0 10px #4ade80;
             }
           }
-         }
-         .register {
-           margin-top: 45px;
-           width: 470px;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           .type-option {
-             display: flex;
-             flex-direction: row;
-             align-items: center;
-             span.text {
-               font-family: $font;
-               font-size: 14px;
-               font-style: normal;
-               font-weight: 600;
-               line-height: normal;
-               color:  #181A20;
-             }
-             div {
-               margin-left: 20px;
-               display: flex;
-               flex-direction: row;
-               &:nth-child(1){
-                 margin-right: 25px;
-               }
-             }
-           }
-           .remember-info {
-             width: 100%;
-             display: flex;
-             flex-direction: row;
-             justify-content: space-between;
-             align-items: center;
-             a {
-               font-family: $font;
-               font-size: 14px;
-               font-style: normal;
-               font-weight: 400;
-               line-height: 26px;
-               cursor: pointer;
-               color:  #181A20;
-             }
-           }
-           button {
-             margin-top: 25px;
-             width: 100%;
-             height: 55px;
-             border-radius: 12px;
-             background:  #EB6753;
-             font-family: $font;
-             font-size: 15px;
-             font-style: normal;
-             font-weight: 600;
-             line-height: normal;
-             color:  #FFF;
-             img {
-               filter: brightness(0) invert(1);
-             }
-           }
-         }
-         .ask-info {
-           margin-top: 90px;
-           p {
-             font-family: $font;
-             font-size: 20px;
-             font-style: normal;
-             line-height: normal;
-             font-weight: 400;
-             color:  #181A20;
-             b {
-               margin-left: 10px;
-               font-weight: 600;
-               font-size: 32px;
-               cursor: pointer;
-               text-decoration: underline;
-             }
-           }
-         }
-       }
-       .right {
-         width: 50%;
-         height: 100%;
-         background-image: url("/img/banner/joinBg.svg");
-         background-size: cover;
-       }
-     }
-   }
+
+          &.nick-label.active {
+            color: #1E3A5F;
+            border-left: 3px solid #D4A853;
+          }
+
+          &.password-label.active {
+            color: #1E3A5F;
+            border-left: 3px solid #D4A853;
+          }
+
+          &.phone-label.active {
+            color: #D4A853;
+            border-left: 3px solid #D4A853;
+          }
+        }
+      }
+    }
+
+    // ============================================
+    // RIGHT SIDE - FORM SECTION
+    // ============================================
+    .form-section {
+      width: 50%;
+      min-height: 750px;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--color-card-bg);
+
+      .form-header {
+        text-align: center;
+        margin-bottom: 35px;
+
+        .logo-creative {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 20px;
+
+          svg {
+            width: 45px;
+            height: 45px;
+          }
+
+          span {
+            font-family: $font-heading;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: 1px;
+          }
+        }
+
+        h1 {
+          font-family: $font-heading;
+          font-size: 32px;
+          font-weight: 700;
+          color: var(--color-text);
+          margin: 0 0 8px 0;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+        }
+
+        p {
+          font-family: $font;
+          font-size: 14px;
+          color: var(--color-text-secondary);
+          margin: 0;
+        }
+      }
+
+      .form-body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .input-creative {
+          position: relative;
+          transition: all 0.3s ease;
+
+          label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: $font;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+
+            .status-dot {
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background: #ddd;
+              transition: all 0.3s ease;
+
+              &.on {
+                background: #4ade80;
+                box-shadow: 0 0 10px #4ade80;
+              }
+            }
+
+            .machine-name {
+              margin-left: auto;
+              font-size: 10px;
+              font-weight: 600;
+              padding: 4px 10px;
+              background: var(--color-bg-secondary);
+              border-radius: 12px;
+              color: var(--color-text-muted);
+              transition: all 0.3s ease;
+            }
+          }
+
+          input {
+            width: 100%;
+            padding: 16px 20px;
+            font-family: $font;
+            font-size: 15px;
+            color: var(--color-text);
+            background: var(--color-bg-secondary);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+
+            &::placeholder {
+              color: var(--color-text-muted);
+              font-style: italic;
+            }
+
+            &:focus {
+              border-color: var(--color-border);
+              background: var(--color-card-bg);
+            }
+          }
+
+          // When activated (machine running)
+          &.activated {
+            label {
+              color: var(--color-text);
+
+              .machine-name {
+                background: rgba($color-primary, 0.1);
+                color: $color-primary;
+              }
+            }
+
+            input {
+              border-color: $color-primary;
+              box-shadow: 0 0 0 4px rgba($color-primary, 0.1);
+            }
+          }
+        }
+
+        .type-selector {
+          margin-top: 8px;
+
+          > span {
+            font-family: $font;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          .type-options {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+
+            label {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              padding: 14px 20px;
+              background: var(--color-bg-secondary);
+              border: 2px solid transparent;
+              border-radius: 12px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              font-family: $font;
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--color-text-secondary);
+
+              input { display: none; }
+
+              svg {
+                width: 20px;
+                height: 20px;
+              }
+
+              &:hover {
+                border-color: var(--color-border);
+              }
+
+              &.active {
+                background: rgba($color-primary, 0.1);
+                border-color: $color-primary;
+                color: $color-primary;
+              }
+            }
+          }
+        }
+
+        .remember-forgot {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .MuiFormControlLabel-root {
+            margin: 0;
+            .MuiTypography-root {
+              font-family: $font;
+              font-size: 14px;
+              color: var(--color-text-secondary);
+            }
+          }
+
+          a {
+            font-family: $font;
+            font-size: 14px;
+            color: $color-primary;
+            text-decoration: none;
+            &:hover { text-decoration: underline; }
+          }
+        }
+
+        .submit-creative {
+          margin-top: 16px;
+          padding: 18px 32px;
+          background: linear-gradient(135deg, $color-primary 0%, darken($color-primary, 10%) 100%);
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba($color-primary, 0.3);
+
+          span {
+            font-family: $font;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          svg {
+            width: 20px;
+            height: 20px;
+            color: white;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba($color-primary, 0.4);
+            svg { transform: translateX(5px); }
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
+
+        .divider {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin: 8px 0;
+
+          &::before, &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-border);
+          }
+
+          span {
+            font-family: $font;
+            font-size: 12px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+        }
+
+        .social-login {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+
+          .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            border: 2px solid var(--color-border);
+            background: var(--color-card-bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+
+            svg { width: 24px; height: 24px; }
+
+            &:hover {
+              border-color: var(--color-text-secondary);
+              transform: translateY(-2px);
+            }
+
+            &.apple svg { color: var(--color-text); }
+          }
+        }
+      }
+
+      .form-footer {
+        margin-top: 28px;
+        text-align: center;
+
+        p {
+          font-family: $font;
+          font-size: 15px;
+          color: var(--color-text-secondary);
+          margin: 0;
+
+          span {
+            color: $color-primary;
+            font-weight: 600;
+            cursor: pointer;
+            &:hover { text-decoration: underline; }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// DARK MODE
+// ============================================
+[data-theme='dark'] {
+  #pc-wrap {
+    .join-page.creative {
+      .workshop-animation {
+        background: linear-gradient(145deg, #2C2416 0%, #1A1612 100%);
+
+        .machine-labels .label {
+          background: rgba(40, 35, 30, 0.95);
+          color: #999;
+
+          &.active {
+            background: rgba(50, 45, 40, 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: 1100px) {
+  #pc-wrap {
+    .join-page.creative {
+      .creative-workshop {
+        flex-direction: column;
+        max-width: 600px;
+
+        .workshop-animation {
+          width: 100%;
+          min-height: 400px;
+
+          .machine-labels {
+            flex-direction: row;
+            top: auto;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 20px;
+          }
+        }
+
+        .form-section {
+          width: 100%;
+          min-height: auto;
+          padding: 40px 30px;
+        }
+      }
+    }
   }
 }

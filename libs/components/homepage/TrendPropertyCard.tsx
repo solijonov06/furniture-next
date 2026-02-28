@@ -48,24 +48,24 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
-						{/* <div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property.propertyBeds} bed</span>
-						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{property.propertyRooms} rooms</span>
-						</div> */}
+							<span>{property.propertyCategory}</span>
+						</div>
+						<div>
+							<img src="/img/icons/bed.svg" alt="" />
+							<span>{property.propertyMaterial}</span>
+						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property.propertyVolume} m3</span>
+							<span>{property.propertyVolume} m³</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
 						<p>
-							{property.propertyRent ? 'Rent' : ''} {property.propertyRent && property.propertyBarter && '/'}{' '}
-							{property.propertyBarter ? 'Barter' : ''}
+							{property.deliveryAvailable ? 'Delivery' : ''} {property.deliveryAvailable && property.furnitureCondition && '/'}{' '}
+							{property.furnitureCondition ? property.furnitureCondition : ''}
 						</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
@@ -108,24 +108,24 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
-						{/* <div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property.propertyBeds} bed</span>
-						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{property.propertyRooms} rooms</span>
-						</div>*/}
-						<div> 
+							<span>{property.propertyCategory}</span>
+						</div>
+						<div>
+							<img src="/img/icons/bed.svg" alt="" />
+							<span>{property.propertyMaterial}</span>
+						</div>
+						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property.propertyVolume} m3</span>
+							<span>{property.propertyVolume} m³</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
 						<p>
-							{property.propertyRent ? 'Rent' : ''} {property.propertyRent && property.propertyBarter && '/'}{' '}
-							{property.propertyBarter ? 'Barter' : ''}
+							{property.deliveryAvailable ? 'Delivery' : ''} {property.deliveryAvailable && property.furnitureCondition && '/'}{' '}
+							{property.furnitureCondition ? property.furnitureCondition : ''}
 						</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>

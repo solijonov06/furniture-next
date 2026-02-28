@@ -1,4 +1,4 @@
-import { PropertyLocation, PropertyStatus, PropertyType } from '../../enums/property.enum';
+import { PropertyLocation, PropertyStatus, PropertyType, PropertyMaterial, PropertyCategory, FurnitureCondition } from '../../enums/property.enum';
 
 export interface PropertyUpdate {
 	_id: string;
@@ -9,13 +9,12 @@ export interface PropertyUpdate {
 	propertyTitle?: string;
 	propertyPrice?: number;
 	propertyVolume?: number;
-	// propertyBeds?: number;
-	// propertyRooms?: number;
 	propertyImages?: string[];
 	propertyDesc?: string;
-	propertyBarter?: boolean;
-	propertyRent?: boolean;
+	propertyMaterial?: PropertyMaterial;
+	propertyCategory?: PropertyCategory;
+	furnitureCondition?: FurnitureCondition;
+	deliveryAvailable?: boolean;
 	soldAt?: Date;
 	deletedAt?: Date;
-	constructedAt?: Date;
 }

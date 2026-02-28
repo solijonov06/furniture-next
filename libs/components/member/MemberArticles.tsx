@@ -36,11 +36,14 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 			input: searchFilter
 		},
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: any) => {
-		setMemberBoArticles(data?.getBoardArticles?.list);
-		setTotal(data?.getBoardArticles?.metaCounter?.[0]?.total || 0)
+	});
+
+	useEffect(() => {
+		if (BoardArticlesData?.getBoardArticles) {
+			setMemberBoArticles(BoardArticlesData.getBoardArticles.list);
+			setTotal(BoardArticlesData.getBoardArticles.metaCounter?.[0]?.total || 0);
 		}
-	})
+	}, [BoardArticlesData]);
 
 	/** LIFECYCLES **/
 	useEffect(() => {

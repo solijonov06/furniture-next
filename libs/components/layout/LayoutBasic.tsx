@@ -30,9 +30,9 @@ const withLayoutBasic = (Component: any) => {
 
 			switch (router.pathname) {
 				case '/property':
-					title = 'FIND YOUR PERFECT PROPERTY';
-					desc = 'Discover premium properties with exceptional amenities';
-					breadcrumb = ['Homepage', 'Properties'];
+					title = 'FIND YOUR PERFECT FURNITURE';
+					desc = 'Discover premium furnishings with exceptional quality';
+					breadcrumb = [];
 					headerClass = 'header-property';
 					break;
 				case '/agent':
@@ -107,8 +107,8 @@ const withLayoutBasic = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>Vesta Living</title>
+						<meta name={'title'} content={`Vesta Living`} />
 					</Head>
 					<Stack id="mobile-wrap">
 						<Stack id={'top'}>
@@ -129,8 +129,8 @@ const withLayoutBasic = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<title>Vesta Living</title>
+						<meta name={'title'} content={`Vesta Living`} />
 					</Head>
 					<Stack id="pc-wrap">
 						<Stack id={'top'}>

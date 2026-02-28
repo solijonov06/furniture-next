@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Button, Stack, Typography } from '@mui/material';
@@ -16,6 +16,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 	const [updateData, setUpdateData] = useState<MemberUpdate>(initialValues);
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	/** APOLLO REQUESTS **/
 
@@ -23,20 +24,35 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		setUpdateData({
-			...updateData,
-			memberNick: user.memberNick,
-			memberPhone: user.memberPhone,
-			memberAddress: user.memberAddress,
-			memberImage: user.memberImage,
-		});
+		console.log('+user from userVar:', user);
+		if (user && user._id) {
+			setUpdateData(prev => ({
+				...prev,
+				memberNick: user.memberNick || '',
+				memberPhone: user.memberPhone || '',
+				memberAddress: user.memberAddress || '',
+				memberImage: user.memberImage || '',
+			}));
+		}
 	}, [user]);
 
 	/** HANDLERS **/
 	const uploadImage = async (e: any) => {
 		try {
 			const image = e.target.files[0];
+			if (!image) {
+				console.log('No image selected');
+				return;
+			}
+			
 			console.log('+image:', image);
+			console.log('+token:', token ? 'exists' : 'missing');
+			console.log('+API URL:', process.env.REACT_APP_API_GRAPHQL_URL);
+
+			if (!token) {
+				await sweetErrorAlert('Please login first!');
+				return;
+			}
 
 			const formData = new FormData();
 			formData.append(
@@ -67,14 +83,32 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 				},
 			});
 
-			const responseImage = response.data.data.imageUploader;
+			console.log('+response:', response.data);
+			
+			if (response.data.errors) {
+				console.error('GraphQL Errors:', response.data.errors);
+				await sweetErrorAlert(response.data.errors[0]?.message || 'Upload failed');
+				return;
+			}
+
+			const responseImage = response.data.data?.imageUploader;
 			console.log('+responseImage: ', responseImage);
-			updateData.memberImage = responseImage;
-			setUpdateData({ ...updateData });
+			
+			if (responseImage) {
+				// Use functional setState to avoid stale closure
+				setUpdateData(prev => ({ ...prev, memberImage: responseImage }));
+				await sweetMixinSuccessAlert('Image uploaded! Click "Update Profile" to save.');
+			} else {
+				await sweetErrorAlert('No image returned from server');
+			}
 
 			return `${REACT_APP_API_URL}/${responseImage}`;
-		} catch (err) {
-			console.log('Error, uploadImage:', err);
+		} catch (err: any) {
+			console.error('Upload error:', err);
+			const errorMsg = err?.response?.data?.errors?.[0]?.message 
+				|| err?.message 
+				|| 'Upload failed. Is the backend running on port 3005?';
+			await sweetErrorAlert(errorMsg);
 		}
 	};
 
@@ -139,14 +173,48 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 							<Stack className="upload-big-box">
 								<input
 									type="file"
-									hidden
-									id="hidden-input"
-									onChange={uploadImage}
-									accept="image/jpg, image/jpeg, image/png"
+									ref={fileInputRef}
+									style={{ 
+										position: 'absolute',
+										width: '1px',
+										height: '1px',
+										padding: 0,
+										margin: '-1px',
+										overflow: 'hidden',
+										clip: 'rect(0, 0, 0, 0)',
+										whiteSpace: 'nowrap',
+										border: 0,
+									}}
+									onChange={(e) => {
+										console.log('onChange triggered!', e.target.files);
+										uploadImage(e);
+									}}
+									accept="image/jpg,image/jpeg,image/png"
 								/>
-								<label htmlFor="hidden-input" className="labeler">
-									<Typography>Upload Profile Image</Typography>
-								</label>
+								<Button 
+									variant="outlined"
+									component="span"
+									onClick={(e: React.MouseEvent) => {
+										e.preventDefault();
+										console.log('Button clicked, opening file picker...');
+										if (fileInputRef.current) {
+											fileInputRef.current.value = '';
+											fileInputRef.current.click();
+										}
+									}}
+									sx={{
+										borderColor: '#8B5A2B',
+										color: '#8B5A2B',
+										padding: '12px 24px',
+										borderRadius: '8px',
+										'&:hover': {
+											borderColor: '#6B4423',
+											backgroundColor: 'rgba(139, 90, 43, 0.05)',
+										}
+									}}
+								>
+									Upload Profile Image
+								</Button>
 								<Typography className="upload-text">A photo must be in JPG, JPEG or PNG format!</Typography>
 							</Stack>
 						</Stack>

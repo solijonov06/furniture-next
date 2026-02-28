@@ -97,12 +97,13 @@ export const GET_PROPERTY = gql`
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
+			propertyMaterial
+			propertyCategory
+			furnitureCondition
+			deliveryAvailable
 			memberId
 			soldAt
 			deletedAt
-			constructedAt
 			createdAt
 			updatedAt
 			memberData {
@@ -152,12 +153,13 @@ export const GET_PROPERTIES = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -211,12 +213,13 @@ export const GET_AGENT_PROPERTIES = gql`
 				propertyLikes
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 			}
@@ -245,12 +248,13 @@ export const GET_FAVORITES = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -306,12 +310,13 @@ export const GET_VISITED = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
+				propertyMaterial
+				propertyCategory
+				furnitureCondition
+				deliveryAvailable
 				memberId
 				soldAt
 				deletedAt
-				constructedAt
 				createdAt
 				updatedAt
 				memberData {
@@ -604,5 +609,199 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 				total
 			}
 		}
+	}
+`;
+
+/**************************
+ *         NOTICE         *
+ *************************/
+
+export const GET_NOTICES = gql`
+	query GetNotices($input: NoticesInquiry!) {
+		getNotices(input: $input) {
+			list {
+				_id
+				noticeCategory
+				noticeStatus
+				noticeTitle
+				noticeContent
+				noticeViews
+				memberId
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_NOTICE = gql`
+	query GetNotice($input: String!) {
+		getNotice(noticeId: $input) {
+			_id
+			noticeCategory
+			noticeStatus
+			noticeTitle
+			noticeContent
+			noticeViews
+			memberId
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+/**************************
+ *          FAQ           *
+ *************************/
+
+export const GET_FAQS = gql`
+	query GetFaqs($input: FaqsInquiry!) {
+		getFaqs(input: $input) {
+			list {
+				_id
+				faqCategory
+				faqStatus
+				faqQuestion
+				faqAnswer
+				faqViews
+				memberId
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_FAQ = gql`
+	query GetFaq($input: String!) {
+		getFaq(faqId: $input) {
+			_id
+			faqCategory
+			faqStatus
+			faqQuestion
+			faqAnswer
+			faqViews
+			memberId
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+
+export const GET_NOTIFICATIONS = gql`
+	query GetNotifications($input: NotificationsInquiry!) {
+		getNotifications(input: $input) {
+			list {
+				_id
+				notificationType
+				notificationStatus
+				notificationGroup
+				notificationTitle
+				notificationDesc
+				authorId
+				receiverId
+				propertyId
+				articleId
+				createdAt
+				updatedAt
+				authorData {
+					_id
+					memberType
+					memberNick
+					memberFullName
+					memberImage
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *         EVENTS         *
+ *************************/
+
+export const GET_EVENTS = gql`
+	query GetEvents($input: EventsInquiry!) {
+		getEvents(input: $input) {
+			list {
+				_id
+				eventTitle
+				eventCity
+				eventDescription
+				eventImage
+				eventStartDate
+				eventEndDate
+				eventLocation
+				eventLink
+				eventStatus
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_EVENT = gql`
+	query GetEvent($input: String!) {
+		getEvent(eventId: $input) {
+			_id
+			eventTitle
+			eventCity
+			eventDescription
+			eventImage
+			eventStartDate
+			eventEndDate
+			eventLocation
+			eventLink
+			eventStatus
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+export const GET_UPCOMING_EVENTS = gql`
+	query GetUpcomingEvents($input: EventsInquiry!) {
+		getUpcomingEvents(input: $input) {
+			list {
+				_id
+				eventTitle
+				eventCity
+				eventDescription
+				eventImage
+				eventStartDate
+				eventEndDate
+				eventLocation
+				eventLink
+				eventStatus
+				createdAt
+				updatedAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_UNREAD_NOTIFICATION_COUNT = gql`
+	query GetUnreadNotificationCount {
+		getUnreadNotificationCount
 	}
 `;

@@ -41,11 +41,14 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 		variables: { input: followInquiry },
 		skip: !followInquiry?.search?.followerId,
 		notifyOnNetworkStatusChange: true,
-		onCompleted(data: T) {
-			setMemberFollowings(data?.getMemberFollowings?.list);
-			setTotal(data?.getMemberFollowings?.metaCounter[0]?.total);
-		},
-	});	
+	});
+
+	useEffect(() => {
+		if (getMemberFollowingsData?.getMemberFollowings) {
+			setMemberFollowings(getMemberFollowingsData.getMemberFollowings.list);
+			setTotal(getMemberFollowingsData.getMemberFollowings.metaCounter[0]?.total);
+		}
+	}, [getMemberFollowingsData]);	
 
 	/** LIFECYCLES **/
 	useEffect(() => {

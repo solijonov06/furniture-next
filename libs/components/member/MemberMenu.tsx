@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Stack, Typography, Box, List, ListItem, Button } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
@@ -35,10 +35,13 @@ const MemberMenu = (props: MemberMenuProps) => {
 		},
 		skip: !memberId,
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			setMember(data?.getMember);
+	});
+
+	useEffect(() => {
+		if (getMemberData?.getMember) {
+			setMember(getMemberData.getMember);
 		}
-	})
+	}, [getMemberData]);
 
 	if (device === 'mobile') {
 		return <div>MEMBER MENU MOBILE</div>;

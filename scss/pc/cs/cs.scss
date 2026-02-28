@@ -1,375 +1,363 @@
-// ============================================
-// CS (CUSTOMER SUPPORT) PAGE - April Ford Style
-// ============================================
-
 #pc-wrap {
-	.cs-page {
-		position: relative;
-		padding: 80px 0 100px;
-		width: 100%;
-		background: var(--color-bg-primary);
+  .cs-page {
+    position: relative;
+    padding: 60px 0px 60px;
+    width: 100%;
+    height: auto;
+    background: var(--color-bg, #fff);
+    transition: background-color 0.3s ease;
+    .container {
+      display: flex;
+      flex-direction: column;
+      .cs-main-info {
+        display: flex;
+        flex-direction: column;
+        .info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          span {
+            color: var(--color-text, #000);
+            font-family: $font;
+            font-size: 35px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.525px;
+          }
+          p {
+            color: var(--color-text-secondary, #757575);
+            font-family: $font;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+        .btns {
+          margin-top: 50px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          :first-child {
+            border-radius: 4px 0 0 4px;
+          }
+          :last-child {
+            border-radius: 0 4px 4px 0;
+          }
+          div {
+            width: 204px;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--color-border, #EEE);
+            cursor: pointer;
+            color: var(--color-text-muted, #BDBDBD);
+            font-family: $font;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.42px;
+            background: var(--color-card-bg, #fff);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            &.active {
+              border: 1px solid var(--color-primary, #725CE8);
+              background: var(--color-primary, #EB6753);
+              color: #FFF;
+            }
+          }
+        }
+      }
+      .cs-content {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        .title {
+          margin-bottom: 25px;
+          color: var(--color-text, #000);
+          font-family: $font;
+          font-size: 27px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: 0.54px;
+        }
+        .pagination {
+          margin-top: 50px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+        .notice-content {
+          .main {
+            border: 1px solid var(--color-border, #EEE);
+            background: var(--color-card-bg, #fff);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            .top {
+              padding: 25px 33px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              span {
+                color: var(--color-text, #000);
+                font-family: $font;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                text-transform: capitalize;
+              }
+            }
+            .bottom {
+              display: flex;
+              flex-direction: column;
+              .notice-card {
+                padding: 20px 14px 20px 30px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border: 1px solid var(--color-border, #EEE);
+                background: var(--color-card-bg, #fff);
+                transition: background-color 0.3s ease, border-color 0.3s ease;
+                &.event {
+                  background: #F6D79A;
+                }
+                div {
+                  padding: 6px 9px;
+                  border-radius: 12px;
+                  border: 1px solid var(--color-primary, #EB6753);
+                  color: var(--color-primary, #EB6753);
+                  font-family: $font;
+                  font-size: 12px;
+                  font-style: normal;
+                  font-weight: 400;
+                }
+                .notice-number {
+                  margin-left: 18px;
+                  width: 39px;
+                  color: var(--color-text-muted, #BDBDBD);
+                  font-family: $font;
+                  font-size: 14px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+                }
+                .notice-title {
+                  width: 1060px;
+                  color: var(--color-text, #000);
+                  font-family: $font;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+                }
+                .notice-date {
+                  color: var(--color-text-muted, #BDBDBD);
+                  font-family: $font;
+                  font-size: 14px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+                }
+              }
+            }
 
-		.container {
-			display: flex;
-			flex-direction: column;
+          }
 
-			// ============================================
-			// MAIN INFO SECTION
-			// ============================================
-			.cs-main-info {
-				display: flex;
-				flex-direction: column;
+        }
+        .faq-content {
+          margin-top: 25px;
+          display: flex;
+          flex-direction: column;
+          .categories {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            div {
+              width: 14%;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: var(--color-text-muted, #BDBDBD);
+              text-align: center;
+              font-family: $font;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+              letter-spacing: -0.225px;
+              cursor: pointer;
+              &.active {
+                border-bottom: 1px solid var(--color-primary, #EB6753);
+                color: var(--color-primary, #EB6753);
+              }
+            }
+          }
+          .wrap {
+            margin-top: 50px;
+            .MuiAccordionDetails-root {
+              padding: 30px 20px;
+              background: var(--color-bg-secondary, #FAFAFA);
+            }
+            .MuiAccordion-root {
+              background: var(--color-card-bg, #fff);
+              color: var(--color-text, #000);
+              transition: background-color 0.3s ease;
+            }
+            .MuiAccordionSummary-content {
+              color: var(--color-text, #000);
+            }
+            .badge {
+              margin: 0 24px;
+              display: inline-block;
+              padding: 4px 10px;
+              border: 1px solid var(--color-primary, #725CE8);
+              border-radius: 7px;
+              color: var(--color-primary, #725CE8);
+            }
+            .question {
+              .badge {
+                background: #e92C28;
+                color: #fff;
+              }
+            }
+            .answer {
+              margin-left: 80px;
+              display: flex;
+              white-space: nowrap;
+              align-items: center;
+              flex-direction: row;
+              color: var(--color-text, #000);
+              .badge {
+                color: var(--color-primary, #EB6753);
+                border: 1px solid var(--color-primary, #EB6753);
+              }
+            }
+          }
+        }
 
-				.info {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					text-align: center;
+        // ============================================
+        // INQUIRY / CONTACT FORM STYLES
+        // ============================================
+        .inquiry-content {
+          margin-top: 25px;
+          
+          .inquiry-wrapper {
+            display: flex;
+            gap: 40px;
+            background: var(--color-card-bg, #fff);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--color-card-shadow, rgba(0, 0, 0, 0.08));
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+          }
 
-					span {
-						color: var(--color-text-primary);
-						font-family: $font-heading;
-						font-size: 42px;
-						font-weight: 700;
-						text-transform: uppercase;
-						letter-spacing: 2px;
-					}
+          .contact-info {
+            flex: 0 0 380px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #1E3A5F 0%, #0D1B2A 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
 
-					p {
-						margin-top: 16px;
-						color: var(--color-text-secondary);
-						font-family: $font;
-						font-size: 16px;
-						max-width: 500px;
-					}
-				}
+            .info-header {
+              margin-bottom: 40px;
+            }
 
-				// Tab Buttons
-				.btns {
-					margin-top: 50px;
-					display: flex;
-					flex-direction: row;
-					justify-content: center;
-					gap: 0;
+            .info-items {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
 
-					div {
-						padding: 16px 40px;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						border: 2px solid var(--color-border-primary);
-						cursor: pointer;
-						color: var(--color-text-secondary);
-						font-family: $font;
-						font-size: 14px;
-						font-weight: 600;
-						text-transform: uppercase;
-						letter-spacing: 0.5px;
-						transition: all $transition-fast;
-						background: var(--color-bg-card);
+              .info-item {
+                display: flex;
+                align-items: center;
+                gap: 16px;
 
-						&:first-child {
-							border-radius: $radius-full 0 0 $radius-full;
-							border-right: none;
-						}
+                .icon-box {
+                  width: 48px;
+                  height: 48px;
+                  border-radius: 12px;
+                  background: rgba(212, 168, 83, 0.15);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
 
-						&:last-child {
-							border-radius: 0 $radius-full $radius-full 0;
-							border-left: none;
-						}
+                  svg {
+                    color: #D4A853;
+                    font-size: 24px;
+                  }
+                }
 
-						&:hover {
-							color: var(--color-accent-primary, $color-primary-blue);
-							border-color: var(--color-accent-primary, $color-primary-blue);
-						}
+                .MuiTypography-subtitle2 {
+                  color: #fff;
+                }
 
-						&.active {
-							border-color: var(--color-accent-primary, $color-primary-blue);
-							background: var(--color-accent-primary, $color-primary-blue);
-							color: $color-white;
-						}
-					}
-				}
-			}
+                .MuiTypography-body2 {
+                  color: rgba(255, 255, 255, 0.7);
+                }
+              }
+            }
 
-			// ============================================
-			// CONTENT SECTION
-			// ============================================
-			.cs-content {
-				margin-top: 50px;
-				display: flex;
-				flex-direction: column;
+            .response-time {
+              margin-top: auto;
+              padding: 16px 20px;
+              background: rgba(212, 168, 83, 0.15);
+              border-radius: 10px;
+              border: 1px solid rgba(212, 168, 83, 0.3);
 
-				.title {
-					margin-bottom: 30px;
-					color: var(--color-text-primary);
-					font-family: $font-heading;
-					font-size: 28px;
-					font-weight: 600;
-					text-transform: uppercase;
-					letter-spacing: 1px;
-				}
+              .MuiTypography-body2 {
+                color: #D4A853;
+              }
+            }
+          }
 
-				// Pagination
-				.pagination {
-					margin-top: 60px;
-					display: flex;
-					flex-direction: row;
-					justify-content: center;
+          .inquiry-form {
+            flex: 1;
+            padding: 50px 40px;
 
-					.MuiPagination-ul {
-						gap: 8px;
+            .MuiTypography-h5 {
+              color: var(--color-text, #1E3A5F);
+            }
 
-						li button {
-							width: 40px;
-							height: 40px;
-							border-radius: 50%;
-							font-family: $font;
-							font-size: 14px;
-							color: var(--color-text-primary);
-							transition: all $transition-fast;
+            .MuiOutlinedInput-root {
+              background: var(--color-input-bg, #fff);
+              
+              &:hover .MuiOutlinedInput-notchedOutline {
+                border-color: #D4A853;
+              }
 
-							&.Mui-selected {
-								background: var(--color-accent-primary, $color-primary-blue);
-								color: $color-white;
-							}
-						}
-					}
-				}
+              &.Mui-focused .MuiOutlinedInput-notchedOutline {
+                border-color: #D4A853;
+              }
+            }
 
-				// ============================================
-				// NOTICE CONTENT
-				// ============================================
-				.notice-content {
-					.main {
-						border-radius: $radius-md;
-						overflow: hidden;
-						box-shadow: var(--shadow-card);
-						border: 1px solid var(--color-border-primary);
+            .MuiInputLabel-root {
+              color: var(--color-text-muted, #717171);
 
-						.top {
-							padding: 20px 30px;
-							display: flex;
-							flex-direction: row;
-							justify-content: space-between;
-							background: var(--color-bg-secondary);
-							border-bottom: 1px solid var(--color-border-primary);
+              &.Mui-focused {
+                color: #D4A853;
+              }
+            }
 
-							span {
-								color: var(--color-text-secondary);
-								font-family: $font;
-								font-size: 13px;
-								font-weight: 600;
-								text-transform: uppercase;
-								letter-spacing: 0.5px;
-							}
-						}
+            .MuiFormHelperText-root {
+              color: var(--color-text-muted, #717171);
+            }
 
-						.bottom {
-							display: flex;
-							flex-direction: column;
+            .MuiSelect-select {
+              color: var(--color-text, #1E3A5F);
+            }
 
-							.notice-card {
-								padding: 24px 30px;
-								display: flex;
-								flex-direction: row;
-								justify-content: space-between;
-								align-items: center;
-								border-bottom: 1px solid var(--color-border-primary);
-								background: var(--color-bg-card);
-								transition: background $transition-fast;
-								cursor: pointer;
-
-								&:hover {
-									background: var(--color-bg-secondary);
-								}
-
-								&:last-child {
-									border-bottom: none;
-								}
-
-								&.event {
-									background: rgba(167, 139, 250, 0.1);
-								}
-
-								div {
-									padding: 6px 14px;
-									border-radius: $radius-full;
-									border: 1px solid var(--color-accent-primary, $color-primary-blue);
-									color: var(--color-accent-primary, $color-primary-blue);
-									font-family: $font;
-									font-size: 11px;
-									font-weight: 600;
-									text-transform: uppercase;
-								}
-
-								.notice-number {
-									margin-left: 20px;
-									width: 50px;
-									color: var(--color-text-secondary);
-									font-family: $font;
-									font-size: 14px;
-								}
-
-								.notice-title {
-									flex: 1;
-									margin: 0 30px;
-									color: var(--color-text-primary);
-									font-family: $font;
-									font-size: 15px;
-									font-weight: 500;
-								}
-
-								.notice-date {
-									color: var(--color-text-tertiary);
-									font-family: $font;
-									font-size: 13px;
-								}
-							}
-						}
-					}
-				}
-
-				// ============================================
-				// FAQ CONTENT
-				// ============================================
-				.faq-content {
-					margin-top: 30px;
-					display: flex;
-					flex-direction: column;
-
-					// Category Tabs
-					.categories {
-						display: flex;
-						flex-direction: row;
-						justify-content: center;
-						gap: 8px;
-						padding-bottom: 20px;
-						border-bottom: 1px solid var(--color-border-primary);
-
-						div {
-							padding: 12px 24px;
-							display: flex;
-							justify-content: center;
-							align-items: center;
-							color: var(--color-text-secondary);
-							font-family: $font;
-							font-size: 14px;
-							font-weight: 500;
-							cursor: pointer;
-							border-radius: $radius-full;
-							transition: all $transition-fast;
-
-							&:hover {
-								color: var(--color-accent-primary, $color-primary-blue);
-								background: rgba(167, 139, 250, 0.1);
-							}
-
-							&.active {
-								background: var(--color-accent-primary, $color-primary-blue);
-								color: $color-white;
-							}
-						}
-					}
-
-					// FAQ Accordion
-					.wrap {
-						margin-top: 30px;
-
-						.MuiAccordion-root {
-							margin-bottom: 16px;
-							border-radius: $radius-md !important;
-							box-shadow: var(--shadow-card) !important;
-							overflow: hidden;
-							background: var(--color-bg-card) !important;
-							border: 1px solid var(--color-border-primary);
-
-							&::before {
-								display: none;
-							}
-
-							&.Mui-expanded {
-								margin-bottom: 16px;
-							}
-						}
-
-						.MuiAccordionSummary-root {
-							padding: 20px 24px;
-							min-height: auto;
-							background: var(--color-bg-card);
-
-							&.Mui-expanded {
-								min-height: auto;
-							}
-						}
-
-						.MuiAccordionSummary-content {
-							margin: 0;
-
-							&.Mui-expanded {
-								margin: 0;
-							}
-						}
-
-						.MuiAccordionDetails-root {
-							padding: 24px;
-							background: var(--color-bg-secondary);
-						}
-
-						.badge {
-							display: inline-flex;
-							align-items: center;
-							justify-content: center;
-							padding: 6px 14px;
-							border-radius: $radius-full;
-							font-family: $font;
-							font-size: 11px;
-							font-weight: 600;
-							text-transform: uppercase;
-							letter-spacing: 0.5px;
-							margin-right: 16px;
-						}
-
-						.question {
-							display: flex;
-							align-items: center;
-
-							.badge {
-								background: var(--color-accent-primary, $color-primary-blue);
-								color: $color-white;
-								border: none;
-							}
-
-							span {
-								color: var(--color-text-primary);
-								font-family: $font;
-								font-size: 15px;
-								font-weight: 500;
-							}
-						}
-
-						.answer {
-							display: flex;
-							align-items: flex-start;
-							flex-direction: row;
-
-							.badge {
-								color: var(--color-accent-primary, $color-primary-purple);
-								border: 1px solid var(--color-accent-primary, $color-primary-purple);
-								background: transparent;
-								flex-shrink: 0;
-							}
-
-							span {
-								color: var(--color-text-secondary);
-								font-family: $font;
-								font-size: 14px;
-								line-height: 1.7;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+            .MuiMenuItem-root {
+              color: var(--color-text, #1E3A5F);
+            }
+          }
+        }
+      }
+    }
+  }
 }

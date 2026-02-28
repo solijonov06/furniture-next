@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import WestIcon from '@mui/icons-material/West';
@@ -38,10 +38,13 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: initialInput },
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			setTrendProperties(data?.getProperties?.list);
-		},
 	});
+
+	useEffect(() => {
+		if (getPropertiesData?.getProperties?.list) {
+			setTrendProperties(getPropertiesData.getProperties.list);
+		}
+	}, [getPropertiesData]);
 	
 	/** HANDLERS **/
 	const likePropertyHandler = async (user: T, id: string) => {
@@ -68,7 +71,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 			<Stack className={'trend-properties'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>Trend Properties</span>
+						<span>Trend Furnishings</span>
 					</Stack>
 					<Stack className={'card-box'}>
 						{trendProperties.length === 0 ? (
@@ -102,7 +105,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>Trend Properties</span>
+							<span>Trend Furnishings</span>
 							<p>Trend is based on likes</p>
 						</Box>
 						<Box component={'div'} className={'right'}>

@@ -2,6 +2,7 @@
 	#community-detail-page {
 		position: relative;
 		padding-bottom: 135px;
+		background: var(--color-bg);
 		.container {
 			padding-top: 100px;
 			flex-direction: column;
@@ -16,8 +17,8 @@
 					padding: 30px 15px 57px 21px;
 					margin-top: 100px;
 					border-radius: 12px;
-					border: 1px solid rgba(196, 196, 196, 0.79);
-					background: #fff;
+					border: 1px solid var(--color-border);
+					background: var(--color-card-bg);
 					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 					.image-info {
 						width: 100%;
@@ -32,7 +33,7 @@
 						.community-name {
 							.name {
 								margin-top: 15px;
-								color: #181a20;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -48,9 +49,10 @@
 						justify-content: center;
 						align-items: center;
 						border-radius: 6px;
-						border: 1px solid #181a20;
+						border: 1px solid var(--color-border);
 						margin-bottom: 10px;
-						color: #181a20;
+						color: var(--color-text);
+						background: var(--color-card-bg);
 						font-family: $font;
 						font-size: 14px;
 						font-style: normal;
@@ -64,8 +66,8 @@
 						padding: 0;
 						justify-content: center;
 						align-items: center;
-						background-color: #000000;
-						color: #ffffff;
+						background-color: var(--color-text);
+						color: var(--color-bg);
 						border-radius: 6px;
 						margin-bottom: 10px;
 						font-family: $font;
@@ -88,7 +90,7 @@
 							width: 60%;
 							height: auto;
 							.title {
-								color: #000;
+								color: var(--color-text);
 								font-family: $font;
 								font-size: 24px;
 								font-style: normal;
@@ -97,7 +99,7 @@
 								letter-spacing: 0.24px;
 							}
 							.sub-title {
-								color: #757575;
+								color: var(--color-text-secondary);
 								font-family: $font;
 								font-size: 13px;
 								font-style: normal;
@@ -110,7 +112,7 @@
 							width: 91px;
 							height: 32px;
 							border-radius: 4px;
-							background: #eb6753;
+							background: #1E3A5F;
 							color: #fff;
 							font-family: $font;
 							font-size: 13px;
@@ -125,7 +127,8 @@
 							width: 1012px;
 							min-height: 500px;
 							border-radius: 8px 8px 0px 0px;
-							border: 1px solid #eee;
+							border: 1px solid var(--color-border);
+							background: var(--color-card-bg);
 							box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 							.content-and-info {
 								width: 100%;
@@ -133,11 +136,11 @@
 								padding: 35px 25px;
 								flex-direction: row;
 								justify-content: space-between;
-								border-bottom: 1px solid #eee;
+								border-bottom: 1px solid var(--color-border);
 								.content {
 									gap: 12px;
 									.content-data {
-										color: #000;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 18px;
 										font-style: normal;
@@ -156,7 +159,7 @@
 											cursor: pointer;
 										}
 										.member-nick {
-											color: #000;
+											color: var(--color-text);
 											font-family: $font;
 											font-size: 13px;
 											font-style: normal;
@@ -168,10 +171,10 @@
 										.divider {
 											width: 1px;
 											height: 16px;
-											background: #eee;
+											background: var(--color-border);
 										}
 										.time-added {
-											color: #bdbdbd;
+											color: var(--color-text-secondary);
 											font-family: $font;
 											font-size: 12px;
 											font-style: normal;
@@ -198,7 +201,7 @@
 										}
 										.text {
 											padding-top: 2 px;
-											color: #000;
+											color: var(--color-text);
 											font-family: $font;
 											font-size: 11px;
 											font-style: normal;
@@ -210,7 +213,7 @@
 									.divider {
 										width: 1px;
 										height: 21px;
-										background: #eeeeee;
+										background: var(--color-border);
 									}
 								}
 							}
@@ -234,7 +237,7 @@
 										gap: 5px;
 										border-radius: 2px;
 										border: 1px solid #eee;
-										background: #eb6753;
+										background: #1E3A5F;
 										p {
 											color: #fff;
 											font-family: $font;
@@ -253,9 +256,10 @@
 							height: auto;
 							padding: 30px 24px;
 							gap: 11px;
+							background: var(--color-card-bg);
 							.title-text {
 								align-self: flex-start;
-								color: #000;
+								color: var(--color-text);
 								text-align: center;
 								font-family: $font;
 								font-size: 17px;
@@ -270,9 +274,11 @@
 									height: 61px;
 									outline: none;
 									padding: 22px 17px;
-									border: 1px solid #eee;
+									border: 1px solid var(--color-border);
+									background: var(--color-input-bg);
+									color: var(--color-text);
 									::placeholder {
-										color: #c0c0c0;
+										color: var(--color-text-secondary);
 										font-family: $font;
 										font-size: 14px;
 										font-style: normal;
@@ -288,10 +294,11 @@
 									justify-content: space-between;
 									align-items: center;
 									padding-left: 17px;
-									border: 1px solid #eee;
+									border: 1px solid var(--color-border);
 									border-top: none;
+									background: var(--color-card-bg);
 									p {
-										color: #000;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 14px;
 										font-style: normal;
@@ -303,7 +310,7 @@
 										width: 100.077px;
 										height: 100%;
 										border-radius: 0;
-										background: #eb6753;
+										background: #1E3A5F;
 										color: #fff;
 										font-family: $font;
 										font-size: 14px;
@@ -318,16 +325,17 @@
 						.comments {
 							width: 100%;
 							height: auto;
-							border: 1px solid #efefef;
+							border: 1px solid var(--color-border);
 							border-top: none;
+							background: var(--color-card-bg);
 							.comments-title {
 								width: 112.087px;
 								display: flex;
 								align-items: center;
 								justify-content: center;
 								padding: 16px 15px;
-								border-bottom: 2px solid #eb6753;
-								color: #eb6753;
+								border-bottom: 2px solid #1E3A5F;
+								color: #1E3A5F;
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -349,8 +357,9 @@
 								height: auto;
 								padding: 20px 24px;
 								gap: 17px;
-								border: 1px solid #efefef;
+								border: 1px solid var(--color-border);
 								border-top: none;
+								background: var(--color-card-bg);
 								.member-info {
 									width: 100%;
 									height: auto;
@@ -371,7 +380,7 @@
 										}
 										.name-date-column {
 											.name {
-												color: #000;
+												color: var(--color-text);
 												font-family: $font;
 												font-size: 16px;
 												font-style: normal;
@@ -380,7 +389,7 @@
 												cursor: pointer;
 											}
 											.date {
-												color: #757575;
+												color: var(--color-text-secondary);
 												font-family: $font;
 												font-size: 13px;
 												font-style: normal;
@@ -399,7 +408,7 @@
 									width: 100%;
 									height: auto;
 									p {
-										color: #000;
+										color: var(--color-text);
 										font-family: $font;
 										font-size: 16px;
 										font-style: normal;
@@ -419,10 +428,11 @@
 				gap: 75px;
 				padding: 30px 9px 28px 9px;
 				border-radius: 10px;
-				border: 1px solid #c4c4c4;
+				border: 1px solid var(--color-border);
+				background: var(--color-card-bg);
 				.similar-articles-title {
 					padding-left: 56px;
-					color: #000;
+					color: var(--color-text);
 					font-family: $font;
 					font-size: 30px;
 					font-style: normal;

@@ -1,4 +1,49 @@
+// Admin Dark Mode CSS Variables - Warm Earthy Theme
+:root {
+  --admin-bg: #FAF8F5;
+  --admin-bg-secondary: #ffffff;
+  --admin-text: #2C2416;
+  --admin-text-secondary: #6B5D4D;
+  --admin-text-muted: #9B8B7A;
+  --admin-border: rgba(139, 111, 78, 0.15);
+  --admin-sidebar-bg: #D4A853;
+  --admin-sidebar-text: #F5EDE3;
+  --admin-card-bg: #ffffff;
+  --admin-table-header: #F5EDE3;
+  --admin-table-row-hover: #FAF8F5;
+  --admin-input-bg: #ffffff;
+  --admin-user-bg: rgba(255, 255, 255, 0.15);
+  --admin-menu-active-bg: rgba(196, 112, 79, 0.15);
+  --admin-accent: #1E3A5F;
+  --admin-accent-light: #D4886A;
+  --admin-secondary: #D4A853;
+  --admin-shadow: rgb(139 111 78 / 10%) 0px 0px 2px 0px, rgb(139 111 78 / 8%) 0px 12px 24px -4px;
+}
+
+[data-theme="dark"] {
+  --admin-bg: #1A1612;
+  --admin-bg-secondary: #252018;
+  --admin-text: #F5EDE3;
+  --admin-text-secondary: #C4B8A8;
+  --admin-text-muted: #8B7D6B;
+  --admin-border: rgba(245, 237, 227, 0.12);
+  --admin-sidebar-bg: #1A3D32;
+  --admin-sidebar-text: #F5EDE3;
+  --admin-card-bg: #252018;
+  --admin-table-header: #342C22;
+  --admin-table-row-hover: #2D2519;
+  --admin-input-bg: #1A1612;
+  --admin-user-bg: rgba(255, 255, 255, 0.08);
+  --admin-menu-active-bg: rgba(212, 136, 106, 0.2);
+  --admin-accent: #D4886A;
+  --admin-accent-light: #E4A88A;
+  --admin-secondary: #4D8A74;
+  --admin-shadow: rgb(0 0 0 / 40%) 0px 0px 2px 0px, rgb(0 0 0 / 30%) 0px 12px 24px -4px;
+}
+
 #pc-wrap {
+  background: var(--admin-bg);
+
   .MuiAppBar-root {
     height: 64px;
     display: flex;
@@ -8,15 +53,19 @@
     position: fixed;
     left: auto;
     box-shadow: none;
-    background: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    background: var(--admin-bg-secondary);
+    border-bottom: 1px solid var(--admin-border);
     .settings-icon-admin {
       margin-right: 15px;
-      color: #7b809a;
+      color: var(--admin-text-muted);
       cursor: pointer;
     }
   }
   .aside {
+    .MuiDrawer-paper {
+      background: var(--admin-sidebar-bg) !important;
+      border-right: 1px solid var(--admin-border);
+    }
     .logo-box {
       display: flex;
       flex-direction: row;
@@ -27,17 +76,25 @@
       }
     }
     .user {
-      background: #f5f5f5;
+      background: var(--admin-user-bg);
     }
     hr {
       margin: 24px 0;
+      border-color: var(--admin-border);
     }
     .MuiListItemIcon-root {
       margin-right: 16px;
+      color: var(--admin-text-secondary);
+    }
+    .MuiTypography-root {
+      color: var(--admin-sidebar-text);
     }
   }
   .user {
-    background: #f5f5f5;
+    background: var(--admin-user-bg);
+    .MuiTypography-root {
+      color: var(--admin-text);
+    }
   }
   .menu-list {
     padding: 8px 24px 8px 32px;
@@ -45,13 +102,17 @@
       padding: 8px 16px 8px 28px;
       border-radius: 4px;
       font-size: 14px;
+      color: var(--admin-text-secondary);
+      &:hover {
+        background: var(--admin-table-row-hover);
+      }
     }
     li.on {
       font-weight: 600;
-      background: #FDF4F4;
-      color: #F54D56;
+      background: var(--admin-menu-active-bg);
+      color: #1E3A5F;
       span {
-        color: #212121;
+        color: var(--admin-text);
       }
     }
   }
@@ -60,6 +121,7 @@
     margin-left: auto;
     padding: 116px 24px;
     align-items: center;
+    background: var(--admin-bg);
     .flex-space {
       display: flex;
       flex-direction: row;
@@ -76,8 +138,8 @@
       border-radius: 4px;
     }
     .success {
-      color: #229a16;
-      background: rgba(84, 214, 44, 0.16);
+      color: #D4A853;
+      background: rgba(45, 90, 74, 0.16);
     }
     .warning {
       color: #f57c00;
@@ -101,7 +163,7 @@
     }
     .success-txt {
       font-size: 14px;
-      color: #229a16;
+      color: #D4A853;
     }
     .warning-txt {
       font-size: 14px;
@@ -161,7 +223,7 @@
           min-width: 220px;
         }
         .active {
-          color: #229a16;
+          color: #D4A853;
           background: rgba(84, 214, 44, 0.16);
         }
         .warning {
@@ -194,10 +256,12 @@
     .content-area {
       strong {
         margin: 0 3px;
+        color: var(--admin-text);
       }
       .tit {
         font-size: 20px;
         padding: 32px 24px;
+        color: var(--admin-text);
       }
       .btn-upload {
         flex-direction: column;
@@ -212,14 +276,16 @@
           height: 80%;
           padding: 10px;
           font-size: 14px;
-          border: 1px solid #eee;
+          border: 1px solid var(--admin-border);
           border-radius: 4px;
           resize: none;
+          background: var(--admin-input-bg);
+          color: var(--admin-text);
         }
       }
       .desc {
         span {
-          color: #757575;
+          color: var(--admin-text-muted);
           margin-right: 4px;
         }
       }
@@ -227,11 +293,12 @@
     .user-area {
       margin-bottom: 24px;
       .user-id {
-        background: #f5f5f5;
+        background: var(--admin-user-bg);
         border-radius: 30px;
         padding: 0 8px;
         margin-top: 8px;
         text-align: center;
+        color: var(--admin-text);
       }
       .connect {
         height: min-content;
@@ -240,7 +307,7 @@
         margin-left: 10px;
       }
       .connect.online {
-        color: #229a16;
+        color: #D4A853;
         background: rgba(84, 214, 44, 0.16);
       }
       .connect.offline {
@@ -257,6 +324,16 @@
           margin-right: 0;
         }
       }
+      .MuiOutlinedInput-root {
+        background: var(--admin-input-bg);
+        color: var(--admin-text);
+        .MuiOutlinedInput-notchedOutline {
+          border-color: var(--admin-border);
+        }
+      }
+      .MuiInputLabel-root {
+        color: var(--admin-text-muted);
+      }
     }
     .btn-wrap {
       margin-top: 24px;
@@ -267,12 +344,12 @@
       }
       button:nth-child(2) {
         color:#fff;
-        box-shadow: rgb(255 48 48 / 24%) 0px 8px 16px 0px;
+        box-shadow: rgb(196 112 79 / 24%) 0px 8px 16px 0px;
       }
     }
     .btn-complete {
       color:#fff;
-      box-shadow: rgb(255 48 48 / 24%) 0px 8px 16px 0px;
+      box-shadow: rgb(196 112 79 / 24%) 0px 8px 16px 0px;
     }
     .btn-action {
       position: static;
@@ -283,16 +360,18 @@
     .btn-add {
       color: #fff;
       font-weight: 500;
-      box-shadow: rgb(255 48 48 / 24%) 0px 8px 16px 0px;
+      box-shadow: rgb(196 112 79 / 24%) 0px 8px 16px 0px;
     }
     .btn-cancel {
-      color: #757575;
-      border: 1px solid #eee;
+      color: var(--admin-text-muted);
+      border: 1px solid var(--admin-border);
+      background: var(--admin-card-bg);
     }
     .btn-upload {
-      border: 1px dashed #eee;
+      border: 1px dashed var(--admin-border);
+      background: var(--admin-card-bg);
     }
-    .btn-text { color: #e92c28; }
+    .btn-text { color: #1E3A5F; }
     .btn-window {
       color: #757575;
       margin-left: 8px;
@@ -307,25 +386,26 @@
     }
 
     .table-wrap {
-      background: #fff;
+      background: var(--admin-card-bg);
       border-radius: 4px;
-      box-shadow: rgb(145 158 171 / 20%) 0px 0px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px;
+      box-shadow: var(--admin-shadow);
       .tab-menu {
         display: flex;
         flex-direction: row;
         padding: 0 24px;
+        border-bottom: 1px solid var(--admin-border);
         li {
           width: auto;
           height: 48px;
           cursor: pointer;
           padding: 12px 16px;
-          color: #bdbdbd;
+          color: var(--admin-text-muted);
           font-size: 14px;
         }
         li.on {
           font-weight: 500;
-          color: #e92c28;
-          border-bottom: 2px solid #e92c28;
+          color: #1E3A5F;
+          border-bottom: 2px solid #1E3A5F;
         }
       }
       &.check-table-wrap {
@@ -336,13 +416,13 @@
       }
       thead {
         tr {
-          background: #fafafa;
+          background: var(--admin-table-header);
         }
         th {
           font-weight: bold;
-          color: #374151;
+          color: var(--admin-text);
           font-size: 14px;
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid var(--admin-border);
         }
         th:last-child {
           padding-right: 24px;
@@ -352,9 +432,12 @@
         }
       }
       tbody {
-        color: #616161;
+        color: var(--admin-text-secondary);
         tr {
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid var(--admin-border);
+          &:hover {
+            background: var(--admin-table-row-hover);
+          }
         }
         tr:last-child {
           border-bottom: 0;
@@ -366,7 +449,7 @@
           padding: 12px 16px;
           border-bottom: 0;
           font-size: 14px;
-          color: #616161;
+          color: var(--admin-text-secondary);
           &.info {
             display: flex;
             flex-direction: row;
@@ -404,7 +487,7 @@
       }
       .flex-box {
         button {
-          color: #e92c28;
+          color: #1E3A5F;
           font-weight: 500;
           margin-right: 8px;
         }
@@ -420,13 +503,14 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 8px;
-            background: #f5f5f5;
+            background: var(--admin-table-header);
             border-radius: 4px;
             padding: 2px 16px;
+            color: var(--admin-text);
           }
           .notice {
             margin: 6px 0 0 30px;
-            color: #bdbdbd;
+            color: var(--admin-text-muted);
           }
         }
         .option {
@@ -435,16 +519,39 @@
             width:301px;
             height: 48px;
             padding-right: 8px;
-            color: #616161;
+            color: var(--admin-text-secondary);
             span { font-size: 14px; }
           }
         }
       }
     }
+
+    // MUI Components Dark Mode Override
+    .MuiTypography-root {
+      color: var(--admin-text);
+    }
+    .MuiPagination-root {
+      .MuiPaginationItem-root {
+        color: var(--admin-text-secondary);
+        &.Mui-selected {
+          background: #1E3A5F;
+          color: #fff;
+        }
+      }
+    }
+    .MuiSelect-select {
+      background: var(--admin-input-bg);
+      color: var(--admin-text);
+    }
+    .MuiChip-root {
+      background: var(--admin-user-bg);
+      color: var(--admin-text);
+    }
     .tit {
       flex-direction: row;
       font-size: 28px;
       font-weight: bold;
+      color: var(--admin-text);
       // margin-bottom: 24px;
     }
     .info-area {
@@ -459,12 +566,19 @@
       }
       .MuiOutlinedInput-root {
         height: 48px;
-        background: #fff;
+        background: var(--admin-input-bg);
         font-size: 14px;
+        color: var(--admin-text);
+        .MuiOutlinedInput-notchedOutline {
+          border-color: var(--admin-border);
+        }
+        &:hover .MuiOutlinedInput-notchedOutline {
+          border-color: var(--admin-text-muted);
+        }
       }
       .MuiTableCell-root {
         padding: 12px 20px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--admin-border);
       }
       .MuiToolbar-root {
         align-items: center;
@@ -475,9 +589,9 @@
       flex-direction: row;
       button {
         height: 44px;
-        background: #fff;
-        border: 1px solid #eee;
-        color: #757575;
+        background: var(--admin-card-bg);
+        border: 1px solid var(--admin-border);
+        color: var(--admin-text-muted);
         margin-right: 8px;
       }
       thead { font-weight: 600; }
@@ -499,19 +613,21 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background: var(--admin-card-bg);
   .top {
     position: relative;
     padding: 24px;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid var(--admin-border);
     box-sizing: border-box;
     h5 {
       font-size: 20px;
       font-family: $font;
+      color: var(--admin-text);
     }
     p {
-      color: #344767;
+      color: var(--admin-text-secondary);
       font-family: $font;
     }
     .close-icon {
@@ -519,6 +635,7 @@
       right: 8px;
       cursor: pointer;
       font-size: 20px;
+      color: var(--admin-text-muted);
     }
   }
   .main {
@@ -538,8 +655,9 @@
       align-items: center;
       h6 {
         font-size: 16px;
-        font-family: $font ;
+        font-family: $font;
         font-weight: 600;
+        color: var(--admin-text);
       }
     }
   }

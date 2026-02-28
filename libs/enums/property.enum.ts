@@ -1,7 +1,7 @@
 export enum PropertyType {
-	APARTMENT = 'APARTMENT',
-	VILLA = 'VILLA',
-	HOUSE = 'HOUSE',
+	FURNITURE = 'FURNITURE',
+	HOME_DECOR = 'HOME_DECOR',
+	HOME_APPLIANCES = 'HOME_APPLIANCES',
 }
 
 export enum PropertyStatus {
@@ -10,14 +10,39 @@ export enum PropertyStatus {
 	DELETE = 'DELETE',
 }
 
+export enum PropertyMaterial {
+	WOOD = 'WOOD',
+	METAL = 'METAL',
+	FABRIC = 'FABRIC',
+	LEATHER = 'LEATHER',
+	PLASTIC = 'PLASTIC',
+	GLASS = 'GLASS',
+}
+
+export enum PropertyCategory {
+	BEDROOM = 'BEDROOM',
+	LIVING_ROOM = 'LIVING_ROOM',
+	KITCHEN = 'KITCHEN',
+	OFFICE = 'OFFICE',
+	OUTDOOR = 'OUTDOOR',
+}
+
+export enum FurnitureCondition {
+	NEW = 'NEW',
+	LIKE_NEW = 'LIKE_NEW',
+	GOOD = 'GOOD',
+	FAIR = 'FAIR',
+	POOR = 'POOR',
+}
+
 export enum PropertyLocation {
-	SEOUL = 'SEOUL',
-	BUSAN = 'BUSAN',
-	INCHEON = 'INCHEON',
-	DAEGU = 'DAEGU',
-	GYEONGJU = 'GYEONGJU',
-	GWANGJU = 'GWANGJU',
-	CHONJU = 'CHONJU',
-	DAEJON = 'DAEJON',
-	JEJU = 'JEJU',
+	NEWYORK = 'NEWYORK',
+	LOSANGELES = 'LOSANGELES',
+	CHICAGO = 'CHICAGO',
+	HOUSTON = 'HOUSTON',
+	PHOENIX = 'PHOENIX',
+	PHILADELPHIA = 'PHILADELPHIA',
+	SANANTONIO = 'SANANTONIO',
+	SANDIEGO = 'SANDIEGO',
+	DALLAS = 'DALLAS',
 }

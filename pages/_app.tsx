@@ -1,5 +1,8 @@
+// Must be first import to suppress Apollo warnings
+import '../libs/suppressWarnings';
+
 import type { AppProps } from 'next/app';
-import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import React, { useState } from 'react';
 import { light } from '../scss/MaterialTheme';
@@ -19,10 +22,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 	return (
 		<ApolloProvider client={client}>
 			<ThemeProvider>
-				<MUIThemeProvider theme={theme}>
+				<MuiThemeProvider theme={theme}>
 					<CssBaseline />
 					<Component {...pageProps} />
-				</MUIThemeProvider>
+				</MuiThemeProvider>
 			</ThemeProvider>
 		</ApolloProvider>
 	);

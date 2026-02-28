@@ -137,12 +137,13 @@ export const CREATE_PROPERTY = gql`
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
+			propertyMaterial
+			propertyCategory
+			furnitureCondition
+			deliveryAvailable
 			memberId
 			soldAt
 			deletedAt
-			constructedAt
 			createdAt
 			updatedAt
 		}
@@ -164,12 +165,13 @@ export const UPDATE_PROPERTY = gql`
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
+			propertyMaterial
+			propertyCategory
+			furnitureCondition
+			deliveryAvailable
 			memberId
 			soldAt
 			deletedAt
-			constructedAt
 			createdAt
 			updatedAt
 		}
@@ -191,12 +193,13 @@ export const LIKE_TARGET_PROPERTY = gql`
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
+			propertyMaterial
+			propertyCategory
+			furnitureCondition
+			deliveryAvailable
 			memberId
 			soldAt
 			deletedAt
-			constructedAt
 			createdAt
 			updatedAt
 		}
@@ -319,6 +322,97 @@ export const UNSUBSCRIBE = gql`
 			followerId
 			createdAt
 			updatedAt
+		}
+	}
+`;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+
+export const UPDATE_NOTIFICATION = gql`
+	mutation UpdateNotification($input: String!) {
+		updateNotification(notificationId: $input) {
+			_id
+			notificationType
+			notificationStatus
+			notificationGroup
+			notificationTitle
+			notificationDesc
+			authorId
+			receiverId
+			propertyId
+			articleId
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+export const MARK_ALL_NOTIFICATIONS_AS_READ = gql`
+	mutation MarkAllNotificationsAsRead {
+		markAllNotificationsAsRead
+	}
+`;
+
+export const DELETE_NOTIFICATION = gql`
+	mutation DeleteNotification($input: String!) {
+		deleteNotification(notificationId: $input)
+	}
+`;
+
+/**************************
+ *         EVENTS         *
+ *************************/
+
+export const CREATE_EVENT = gql`
+	mutation CreateEvent($input: EventInput!) {
+		createEvent(input: $input) {
+			_id
+			eventTitle
+			eventCity
+			eventDescription
+			eventImage
+			eventStartDate
+			eventEndDate
+			eventLocation
+			eventLink
+			eventStatus
+			createdAt
+		}
+	}
+`;
+
+/**************************
+ *      CS - NOTICE       *
+ *************************/
+
+export const CREATE_NOTICE = gql`
+	mutation CreateNotice($input: NoticeInput!) {
+		createNotice(input: $input) {
+			_id
+			noticeCategory
+			noticeStatus
+			noticeTitle
+			noticeContent
+			createdAt
+		}
+	}
+`;
+
+/**************************
+ *       CS - FAQ         *
+ *************************/
+
+export const CREATE_FAQ = gql`
+	mutation CreateFaq($input: FaqInput!) {
+		createFaq(input: $input) {
+			_id
+			faqCategory
+			faqStatus
+			faqQuestion
+			faqAnswer
+			createdAt
 		}
 	}
 `;

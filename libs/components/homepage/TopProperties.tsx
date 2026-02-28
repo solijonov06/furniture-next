@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import WestIcon from '@mui/icons-material/West';
@@ -36,10 +36,13 @@ const TopProperties = (props: TopPropertiesProps) => {
 			fetchPolicy: 'cache-and-network',
 			variables: { input: initialInput },
 			notifyOnNetworkStatusChange: true,
-			onCompleted: (data: T) => {
-				setTopProperties(data?.getProperties?.list);
-			},
 		});
+
+	useEffect(() => {
+		if (getPropertiesData?.getProperties?.list) {
+			setTopProperties(getPropertiesData.getProperties.list);
+		}
+	}, [getPropertiesData]);
 	
 	/** HANDLERS **/
 	const likePropertyHandler = async (user: T, id: string) => {
@@ -63,24 +66,30 @@ const TopProperties = (props: TopPropertiesProps) => {
 			<Stack className={'top-properties'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>Top properties</span>
+						<span>Top Furnishings</span>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'top-property-swiper'}
-							slidesPerView={'auto'}
-							centeredSlides={true}
-							spaceBetween={15}
-							modules={[Autoplay]}
-						>
-							{topProperties.map((property: Property) => {
-								return (
-									<SwiperSlide className={'top-property-slide'} key={property?._id}>
-										<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{topProperties.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Top Furnishings
+							</Box>
+						) : (
+							<Swiper
+								className={'top-property-swiper'}
+								slidesPerView={'auto'}
+								centeredSlides={true}
+								spaceBetween={15}
+								modules={[Autoplay]}
+							>
+								{topProperties.map((property: Property) => {
+									return (
+										<SwiperSlide className={'top-property-slide'} key={property?._id}>
+											<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>
@@ -91,8 +100,8 @@ const TopProperties = (props: TopPropertiesProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>Top properties</span>
-							<p>Check out our Top Properties</p>
+							<span>Top Furnishings</span>
+							<p>Check out our Top Furnishings</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
 							<div className={'pagination-box'}>
@@ -103,27 +112,33 @@ const TopProperties = (props: TopPropertiesProps) => {
 						</Box>
 					</Stack>
 					<Stack className={'card-box'}>
-						<Swiper
-							className={'top-property-swiper'}
-							slidesPerView={'auto'}
-							spaceBetween={15}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-top-next',
-								prevEl: '.swiper-top-prev',
-							}}
-							pagination={{
-								el: '.swiper-top-pagination',
-							}}
-						>
-							{topProperties.map((property: Property) => {
-								return (
-									<SwiperSlide className={'top-property-slide'} key={property?._id}>
-										<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler}  />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
+						{topProperties.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								No Top Furnishings
+							</Box>
+						) : (
+							<Swiper
+								className={'top-property-swiper'}
+								slidesPerView={'auto'}
+								spaceBetween={15}
+								modules={[Autoplay, Navigation, Pagination]}
+								navigation={{
+									nextEl: '.swiper-top-next',
+									prevEl: '.swiper-top-prev',
+								}}
+								pagination={{
+									el: '.swiper-top-pagination',
+								}}
+							>
+								{topProperties.map((property: Property) => {
+									return (
+										<SwiperSlide className={'top-property-slide'} key={property?._id}>
+											<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler}  />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
 					</Stack>
 				</Stack>
 			</Stack>
